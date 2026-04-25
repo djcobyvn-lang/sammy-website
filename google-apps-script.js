@@ -29,6 +29,11 @@ function doGet(e) {
     let result;
     if (type === 'update-status') {
       result = updateStatus(data);
+    } else if (type === 'check-access') {
+      result = checkCourseAccess(data);
+      return buildResponse(result);
+    } else if (type === 'activate-course') {
+      result = activateCourse(data);
     } else if (type === 'xac-nhan-ck') {
       result = saveXacNhanCK(data);
     } else if (type === 'khoa-hoc') {
@@ -168,6 +173,50 @@ function formatTime() {
 
 function clean(val) {
   return val ? String(val).trim() : '';
+}
+
+// ────────────────────────────────────────────────────
+// Kiểm tra học viên đã thanh toán khoá học chưa
+// ────────────────────────────────────────────────────
+function checkCourseAccess(data) {
+  const email = clean(data.email || '').toLowerCase();
+  if (!email) return { activated: false };
+
+  const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_KHOA_HOC);
+  if (!sheet) return { activated: false };
+
+  const values = sheet.getDataRange().getValues();
+  for (let i = 1; i < values.length; i++) {
+    const rowEmail  = String(values[i][3] || '').toLowerCase(); // cột D = Email
+    const rowStatus = String(values[i][6] || '');               // cột G = Trạng Thái
+    if (rowEmail === email && rowStatus === 'Đã Thanh Toán ✓') {
+      return { activated: true };
+    }
+  }
+  return { activated: false };
+}
+
+// ────────────────────────────────────────────────────
+// Kích hoạt học viên khi SePay xác nhận thanh toán
+// ────────────────────────────────────────────────────
+function activateCourse(data) {
+  const email  = clean(data.email || '').toLowerCase();
+  const status = clean(data.status || 'Đã Thanh Toán ✓');
+  if (!email) return null;
+
+  const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_KHOA_HOC);
+  if (!sheet) return null;
+
+  const values = sheet.getDataRange().getValues();
+  for (let i = values.length - 1; i >= 1; i--) {
+    const rowEmail = String(values[i][3] || '').toLowerCase();
+    if (rowEmail === email) {
+      sheet.getRange(i + 1, 7).setValue(status); // cột G = Trạng Thái
+      Logger.log('Kích hoạt học viên: ' + email);
+      return i + 1;
+    }
+  }
+  return null;
 }
 
 // ────────────────────────────────────────────────────

@@ -1,0 +1,14 @@
+node_modules/
+backend/data/
+.env
+*.log
+
+# Ảnh rác / dev scripts
+screenshot_full.png
+screenshot_v1.png
+screenshot_v2.png
+ss_*.png
+remove_*.js
+screenshot*.js
+logo-chu-dao.png.png
+nensammy.png

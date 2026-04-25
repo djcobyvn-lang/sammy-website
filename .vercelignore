@@ -10,38 +10,26 @@ screenshot_close.js
 screenshot_hero.js
 screenshot_zoom.js
 
-# Screenshots & backup images
+# Screenshots
 screenshot_full.png
 screenshot_v1.png
 screenshot_v2.png
-ss_cards_close.png
-ss_cards_final.png
-ss_cards_grid.png
-ss_cards_zoom.png
-ss_full.png
-ss_hero.png
-ss_hero_font.png
-ss_numbers.png
-ss_services.png
+ss_*.png
 
-# Duplicate/unused images
+# Unused images
 logo-chu-dao.png.png
 nensammy.png
 logo-chu-dao.png
 
-# Old icon folder (moved to /assets/icons)
+# Old icon folder
 icons/
 
-# GAS reference file (không serve cho user)
+# GAS reference
 google-apps-script.js
 
-# Backend (deploy riêng trên Railway)
+# Old backend (replaced by /api)
 backend/
 
-# Node
+# Dev
 node_modules/
-package.json
-package-lock.json
-
-# Dev docs
 CLAUDE.md
