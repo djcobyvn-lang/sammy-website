@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — Quản Trị Nội Dung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#04051A;
+  --bg2:#080C2E;
+  --card:#0D1240;
+  --card2:rgba(13,18,64,.75);
+  --violet:#7B5EA7;
+  --indigo:#4F6BFF;
+  --teal:#2DD4BF;
+  --glow:#A78BFA;
+  --txt:#E8E8F0;
+  --muted:#9898B8;
+  --gold:#C9A84C;
+  --red:#f87171;
+  --border:rgba(123,94,167,.22);
+  --border-h:rgba(167,139,250,.5);
+  --grad:linear-gradient(135deg,#7B5EA7,#4F6BFF);
+  --grad-gold:linear-gradient(135deg,#C9A84C,#e0c068);
+  --sidebar-w:300px;
+}
+
+html,body{height:100%;overflow:hidden;}
+body{
+  background:var(--bg);
+  font-family:'Be Vietnam Pro',sans-serif;
+  color:var(--txt);
+  font-size:.875rem;
+}
+
+/* ── AUTH GUARD ── */
+#authGuard{display:none;position:fixed;inset:0;background:var(--bg);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:1rem;}
+#authGuard p{color:var(--muted);}
+#authGuard a{color:var(--glow);}
+
+/* ── LAYOUT ── */
+.admin-layout{display:flex;height:100vh;overflow:hidden;}
+
+/* ── TOP BAR ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:56px;z-index:100;
+  background:rgba(8,12,46,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.25rem;gap:1rem;
+}
+.topbar-brand{
+  display:flex;align-items:center;gap:.6rem;
+  font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  white-space:nowrap;
+}
+.topbar-brand span{font-size:1.2rem;}
+.topbar-right{display:flex;align-items:center;gap:.75rem;}
+.topbar-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--grad);display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;cursor:pointer;flex-shrink:0;
+}
+.topbar-name{font-size:.8rem;color:var(--muted);display:none;}
+.btn-sm{
+  background:transparent;border:1px solid var(--border);
+  border-radius:8px;padding:.35rem .75rem;color:var(--muted);
+  font-family:'Be Vietnam Pro',sans-serif;font-size:.75rem;cursor:pointer;
+  transition:border-color .2s,color .2s;
+}
+.btn-sm:hover{border-color:var(--glow);color:var(--txt);}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  height:100vh;padding-top:56px;
+  background:var(--bg2);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transition:transform .3s;
+}
+.sidebar-inner{flex:1;overflow-y:auto;padding:1rem .75rem;display:flex;flex-direction:column;gap:1rem;}
+.sidebar-inner::-webkit-scrollbar{width:4px;}
+.sidebar-inner::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+
+.sidebar-section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.25rem .25rem .5rem;
+}
+.sidebar-section-title{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.btn-new{
+  display:flex;align-items:center;gap:.3rem;
+  background:var(--grad);border:none;border-radius:8px;
+  padding:.4rem .75rem;color:#fff;
+  font-family:'Be Vietnam Pro',sans-serif;font-size:.72rem;font-weight:600;
+  cursor:pointer;white-space:nowrap;
+  box-shadow:0 2px 12px rgba(123,94,167,.35);
+  transition:opacity .2s,transform .15s;
+}
+.btn-new:hover{opacity:.9;transform:translateY(-1px);}
+
+.post-list{display:flex;flex-direction:column;gap:.35rem;}
+.post-item{
+  display:flex;align-items:center;gap:.6rem;
+  padding:.6rem .75rem;border-radius:10px;cursor:pointer;
+  border:1px solid transparent;
+  transition:background .15s,border-color .15s;
+  position:relative;
+}
+.post-item:hover{background:rgba(123,94,167,.1);border-color:var(--border);}
+.post-item.active{background:rgba(123,94,167,.18);border-color:var(--border-h);}
+.post-item.active::before{
+  content:'';position:absolute;left:0;top:20%;bottom:20%;width:2px;border-radius:2px;
+  background:var(--glow);
+}
+.post-item-icon{font-size:1rem;flex-shrink:0;}
+.post-item-info{flex:1;min-width:0;}
+.post-item-title{font-size:.8rem;font-weight:500;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.post-item-meta{font-size:.68rem;color:var(--muted);margin-top:.1rem;}
+.post-item-lock{font-size:.75rem;flex-shrink:0;}
+.post-item-lock.member{color:var(--gold);}
+.post-item-lock.public{color:var(--teal);}
+.post-item-actions{display:flex;gap:.25rem;opacity:0;transition:opacity .15s;}
+.post-item:hover .post-item-actions{opacity:1;}
+.act-btn{
+  background:none;border:none;padding:.15rem .3rem;border-radius:4px;cursor:pointer;
+  font-size:.7rem;color:var(--muted);transition:color .15s,background .15s;
+}
+.act-btn:hover{color:var(--red);background:rgba(248,113,113,.1);}
+.act-btn.edit:hover{color:var(--glow);background:rgba(167,139,250,.1);}
+
+.sidebar-stats{
+  margin-top:auto;padding:.75rem;
+  background:rgba(13,18,64,.5);border:1px solid var(--border);border-radius:12px;
+}
+.stat-row{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);padding:.2rem 0;}
+.stat-val{color:var(--txt);font-weight:600;}
+
+/* ── MAIN EDITOR ── */
+.main{
+  flex:1;min-width:0;height:100vh;padding-top:56px;
+  overflow-y:auto;background:var(--bg);
+}
+.main::-webkit-scrollbar{width:6px;}
+.main::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+
+.editor-wrap{max-width:900px;margin:0 auto;padding:1.5rem 1.25rem 3rem;}
+
+.editor-toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem;
+}
+.editor-title-area{display:flex;flex-direction:column;gap:.2rem;}
+.editor-label{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.editor-status{
+  display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--muted);
+}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--muted);}
+.status-dot.saved{background:var(--teal);}
+.status-dot.unsaved{background:var(--gold);}
+
+.toolbar-actions{display:flex;gap:.5rem;flex-wrap:wrap;}
+.btn-save{
+  background:transparent;border:1px solid var(--border);border-radius:8px;
+  padding:.5rem 1rem;color:var(--muted);
+  font-family:'Be Vietnam Pro',sans-serif;font-size:.8rem;cursor:pointer;
+  transition:all .2s;
+}
+.btn-save:hover{border-color:var(--glow);color:var(--glow);}
+.btn-publish{
+  background:var(--grad);border:none;border-radius:8px;
+  padding:.5rem 1.2rem;color:#fff;
+  font-family:'Be Vietnam Pro',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;
+  box-shadow:0 3px 16px rgba(123,94,167,.4);
+  transition:opacity .2s,transform .15s;
+}
+.btn-publish:hover{opacity:.9;transform:translateY(-1px);}
+
+/* ── FORM GRID ── */
+.form-section{margin-bottom:1.5rem;}
+.form-section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-weight:600;color:var(--glow);
+  padding-bottom:.5rem;margin-bottom:1rem;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:.4rem;
+}
+
+.f-grid{display:grid;gap:1rem;}
+.f-grid-2{grid-template-columns:1fr 1fr;}
+.f-grid-3{grid-template-columns:1fr 1fr 1fr;}
+
+.f-group{display:flex;flex-direction:column;gap:.35rem;}
+.f-label{font-size:.7rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);}
+.f-label .req{color:var(--red);margin-left:.15rem;}
+
+.f-input,.f-select,.f-textarea{
+  background:rgba(4,5,26,.8);
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:.6rem .85rem;
+  color:var(--txt);
+  font-family:'Be Vietnam Pro',sans-serif;
+  font-size:.85rem;
+  outline:none;
+  transition:border-color .2s,box-shadow .2s;
+  width:100%;
+}
+.f-input::placeholder,.f-textarea::placeholder{color:rgba(152,152,184,.35);}
+.f-input:focus,.f-select:focus,.f-textarea:focus{
+  border-color:var(--glow);
+  box-shadow:0 0 0 3px rgba(167,139,250,.12),0 0 10px rgba(167,139,250,.15);
+}
+.f-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239898B8' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .85rem center;}
+option{background:var(--card);color:var(--txt);}
+.f-textarea{resize:vertical;min-height:90px;line-height:1.7;}
+.f-textarea.large{min-height:240px;}
+
+/* Color preview input */
+.color-input-wrap{position:relative;}
+.color-preview{
+  position:absolute;right:.5rem;top:50%;transform:translateY(-50%);
+  width:56px;height:26px;border-radius:6px;
+  background:linear-gradient(135deg,#7B5EA7,#4F6BFF);
+  pointer-events:none;border:1px solid rgba(255,255,255,.1);
+}
+.color-preview-labels{
+  display:flex;gap:.3rem;margin-top:.35rem;flex-wrap:wrap;
+}
+.clr-chip{
+  font-size:.65rem;padding:.2rem .5rem;border-radius:20px;
+  background:rgba(123,94,167,.2);border:1px solid var(--border);
+  color:var(--muted);cursor:pointer;transition:border-color .15s;
+}
+.clr-chip:hover{border-color:var(--glow);}
+
+/* Access radio */
+.access-group{display:flex;gap:.75rem;flex-wrap:wrap;}
+.access-opt{
+  display:flex;align-items:center;gap:.45rem;
+  padding:.5rem .85rem;border-radius:9px;cursor:pointer;
+  border:1px solid var(--border);background:rgba(4,5,26,.6);
+  transition:border-color .2s,background .2s;font-size:.82rem;
+}
+.access-opt:has(input:checked){border-color:var(--glow);background:rgba(167,139,250,.12);}
+.access-opt input{accent-color:var(--glow);cursor:pointer;}
+.access-icon{font-size:1rem;}
+
+/* Content toolbar */
+.content-toolbar{
+  display:flex;gap:.25rem;flex-wrap:wrap;padding:.45rem .6rem;
+  background:rgba(8,12,46,.8);border:1px solid var(--border);
+  border-radius:9px 9px 0 0;border-bottom:none;
+}
+.tb-btn{
+  background:none;border:none;padding:.3rem .45rem;border-radius:5px;
+  color:var(--muted);cursor:pointer;font-size:.8rem;
+  transition:background .15s,color .15s;
+}
+.tb-btn:hover{background:rgba(167,139,250,.15);color:var(--txt);}
+.tb-sep{width:1px;background:var(--border);margin:.15rem .1rem;}
+.content-area{
+  border-radius:0 0 9px 9px;
+}
+.content-area .f-textarea{
+  border-radius:0 0 9px 9px;
+  min-height:300px;font-size:.875rem;line-height:1.85;
+}
+
+/* Preview badge */
+.preview-badge{
+  display:inline-flex;align-items:center;gap:.3rem;
+  font-size:.65rem;padding:.2rem .6rem;border-radius:20px;
+  border:1px solid var(--border);color:var(--muted);
+}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;
+  background:rgba(13,18,64,.95);backdrop-filter:blur(12px);
+  border:1px solid var(--border-h);border-radius:12px;
+  padding:.75rem 1.2rem;font-size:.82rem;
+  display:flex;align-items:center;gap:.6rem;
+  transform:translateY(80px);opacity:0;
+  transition:transform .3s,opacity .3s;pointer-events:none;
+}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast-icon{font-size:1rem;}
+
+/* Mobile toggle */
+.sidebar-toggle{
+  display:none;background:none;border:none;color:var(--txt);
+  font-size:1.2rem;cursor:pointer;padding:.25rem;
+}
+
+/* ── RESPONSIVE ── */
+@media(min-width:960px){
+  .topbar-name{display:block;}
+}
+
+@media(max-width:767px){
+  :root{--sidebar-w:280px;}
+  .sidebar{
+    position:fixed;left:0;top:56px;bottom:0;z-index:200;
+    transform:translateX(-100%);
+  }
+  .sidebar.open{transform:translateX(0);}
+  .sidebar-toggle{display:block;}
+  .main{padding-top:56px;}
+  .f-grid-2,.f-grid-3{grid-template-columns:1fr;}
+  .editor-toolbar{flex-direction:column;align-items:flex-start;}
+  .toolbar-actions{width:100%;justify-content:flex-end;}
+}
+</style>
+</head>
+<body>
+
+<div id="authGuard">
+  <p>⛔ Truy cập bị từ chối.</p>
+  <a href="admin-login.html">→ Đến trang đăng nhập</a>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:.75rem;">
+    <button class="sidebar-toggle" id="sidebarToggle" title="Menu">☰</button>
+    <div class="topbar-brand"><span>✦</span> SAMMY TRƯƠNG</div>
+    <span style="font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;opacity:.6;">Admin</span>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-name" style="font-size:.78rem;color:var(--muted);">Xin chào, <strong style="color:var(--txt);">Admin</strong></span>
+    <a href="index.html" class="btn-sm" target="_blank">🔗 Xem site</a>
+    <button class="btn-sm" id="logoutBtn">Đăng xuất</button>
+    <div class="topbar-avatar">✦</div>
+  </div>
+</div>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+
+      <div>
+        <div class="sidebar-section-head">
+          <span class="sidebar-section-title">Bài Viết Hiện Có</span>
+          <button class="btn-new" id="btnNew">+ Bài Mới</button>
+        </div>
+        <div class="post-list" id="postList"></div>
+      </div>
+
+      <div class="sidebar-stats" id="sidebarStats"></div>
+
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="mainEditor">
+    <div class="editor-wrap">
+
+      <!-- Toolbar -->
+      <div class="editor-toolbar">
+        <div class="editor-title-area">
+          <span class="editor-label">✦ Trình Soạn Thảo</span>
+          <div class="editor-status">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="statusText">Chưa có thay đổi</span>
+          </div>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn-save" id="btnSaveDraft">💾 Lưu nháp</button>
+          <button class="btn-publish" id="btnPublish">✦ Đăng bài</button>
+        </div>
+      </div>
+
+      <!-- META INFO -->
+      <div class="form-section">
+        <div class="form-section-title">📋 Thông Tin Bài Viết</div>
+        <div class="f-grid f-grid-1" style="gap:1rem;">
+
+          <div class="f-group">
+            <label class="f-label">Tiêu đề <span class="req">*</span></label>
+            <input class="f-input" id="fTitle" type="text" placeholder="Nhập tiêu đề bài viết…" style="font-size:1rem;padding:.7rem 1rem;">
+          </div>
+
+          <div class="f-grid f-grid-2">
+            <div class="f-group">
+              <label class="f-label">Slug / URL <span class="req">*</span></label>
+              <input class="f-input" id="fSlug" type="text" placeholder="tieu-de-bai-viet">
+            </div>
+            <div class="f-group">
+              <label class="f-label">Danh Mục</label>
+              <select class="f-select" id="fCategory">
+                <option value="">— Chọn danh mục —</option>
+                <option>Thần Số Học</option>
+                <option>Tâm Linh</option>
+                <option>Chữa Lành</option>
+                <option>Hành Trình Linh Hồn</option>
+                <option>Góc Nhìn</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="f-group">
+            <label class="f-label">Tóm Tắt / Excerpt</label>
+            <textarea class="f-textarea" id="fExcerpt" placeholder="Mô tả ngắn, hiển thị ở trang danh sách bài viết…" rows="3"></textarea>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PUBLISH META -->
+      <div class="form-section">
+        <div class="form-section-title">⚙️ Cài Đặt Đăng Bài</div>
+        <div class="f-grid f-grid-3">
+
+          <div class="f-group">
+            <label class="f-label">Ngày Đăng</label>
+            <input class="f-input" id="fDate" type="date">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Thời Gian Đọc (phút)</label>
+            <input class="f-input" id="fReadTime" type="number" min="1" max="120" placeholder="5">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Quyền Truy Cập</label>
+            <div class="access-group">
+              <label class="access-opt">
+                <input type="radio" name="access" value="public" checked>
+                <span class="access-icon">🌐</span> Công khai
+              </label>
+              <label class="access-opt">
+                <input type="radio" name="access" value="member">
+                <span class="access-icon">🔒</span> Hội viên
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MEDIA & STYLE -->
+      <div class="form-section">
+        <div class="form-section-title">🎨 Hình Ảnh & Phong Cách</div>
+        <div class="f-grid f-grid-2">
+
+          <div class="f-group">
+            <label class="f-label">Thumbnail URL</label>
+            <input class="f-input" id="fThumb" type="url" placeholder="https://…/thumbnail.jpg">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Link Nhạc Nền</label>
+            <input class="f-input" id="fMusic" type="url" placeholder="https://…/music.mp3">
+          </div>
+
+          <div class="f-group" style="grid-column:1/-1;">
+            <label class="f-label">Màu Nền (Gradient)</label>
+            <div class="color-input-wrap">
+              <input class="f-input" id="fColor" type="text" placeholder="linear-gradient(135deg,#7B5EA7,#4F6BFF)" style="padding-right:5rem;">
+              <div class="color-preview" id="colorPreview"></div>
+            </div>
+            <div class="color-preview-labels">
+              <span class="clr-chip" data-val="linear-gradient(135deg,#7B5EA7,#4F6BFF)">🟣 Tím ngân hà</span>
+              <span class="clr-chip" data-val="linear-gradient(135deg,#2DD4BF,#4F6BFF)">🩵 Xanh teal</span>
+              <span class="clr-chip" data-val="linear-gradient(135deg,#C9A84C,#e0c068)">🟡 Vàng gold</span>
+              <span class="clr-chip" data-val="linear-gradient(135deg,#ec4899,#8b5cf6)">🩷 Hồng tím</span>
+              <span class="clr-chip" data-val="linear-gradient(135deg,#04051A,#080C2E)">🖤 Vũ trụ tối</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="form-section">
+        <div class="form-section-title">✍️ Nội Dung Bài Viết</div>
+        <div class="content-toolbar">
+          <button class="tb-btn" title="Bold" onclick="wrapText('**','**')"><strong>B</strong></button>
+          <button class="tb-btn" title="Italic" onclick="wrapText('_','_')"><em>I</em></button>
+          <button class="tb-btn" title="Tiêu đề 2" onclick="wrapText('## ','')">H2</button>
+          <button class="tb-btn" title="Tiêu đề 3" onclick="wrapText('### ','')">H3</button>
+          <div class="tb-sep"></div>
+          <button class="tb-btn" title="Trích dẫn" onclick="wrapText('> ','')">❝</button>
+          <button class="tb-btn" title="Danh sách" onclick="wrapText('- ','')">☰</button>
+          <button class="tb-btn" title="Link" onclick="wrapText('[','](url)')">🔗</button>
+          <div class="tb-sep"></div>
+          <button class="tb-btn" title="Đường kẻ ngang" onclick="insertText('\n---\n')">—</button>
+          <button class="tb-btn" title="Xuống dòng" onclick="insertText('\n\n')">↵</button>
+          <div style="flex:1;"></div>
+          <span class="preview-badge"><span id="charCount">0</span> ký tự</span>
+        </div>
+        <div class="content-area">
+          <textarea class="f-textarea large" id="fContent" placeholder="Bắt đầu viết nội dung bài viết tại đây…&#10;&#10;Hỗ trợ Markdown: **đậm**, _nghiêng_, ## Tiêu đề, > Trích dẫn…"></textarea>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <span class="toast-icon" id="toastIcon">✓</span>
+  <span id="toastMsg">Đã lưu</span>
+</div>
+
+<script>
+/* ── AUTH ── */
+if(!sessionStorage.getItem('admin_auth')){
+  document.getElementById('authGuard').style.display='flex';
+  document.querySelector('.topbar').style.display='none';
+  document.querySelector('.admin-layout').style.display='none';
+}
+document.getElementById('logoutBtn').addEventListener('click',()=>{
+  sessionStorage.removeItem('admin_auth');
+  window.location.href='admin-login.html';
+});
+
+/* ── DATA STORE ── */
+const STORE_KEY='sammy_posts';
+function loadPosts(){
+  try{ return JSON.parse(localStorage.getItem(STORE_KEY))||[]; }
+  catch(e){ return []; }
+}
+function savePosts(posts){ localStorage.setItem(STORE_KEY,JSON.stringify(posts)); }
+
+let posts=loadPosts();
+let currentId=null;
+let dirty=false;
+
+/* seed demo data */
+if(!posts.length){
+  posts=[
+    {id:'1',title:'Số Linh Hồn Là Gì?',slug:'so-linh-hon-la-gi',excerpt:'Khám phá ý nghĩa sâu xa của số linh hồn trong thần số học.',category:'Thần Số Học',readTime:7,date:'2026-04-10',access:'public',thumb:'',music:'',color:'linear-gradient(135deg,#7B5EA7,#4F6BFF)',content:'## Số Linh Hồn Là Gì?\n\nSố linh hồn (Soul Urge Number) là con số đại diện cho những khao khát sâu kín nhất của bạn…',status:'published'},
+    {id:'2',title:'Hành Trình Tìm Về Bản Thân',slug:'hanh-trinh-tim-ve-ban-than',excerpt:'Mỗi người đều có một hành trình riêng để khám phá bản thân.',category:'Hành Trình Linh Hồn',readTime:10,date:'2026-04-18',access:'member',thumb:'',music:'',color:'linear-gradient(135deg,#C9A84C,#e0c068)',content:'## Bắt Đầu Từ Đâu?\n\nHành trình tìm về bản thân bắt đầu từ khoảnh khắc bạn dừng lại và lắng nghe nội tâm…',status:'published'},
+    {id:'3',title:'Năm Cá Nhân 2026',slug:'nam-ca-nhan-2026',excerpt:'Những dự báo và cơ hội theo thần số học cho năm 2026.',category:'Thần Số Học',readTime:12,date:'2026-01-01',access:'public',thumb:'',music:'',color:'linear-gradient(135deg,#2DD4BF,#4F6BFF)',content:'## Năm 2026 Trong Thần Số Học\n\nNăm 2026 (2+0+2+6=10→1) là năm của sự khởi đầu mới…',status:'published'},
+  ];
+  savePosts(posts);
+}
+
+/* ── RENDER SIDEBAR ── */
+function renderSidebar(){
+  const list=document.getElementById('postList');
+  list.innerHTML=posts.map(p=>`
+    <div class="post-item${p.id===currentId?' active':''}" data-id="${p.id}">
+      <span class="post-item-icon">${p.status==='published'?'📄':'📝'}</span>
+      <div class="post-item-info">
+        <div class="post-item-title">${p.title||'(Chưa đặt tên)'}</div>
+        <div class="post-item-meta">${p.category||'—'} · ${p.date||'—'}</div>
+      </div>
+      <span class="post-item-lock ${p.access==='member'?'member':'public'}" title="${p.access==='member'?'Hội viên':'Công khai'}">
+        ${p.access==='member'?'🔒':'🌐'}
+      </span>
+      <div class="post-item-actions">
+        <button class="act-btn edit" title="Sửa" onclick="loadPost('${p.id}');event.stopPropagation()">✏️</button>
+        <button class="act-btn" title="Xóa" onclick="deletePost('${p.id}');event.stopPropagation()">🗑️</button>
+      </div>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.post-item').forEach(el=>{
+    el.addEventListener('click',()=> loadPost(el.dataset.id));
+  });
+
+  const stats=document.getElementById('sidebarStats');
+  const pub=posts.filter(p=>p.status==='published').length;
+  const mem=posts.filter(p=>p.access==='member').length;
+  stats.innerHTML=`
+    <div class="stat-row"><span>Tổng bài viết</span><span class="stat-val">${posts.length}</span></div>
+    <div class="stat-row"><span>Đã đăng</span><span class="stat-val">${pub}</span></div>
+    <div class="stat-row"><span>Dành cho hội viên</span><span class="stat-val">${mem}</span></div>
+    <div class="stat-row"><span>Nháp</span><span class="stat-val">${posts.length-pub}</span></div>
+  `;
+}
+
+/* ── LOAD POST INTO FORM ── */
+function loadPost(id){
+  const p=posts.find(x=>x.id===id);
+  if(!p) return;
+  currentId=id;
+  document.getElementById('fTitle').value=p.title||'';
+  document.getElementById('fSlug').value=p.slug||'';
+  document.getElementById('fExcerpt').value=p.excerpt||'';
+  document.getElementById('fCategory').value=p.category||'';
+  document.getElementById('fDate').value=p.date||'';
+  document.getElementById('fReadTime').value=p.readTime||'';
+  document.querySelectorAll('input[name="access"]').forEach(r=> r.checked=(r.value===p.access));
+  document.getElementById('fThumb').value=p.thumb||'';
+  document.getElementById('fMusic').value=p.music||'';
+  document.getElementById('fColor').value=p.color||'';
+  document.getElementById('fContent').value=p.content||'';
+  updateColorPreview(p.color||'');
+  updateCharCount();
+  setStatus('saved');
+  dirty=false;
+  renderSidebar();
+  if(window.innerWidth<768) closeSidebar();
+}
+
+/* ── COLLECT FORM ── */
+function collectForm(){
+  return {
+    id:currentId,
+    title:document.getElementById('fTitle').value.trim(),
+    slug:document.getElementById('fSlug').value.trim(),
+    excerpt:document.getElementById('fExcerpt').value.trim(),
+    category:document.getElementById('fCategory').value,
+    date:document.getElementById('fDate').value,
+    readTime:parseInt(document.getElementById('fReadTime').value)||5,
+    access:document.querySelector('input[name="access"]:checked')?.value||'public',
+    thumb:document.getElementById('fThumb').value.trim(),
+    music:document.getElementById('fMusic').value.trim(),
+    color:document.getElementById('fColor').value.trim(),
+    content:document.getElementById('fContent').value,
+  };
+}
+
+/* ── NEW POST ── */
+document.getElementById('btnNew').addEventListener('click',()=>{
+  const id=Date.now().toString();
+  const today=new Date().toISOString().split('T')[0];
+  const np={id,title:'',slug:'',excerpt:'',category:'',date:today,readTime:5,access:'public',thumb:'',music:'',color:'linear-gradient(135deg,#7B5EA7,#4F6BFF)',content:'',status:'draft'};
+  posts.unshift(np);
+  savePosts(posts);
+  loadPost(id);
+  renderSidebar();
+  document.getElementById('fTitle').focus();
+  toast('✦ Bài viết mới đã được tạo','info');
+});
+
+/* ── SAVE DRAFT ── */
+document.getElementById('btnSaveDraft').addEventListener('click',()=>{
+  saveCurrentPost('draft');
+  toast('💾 Đã lưu nháp');
+});
+
+/* ── PUBLISH ── */
+document.getElementById('btnPublish').addEventListener('click',()=>{
+  const d=collectForm();
+  if(!d.title){ toast('⚠️ Vui lòng nhập tiêu đề','warn'); document.getElementById('fTitle').focus(); return; }
+  if(!d.slug){ autoSlug(); }
+  saveCurrentPost('published');
+  toast('✦ Đã đăng bài thành công!','success');
+});
+
+function saveCurrentPost(status){
+  if(!currentId) return;
+  const d=collectForm();
+  d.status=status;
+  const idx=posts.findIndex(p=>p.id===currentId);
+  if(idx>-1) posts[idx]={...posts[idx],...d};
+  savePosts(posts);
+  renderSidebar();
+  setStatus('saved');
+  dirty=false;
+}
+
+function deletePost(id){
+  if(!confirm('Xóa bài viết này?')) return;
+  posts=posts.filter(p=>p.id!==id);
+  savePosts(posts);
+  if(currentId===id){
+    currentId=null;
+    clearForm();
+  }
+  renderSidebar();
+  toast('🗑️ Đã xóa bài viết','warn');
+}
+
+function clearForm(){
+  ['fTitle','fSlug','fExcerpt','fDate','fReadTime','fThumb','fMusic','fColor','fContent'].forEach(id=> document.getElementById(id).value='');
+  document.getElementById('fCategory').value='';
+  document.querySelector('input[name="access"][value="public"]').checked=true;
+  updateColorPreview('');updateCharCount();setStatus('');
+}
+
+/* ── SLUG AUTO GENERATE ── */
+document.getElementById('fTitle').addEventListener('input',function(){
+  autoSlug();
+  markDirty();
+});
+function autoSlug(){
+  const t=document.getElementById('fTitle').value;
+  const slug=t.toLowerCase()
+    .replace(/[àáạảãâầấậẩẫăằắặẳẵ]/g,'a')
+    .replace(/[èéẹẻẽêềếệểễ]/g,'e')
+    .replace(/[ìíịỉĩ]/g,'i')
+    .replace(/[òóọỏõôồốộổỗơờớợởỡ]/g,'o')
+    .replace(/[ùúụủũưừứựửữ]/g,'u')
+    .replace(/[ỳýỵỷỹ]/g,'y')
+    .replace(/đ/g,'d')
+    .replace(/[^a-z0-9\s-]/g,'')
+    .trim().replace(/\s+/g,'-').replace(/-+/g,'-');
+  document.getElementById('fSlug').value=slug;
+}
+
+/* ── COLOR PREVIEW ── */
+document.getElementById('fColor').addEventListener('input',function(){ updateColorPreview(this.value); markDirty(); });
+document.querySelectorAll('.clr-chip').forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    const v=chip.dataset.val;
+    document.getElementById('fColor').value=v;
+    updateColorPreview(v);
+    markDirty();
+  });
+});
+function updateColorPreview(val){
+  document.getElementById('colorPreview').style.background=val||'linear-gradient(135deg,#7B5EA7,#4F6BFF)';
+}
+
+/* ── CHAR COUNT ── */
+document.getElementById('fContent').addEventListener('input',()=>{ updateCharCount(); markDirty(); });
+function updateCharCount(){
+  document.getElementById('charCount').textContent=document.getElementById('fContent').value.length.toLocaleString();
+}
+
+/* ── DIRTY TRACKING ── */
+['fSlug','fExcerpt','fDate','fReadTime','fThumb','fMusic'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', markDirty);
+});
+document.getElementById('fCategory').addEventListener('change', markDirty);
+document.querySelectorAll('input[name="access"]').forEach(r=> r.addEventListener('change', markDirty));
+
+function markDirty(){
+  if(!dirty){ dirty=true; setStatus('unsaved'); }
+}
+
+function setStatus(s){
+  const dot=document.getElementById('statusDot');
+  const txt=document.getElementById('statusText');
+  dot.className='status-dot'+(s?' '+s:'');
+  const map={saved:'Đã lưu ✓',unsaved:'Có thay đổi chưa lưu',info:'Đang soạn thảo',''  :'—'};
+  txt.textContent=map[s]||s;
+}
+
+/* ── CONTENT TOOLBAR HELPERS ── */
+function wrapText(before,after){
+  const ta=document.getElementById('fContent');
+  const s=ta.selectionStart,e=ta.selectionEnd;
+  const sel=ta.value.substring(s,e);
+  ta.value=ta.value.substring(0,s)+before+sel+after+ta.value.substring(e);
+  ta.selectionStart=s+before.length;
+  ta.selectionEnd=s+before.length+sel.length;
+  ta.focus();updateCharCount();markDirty();
+}
+function insertText(txt){
+  const ta=document.getElementById('fContent');
+  const s=ta.selectionStart;
+  ta.value=ta.value.substring(0,s)+txt+ta.value.substring(s);
+  ta.selectionStart=ta.selectionEnd=s+txt.length;
+  ta.focus();updateCharCount();markDirty();
+}
+
+/* ── TOAST ── */
+function toast(msg,type='success'){
+  const el=document.getElementById('toast');
+  const ic=document.getElementById('toastIcon');
+  const mg=document.getElementById('toastMsg');
+  const icons={success:'✓',warn:'⚠️',info:'✦',error:'✕'};
+  ic.textContent=icons[type]||'✓';
+  mg.textContent=msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t=setTimeout(()=> el.classList.remove('show'),2800);
+}
+
+/* ── SIDEBAR MOBILE ── */
+document.getElementById('sidebarToggle').addEventListener('click',()=>{
+  document.getElementById('sidebar').classList.toggle('open');
+});
+function closeSidebar(){ document.getElementById('sidebar').classList.remove('open'); }
+document.getElementById('mainEditor').addEventListener('click',()=>{
+  if(window.innerWidth<768) closeSidebar();
+});
+
+/* ── AUTO-SAVE every 60s ── */
+setInterval(()=>{
+  if(dirty && currentId){ saveCurrentPost(posts.find(p=>p.id===currentId)?.status||'draft'); toast('💾 Tự động lưu','info'); }
+},60000);
+
+/* ── SET TODAY AS DEFAULT DATE ── */
+document.getElementById('fDate').value=new Date().toISOString().split('T')[0];
+
+/* ── INIT ── */
+renderSidebar();
+if(posts.length) loadPost(posts[0].id);
+</script>
+</body>
+</html>

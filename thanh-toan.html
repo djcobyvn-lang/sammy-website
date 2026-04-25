@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xác Nhận Thanh Toán | Sammy Trương</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #04051A; --card: rgba(13,18,64,0.62);
+      --violet: #7B5EA7; --indigo: #4F6BFF; --neon: #A78BFA;
+      --teal: #2DD4BF; --gold: #C9A84C; --gold2: #E8C56A;
+      --text: #E8E8F0; --muted: #9898B8;
+      --border: rgba(167,139,250,0.18); --border-h: rgba(167,139,250,0.48);
+      --glow: 0 0 40px rgba(167,139,250,0.28);
+    }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--bg) url('/assets/anh-nen-sammy.png') center top / 100% auto no-repeat;
+      color: var(--text); min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-start; padding: 2rem 1.2rem 4rem;
+    }
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .wrap { position: relative; z-index: 1; width: 100%; max-width: 580px; }
+
+    /* LOGO BAR */
+    .logo-bar { text-align: center; margin: 1.6rem 0 2.2rem; }
+    .logo-mark {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .82rem; font-weight: 700; color: #fff;
+      border: 1.5px solid rgba(167,139,250,0.42);
+      box-shadow: 0 0 20px rgba(167,139,250,0.38); margin: 0 auto .75rem;
+    }
+    .logo-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text); }
+
+    /* STEP BAR */
+    .steps { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 2.4rem; }
+    .step { display: flex; flex-direction: column; align-items: center; gap: .3rem; }
+    .step-dot {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 600;
+      border: 2px solid rgba(167,139,250,0.25); color: var(--muted);
+    }
+    .step-dot.done   { background: rgba(45,212,191,0.15); border-color: rgba(45,212,191,0.40); color: var(--teal); }
+    .step-dot.active { background: linear-gradient(135deg, var(--violet), var(--indigo)); border-color: transparent; color: #fff; box-shadow: 0 0 14px rgba(123,94,167,0.40); }
+    .step-lbl { font-size: .62rem; color: var(--muted); white-space: nowrap; }
+    .step-lbl.active { color: var(--neon); }
+    .step-line { width: 48px; height: 2px; background: rgba(167,139,250,0.15); margin: 0 .3rem; margin-bottom: 1.2rem; }
+    .step-line.done { background: rgba(45,212,191,0.35); }
+
+    /* CARD */
+    .card {
+      background: var(--card); backdrop-filter: blur(20px);
+      border: 1px solid var(--border); border-radius: 24px;
+      overflow: hidden; position: relative;
+    }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--violet), var(--indigo), var(--teal));
+    }
+
+    /* HEADER */
+    .card-header {
+      padding: 2rem 2.2rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: .35rem; }
+    .card-sub { font-size: .83rem; color: var(--muted); }
+
+    /* ORDER SUMMARY */
+    .order-box {
+      margin: 1.6rem 2.2rem 0;
+      background: rgba(4,5,26,0.55); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.3rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .order-pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .2rem; }
+    .order-pkg-sub { font-size: .78rem; color: var(--muted); }
+    .order-price { text-align: right; flex-shrink: 0; }
+    .order-price .op-num { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700; color: var(--gold2); display: block; line-height: 1; }
+    .order-price .op-unit { font-size: .72rem; color: var(--muted); }
+
+    /* BANK INFO */
+    .bank-section { padding: 1.6rem 2.2rem; }
+    .bank-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .18em; color: var(--neon); margin-bottom: 1rem; display: block; }
+    .bank-card {
+      background: rgba(13,10,0,0.55); border: 1px solid rgba(201,168,76,0.30);
+      border-radius: 18px; overflow: hidden; position: relative;
+    }
+    .bank-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold2), transparent);
+    }
+    .bank-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 1.4rem; border-bottom: 1px solid rgba(201,168,76,0.10);
+      gap: .8rem;
+    }
+    .bank-row:last-child { border-bottom: none; }
+    .bank-row-label { font-size: .72rem; color: var(--muted); flex-shrink: 0; min-width: 110px; }
+    .bank-row-val { font-size: .9rem; color: var(--text); font-weight: 500; flex: 1; }
+    .bank-row-val.highlight { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--gold2); letter-spacing: .06em; }
+    .btn-copy {
+      flex-shrink: 0; background: rgba(167,139,250,0.12);
+      border: 1px solid rgba(167,139,250,0.28); border-radius: 8px;
+      color: var(--neon); font-size: .72rem; font-weight: 500;
+      padding: .3rem .7rem; cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      transition: background .25s, border-color .25s;
+      white-space: nowrap;
+    }
+    .btn-copy:hover { background: rgba(167,139,250,0.22); border-color: var(--neon); }
+    .btn-copy.copied { background: rgba(45,212,191,0.14); border-color: rgba(45,212,191,0.40); color: var(--teal); }
+
+    /* TRANSFER CONTENT */
+    .ck-box {
+      margin: 1.2rem 0 0;
+      background: rgba(79,107,255,0.08); border: 1px solid rgba(79,107,255,0.22);
+      border-radius: 14px; padding: 1rem 1.3rem;
+    }
+    .ck-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .14em; color: var(--neon); margin-bottom: .4rem; display: block; }
+    .ck-value-wrap { display: flex; align-items: center; justify-content: space-between; gap: .8rem; }
+    .ck-value { font-size: .9rem; color: var(--text); font-weight: 500; word-break: break-word; }
+
+    /* INSTRUCTIONS */
+    .instructions {
+      margin: 1.2rem 2.2rem 0;
+      background: rgba(45,212,191,0.06); border: 1px solid rgba(45,212,191,0.20);
+      border-radius: 12px; padding: 1rem 1.2rem;
+    }
+    .instructions ol { list-style: none; display: flex; flex-direction: column; gap: .55rem; counter-reset: steps; }
+    .instructions ol li {
+      display: flex; align-items: flex-start; gap: .65rem;
+      font-size: .83rem; color: var(--muted); line-height: 1.65;
+      counter-increment: steps;
+    }
+    .instructions ol li::before {
+      content: counter(steps);
+      width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(45,212,191,0.15); border: 1px solid rgba(45,212,191,0.30);
+      color: var(--teal); font-size: .68rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: .1rem;
+    }
+
+    /* CTA */
+    .cta-section { padding: 1.6rem 2.2rem 2.2rem; }
+    .btn-confirm {
+      display: block; width: 100%; text-align: center;
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      color: #fff; border: none; cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: .97rem; font-weight: 600;
+      padding: 1rem; border-radius: 100px;
+      box-shadow: 0 0 28px rgba(123,94,167,0.35); transition: box-shadow .3s, transform .2s;
+    }
+    .btn-confirm:hover { box-shadow: 0 0 54px rgba(123,94,167,0.58); transform: translateY(-1px); }
+    .btn-confirm:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
+    .note-small { font-size: .75rem; color: var(--muted); text-align: center; margin-top: .9rem; line-height: 1.65; }
+
+    /* SUCCESS STATE */
+    .success-panel {
+      display: none; text-align: center;
+      padding: 3rem 2.2rem 2.5rem;
+    }
+    .success-icon { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
+    .success-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: .6rem; color: var(--teal); }
+    .success-sub { font-size: .88rem; color: var(--muted); line-height: 1.8; }
+
+    /* NOT FOUND */
+    .not-found { text-align: center; padding: 3rem 2rem; }
+    .not-found h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: .6rem; }
+    .not-found p { color: var(--muted); font-size: .88rem; margin-bottom: 1.4rem; }
+    .btn-back { display: inline-block; text-decoration: none; color: var(--neon); font-size: .88rem; border: 1px solid rgba(167,139,250,0.35); padding: .6rem 1.4rem; border-radius: 100px; transition: border-color .25s; }
+    .btn-back:hover { border-color: var(--neon); }
+
+    @media (max-width: 500px) {
+      .bank-row { flex-wrap: wrap; }
+      .bank-row-label { min-width: auto; width: 100%; }
+      .order-box { flex-direction: column; align-items: flex-start; }
+      .order-price { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+
+<div class="wrap">
+  <div class="logo-bar">
+    <div class="logo-mark">ST</div>
+    <div class="logo-name">Sammy Trương</div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps">
+    <div class="step">
+      <div class="step-dot done">✓</div>
+      <span class="step-lbl">Đăng ký</span>
+    </div>
+    <div class="step-line done"></div>
+    <div class="step">
+      <div class="step-dot active">2</div>
+      <span class="step-lbl active">Thanh toán</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step">
+      <div class="step-dot">3</div>
+      <span class="step-lbl">Kích hoạt</span>
+    </div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="card" id="mainCard">
+
+    <!-- HEADER -->
+    <div class="card-header">
+      <div class="card-title">Xác Nhận Thanh Toán</div>
+      <p class="card-sub">Hoàn tất đăng ký — chuyển khoản để kích hoạt dịch vụ ngay</p>
+    </div>
+
+    <!-- ORDER SUMMARY -->
+    <div class="order-box" id="orderBox">
+      <div>
+        <div class="order-pkg-name" id="pkgName">—</div>
+        <div class="order-pkg-sub" id="pkgSub">Đang tải thông tin gói...</div>
+      </div>
+      <div class="order-price">
+        <span class="op-num" id="pkgPrice">—</span>
+        <span class="op-unit">VNĐ</span>
+      </div>
+    </div>
+
+    <!-- BANK INFO -->
+    <div class="bank-section">
+      <span class="bank-label">Thông Tin Chuyển Khoản</span>
+      <div class="bank-card">
+        <div class="bank-row">
+          <span class="bank-row-label">Ngân hàng</span>
+          <span class="bank-row-val">ACB — Á Châu</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-row-label">Số tài khoản</span>
+          <span class="bank-row-val highlight">6855117</span>
+          <button class="btn-copy" onclick="copyText('6855117', this)">Sao chép</button>
+        </div>
+        <div class="bank-row">
+          <span class="bank-row-label">Chủ tài khoản</span>
+          <span class="bank-row-val">Truong Thi Diem Kieu</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-row-label">Số tiền</span>
+          <span class="bank-row-val highlight" id="bankAmount">—</span>
+        </div>
+      </div>
+
+      <div class="ck-box">
+        <span class="ck-label">Nội Dung Chuyển Khoản</span>
+        <div class="ck-value-wrap">
+          <span class="ck-value" id="ckContent">—</span>
+          <button class="btn-copy" id="ckCopyBtn" onclick="copyCK(this)">Sao chép</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTRUCTIONS -->
+    <div class="instructions">
+      <ol>
+        <li>Chuyển khoản đúng số tiền và nội dung ghi ở trên.</li>
+        <li>Chụp màn hình xác nhận giao dịch.</li>
+        <li>Bấm <strong style="color:var(--text);">"Tôi đã chuyển khoản"</strong> — Sammy sẽ xác nhận và kích hoạt trong vòng <strong style="color:var(--teal);">24 giờ</strong>.</li>
+      </ol>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <button class="btn-confirm" id="confirmBtn" onclick="handleConfirm()">
+        Tôi Đã Chuyển Khoản ✓
+      </button>
+      <p class="note-small" id="noteText">
+        Sau khi xác nhận, tài khoản học viên sẽ được gửi về email của bạn.
+      </p>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-panel" id="successPanel">
+      <span class="success-icon">🎉</span>
+      <div class="success-title">Đã Ghi Nhận!</div>
+      <p class="success-sub">
+        Cảm ơn bạn đã đăng ký. Sammy sẽ xác nhận thanh toán và gửi thông tin kích hoạt qua email trong vòng <strong style="color:var(--teal);">24 giờ</strong>.<br><br>
+        Nếu cần hỗ trợ ngay: Zalo <strong style="color:var(--gold2);">0972 624 729</strong>
+      </p>
+    </div>
+
+  </div><!-- end card -->
+
+  <!-- NOT FOUND (hidden by default) -->
+  <div class="card not-found" id="notFound" style="display:none;">
+    <h2>Không tìm thấy thông tin gói</h2>
+    <p>Vui lòng quay lại và chọn gói dịch vụ trước khi thanh toán.</p>
+    <a href="luan-giai-ca-nhan.html" class="btn-back">← Quay lại chọn gói</a>
+  </div>
+
+  <div style="text-align:center;margin-top:1.6rem;">
+    <a href="luan-giai-ca-nhan.html" style="font-size:.78rem;color:var(--muted);text-decoration:none;">← Quay lại chọn gói khác</a>
+  </div>
+</div>
+
+<script>
+/* ─── PACKAGE DATA ─── */
+const PACKAGES_DATA = {
+  'co-ban': {
+    name: 'Gói Cơ Bản',
+    sub:  'Chạm vào bản ngã',
+    price: 500000,
+    code: 'CO-BAN'
+  },
+  'nang-cao': {
+    name: 'Gói Nâng Cao',
+    sub:  'Kiến tạo tương lai',
+    price: 1000000,
+    code: 'NANG-CAO'
+  },
+  'dac-biet': {
+    name: 'Gói Đặc Biệt',
+    sub:  'Chuyển hóa & Chữa lành',
+    price: 2000000,
+    code: 'DAC-BIET'
+  },
+  'me-be-nang-cao': {
+    name: 'Gói Mẹ & Bé — Nâng Cao',
+    sub:  'Kết nối thiêng liêng',
+    price: 1500000,
+    code: 'ME-BE-NC'
+  },
+  'me-be-dac-biet': {
+    name: 'Gói Mẹ & Bé — Đặc Biệt',
+    sub:  'Đồng hành trọn vẹn',
+    price: 3000000,
+    code: 'ME-BE-DB'
+  },
+  '2-ngay-sinh-nang-cao': {
+    name: 'Gói 2 Ngày Sinh — Nâng Cao',
+    sub:  'Thấu suốt',
+    price: 1500000,
+    code: '2NS-NC'
+  },
+  '2-ngay-sinh-dac-biet': {
+    name: 'Gói 2 Ngày Sinh — Đặc Biệt',
+    sub:  'Hợp nhất',
+    price: 3000000,
+    code: '2NS-DB'
+  },
+  'truc-tiep-11': {
+    name: 'Gói Trực Tiếp 1:1',
+    sub:  'Zoom · ~120 phút',
+    price: 3000000,
+    code: 'TRUC-TIEP'
+  }
+};
+
+/* ─── FORMAT PRICE ─── */
+function fmt(n) {
+  return n.toLocaleString('vi-VN');
+}
+
+// ► Dán URL Web App vào đây (giống với luan-giai-ca-nhan.html)
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwFi3Iq79XFFA9BBAUar9Ius727HeZncIHOVQdxMXczbpNRJ_TiBUgHnsI-YJDYnNl-ew/exec';
+
+/* ─── READ PARAMS ─── */
+const params  = new URLSearchParams(location.search);
+const pkgId   = params.get('goi') || sessionStorage.getItem('sammy_pkg');
+const custName = params.get('ten') || sessionStorage.getItem('sammy_ten') || 'Khach Hang';
+
+const pkg = PACKAGES_DATA[pkgId];
+
+if (!pkg) {
+  document.getElementById('mainCard').style.display = 'none';
+  document.getElementById('notFound').style.display = 'block';
+} else {
+  const ckContent = `${custName} - ${pkg.code}`;
+
+  document.getElementById('pkgName').textContent  = pkg.name;
+  document.getElementById('pkgSub').textContent   = pkg.sub;
+  document.getElementById('pkgPrice').textContent = fmt(pkg.price);
+  document.getElementById('bankAmount').textContent = fmt(pkg.price) + ' VNĐ';
+  document.getElementById('ckContent').textContent  = ckContent;
+  document.title = `Thanh toán ${pkg.name} | Sammy Trương`;
+}
+
+/* ─── COPY ─── */
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Đã sao chép';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Sao chép'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    const el = document.createElement('textarea');
+    el.value = text; document.body.appendChild(el);
+    el.select(); document.execCommand('copy');
+    document.body.removeChild(el);
+    btn.textContent = '✓ Đã sao chép'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Sao chép'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function copyCK(btn) {
+  const text = document.getElementById('ckContent').textContent;
+  copyText(text, btn);
+}
+
+/* ─── CONFIRM ─── */
+async function handleConfirm() {
+  const btn = document.getElementById('confirmBtn');
+  btn.disabled = true;
+  btn.textContent = 'Đang ghi nhận...';
+
+  const order = {
+    packageId:   pkgId,
+    packageName: pkg?.name,
+    price:       pkg?.price,
+    customerName: custName,
+    email:       params.get('email') || sessionStorage.getItem('sammy_email') || '',
+    zalo:        params.get('zalo')  || sessionStorage.getItem('sammy_zalo')  || '',
+    confirmedAt: new Date().toISOString()
+  };
+
+  /* Log to console (replace with API call when backend ready) */
+  console.log('[Order Confirmed]', order);
+
+  /* Gửi lên Google Sheets */
+  try {
+    await fetch(GAS_URL + '?payload=' + encodeURIComponent(JSON.stringify({ ...order, formType: 'xac-nhan-ck' })), { mode: 'no-cors' });
+  } catch { /* non-blocking */ }
+
+  /* POST to backend */
+  try {
+    await fetch('/api/order/confirm', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(order)
+    });
+  } catch {
+    /* Offline — proceed anyway */
+  }
+
+  /* Save to sessionStorage as fallback */
+  sessionStorage.setItem('sammy_order', JSON.stringify(order));
+
+  /* Show success */
+  document.querySelector('.card-header').style.display   = 'none';
+  document.getElementById('orderBox').style.display      = 'none';
+  document.querySelector('.bank-section').style.display  = 'none';
+  document.querySelector('.instructions').style.display  = 'none';
+  document.querySelector('.cta-section').style.display   = 'none';
+  document.getElementById('successPanel').style.display  = 'block';
+}
+
+/* ─── STARFIELD ─── */
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  function init(){stars=[];for(let i=0;i<200;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.1,o:Math.random()*.5+.1,speed:Math.random()*.016+.004,phase:Math.random()*Math.PI*2});}
+  function draw(t){ctx.clearRect(0,0,W,H);stars.forEach(s=>{const tw=Math.sin(t*.001*s.speed*1000+s.phase)*.28+.72;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(210,195,255,${s.o*tw})`;ctx.fill();});requestAnimationFrame(draw);}
+  resize();init();requestAnimationFrame(draw);
+  window.addEventListener('resize',()=>{resize();init();});
+})();
+</script>
+</body>
+</html>

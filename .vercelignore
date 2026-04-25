@@ -1,0 +1,47 @@
+# Dev scripts
+remove_bg.js
+remove_logo_bg.js
+remove_logo_bg2.js
+remove_planet.js
+remove_planets_all.js
+screenshot.js
+screenshot_cards.js
+screenshot_close.js
+screenshot_hero.js
+screenshot_zoom.js
+
+# Screenshots & backup images
+screenshot_full.png
+screenshot_v1.png
+screenshot_v2.png
+ss_cards_close.png
+ss_cards_final.png
+ss_cards_grid.png
+ss_cards_zoom.png
+ss_full.png
+ss_hero.png
+ss_hero_font.png
+ss_numbers.png
+ss_services.png
+
+# Duplicate/unused images
+logo-chu-dao.png.png
+nensammy.png
+logo-chu-dao.png
+
+# Old icon folder (moved to /assets/icons)
+icons/
+
+# GAS reference file (không serve cho user)
+google-apps-script.js
+
+# Backend (deploy riêng trên Railway)
+backend/
+
+# Node
+node_modules/
+package.json
+package-lock.json
+
+# Dev docs
+CLAUDE.md

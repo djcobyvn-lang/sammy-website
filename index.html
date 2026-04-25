@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sammy Trương | Thần Số Học Vũ Trụ</title>
+  <meta name="description" content="Giải mã ngày sinh, làm chủ cuộc đời. Sammy Trương — chuyên gia thần số học vũ trụ với hơn 10 năm kinh nghiệm." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --bg:        #04051A;
+      --bg2:       #080C2E;
+      --bg3:       #0D1240;
+      --card:      rgba(13,18,64,0.58);
+      --violet:    #7B5EA7;
+      --indigo:    #4F6BFF;
+      --neon:      #A78BFA;
+      --teal:      #2DD4BF;
+      --gold:      #C9A84C;
+      --text:      #E8E8F0;
+      --muted:     #9898B8;
+      --border:    rgba(167,139,250,0.16);
+      --border-h:  rgba(167,139,250,0.48);
+      --glow:      0 0 40px rgba(167,139,250,0.28);
+      --glow-lg:   0 0 70px rgba(167,139,250,0.20), 0 0 140px rgba(79,107,255,0.10);
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--bg) url('/assets/anh-nen-sammy.png') center top / 100% auto no-repeat;
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.75;
+    }
+
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    .nebula {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 65% 80% at 0%   15%, rgba(123,94,167,0.13) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 65% at 100%  8%, rgba(45,212,191,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 55% at 95%  62%, rgba(79,107,255,0.09) 0%, transparent 60%),
+        radial-gradient(ellipse 85% 45% at 50% 100%, rgba(123,94,167,0.07) 0%, transparent 65%);
+    }
+
+    nav, section, footer, .mobile-menu { position: relative; z-index: 2; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 72px;
+      background: rgba(4,5,26,0.60);
+      backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border);
+      transition: background .35s;
+    }
+    nav.scrolled { background: rgba(4,5,26,0.94); }
+
+    .logo {
+      display: flex; align-items: center; gap: .75rem;
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.18rem; font-weight: 600; color: var(--text);
+      letter-spacing: .05em;
+    }
+    .logo-mark {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: .8rem; font-weight: 700; color: #fff;
+      border: 1.5px solid rgba(167,139,250,0.42);
+      box-shadow: 0 0 18px rgba(167,139,250,0.38);
+      flex-shrink: 0;
+    }
+
+    .nav-links { display: flex; gap: 2.6rem; list-style: none; }
+    .nav-links a {
+      color: #B0A0D0; text-decoration: none;
+      font-size: .875rem; letter-spacing: .02em;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      color: #fff; border: none; cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: .88rem; font-weight: 500;
+      padding: .6rem 1.55rem; border-radius: 100px;
+      box-shadow: 0 0 22px rgba(123,94,167,0.28);
+      transition: box-shadow .3s, transform .2s;
+      white-space: nowrap;
+    }
+    .btn-primary:hover { box-shadow: 0 0 44px rgba(123,94,167,0.58); transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: transparent; color: var(--text); cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: .88rem; font-weight: 400;
+      padding: .6rem 1.55rem; border-radius: 100px;
+      border: 1px solid rgba(167,139,250,0.36);
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .btn-ghost:hover { border-color: var(--neon); box-shadow: 0 0 22px rgba(167,139,250,0.20); }
+    .btn-hocvien {
+      background: transparent; color: var(--neon); cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: .82rem; font-weight: 500;
+      padding: .52rem 1.1rem; border-radius: 100px;
+      border: 1px solid rgba(167,139,250,0.40);
+      transition: background .3s, border-color .3s, box-shadow .3s;
+      text-decoration: none; display: inline-flex; align-items: center; gap: .35rem; white-space: nowrap;
+    }
+    .btn-hocvien:hover { background: rgba(167,139,250,0.10); border-color: var(--neon); box-shadow: 0 0 18px rgba(167,139,250,0.22); }
+    .nav-actions { display: flex; align-items: center; gap: .6rem; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
+      background: rgba(4,5,26,0.98); backdrop-filter: blur(20px);
+      padding: 1.6rem 6% 2.2rem; border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu .nav-links { flex-direction: column; gap: 1.2rem; }
+    .mobile-menu .nav-links a { font-size: 1rem; }
+    .mobile-menu .btn-primary { margin-top: 1.4rem; width: 100%; padding: .8rem; text-align: center; display: block; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 120px 6% 90px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 600px;
+      background: radial-gradient(ellipse, rgba(123,94,167,0.16) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 860px; width: 100%;
+      display: flex; flex-direction: column; align-items: center;
+      position: relative; z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: .65rem;
+      background: rgba(123,94,167,0.12);
+      border: 1px solid rgba(167,139,250,0.28);
+      border-radius: 100px; padding: .42rem 1.2rem;
+      font-size: .7rem; color: var(--neon); letter-spacing: .15em;
+      text-transform: uppercase; margin-bottom: 2.2rem;
+    }
+    .hero-eyebrow .dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--neon); opacity: .7; flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 7.5vw, 5.8rem);
+      font-weight: 700; line-height: 1.06;
+      margin-bottom: 1.6rem;
+      background: linear-gradient(155deg, #F0ECFF 20%, #C084FC 52%, #2DD4BF 90%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-line {
+      width: 90px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(167,139,250,0.55), transparent);
+      margin: 0 auto 1.8rem;
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.25rem, 2.8vw, 1.7rem);
+      font-weight: 300; font-style: italic;
+      color: rgba(232,232,240,0.78);
+      letter-spacing: .06em;
+      margin-bottom: 3rem;
+    }
+
+    .hero-btns { display: flex; gap: 1.1rem; flex-wrap: wrap; justify-content: center; }
+    .hero-btns .btn-primary,
+    .hero-btns .btn-ghost { padding: .9rem 2.4rem; font-size: .97rem; }
+
+    .hero-scroll {
+      position: absolute; bottom: 2.8rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: .45rem;
+      color: var(--muted); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+      animation: fadeScroll 2.2s ease-in-out infinite;
+    }
+    .hero-scroll-bar {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, rgba(167,139,250,0.55), transparent);
+    }
+    @keyframes fadeScroll {
+      0%,100%{ opacity:.35; transform:translateX(-50%) translateY(0); }
+      50%     { opacity:1;   transform:translateX(-50%) translateY(6px); }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px; margin: 0 6%;
+      background: linear-gradient(90deg, transparent, rgba(167,139,250,0.30), transparent);
+    }
+
+    /* ── SHARED SECTION ── */
+    section { padding: 6.5rem 6%; }
+
+    .sec-tag {
+      font-size: .7rem; text-transform: uppercase; letter-spacing: .2em;
+      color: var(--neon); margin-bottom: .8rem; display: block;
+    }
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.65rem, 3.4vw, 2.7rem); font-weight: 600;
+      background: linear-gradient(135deg, var(--text) 40%, var(--neon) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 1rem;
+    }
+    .sec-sub {
+      color: var(--muted); max-width: 580px; margin: 0 auto;
+      font-size: .92rem; line-height: 1.88;
+    }
+    .sec-head { text-align: center; margin-bottom: 4rem; }
+
+    /* ── CORE NUMBERS ── */
+    .numbers-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 1.2rem; max-width: 1280px; margin: 0 auto;
+    }
+    .num-card {
+      background: var(--card); backdrop-filter: blur(18px);
+      border: 1px solid var(--border); border-radius: 22px;
+      padding: 2rem 1.4rem 1.8rem; text-align: center;
+      cursor: pointer;
+      transition: transform .35s, box-shadow .35s, border-color .35s, background .35s;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .num-card::before {
+      content: ''; position: absolute; top: 0; left: 8%; right: 8%;
+      height: 2px; border-radius: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon), transparent);
+      opacity: 0; transition: opacity .35s;
+    }
+    .num-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--border-h);
+      box-shadow: var(--glow);
+      background: rgba(13,18,64,0.78);
+    }
+    .num-card:hover::before { opacity: 1; }
+    .num-icon {
+      width: 100px; height: 100px;
+      margin: 0 auto 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .35s;
+    }
+    .num-card:hover .num-icon { transform: scale(1.08); }
+    .num-icon img {
+      width: 100px; height: 100px; object-fit: contain; display: block;
+      filter: brightness(1.35) saturate(1.2) drop-shadow(0 0 10px rgba(167,139,250,0.52));
+    }
+    .num-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--text); margin-bottom: .3rem; letter-spacing: .02em;
+    }
+    .num-card .num-label {
+      font-size: .65rem; text-transform: uppercase; letter-spacing: .14em;
+      color: var(--neon); margin-bottom: .9rem; display: block;
+    }
+    /* content detail — visible always, subtle at rest, clear on hover */
+    .num-detail {
+      text-align: left; margin-top: auto;
+    }
+    .num-detail-block { margin-bottom: .8rem; }
+    .num-detail-block:last-child { margin-bottom: 0; }
+    .num-detail-tag {
+      font-size: .63rem; text-transform: uppercase; letter-spacing: .12em;
+      display: flex; align-items: center; gap: .35rem; margin-bottom: .3rem;
+      opacity: .6; transition: opacity .3s;
+    }
+    .num-detail-tag .dtag-dot {
+      width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+    }
+    .num-card:hover .num-detail-tag { opacity: 1; }
+    .num-meaning {
+      font-size: .78rem; color: var(--muted); line-height: 1.65;
+      font-style: italic;
+    }
+    .num-benefit {
+      font-size: .78rem; color: var(--muted); line-height: 1.65;
+    }
+    .num-card:hover .num-meaning,
+    .num-card:hover .num-benefit { color: rgba(232,232,240,0.82); }
+    .num-divider {
+      height: 1px; margin: .75rem 0;
+      background: linear-gradient(90deg, transparent, rgba(167,139,250,0.18), transparent);
+    }
+    .num-btn {
+      display: inline-block; font-size: .72rem;
+      font-family: 'Be Vietnam Pro', sans-serif; font-weight: 500;
+      color: #fff; text-decoration: none;
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      padding: .38rem .95rem; border-radius: 100px; border: none; cursor: pointer;
+      transition: box-shadow .3s, transform .2s;
+      box-shadow: 0 0 12px rgba(123,94,167,0.28);
+    }
+    .num-btn:hover { box-shadow: 0 0 24px rgba(123,94,167,0.58); transform: translateY(-1px); }
+
+    /* ── ABOUT ── */
+    .about-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.25fr;
+      gap: 6rem; align-items: center;
+    }
+    .about-visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 420px;
+    }
+    .about-bg-num {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20rem; font-weight: 700; line-height: 1;
+      color: rgba(123,94,167,0.045); user-select: none; pointer-events: none;
+    }
+    .about-sphere {
+      width: 310px; height: 310px; border-radius: 50%; position: relative;
+      background: radial-gradient(circle at 35% 30%,
+        rgba(167,139,250,0.30) 0%,
+        rgba(123,94,167,0.22) 30%,
+        rgba(79,107,255,0.12) 55%,
+        rgba(45,212,191,0.06) 75%,
+        transparent 88%
+      );
+      border: 1px solid rgba(167,139,250,0.18);
+      animation: floatY 7s ease-in-out infinite;
+      box-shadow: 0 0 90px rgba(123,94,167,0.18), inset 0 0 50px rgba(167,139,250,0.07);
+    }
+    .about-sphere::before {
+      content: ''; position: absolute; inset: -22px; border-radius: 50%;
+      border: 1px solid rgba(167,139,250,0.10);
+    }
+    .about-sphere::after {
+      content: ''; position: absolute; inset: -44px; border-radius: 50%;
+      border: 1px solid rgba(167,139,250,0.05);
+    }
+    .sphere-center {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5.5rem; font-weight: 300;
+      color: rgba(167,139,250,0.22); user-select: none;
+    }
+    .float-num {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 300;
+      color: rgba(167,139,250,0.28);
+      animation: floatY 5s ease-in-out infinite;
+    }
+    .float-num:nth-child(1){ top:8%;  left:4%;  animation-delay:0s; }
+    .float-num:nth-child(2){ top:14%; right:7%; animation-delay:-1.8s; }
+    .float-num:nth-child(3){ bottom:15%; left:8%;  animation-delay:-3.2s; }
+    .float-num:nth-child(4){ bottom:8%;  right:4%; animation-delay:-4.5s; }
+    .float-num:nth-child(5){ top:50%; left:1%; animation-delay:-2.2s; font-size:1rem; }
+    .float-num:nth-child(6){ top:46%; right:0%; animation-delay:-0.6s; font-size:1rem; }
+
+    .about-text .sec-tag,
+    .about-text .sec-title { text-align: left; }
+    .about-p { color: var(--muted); line-height: 1.95; margin-bottom: 1.1rem; font-size: .93rem; }
+
+    .stats-row {
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 1rem; margin-top: 2.4rem; max-width: 400px;
+    }
+    .stat {
+      text-align: center; padding: 1.4rem 1rem;
+      background: rgba(13,18,64,0.52); border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .stat:hover { border-color: var(--border-h); box-shadow: var(--glow); }
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem; font-weight: 700; color: var(--neon); display: block;
+    }
+    .stat-l { font-size: .7rem; color: var(--muted); margin-top: .25rem; display: block; letter-spacing: .06em; }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 1.6rem; max-width: 800px; margin: 0 auto;
+    }
+    .srv-card {
+      background: var(--card); backdrop-filter: blur(18px);
+      border: 1px solid var(--border); border-radius: 24px;
+      padding: 2.6rem 2.1rem;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      position: relative; overflow: hidden;
+    }
+    .srv-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--violet), var(--teal));
+      opacity: 0; transition: opacity .3s;
+    }
+    .srv-card:hover { transform: translateY(-8px); border-color: var(--border-h); box-shadow: var(--glow); }
+    .srv-card:hover::after { opacity: 1; }
+    .srv-icon {
+      width: 68px; height: 68px; border-radius: 20px; margin-bottom: 1.6rem;
+      background: linear-gradient(135deg, rgba(123,94,167,0.26), rgba(79,107,255,0.16));
+      border: 1px solid rgba(167,139,250,0.26);
+      display: flex; align-items: center; justify-content: center; font-size: 2rem;
+    }
+    .srv-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.18rem; margin-bottom: .9rem;
+    }
+    .srv-card p { color: var(--muted); font-size: .88rem; line-height: 1.8; margin-bottom: 1.6rem; }
+    .srv-link {
+      color: var(--neon); text-decoration: none; font-size: .86rem; font-weight: 500;
+      display: inline-flex; align-items: center; gap: .38rem; transition: gap .3s;
+    }
+    .srv-link:hover { gap: .65rem; }
+
+    /* ── WHY US ── */
+    .why-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 1.5rem; max-width: 1200px; margin: 0 auto;
+    }
+    .why-card {
+      text-align: center; padding: 2.4rem 1.6rem;
+      background: rgba(13,18,64,0.42); border: 1px solid var(--border); border-radius: 22px;
+      transition: transform .3s, background .3s, border-color .3s;
+      position: relative; overflow: hidden;
+    }
+    .why-card::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 55%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .why-card:hover { transform: translateY(-6px); background: rgba(13,18,64,0.72); border-color: var(--border-h); }
+    .why-card:hover::before { opacity: 1; }
+    .why-ic {
+      width: 66px; height: 66px; border-radius: 50%; margin: 0 auto 1.3rem;
+      background: linear-gradient(135deg, rgba(123,94,167,0.20), rgba(45,212,191,0.10));
+      border: 1px solid rgba(167,139,250,0.22);
+      display: flex; align-items: center; justify-content: center; font-size: 1.9rem;
+    }
+    .why-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.02rem; margin-bottom: .65rem; color: var(--text);
+    }
+    .why-card p { font-size: .83rem; color: var(--muted); line-height: 1.78; }
+
+    /* ── TESTIMONIALS ── */
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1.6rem; max-width: 1200px; margin: 0 auto;
+    }
+    .testi-card {
+      background: var(--card); backdrop-filter: blur(14px);
+      border: 1px solid var(--border); border-radius: 22px; padding: 2.4rem;
+      position: relative; overflow: hidden;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .testi-card:hover { border-color: var(--border-h); box-shadow: var(--glow); }
+    .testi-card::before {
+      content: '\201C';
+      position: absolute; top: 1.4rem; right: 1.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6rem; line-height: 1; color: rgba(167,139,250,0.10);
+      pointer-events: none;
+    }
+    .stars-row { color: var(--gold); font-size: .82rem; margin-bottom: 1rem; letter-spacing: .12em; }
+    .testi-text { color: var(--muted); font-size: .875rem; line-height: 1.88; margin-bottom: 1.6rem; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: .85rem; }
+    .av {
+      width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--violet), var(--teal));
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+      border: 2px solid rgba(167,139,250,0.32);
+    }
+    .av-name { font-weight: 600; font-size: .88rem; }
+    .av-desc { font-size: .75rem; color: var(--muted); }
+
+    /* ── BLOG ── */
+    .blog-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1.6rem; max-width: 1200px; margin: 0 auto;
+    }
+    .blog-card {
+      background: var(--card); backdrop-filter: blur(14px);
+      border: 1px solid var(--border); border-radius: 20px;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .blog-card:hover { transform: translateY(-6px); border-color: var(--border-h); box-shadow: 0 0 32px rgba(167,139,250,0.16); }
+    .blog-thumb {
+      height: 185px;
+      background: linear-gradient(135deg, rgba(123,94,167,0.32), rgba(45,212,191,0.16));
+      display: flex; align-items: center; justify-content: center; font-size: 3.2rem;
+      position: relative;
+    }
+    .blog-thumb::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 65px;
+      background: linear-gradient(0deg, rgba(13,18,64,0.88), transparent);
+    }
+    .blog-body { padding: 1.5rem 1.6rem; }
+    .blog-cat {
+      display: inline-block; background: rgba(123,94,167,0.22); color: var(--neon);
+      font-size: .68rem; padding: .22rem .75rem; border-radius: 100px;
+      letter-spacing: .07em; text-transform: uppercase;
+    }
+    .blog-date { font-size: .74rem; color: var(--muted); margin: .55rem 0; }
+    .blog-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; line-height: 1.55; margin-bottom: .72rem;
+    }
+    .blog-ex { font-size: .83rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.1rem; }
+    .blog-more { color: var(--neon); text-decoration: none; font-size: .83rem; font-weight: 500; }
+
+    /* ── CTA ── */
+    .cta-wrap { max-width: 760px; margin: 0 auto; text-align: center; }
+    .cta-box {
+      background: rgba(13,18,64,0.52); border: 1px solid rgba(167,139,250,0.26);
+      border-radius: 30px; padding: 5.5rem 4rem; position: relative; overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+    .cta-box::before {
+      content: ''; position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+      width: 560px; height: 560px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,94,167,0.11), transparent 65%);
+      pointer-events: none;
+    }
+    .cta-box::after {
+      content: ''; position: absolute; bottom: -100px; right: -100px;
+      width: 350px; height: 350px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(45,212,191,0.06), transparent 65%);
+      pointer-events: none;
+    }
+    .cta-tag { font-size: .7rem; text-transform: uppercase; letter-spacing: .2em; color: var(--neon); display: block; margin-bottom: .9rem; position: relative; }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.7rem, 3.8vw, 2.6rem); font-weight: 600;
+      margin-bottom: 1.1rem; position: relative;
+    }
+    .cta-sub { color: var(--muted); margin-bottom: 2.4rem; font-size: .93rem; position: relative; }
+    .email-row {
+      display: flex; gap: .8rem; max-width: 500px; margin: 0 auto; position: relative;
+    }
+    .email-in {
+      flex: 1; background: rgba(4,5,26,0.78); border: 1px solid rgba(167,139,250,0.26);
+      border-radius: 100px; padding: .88rem 1.55rem; color: var(--text);
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: .9rem; outline: none;
+      transition: border-color .3s;
+    }
+    .email-in:focus { border-color: var(--neon); }
+    .email-in::placeholder { color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: rgba(4,5,26,0.97); border-top: 1px solid var(--border);
+      padding: 5rem 6% 2.8rem; position: relative; z-index: 2;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3.2rem; max-width: 1200px; margin: 0 auto;
+      padding-bottom: 3.2rem; border-bottom: 1px solid var(--border);
+    }
+    .footer-brand-p { color: var(--muted); font-size: .86rem; line-height: 1.88; margin-top: 1.1rem; max-width: 270px; }
+    .socials { display: flex; gap: .8rem; margin-top: 1.6rem; }
+    .soc {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(123,94,167,0.11); border: 1px solid rgba(167,139,250,0.18);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: .95rem;
+      transition: background .3s, border-color .3s, box-shadow .3s;
+    }
+    .soc:hover { background: rgba(123,94,167,0.26); border-color: var(--neon); box-shadow: 0 0 16px rgba(167,139,250,0.22); }
+    .footer-col h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .98rem; margin-bottom: 1.3rem; color: var(--text); letter-spacing: .04em;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: .68rem; }
+    .footer-col ul a { color: var(--muted); text-decoration: none; font-size: .85rem; transition: color .25s; }
+    .footer-col ul a:hover { color: var(--neon); }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto; padding-top: 2.2rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .8rem;
+    }
+    .footer-bottom p { color: var(--muted); font-size: .8rem; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes floatY {
+      0%,100%{ transform: translateY(0); }
+      50%    { transform: translateY(-14px); }
+    }
+
+    /* ── PACKAGES ── */
+    .packages-grid {
+      display: grid; grid-template-columns: repeat(6,1fr);
+      gap: 1.2rem; max-width: 1520px; margin: 0 auto;
+    }
+    .pkg-card {
+      background: var(--card); backdrop-filter: blur(18px);
+      border: 1px solid var(--border); border-radius: 24px;
+      padding: 2.2rem 1.8rem 2.4rem;
+      display: flex; flex-direction: column;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+      position: relative; overflow: hidden;
+    }
+    .pkg-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--border-h), transparent);
+      transition: background .3s;
+    }
+    .pkg-card:hover { transform: translateY(-8px); border-color: var(--border-h); box-shadow: var(--glow); }
+    .pkg-card.featured { border-color: rgba(167,139,250,0.42); background: rgba(13,18,64,0.75); }
+    .pkg-card.featured::before { background: linear-gradient(90deg, var(--violet), var(--indigo), var(--teal)); }
+    .featured-badge {
+      position: absolute; top: 1.2rem; right: 1.4rem;
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      color: #fff; font-size: .62rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .28rem .75rem; border-radius: 100px;
+    }
+    .pkg-icon {
+      width: 56px; height: 56px; border-radius: 16px; margin-bottom: 1.4rem;
+      background: linear-gradient(135deg, rgba(123,94,167,0.24), rgba(79,107,255,0.14));
+      border: 1px solid rgba(167,139,250,0.24);
+      display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+    }
+    .pkg-tag { font-size: .68rem; text-transform: uppercase; letter-spacing: .14em; color: var(--neon); margin-bottom: .4rem; display: block; }
+    .pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; margin-bottom: .3rem; line-height: 1.2; }
+    .pkg-subtitle { font-size: .78rem; color: var(--muted); margin-bottom: 1.5rem; font-style: italic; }
+    .benefit-toggle {
+      width: 100%; background: rgba(123,94,167,0.10);
+      border: 1px solid rgba(167,139,250,0.20); border-radius: 10px;
+      padding: .65rem 1rem; margin-bottom: 1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: .82rem; color: var(--text);
+      transition: background .25s, border-color .25s;
+    }
+    .benefit-toggle:hover { background: rgba(123,94,167,0.20); border-color: rgba(167,139,250,0.38); }
+    .benefit-toggle .arrow {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(167,139,250,0.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; transition: transform .3s; flex-shrink: 0;
+    }
+    .benefit-toggle.open .arrow { transform: rotate(180deg); }
+    .benefit-body {
+      display: none; padding: .9rem 1rem 1rem;
+      background: rgba(4,5,26,0.40); border-radius: 0 0 10px 10px;
+      margin-top: -1rem; margin-bottom: 1rem;
+      border: 1px solid rgba(167,139,250,0.14); border-top: none;
+    }
+    .benefit-body.open { display: block; }
+    .benefit-body p { font-size: .84rem; color: var(--muted); line-height: 1.85; font-style: italic; }
+    .pkg-fit {
+      font-size: .8rem; color: var(--muted); margin-bottom: 1.6rem;
+      padding: .7rem .9rem;
+      background: rgba(45,212,191,0.06); border-left: 2px solid rgba(45,212,191,0.35);
+      border-radius: 0 8px 8px 0;
+    }
+    .pkg-fit strong { color: var(--teal); font-weight: 500; }
+    .pkg-footer { margin-top: auto; }
+    .pkg-price { text-align: center; padding: .7rem .5rem .3rem; }
+    .pkg-price .pp-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem; font-weight: 700; color: var(--gold);
+      letter-spacing: .02em; display: block; line-height: 1.1;
+    }
+    .pkg-price .pp-unit { font-size: .7rem; color: var(--muted); letter-spacing: .06em; }
+    .pkg-price .pp-from { font-size: .72rem; color: var(--muted); display: block; margin-bottom: .1rem; }
+    .pkg-cta-text { font-size: .78rem; color: var(--muted); font-style: italic; margin-bottom: .9rem; text-align: center; }
+    .pkg-btn {
+      display: block; width: 100%; text-align: center;
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      color: #fff; border: none; cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: .86rem; font-weight: 500;
+      padding: .75rem 1rem; border-radius: 100px; text-decoration: none;
+      box-shadow: 0 0 20px rgba(123,94,167,0.26); transition: box-shadow .3s, transform .2s;
+    }
+    .pkg-btn:hover { box-shadow: 0 0 40px rgba(123,94,167,0.52); transform: translateY(-1px); }
+    .pkg-btn.ghost {
+      background: transparent; border: 1px solid rgba(167,139,250,0.36);
+      box-shadow: none; color: var(--text);
+    }
+    .pkg-btn.ghost:hover { border-color: var(--neon); box-shadow: 0 0 20px rgba(167,139,250,0.18); }
+    .pkg-btn.zalo {
+      background: transparent; border: 1px solid rgba(6,199,85,0.38);
+      box-shadow: none; color: #4ADE80; margin-top: .45rem;
+    }
+    .pkg-btn.zalo:hover { background: rgba(6,199,85,0.10); border-color: #4ADE80; box-shadow: 0 0 14px rgba(6,199,85,0.20); transform: translateY(-1px); }
+
+    /* ── SCROLL REVEAL ── */
+    .rev       { opacity:0; transform:translateY(42px); transition:opacity .72s ease, transform .72s ease; }
+    .rev.in    { opacity:1; transform:translateY(0); }
+    .rev-l     { opacity:0; transform:translateX(-42px); transition:opacity .76s ease, transform .76s ease; }
+    .rev-l.in  { opacity:1; transform:translateX(0); }
+    .rev-r     { opacity:0; transform:translateX(42px); transition:opacity .76s ease, transform .76s ease; }
+    .rev-r.in  { opacity:1; transform:translateX(0); }
+    .rev-scale { opacity:0; transform:scale(.9); transition:opacity .72s ease, transform .72s ease; }
+    .rev-scale.in { opacity:1; transform:scale(1); }
+
+    .d1{ transition-delay:.08s; } .d2{ transition-delay:.16s; }
+    .d3{ transition-delay:.24s; } .d4{ transition-delay:.32s; }
+    .d5{ transition-delay:.40s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1400px) { .packages-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 1100px) {
+      .packages-grid { grid-template-columns: repeat(2,1fr); }
+      .numbers-grid { grid-template-columns: repeat(3,1fr); }
+      .why-grid     { grid-template-columns: repeat(2,1fr); }
+      .footer-grid  { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { min-height: 280px; }
+      .about-bg-num { font-size: 11rem; }
+      .about-sphere { width: 230px; height: 230px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .packages-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .numbers-grid  { grid-template-columns: repeat(2,1fr); }
+      .services-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .testi-grid    { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .blog-grid     { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .footer-grid   { grid-template-columns: 1fr; gap: 1.8rem; }
+      .email-row     { flex-direction: column; }
+      .email-in      { border-radius: 14px; }
+      .email-row .btn-primary { border-radius: 14px; padding: .85rem; }
+      .cta-box       { padding: 3.2rem 1.8rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 500px) {
+      .numbers-grid { grid-template-columns: repeat(2,1fr); gap: .85rem; }
+      .why-grid     { grid-template-columns: 1fr; }
+      section       { padding: 4.5rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="nebula"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="logo">
+    <div class="logo-mark">ST</div>
+    <span style="text-transform:uppercase; letter-spacing:.12em; font-size:1rem; font-weight:700;">Sammy Trương</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="luan-giai-ca-nhan.html">Luận Giải Cá Nhân</a></li>
+    <li><a href="khoa-hoc-3-goc.html">Khóa Học</a></li>
+    <li><a href="ebook.html">Ebook</a></li>
+    <li><a href="#blog">Bài Viết</a></li>
+    <li><a href="#contact">Liên Hệ</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="hoc-vien-dang-nhap.html" class="btn-hocvien">👤 Học Viên</a>
+    <a href="luan-giai-ca-nhan.html#register" class="btn-primary nav-cta" style="text-decoration:none;">Luận Giải Ngay</a>
+  </div>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mob">
+  <ul class="nav-links">
+    <li><a href="luan-giai-ca-nhan.html">Luận Giải Cá Nhân</a></li>
+    <li><a href="khoa-hoc-3-goc.html">Khóa Học</a></li>
+    <li><a href="ebook.html">Ebook</a></li>
+    <li><a href="#blog">Bài Viết</a></li>
+    <li><a href="#contact">Liên Hệ</a></li>
+  </ul>
+  <div style="display:flex;flex-direction:column;gap:.8rem;margin-top:1.4rem;">
+    <a href="luan-giai-ca-nhan.html#register" class="btn-primary" style="text-align:center;padding:.8rem;display:block;text-decoration:none;">Luận Giải Ngay</a>
+    <a href="hoc-vien-dang-nhap.html" class="btn-hocvien" style="justify-content:center;">👤 Đăng Nhập Học Viên</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-eyebrow rev">
+      <span class="dot"></span>
+      Vũ Trụ Số
+      <span class="dot"></span>
+    </div>
+    <h1 class="hero-title rev">Thần Số Học<br><span style="white-space:nowrap;">Ứng Dụng &amp; Chữa Lành</span></h1>
+    <div class="hero-line rev"></div>
+    <p class="hero-sub rev">Giải Mã Ngày Sinh · Làm Chủ Cuộc Đời</p>
+    <div class="hero-btns rev">
+      <a href="luan-giai-ca-nhan.html" class="btn-primary" style="text-decoration:none;">Luận Giải Cá Nhân</a>
+      <button class="btn-ghost">Tìm Hiểu Thêm</button>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-bar"></div>
+    <span>Khám Phá</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PACKAGES -->
+<section style="padding:4rem 6% 5.5rem;" id="packages">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Các Gói ✦</span>
+    <h2 class="sec-title">Chọn Gói Phù Hợp Với Bạn</h2>
+    <p class="sec-sub">Mỗi gói được thiết kế cho một hành trình khác nhau — từ bước đầu khám phá đến chuyển hóa toàn diện.</p>
+  </div>
+  <div class="packages-grid">
+
+    <!-- Gói 01 -->
+    <div class="pkg-card rev d1">
+      <div class="pkg-icon">🌱</div>
+      <span class="pkg-tag">Gói 01</span>
+      <div class="pkg-name">Gói Cơ Bản</div>
+      <div class="pkg-subtitle">Chạm vào bản ngã</div>
+      <button class="benefit-toggle" onclick="toggleBenefit(this)"><span>✦ Lợi ích nhận được</span><span class="arrow">▾</span></button>
+      <div class="benefit-body"><p>"Sáng tỏ bản đồ năng lượng, giúp bạn giải mã lý do tại sao mình có những suy nghĩ, hành động hiện tại."</p></div>
+      <div class="pkg-fit"><strong>Phù hợp:</strong> Người muốn bắt đầu hành trình tự nhận thức.</div>
+      <div class="pkg-footer">
+        <div class="pkg-price"><span class="pp-num">500.000</span><span class="pp-unit"> VNĐ</span></div>
+        <div class="pkg-cta-text">Bắt đầu hành trình của bạn tại đây.</div>
+        <a href="goi-01-co-ban.html" class="pkg-btn ghost" style="margin-bottom:.6rem;">Xem Chi Tiết</a>
+        <a href="luan-giai-ca-nhan.html#register" class="pkg-btn">Đăng Ký Ngay</a>
+      </div>
+    </div>
+
+    <!-- Gói 02 -->
+    <div class="pkg-card featured rev d2">
+      <div class="featured-badge">Phổ biến</div>
+      <div class="pkg-icon">🗺️</div>
+      <span class="pkg-tag">Gói 02</span>
+      <div class="pkg-name">Gói Nâng Cao</div>
+      <div class="pkg-subtitle">Kiến tạo tương lai</div>
+      <button class="benefit-toggle" onclick="toggleBenefit(this)"><span>✦ Lợi ích nhận được</span><span class="arrow">▾</span></button>
+      <div class="benefit-body"><p>"Bạn sở hữu 'bản đồ chiến lược' cho 12 tháng tới. Biết lúc nào nên tiến, lúc nào nên tĩnh."</p></div>
+      <div class="pkg-fit"><strong>Phù hợp:</strong> Người đang đứng trước ngã rẽ sự nghiệp hoặc cần kế hoạch cụ thể.</div>
+      <div class="pkg-footer">
+        <div class="pkg-price"><span class="pp-num" style="color:var(--neon);">1.000.000</span><span class="pp-unit"> VNĐ</span></div>
+        <div class="pkg-cta-text">Làm chủ vận trình của bạn.</div>
+        <a href="goi-02-nang-cao.html" class="pkg-btn ghost" style="margin-bottom:.6rem;">Xem Chi Tiết</a>
+        <a href="luan-giai-ca-nhan.html#register" class="pkg-btn">Đăng Ký Ngay</a>
+      </div>
+    </div>
+
+    <!-- Gói 03 -->
+    <div class="pkg-card rev d3">
+      <div class="pkg-icon">🌀</div>
+      <span class="pkg-tag">Gói 03</span>
+      <div class="pkg-name">Gói Đặc Biệt</div>
+      <div class="pkg-subtitle">Chuyển hóa & Chữa lành</div>
+      <button class="benefit-toggle" onclick="toggleBenefit(this)"><span>✦ Lợi ích nhận được</span><span class="arrow">▾</span></button>
+      <div class="benefit-body"><p>"Thần số học + Tarot + MBTI — gỡ bỏ nút thắt, chữa lành tổn thương và định hình lại vận mệnh."</p></div>
+      <div class="pkg-fit"><strong>Phù hợp:</strong> Người tìm kiếm sự thay đổi toàn diện cả về tâm trí và đường đời.</div>
+      <div class="pkg-footer">
+        <div style="text-align:center;margin-bottom:.4rem;"><span style="background:linear-gradient(135deg,rgba(201,168,76,0.22),rgba(123,94,167,0.18));border:1px solid rgba(201,168,76,0.35);color:var(--gold);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .75rem;border-radius:100px;">Được chọn nhiều nhất</span></div>
+        <div class="pkg-price"><span class="pp-num" style="color:var(--gold);">2.000.000</span><span class="pp-unit"> VNĐ</span></div>
+        <div class="pkg-cta-text">Đánh thức tiềm năng đích thực.</div>
+        <a href="goi-04-dac-biet.html" class="pkg-btn ghost" style="margin-bottom:.6rem;">Xem Chi Tiết</a>
+        <a href="luan-giai-ca-nhan.html#register" class="pkg-btn">Đăng Ký Ngay</a>
+      </div>
+    </div>
+
+    <!-- Gói 04 -->
+    <div class="pkg-card rev d4">
+      <div class="pkg-icon">👩‍👧</div>
+      <span class="pkg-tag">Gói 04</span>
+      <div class="pkg-name">Gói Mẹ & Bé</div>
+      <div class="pkg-subtitle">Kết nối thiêng liêng</div>
+      <button class="benefit-toggle" onclick="toggleBenefit(this)"><span>✦ Lợi ích nhận được</span><span class="arrow">▾</span></button>
+      <div class="benefit-body"><p>"Xây dựng ngôn ngữ chung giữa mẹ và con để đồng hành thay vì áp đặt."</p></div>
+      <div class="pkg-fit"><strong>Phù hợp:</strong> Cha mẹ muốn định hướng phát triển sớm cho con.</div>
+      <div class="pkg-footer">
+        <div class="pkg-price"><span class="pp-from">Từ</span><span class="pp-num">1.500.000</span><span class="pp-unit"> VNĐ</span></div>
+        <div class="pkg-cta-text">Thấu hiểu để yêu thương.</div>
+        <a href="goi-03-me-va-be.html" class="pkg-btn ghost" style="margin-bottom:.6rem;">Xem Chi Tiết</a>
+        <a href="luan-giai-ca-nhan.html#register" class="pkg-btn">Đăng Ký Ngay</a>
+      </div>
+    </div>
+
+    <!-- Gói 05 -->
+    <div class="pkg-card rev d5">
+      <div class="pkg-icon">☯️</div>
+      <span class="pkg-tag">Gói 05</span>
+      <div class="pkg-name">Gói 2 Ngày Sinh</div>
+      <div class="pkg-subtitle">Sự hòa hợp năng lượng</div>
+      <button class="benefit-toggle" onclick="toggleBenefit(this)"><span>✦ Lợi ích nhận được</span><span class="arrow">▾</span></button>
+      <div class="benefit-body"><p>"Phân tích song song 2 bộ bản đồ năng lượng, xác định ngày sinh chủ đạo và khai thác sức mạnh cộng hưởng."</p></div>
+      <div class="pkg-fit"><strong>Phù hợp:</strong> Người có 2 ngày sinh đang phân vân chưa biết đâu là năng lượng tác động chính.</div>
+      <div class="pkg-footer">
+        <div class="pkg-price"><span class="pp-from">Từ</span><span class="pp-num">1.500.000</span><span class="pp-unit"> VNĐ</span></div>
+        <div class="pkg-cta-text">Thấu hiểu sự cân bằng.</div>
+        <a href="goi-05-2-ngay-sinh.html" class="pkg-btn ghost" style="margin-bottom:.6rem;">Xem Chi Tiết</a>
+        <a href="luan-giai-ca-nhan.html#register" class="pkg-btn">Đăng Ký Ngay</a>
+      </div>
+    </div>
+
+    <!-- Gói 06 -->
+    <div class="pkg-card rev" style="border-color:rgba(245,158,11,0.35);transition-delay:.42s;">
+      <div class="pkg-icon" style="background:linear-gradient(135deg,rgba(245,158,11,0.24),rgba(123,94,167,0.14));border-color:rgba(245,158,11,0.28);">🎥</div>
+      <span class="pkg-tag" style="color:#FCD34D;">Gói 06</span>
+      <div class="pkg-name">Gói Trực Tiếp 1:1</div>
+      <div class="pkg-subtitle">Kết nối sâu sắc</div>
+      <button class="benefit-toggle" onclick="toggleBenefit(this)"><span>✦ Lợi ích nhận được</span><span class="arrow">▾</span></button>
+      <div class="benefit-body"><p>"Luận giải trực tiếp 1:1 qua Zoom — tương tác, đặt câu hỏi và giải đáp tức thì. Tặng kèm video ghi lại toàn bộ buổi."</p></div>
+      <div class="pkg-fit" style="border-left-color:rgba(245,158,11,0.50);background:rgba(245,158,11,0.06);"><strong style="color:#FCD34D;">Phù hợp:</strong> Người cần giải đáp cấp bách, quyết định chiến lược và sự đồng hành 1:1 để tháo gỡ bế tắc ngay lập tức.</div>
+      <div class="pkg-footer">
+        <div class="pkg-price"><span class="pp-num" style="color:#FCD34D;">3.000.000</span><span class="pp-unit"> VNĐ · ~120 phút</span></div>
+        <div class="pkg-cta-text">Đặt lịch tư vấn trực tiếp.</div>
+        <a href="goi-06-truc-tiep.html" class="pkg-btn ghost" style="margin-bottom:.6rem;">Xem Chi Tiết</a>
+        <a href="goi-06-truc-tiep.html#register" class="pkg-btn" style="background:linear-gradient(135deg,#92600a,#FCD34D,#F59E0B);color:#1a0e00;box-shadow:0 0 22px rgba(245,158,11,0.35);">Đặt Lịch Ngay</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CORE NUMBERS -->
+<section id="numbers">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Khám Phá ✦</span>
+    <h2 class="sec-title">Các Chỉ Số Cốt Lõi</h2>
+    <p class="sec-sub">Mỗi chỉ số là một mảnh ghép của bức tranh năng lượng hoàn chỉnh về con người bạn — từ sứ mệnh đến tâm hồn, từ bên trong ra bên ngoài.</p>
+  </div>
+  <div class="numbers-grid">
+
+    <!-- 1. Số Chủ Đạo -->
+    <div class="num-card rev d1">
+      <div class="num-icon"><img src="/assets/icons/icon-duong-doi.png" alt="Số Chủ Đạo"></div>
+      <h3>Số Chủ Đạo</h3>
+      <span class="num-label">Life Path Number</span>
+      <div class="num-detail">
+        <div class="num-detail-block">
+          <div class="num-detail-tag" style="color:var(--neon);">
+            <span class="dtag-dot" style="background:var(--neon);"></span>Ý Nghĩa
+          </div>
+          <p class="num-meaning">Là "bản thiết kế" tổng thể của cuộc đời — con đường bạn được sinh ra để đi, phản ánh bài học lớn nhất mà linh hồn cần trải qua trong kiếp này.</p>
+        </div>
+        <div class="num-divider"></div>
+        <div class="num-detail-block">
+          <div class="num-detail-tag" style="color:var(--teal);">
+            <span class="dtag-dot" style="background:var(--teal);"></span>Lợi Ích
+          </div>
+          <p class="num-benefit">Hiểu được quỹ đạo sự nghiệp phù hợp, lý do bạn gặp những thử thách lặp đi lặp lại và cách để sống đúng với tiềm năng lớn nhất của mình.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Số Vận Mệnh -->
+    <div class="num-card rev d2">
+      <div class="num-icon"><img src="/assets/icons/icon-van-menh.png" alt="Số Vận Mệnh"></div>
+      <h3>Số Vận Mệnh</h3>
+      <span class="num-label">Destiny Number</span>
+      <div class="num-detail">
+        <div class="num-detail-block">
+          <div class="num-detail-tag" style="color:var(--neon);">
+            <span class="dtag-dot" style="background:var(--neon);"></span>Ý Nghĩa
+          </div>
+          <p class="num-meaning">Là sứ mệnh và mục đích mà bạn cần hiện thực hóa thông qua các hành động trong đời — không phải điều bạn muốn, mà điều bạn được kêu gọi để làm.</p>
+        </div>
+        <div class="num-divider"></div>
+        <div class="num-detail-block">
+          <div class="num-detail-tag" style="color:var(--teal);">
+            <span class="dtag-dot" style="background:var(--teal);"></span>Lợi Ích
+          </div>
+          <p class="num-benefit">Xác định "ngôi sao Bắc Đẩu" cho công việc, giúp bạn tập trung nguồn lực vào đúng mục tiêu thay vì làm việc dàn trải, vô định.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Số Linh Hồn -->
+    <div class="num-card rev d3">
+      <div class="num-icon"><img src="/assets/icons/icon-linh-hon.png" alt="Số Linh Hồn"></div>
+      <h3>Số Linh Hồn</h3>
+      <span class="num-label">Soul Urge Number</span>
+      <div class="num-detail">
+        <div class="num-detail-block">
+          <div class="num-detail-tag" style="color:var(--neon);">
+            <span class="dtag-dot" style="background:var(--neon);"></span>Ý Nghĩa
+          </div>
+          <p class="num-meaning">Là tiếng gọi nội tâm, những khao khát sâu kín nhất thúc đẩy bạn từ bên trong — phần mà người khác ít thấy nhưng bạn cảm nhận rất rõ.</p>
+        </div>
+        <div class="num-divider"></div>
+        <div class="num-detail-block">
+          <div class="num-detail-tag" style="color:var(--teal);">
+            <span class="dtag-dot" style="background:var(--teal);"></span>Lợi Ích
+          </div>
+          <p class="num-benefit">Tìm thấy sự hài lòng đích thực, biết cách nuôi dưỡng cảm xúc để không rơi vào kiệt sức (burnout) trong công việc và cuộc sống.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Số Tính Cách -->
+    <div class="num-card rev d4">
+      <div class="num-icon"><img src="/assets/icons/icon-tinh-cach.png" alt="Số Tính Cách"></div>
+      <h3>Số Tính Cách</h3>
+      <span class="num-label">Personality Number</span>
+      <div class="num-detail">
+        <div class="num-detail-block">
+          <div class="num-detail-tag" style="color:var(--neon);">
+            <span class="dtag-dot" style="background:var(--neon);"></span>Ý Nghĩa
+          </div>
+          <p class="num-meaning">Là "bộ lọc" mà thế giới dùng để nhìn vào bạn — cách bạn thể hiện bản thân trong các mối quan hệ và ấn tượng đầu tiên bạn tạo ra.</p>
+        </div>
+        <div class="num-divider"></div>
+        <div class="num-detail-block">
+          <div class="num-detail-tag" style="color:var(--teal);">
+            <span class="dtag-dot" style="background:var(--teal);"></span>Lợi Ích
+          </div>
+          <p class="num-benefit">Cải thiện kỹ năng giao tiếp và xây dựng thương hiệu cá nhân, hiểu tại sao đôi khi bạn bị hiểu lầm hoặc được người khác đón nhận theo cách bất ngờ.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Số Ngày Sinh -->
+    <div class="num-card rev d5">
+      <div class="num-icon"><img src="/assets/icons/icon-ngay-sinh.png" alt="Số Ngày Sinh"></div>
+      <h3>Số Ngày Sinh</h3>
+      <span class="num-label">Birth Day Number</span>
+      <div class="num-detail">
+        <div class="num-detail-block">
+          <div class="num-detail-tag" style="color:var(--neon);">
+            <span class="dtag-dot" style="background:var(--neon);"></span>Ý Nghĩa
+          </div>
+          <p class="num-meaning">Là "bộ công cụ" tài năng thiên bẩm được ban tặng khi bạn đến với thế giới — những năng lực tự nhiên không cần học vẫn có thể phát huy.</p>
+        </div>
+        <div class="num-divider"></div>
+        <div class="num-detail-block">
+          <div class="num-detail-tag" style="color:var(--teal);">
+            <span class="dtag-dot" style="background:var(--teal);"></span>Lợi Ích
+          </div>
+          <p class="num-benefit">Tận dụng những ưu thế có sẵn để giải quyết vấn đề nhanh hơn, tự tin hơn trong việc phát huy năng lực đặc biệt của mình.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-visual rev-l">
+      <div class="about-bg-num">∞</div>
+      <span class="float-num">1</span>
+      <span class="float-num">3</span>
+      <span class="float-num">7</span>
+      <span class="float-num">9</span>
+      <span class="float-num">11</span>
+      <span class="float-num">22</span>
+      <div class="about-sphere">
+        <span class="sphere-center">∞</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <span class="sec-tag rev">✦ Về Sammy Trương ✦</span>
+      <h2 class="sec-title rev" style="white-space:nowrap;">Hành Trình Tìm Về Bản Thân</h2>
+      <p class="about-p rev">Thần số học không chỉ là những con số — đó là ngôn ngữ của vũ trụ, bản đồ linh hồn được mã hóa từ khi bạn sinh ra. Mỗi con số trong tên và ngày sinh của bạn chứa đựng thông tin sâu sắc từ vũ trụ.</p>
+      <p class="about-p rev">Với hơn 7 năm nghiên cứu và thực hành, Sam đã giúp hàng nghìn người khám phá bản thân, hiểu rõ sứ mệnh cuộc đời và bước đi trên con đường tâm linh đúng hướng.</p>
+      <div class="stats-row rev">
+        <div class="stat"><span class="stat-n" data-t="5000">0</span><span class="stat-l">Luận Giải</span></div>
+        <div class="stat"><span class="stat-n" data-t="7">0</span><span class="stat-l">Năm Kinh Nghiệm</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Dịch Vụ ✦</span>
+    <h2 class="sec-title">Hành Trình Cùng Bạn</h2>
+    <p class="sec-sub">Chọn con đường phù hợp với hành trình tâm linh của bạn</p>
+  </div>
+  <div class="services-grid">
+    <div class="srv-card rev d1">
+      <div class="srv-icon">🔮</div>
+      <h3>Luận Giải Cá Nhân</h3>
+      <p>Phân tích toàn diện biểu đồ thần số học. Khám phá số linh hồn, số định mệnh, năm cá nhân và lộ trình cuộc đời của bạn.</p>
+      <a href="luan-giai-ca-nhan.html" class="srv-link">Xem Chi Tiết →</a>
+    </div>
+    <div class="srv-card rev d2">
+      <div class="srv-icon">🎓</div>
+      <h3>Khóa Học Thần Số Học 3 Gốc</h3>
+      <p>Chương trình 15 chương chuyên sâu — từ nền tảng đến chuyển hóa. Video, bài tập và hỗ trợ trực tiếp từ Sammy Trương.</p>
+      <a href="khoa-hoc-3-goc.html" class="srv-link">Xem Khóa Học →</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY US -->
+<section>
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Cam Kết ✦</span>
+    <h2 class="sec-title">Tại Sao Chọn Chúng Tôi</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card rev d1">
+      <div class="why-ic">🌟</div>
+      <h3>Chuyên Môn Sâu</h3>
+      <p>Hơn 10 năm nghiên cứu thần số học truyền thống và hiện đại, kết hợp nhiều trường phái</p>
+    </div>
+    <div class="why-card rev d2">
+      <div class="why-ic">💎</div>
+      <h3>Cá Nhân Hóa 100%</h3>
+      <p>Mỗi luận giải được viết riêng cho bạn, không template, không sao chép</p>
+    </div>
+    <div class="why-card rev d3">
+      <div class="why-ic">🤝</div>
+      <h3>Hỗ Trợ Tận Tình</h3>
+      <p>Đồng hành cùng bạn, giải đáp mọi thắc mắc sau buổi luận giải</p>
+    </div>
+    <div class="why-card rev d4">
+      <div class="why-ic">🔒</div>
+      <h3>Bảo Mật Tuyệt Đối</h3>
+      <p>Thông tin cá nhân luôn được bảo vệ, không bao giờ chia sẻ bên thứ ba</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Kiến Thức ✦</span>
+    <h2 class="sec-title">Bài Viết Mới Nhất</h2>
+    <p class="sec-sub">Khám phá kho tàng kiến thức về thần số học và tâm linh</p>
+  </div>
+  <div class="blog-grid">
+    <div class="blog-card rev d1">
+      <div class="blog-thumb">🌌</div>
+      <div class="blog-body">
+        <span class="blog-cat">Nhập Môn</span>
+        <div class="blog-date">15 tháng 4, 2026</div>
+        <h3>Con Số Linh Hồn Là Gì? Hướng Dẫn Tính Toán Đầy Đủ</h3>
+        <p class="blog-ex">Tìm hiểu cách tính con số linh hồn từ tên đầy đủ và ý nghĩa sâu xa của từng con số trong thần số học...</p>
+        <a href="#" class="blog-more">Đọc Thêm →</a>
+      </div>
+    </div>
+    <div class="blog-card rev d2">
+      <div class="blog-thumb">✨</div>
+      <div class="blog-body">
+        <span class="blog-cat">Nâng Cao</span>
+        <div class="blog-date">10 tháng 4, 2026</div>
+        <h3>Năm Cá Nhân 9 — Chu Kỳ Kết Thúc Và Tái Sinh</h3>
+        <p class="blog-ex">Năm cá nhân số 9 là thời điểm đặc biệt để buông bỏ, chữa lành và chuẩn bị cho chu kỳ mới...</p>
+        <a href="#" class="blog-more">Đọc Thêm →</a>
+      </div>
+    </div>
+    <div class="blog-card rev d3">
+      <div class="blog-thumb">🔢</div>
+      <div class="blog-body">
+        <span class="blog-cat">Thực Hành</span>
+        <div class="blog-date">5 tháng 4, 2026</div>
+        <h3>11, 22, 33 — Ý Nghĩa Của Các Số Master Trong Thần Số Học</h3>
+        <p class="blog-ex">Các số master mang tần số rung động cao nhất, đặt ra thách thức và tiềm năng đặc biệt...</p>
+        <a href="#" class="blog-more">Đọc Thêm →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section id="contact">
+  <div class="cta-wrap">
+    <div class="cta-box rev">
+      <span class="cta-tag">✦ Bắt Đầu Ngay ✦</span>
+      <h2 class="cta-title">Khám Phá Con Số Của Bạn</h2>
+      <p class="cta-sub">Đăng ký nhận bản tin miễn phí và bài học thần số học hàng tuần từ Sammy Trương</p>
+      <div class="email-row">
+        <input type="email" class="email-in" placeholder="Email của bạn..." />
+        <button class="btn-primary">Đăng Ký</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="#" class="logo"><div class="logo-mark">ST</div>Sammy Trương</a>
+      <p class="footer-brand-p">Nền tảng thần số học chuyên nghiệp — đồng hành cùng bạn trên hành trình khám phá bản thân và thức tỉnh tâm linh.</p>
+      <div class="socials">
+        <a href="#" class="soc">📘</a>
+        <a href="#" class="soc">▶</a>
+        <a href="#" class="soc">📱</a>
+        <a href="#" class="soc">🎵</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Dịch Vụ</h4>
+      <ul>
+        <li><a href="luan-giai-ca-nhan.html">Luận Giải Cá Nhân</a></li>
+        <li><a href="khoa-hoc-3-goc.html">Khóa Học 3 Gốc</a></li>
+        <li><a href="#">Ebooks</a></li>
+        <li><a href="#">Tư Vấn 1-1</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Thần Số Học</h4>
+      <ul>
+        <li><a href="#">Số Linh Hồn</a></li>
+        <li><a href="#">Số Định Mệnh</a></li>
+        <li><a href="#">Số Nghiệp</a></li>
+        <li><a href="#">Số Master</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Hỗ Trợ</h4>
+      <ul>
+        <li><a href="#">Liên Hệ</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Chính Sách</a></li>
+        <li><a href="#">Bài Viết</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sammy Trương. Bảo lưu mọi quyền.</p>
+    <p>Thiết kế với ✦ tâm huyết</p>
+  </div>
+</footer>
+
+<script>
+/* STARFIELD */
+(function(){
+  const c = document.getElementById('starfield');
+  const ctx = c.getContext('2d');
+  let W, H, stars = [];
+  function resize(){ W = c.width = innerWidth; H = c.height = innerHeight; }
+  function init(){
+    stars = [];
+    for(let i = 0; i < 300; i++) stars.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.4 + .15,
+      o: Math.random() * .55 + .1,
+      speed: Math.random() * .016 + .004,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+  function draw(t){
+    ctx.clearRect(0, 0, W, H);
+    stars.forEach(s => {
+      const tw = Math.sin(t * .001 * s.speed * 1000 + s.phase) * .28 + .72;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,185,255,${s.o * tw})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  resize(); init(); requestAnimationFrame(draw);
+  window.addEventListener('resize', () => { resize(); init(); });
+})();
+
+/* NAVBAR */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', scrollY > 50);
+});
+
+/* HAMBURGER */
+const ham = document.getElementById('ham');
+const mob = document.getElementById('mob');
+ham.addEventListener('click', () => {
+  mob.classList.toggle('open');
+  const [a, b, cc] = ham.querySelectorAll('span');
+  if (mob.classList.contains('open')) {
+    a.style.transform = 'rotate(45deg) translate(5px,5px)';
+    b.style.opacity = '0';
+    cc.style.transform = 'rotate(-45deg) translate(5px,-5px)';
+  } else {
+    a.style.transform = b.style.opacity = cc.style.transform = '';
+  }
+});
+mob.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mob.classList.remove('open')));
+
+/* SCROLL REVEAL */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: .08, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.rev,.rev-l,.rev-r,.rev-scale').forEach(el => obs.observe(el));
+
+/* COUNTER */
+const cobs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const tgt = +el.dataset.t;
+    const suffix = '+';
+    let cur = 0;
+    const inc = tgt / 55;
+    const timer = setInterval(() => {
+      cur += inc;
+      if (cur >= tgt) { cur = tgt; clearInterval(timer); }
+      el.textContent = Math.floor(cur).toLocaleString('vi-VN') + suffix;
+    }, 22);
+    cobs.unobserve(el);
+  });
+}, { threshold: .5 });
+document.querySelectorAll('.stat-n[data-t]').forEach(el => cobs.observe(el));
+</script>
+</body>
+</html>

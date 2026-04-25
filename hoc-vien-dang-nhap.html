@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng Nhập Học Viên | Sammy Trương</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #04051A; --card: rgba(13,18,64,0.65);
+      --violet: #7B5EA7; --indigo: #4F6BFF; --neon: #A78BFA;
+      --gold: #C9A84C; --gold2: #E8C56A; --teal: #2DD4BF;
+      --text: #E8E8F0; --muted: #9898B8;
+      --border: rgba(167,139,250,0.18);
+    }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--bg) url('/assets/anh-nen-sammy.png') center top / 100% auto no-repeat;
+      color: var(--text); min-height: 100vh;
+      display: flex; align-items: center; justify-content: center; padding: 2rem;
+    }
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .wrap { position: relative; z-index: 1; width: 100%; max-width: 440px; }
+
+    .logo-bar { text-align: center; margin-bottom: 2.4rem; }
+    .logo-mark {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; font-weight: 700; color: #fff;
+      border: 1.5px solid rgba(167,139,250,0.42);
+      box-shadow: 0 0 24px rgba(167,139,250,0.38); margin: 0 auto .9rem;
+    }
+    .logo-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .card {
+      background: var(--card); backdrop-filter: blur(20px);
+      border: 1px solid var(--border); border-radius: 24px;
+      padding: 2.8rem 2.6rem; position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--violet), var(--indigo), var(--teal));
+    }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 600; text-align: center; margin-bottom: .4rem;
+    }
+    .card-sub { font-size: .84rem; color: var(--muted); text-align: center; margin-bottom: 2rem; line-height: 1.7; }
+
+    /* STEP INDICATOR */
+    .steps {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; margin-bottom: 2rem;
+    }
+    .step-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .78rem; font-weight: 600;
+      border: 2px solid rgba(167,139,250,0.25); color: var(--muted);
+      transition: all .3s;
+    }
+    .step-dot.active { background: linear-gradient(135deg, var(--violet), var(--indigo)); color: #fff; border-color: transparent; box-shadow: 0 0 16px rgba(123,94,167,0.40); }
+    .step-dot.done   { background: rgba(45,212,191,0.15); color: var(--teal); border-color: rgba(45,212,191,0.35); }
+    .step-line { flex: 1; height: 2px; background: rgba(167,139,250,0.15); margin: 0 .5rem; max-width: 60px; }
+    .step-line.done { background: rgba(45,212,191,0.35); }
+    .step-label {
+      font-size: .68rem; color: var(--muted); text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: .35rem;
+    }
+    .step-label.active { color: var(--neon); }
+
+    /* PANELS */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: .78rem; color: var(--muted); margin-bottom: .45rem; letter-spacing: .04em; }
+    .form-group input {
+      width: 100%; background: rgba(4,5,26,0.70);
+      border: 1px solid rgba(167,139,250,0.22); border-radius: 12px;
+      padding: .85rem 1.1rem; color: var(--text);
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: .95rem; outline: none;
+      transition: border-color .3s;
+    }
+    .form-group input:focus { border-color: var(--neon); }
+    .form-group input::placeholder { color: var(--muted); }
+
+    /* OTP input */
+    .otp-wrap {
+      display: flex; gap: .6rem; justify-content: center; margin: 1rem 0 1.5rem;
+    }
+    .otp-input {
+      width: 52px; height: 58px; text-align: center;
+      background: rgba(4,5,26,0.70); border: 1px solid rgba(167,139,250,0.28);
+      border-radius: 12px; color: var(--text); font-size: 1.5rem; font-weight: 700;
+      outline: none; transition: border-color .3s, box-shadow .3s;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .otp-input:focus { border-color: var(--neon); box-shadow: 0 0 14px rgba(167,139,250,0.22); }
+    .otp-input.filled { border-color: rgba(45,212,191,0.45); color: var(--teal); }
+
+    .btn-submit {
+      display: block; width: 100%;
+      background: linear-gradient(135deg, var(--violet), var(--indigo));
+      color: #fff; border: none; cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: .96rem; font-weight: 600;
+      padding: .95rem; border-radius: 100px;
+      box-shadow: 0 0 26px rgba(123,94,167,0.35); transition: box-shadow .3s, transform .2s;
+    }
+    .btn-submit:hover { box-shadow: 0 0 50px rgba(123,94,167,0.55); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .resend-row {
+      text-align: center; margin-top: 1.2rem;
+      font-size: .82rem; color: var(--muted);
+    }
+    .resend-btn {
+      background: none; border: none; cursor: pointer; color: var(--neon);
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: .82rem;
+      text-decoration: underline; padding: 0; display: inline;
+    }
+    .resend-btn:disabled { color: var(--muted); text-decoration: none; cursor: default; }
+    #countdown { color: var(--muted); }
+
+    .msg {
+      margin-top: 1rem; padding: .8rem 1rem; border-radius: 10px;
+      font-size: .84rem; text-align: center; display: none;
+    }
+    .msg.error   { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.28); color: #FCA5A5; }
+    .msg.success { background: rgba(45,212,191,0.10); border: 1px solid rgba(45,212,191,0.28); color: var(--teal); }
+
+    .email-display {
+      text-align: center; margin-bottom: 1.4rem;
+      font-size: .88rem; color: var(--muted);
+    }
+    .email-display strong { color: var(--text); }
+
+    .back-link { text-align: center; margin-top: 1.6rem; font-size: .82rem; color: var(--muted); }
+    .back-link a { color: var(--neon); text-decoration: none; }
+
+    /* Success state */
+    .success-icon { font-size: 3rem; text-align: center; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+
+<div class="wrap">
+  <div class="logo-bar">
+    <div class="logo-mark">ST</div>
+    <div class="logo-name">Sammy Trương</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Cổng Học Viên</div>
+    <p class="card-sub" id="cardSub">Nhập email bạn đã đăng ký khóa học để nhận mã đăng nhập.</p>
+
+    <!-- STEP INDICATOR -->
+    <div class="steps">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;">
+        <div class="step-dot active" id="dot1">1</div>
+        <span style="font-size:.65rem;color:var(--neon);">Email</span>
+      </div>
+      <div class="step-line" id="line1"></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;">
+        <div class="step-dot" id="dot2">2</div>
+        <span style="font-size:.65rem;color:var(--muted);" id="lbl2">Mã OTP</span>
+      </div>
+      <div class="step-line" id="line2"></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;">
+        <div class="step-dot" id="dot3">✓</div>
+        <span style="font-size:.65rem;color:var(--muted);" id="lbl3">Vào học</span>
+      </div>
+    </div>
+
+    <!-- PANEL 1: Enter Email -->
+    <div class="panel active" id="panel1">
+      <form onsubmit="sendOTP(event)">
+        <div class="form-group">
+          <label>Email đã đăng ký</label>
+          <input type="email" id="emailInput" placeholder="email@example.com" required autocomplete="email" />
+        </div>
+        <button type="submit" class="btn-submit" id="sendBtn">Gửi Mã Đăng Nhập →</button>
+      </form>
+      <div class="msg" id="msg1"></div>
+    </div>
+
+    <!-- PANEL 2: Enter OTP -->
+    <div class="panel" id="panel2">
+      <div class="email-display">Mã đã gửi tới <strong id="emailShown"></strong></div>
+      <div class="otp-wrap">
+        <input class="otp-input" maxlength="1" id="o1" inputmode="numeric" />
+        <input class="otp-input" maxlength="1" id="o2" inputmode="numeric" />
+        <input class="otp-input" maxlength="1" id="o3" inputmode="numeric" />
+        <input class="otp-input" maxlength="1" id="o4" inputmode="numeric" />
+        <input class="otp-input" maxlength="1" id="o5" inputmode="numeric" />
+        <input class="otp-input" maxlength="1" id="o6" inputmode="numeric" />
+      </div>
+      <button class="btn-submit" id="verifyBtn" onclick="verifyOTP()">Xác Nhận Mã →</button>
+      <div class="resend-row">
+        Không nhận được mã?
+        <button class="resend-btn" id="resendBtn" onclick="resendOTP()" disabled>
+          Gửi lại (<span id="countdown">60</span>s)
+        </button>
+      </div>
+      <div class="msg" id="msg2"></div>
+    </div>
+
+    <!-- PANEL 3: Success -->
+    <div class="panel" id="panel3">
+      <div class="success-icon">🎉</div>
+      <p style="text-align:center;font-size:.95rem;color:var(--muted);line-height:1.8;">
+        Đăng nhập thành công!<br>Đang chuyển vào khóa học...
+      </p>
+    </div>
+  </div>
+
+  <div class="back-link">
+    <a href="khoa-hoc-3-goc.html">← Trang khóa học</a> &nbsp;·&nbsp;
+    <a href="index.html">Trang chủ</a>
+  </div>
+</div>
+
+<script>
+const API = '/api';
+let currentEmail = '';
+let countdownTimer;
+
+/* STARFIELD */
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  function init(){stars=[];for(let i=0;i<200;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.1,o:Math.random()*.45+.1,speed:Math.random()*.016+.004,phase:Math.random()*Math.PI*2});}
+  function draw(t){ctx.clearRect(0,0,W,H);stars.forEach(s=>{const tw=Math.sin(t*.001*s.speed*1000+s.phase)*.28+.72;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(220,210,255,${s.o*tw})`;ctx.fill();});requestAnimationFrame(draw);}
+  resize();init();requestAnimationFrame(draw);
+  window.addEventListener('resize',()=>{ resize(); init(); });
+})();
+
+/* Already logged in? */
+if (localStorage.getItem('sammy_token')) window.location.href = 'hoc-vien-khoa-hoc.html';
+
+function showMsg(id, text, type) {
+  const el = document.getElementById(id);
+  el.textContent = text; el.className = `msg ${type}`; el.style.display = 'block';
+}
+function hideMsg(id) { document.getElementById(id).style.display = 'none'; }
+
+function goPanel(n) {
+  [1,2,3].forEach(i => {
+    document.getElementById(`panel${i}`).classList.toggle('active', i === n);
+    const dot = document.getElementById(`dot${i}`);
+    if (i < n)  { dot.className = 'step-dot done'; }
+    if (i === n){ dot.className = 'step-dot active'; }
+    if (i > n)  { dot.className = 'step-dot'; }
+  });
+  if (document.getElementById('line1')) {
+    document.getElementById('line1').className = n > 1 ? 'step-line done' : 'step-line';
+    document.getElementById('line2').className = n > 2 ? 'step-line done' : 'step-line';
+  }
+  if (n === 2) {
+    document.getElementById('lbl2').style.color = 'var(--neon)';
+    document.getElementById('cardSub').textContent = 'Nhập mã 6 số vừa gửi tới email của bạn.';
+    startCountdown();
+    document.getElementById('o1').focus();
+  }
+  if (n === 3) {
+    document.getElementById('lbl3').style.color = 'var(--teal)';
+    document.getElementById('dot3').className = 'step-dot done';
+  }
+}
+
+async function sendOTP(e) {
+  e.preventDefault();
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true; btn.textContent = 'Đang gửi...';
+  currentEmail = document.getElementById('emailInput').value.trim();
+  try {
+    const res = await fetch(`${API}/auth/send-otp`, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ email: currentEmail })
+    });
+    const data = await res.json();
+    if (!res.ok) { showMsg('msg1', data.error || 'Không thể gửi mã', 'error'); return; }
+    document.getElementById('emailShown').textContent = currentEmail;
+    goPanel(2);
+  } catch {
+    /* Dev mode — skip API, proceed anyway */
+    document.getElementById('emailShown').textContent = currentEmail;
+    showMsg('msg1', 'Server chưa kết nối — chế độ demo', 'success');
+    setTimeout(() => { goPanel(2); }, 800);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Gửi Mã Đăng Nhập →';
+  }
+}
+
+async function resendOTP() {
+  try {
+    await fetch(`${API}/auth/send-otp`, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ email: currentEmail })
+    });
+    showMsg('msg2', 'Đã gửi lại mã mới.', 'success');
+    startCountdown();
+  } catch { showMsg('msg2', 'Không thể gửi lại.', 'error'); }
+}
+
+async function verifyOTP() {
+  const code = ['o1','o2','o3','o4','o5','o6'].map(id => document.getElementById(id).value).join('');
+  if (code.length < 6) { showMsg('msg2', 'Vui lòng nhập đủ 6 số.', 'error'); return; }
+  const btn = document.getElementById('verifyBtn');
+  btn.disabled = true; btn.textContent = 'Đang xác nhận...';
+  try {
+    const res = await fetch(`${API}/auth/verify-otp`, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ email: currentEmail, otp: code })
+    });
+    const data = await res.json();
+    if (!res.ok) { showMsg('msg2', data.error || 'Mã không đúng hoặc đã hết hạn.', 'error'); btn.disabled = false; btn.textContent = 'Xác Nhận Mã →'; return; }
+    localStorage.setItem('sammy_token', data.token);
+    localStorage.setItem('sammy_name', data.name || currentEmail);
+    clearInterval(countdownTimer);
+    goPanel(3);
+    setTimeout(() => window.location.href = 'hoc-vien-khoa-hoc.html', 1500);
+  } catch {
+    showMsg('msg2', 'Không thể kết nối máy chủ.', 'error');
+    btn.disabled = false; btn.textContent = 'Xác Nhận Mã →';
+  }
+}
+
+function startCountdown() {
+  clearInterval(countdownTimer);
+  let t = 60;
+  const btn = document.getElementById('resendBtn');
+  const cd  = document.getElementById('countdown');
+  btn.disabled = true;
+  countdownTimer = setInterval(() => {
+    t--;
+    cd.textContent = t;
+    if (t <= 0) {
+      clearInterval(countdownTimer);
+      btn.disabled = false;
+      btn.innerHTML = 'Gửi lại mã';
+    }
+  }, 1000);
+}
+
+/* OTP auto-advance */
+['o1','o2','o3','o4','o5','o6'].forEach((id, i, arr) => {
+  const el = document.getElementById(id);
+  el.addEventListener('input', () => {
+    el.value = el.value.replace(/\D/g,'').slice(-1);
+    el.classList.toggle('filled', el.value !== '');
+    if (el.value && i < arr.length - 1) document.getElementById(arr[i+1]).focus();
+    if (i === arr.length - 1 && el.value) verifyOTP();
+  });
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Backspace' && !el.value && i > 0) document.getElementById(arr[i-1]).focus();
+  });
+  el.addEventListener('paste', e => {
+    e.preventDefault();
+    const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,'').slice(0,6);
+    arr.forEach((aid, ai) => {
+      const ainput = document.getElementById(aid);
+      ainput.value = pasted[ai] || '';
+      ainput.classList.toggle('filled', !!ainput.value);
+    });
+    if (pasted.length === 6) verifyOTP();
+  });
+});
+</script>
+</body>
+</html>
