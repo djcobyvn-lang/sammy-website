@@ -787,10 +787,28 @@
       .hero-btns { flex-direction: column; align-items: center; gap: .65rem; }
       .hero-btns .btn-primary,
       .hero-btns .btn-ghost { width: 100%; max-width: 320px; text-align: center; display: block; }
-      .numbers-grid { grid-template-columns: repeat(2,1fr); gap: .65rem; }
-      .num-card { padding: 1.4rem .85rem; }
+      .numbers-grid {
+        grid-template-columns: repeat(2,1fr);
+        gap: .65rem;
+      }
+      /* card thứ 5 căn giữa hàng cuối */
+      .numbers-grid .num-card:last-child {
+        grid-column: 1 / -1;
+        max-width: 50%;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .num-card { padding: 1.2rem .75rem; }
+      .num-icon {
+        width: 60px; height: 60px;
+        margin-bottom: .75rem;
+      }
+      .num-icon img { width: 56px; height: 56px; }
+      .num-card h3 { font-size: .9rem; }
+      .num-card .num-label { font-size: .58rem; margin-bottom: .6rem; }
+      .num-meaning, .num-benefit { font-size: .72rem; }
+      .num-detail-tag { font-size: .58rem; }
       .num-val { font-size: 2rem; }
-      .num-icon img { width: 40px; height: 40px; }
       .stat-item { padding: 1.2rem .8rem; }
       .srv-card { padding: 2rem 1.4rem; }
       section { padding: 4rem 5%; }
