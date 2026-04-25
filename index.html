@@ -765,6 +765,36 @@
       .why-grid     { grid-template-columns: 1fr; }
       section       { padding: 4.5rem 5%; }
     }
+
+    /* ── RESPONSIVE IMPROVEMENTS ── */
+    @media (max-width: 768px) {
+      .hero { padding: 105px 5% 60px; }
+      .hero-title { letter-spacing: -.01em; }
+      .hero-btns .btn-primary,
+      .hero-btns .btn-ghost { padding: .85rem 1.8rem; }
+      .stat-num { font-size: 2.4rem; }
+      .about-inner { grid-template-columns: 1fr; text-align: center; }
+      .about-text { order: 2; }
+      .about-visual { order: 1; min-height: 250px; }
+      .about-sphere { width: 200px; height: 200px; }
+      .pkg-card { padding: 1.8rem 1.4rem; }
+      .pkg-price .pp-num { font-size: 2rem; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 88px 5% 44px; }
+      nav { padding: 0 4%; }
+      .hero-eyebrow { font-size: .62rem; padding: .35rem .9rem; }
+      .hero-btns { flex-direction: column; align-items: center; gap: .65rem; }
+      .hero-btns .btn-primary,
+      .hero-btns .btn-ghost { width: 100%; max-width: 320px; text-align: center; display: block; }
+      .numbers-grid { grid-template-columns: repeat(2,1fr); gap: .65rem; }
+      .num-card { padding: 1.4rem .85rem; }
+      .num-val { font-size: 2rem; }
+      .num-icon img { width: 40px; height: 40px; }
+      .stat-item { padding: 1.2rem .8rem; }
+      .srv-card { padding: 2rem 1.4rem; }
+      section { padding: 4rem 5%; }
+    }
   </style>
 </head>
 <body>

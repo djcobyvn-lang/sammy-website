@@ -12,3 +12,6 @@ remove_*.js
 screenshot*.js
 logo-chu-dao.png.png
 nensammy.png
+
+.vercel
+.env*.local

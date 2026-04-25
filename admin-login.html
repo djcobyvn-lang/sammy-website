@@ -167,6 +167,13 @@ body::before{
 .shake{animation:shake .35s ease;}
 .f-error{font-size:.72rem;color:#f87171;margin-top:.3rem;display:none;}
 .f-error.show{display:block;}
+
+    /* ── RESPONSIVE IMPROVEMENTS ── */
+    @media (max-width: 480px) {
+      body { padding: 1rem; }
+      .f-input { font-size: 16px; min-height: 44px; }
+      .btn-primary { min-height: 48px; }
+    }
 </style>
 </head>
 <body>

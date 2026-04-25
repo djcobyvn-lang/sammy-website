@@ -378,6 +378,32 @@
     .pf-msg.ok  { display:block; color:var(--teal); background:rgba(45,212,191,0.10); border:1px solid rgba(45,212,191,0.25); }
     .pf-msg.err { display:block; color:#FCA5A5; background:rgba(239,68,68,0.10); border:1px solid rgba(239,68,68,0.20); }
     @media (max-width:480px) { .pf-row { grid-template-columns:1fr; } }
+
+    /* ── RESPONSIVE IMPROVEMENTS ── */
+    @media (max-width: 768px) {
+      .hero { padding-top: 105px; padding-bottom: 50px; }
+      .hero-inner { text-align: center; }
+      .hero-btns { justify-content: center; }
+      .pkg-detail { grid-template-columns: 1fr; }
+      .price-box { position: static; }
+      .breadcrumb { flex-wrap: wrap; justify-content: center; gap: .35rem; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 88px 5% 44px; }
+      nav { padding: 0 4%; }
+      .hero-title { letter-spacing: -.01em; }
+      .pf-group input, .pf-group textarea, .pf-group select {
+        font-size: 16px; /* prevent iOS zoom */
+        min-height: 44px;
+        padding: .75rem .9rem;
+      }
+      .pf-submit { min-height: 48px; font-size: .9rem; }
+      .btn-primary, .btn-ghost, .btn-neon, .btn-teal, .btn-zalo {
+        min-height: 44px;
+      }
+      .hero-btns .btn-primary,
+      .hero-btns .btn-ghost { width: 100%; max-width: 320px; }
+    }
   </style>
 </head>
 <body>

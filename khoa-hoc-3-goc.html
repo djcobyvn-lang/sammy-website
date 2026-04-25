@@ -396,6 +396,30 @@
       .form-box { padding: 2rem 1.6rem; }
     }
     @media (max-width: 500px) { .section { padding: 4.5rem 5%; } }
+
+    /* ── RESPONSIVE IMPROVEMENTS ── */
+    @media (max-width: 768px) {
+      .hero { padding: 105px 5% 55px; }
+      .hero-title { letter-spacing: -.01em; }
+      .form-box { padding: 1.8rem 1.4rem; }
+      .module-toggle { padding: 1rem 1.1rem; gap: .65rem; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 88px 5% 44px; }
+      nav { padding: 0 4%; }
+      .hero-btns { flex-direction: column; align-items: center; gap: .65rem; }
+      .hero-btns .btn-primary,
+      .hero-btns a { width: 100%; max-width: 320px; text-align: center; display: block; box-sizing: border-box; }
+      .hero-price { flex-direction: column; gap: .5rem; align-items: center; }
+      .module-num-badge { width: 34px; height: 34px; font-size: .7rem; }
+      .module-name { font-size: 1rem; }
+      .form-input, .form-textarea {
+        font-size: 16px;
+        min-height: 44px;
+      }
+      .form-submit { min-height: 48px; }
+      section { padding: 4rem 5%; }
+    }
   </style>
 </head>
 <body>

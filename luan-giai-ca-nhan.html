@@ -512,6 +512,27 @@
       .section { padding: 4.5rem 5%; }
       .compare-wrap { font-size: .78rem; }
     }
+
+    /* ── RESPONSIVE IMPROVEMENTS ── */
+    @media (max-width: 768px) {
+      .hero { padding: 105px 5% 55px; }
+      .hero-title { letter-spacing: -.01em; }
+      .compare-wrap { margin: 0 -1rem; border-radius: 0; }
+      .form-wrap { padding: 1.8rem 1.4rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 88px 5% 44px; }
+      nav { padding: 0 4%; }
+      .compare-table { font-size: .72rem; }
+      .compare-table th, .compare-table td { padding: .6rem .5rem; }
+      .form-input, .form-select, .form-textarea {
+        font-size: 16px;
+        min-height: 44px;
+      }
+      .form-submit { min-height: 48px; }
+      section { padding: 4rem 5%; }
+    }
   </style>
 </head>
 <body>
