@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 // Cấu hình email — điền thông tin khi deploy
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER || 'your-email@gmail.com',
@@ -34,8 +34,8 @@ async function sendActivationEmail(student) {
 
   try {
     await transporter.sendMail({
-      from:    `"Sammy Trương" <${process.env.EMAIL_USER}>`,
-      to:      email,
+      from: `"Sammy Trương" <${process.env.EMAIL_USER}>`,
+      to: email,
       subject: '🎓 Khóa Học 3 Gốc — Tài Khoản Đã Được Kích Hoạt',
       html
     });
@@ -61,8 +61,8 @@ async function sendOTPEmail(student, otp) {
   `;
   try {
     await transporter.sendMail({
-      from:    `"Sammy Trương" <${process.env.EMAIL_USER}>`,
-      to:      email,
+      from: `"Sammy Trương" <${process.env.EMAIL_USER}>`,
+      to: email,
       subject: `${otp} — Mã đăng nhập Cổng Học Viên`,
       html
     });
@@ -91,8 +91,8 @@ async function sendPaymentConfirmEmail(order) {
   `;
   try {
     await transporter.sendMail({
-      from:    `"Sammy Trương" <${process.env.EMAIL_USER}>`,
-      to:      email,
+      from: `"Sammy Trương" <${process.env.EMAIL_USER}>`,
+      to: email,
       subject: `✓ Xác nhận thanh toán — ${packageName}`,
       html
     });
