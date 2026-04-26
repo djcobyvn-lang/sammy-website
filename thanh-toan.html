@@ -68,32 +68,41 @@
 
     /* HEADER */
     .card-header {
-      padding: 2rem 2.2rem 1.4rem;
-      border-bottom: 1px solid var(--border);
+      padding: 2rem 2.4rem 1.8rem;
       text-align: center;
     }
-    .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: .35rem; }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 600;
+      margin-bottom: .4rem;
+      background: linear-gradient(135deg, var(--text) 40%, var(--neon));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
     .card-sub { font-size: .83rem; color: var(--muted); }
+
+    /* SECTION DIVIDER */
+    .sec-divider {
+      height: 1px; margin: 0 2.4rem;
+      background: linear-gradient(90deg, transparent, rgba(167,139,250,.2), transparent);
+    }
 
     /* ORDER SUMMARY */
     .order-box {
-      margin: 1.6rem 2.2rem 0;
-      background: rgba(4,5,26,0.55); border: 1px solid var(--border);
-      border-radius: 16px; padding: 1.3rem 1.5rem;
+      margin: 0; padding: 1.4rem 2.4rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      background: rgba(4,5,26,.35);
     }
-    .order-pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .2rem; }
+    .order-pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--text); margin-bottom: .2rem; }
     .order-pkg-sub { font-size: .78rem; color: var(--muted); }
     .order-price { text-align: right; flex-shrink: 0; }
-    .order-price .op-num { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700; color: var(--gold2); display: block; line-height: 1; }
+    .order-price .op-num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold2); display: block; line-height: 1; }
     .order-price .op-unit { font-size: .72rem; color: var(--muted); }
 
     /* ── 2-COLUMN PAYMENT LAYOUT ── */
     .payment-body {
       display: grid;
-      grid-template-columns: 1fr 210px;
-      gap: 1.4rem;
-      padding: 1.6rem 2rem;
+      grid-template-columns: 1fr 212px;
+      gap: 1.8rem;
+      padding: 2rem 2.4rem;
       align-items: start;
     }
 
@@ -179,27 +188,27 @@
 
     /* INSTRUCTIONS */
     .instructions {
-      margin: 1.2rem 2.2rem 0;
-      background: rgba(45,212,191,0.06); border: 1px solid rgba(45,212,191,0.20);
-      border-radius: 12px; padding: 1rem 1.2rem;
+      padding: 1.4rem 2.4rem;
+      display: flex; gap: 1.8rem;
     }
-    .instructions ol { list-style: none; display: flex; flex-direction: column; gap: .55rem; counter-reset: steps; }
-    .instructions ol li {
-      display: flex; align-items: flex-start; gap: .65rem;
-      font-size: .83rem; color: var(--muted); line-height: 1.65;
-      counter-increment: steps;
+    .instr-item {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: .5rem;
     }
-    .instructions ol li::before {
-      content: counter(steps);
-      width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
-      background: rgba(45,212,191,0.15); border: 1px solid rgba(45,212,191,0.30);
-      color: var(--teal); font-size: .68rem; font-weight: 700;
+    .instr-num {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(45,212,191,.12); border: 1px solid rgba(45,212,191,.3);
+      color: var(--teal); font-size: .72rem; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
-      margin-top: .1rem;
+    }
+    .instr-text { font-size: .78rem; color: var(--muted); line-height: 1.6; }
+    @media (max-width: 500px) {
+      .instructions { flex-direction: column; gap: .85rem; padding: 1.2rem 1.6rem; }
+      .instr-item { flex-direction: row; text-align: left; gap: .75rem; }
     }
 
     /* CTA */
-    .cta-section { padding: 1.6rem 2.2rem 2.2rem; }
+    .cta-section { padding: 0 2.4rem 2.4rem; }
     .btn-confirm {
       display: block; width: 100%; text-align: center;
       background: linear-gradient(135deg, var(--violet), var(--indigo));
@@ -210,7 +219,22 @@
     }
     .btn-confirm:hover { box-shadow: 0 0 54px rgba(123,94,167,0.58); transform: translateY(-1px); }
     .btn-confirm:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
-    .note-small { font-size: .75rem; color: var(--muted); text-align: center; margin-top: .9rem; line-height: 1.65; }
+
+    .support-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: .75rem; margin-top: 1rem;
+    }
+    .support-text { font-size: .78rem; color: var(--muted); }
+    .btn-zalo {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(74,222,128,.1); border: 1px solid rgba(74,222,128,.35);
+      border-radius: 100px; padding: .45rem 1.1rem;
+      color: #4ADE80; font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: .8rem; font-weight: 500; text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-zalo:hover { background: rgba(74,222,128,.18); border-color: #4ADE80; }
+    .note-small { font-size: .75rem; color: var(--muted); text-align: center; margin-top: .75rem; line-height: 1.65; }
 
     /* SUCCESS STATE */
     .success-panel {
@@ -290,6 +314,8 @@
       <p class="card-sub">Hoàn tất đăng ký — chuyển khoản để kích hoạt dịch vụ ngay</p>
     </div>
 
+    <div class="sec-divider"></div>
+
     <!-- ORDER SUMMARY -->
     <div class="order-box" id="orderBox">
       <div>
@@ -351,22 +377,39 @@
 
     </div>
 
+    <div class="sec-divider"></div>
+
     <!-- INSTRUCTIONS -->
     <div class="instructions">
-      <ol>
-        <li>Chuyển khoản đúng số tiền và nội dung ghi ở trên.</li>
-        <li>Chụp màn hình xác nhận giao dịch.</li>
-        <li>Bấm <strong style="color:var(--text);">"Tôi đã chuyển khoản"</strong> — Sammy sẽ xác nhận và kích hoạt trong vòng <strong style="color:var(--teal);">24 giờ</strong>.</li>
-      </ol>
+      <div class="instr-item">
+        <div class="instr-num">1</div>
+        <div class="instr-text">Chuyển khoản đúng số tiền và nội dung</div>
+      </div>
+      <div class="instr-item">
+        <div class="instr-num">2</div>
+        <div class="instr-text">Chụp màn hình xác nhận giao dịch</div>
+      </div>
+      <div class="instr-item">
+        <div class="instr-num">3</div>
+        <div class="instr-text">Bấm nút bên dưới để hoàn tất</div>
+      </div>
     </div>
+
+    <div class="sec-divider"></div>
 
     <!-- CTA -->
     <div class="cta-section">
       <button class="btn-confirm" id="confirmBtn" onclick="handleConfirm()">
         Tôi Đã Chuyển Khoản ✓
       </button>
+      <div class="support-row">
+        <span class="support-text">Cần hỗ trợ ngay?</span>
+        <a href="https://zalo.me/0362676159" target="_blank" class="btn-zalo">
+          💬 Chat Zalo
+        </a>
+      </div>
       <p class="note-small" id="noteText">
-        Sau khi xác nhận, tài khoản học viên sẽ được gửi về email của bạn.
+        Hệ thống sẽ tự động xác nhận sau khi nhận được thanh toán.
       </p>
     </div>
 
