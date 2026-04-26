@@ -21,8 +21,8 @@ logo-chu-dao.png.png
 nensammy.png
 logo-chu-dao.png
 
-# Old icon folder
-icons/
+# Old icon folder (root only)
+/icons/
 
 # GAS reference
 google-apps-script.js
