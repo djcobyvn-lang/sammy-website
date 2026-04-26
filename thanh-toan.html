@@ -597,10 +597,7 @@ async function handleConfirm() {
   /* Log to console (replace with API call when backend ready) */
   console.log('[Order Confirmed]', order);
 
-  /* Gửi lên Google Sheets */
-  try {
-    await fetch(GAS_URL + '?payload=' + encodeURIComponent(JSON.stringify({ ...order, formType: 'xac-nhan-ck' })), { mode: 'no-cors' });
-  } catch { /* non-blocking */ }
+  /* Sheet chỉ được cập nhật bởi webhook SePay — không ghi từ đây */
 
   /* POST to backend */
   try {

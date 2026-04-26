@@ -20,11 +20,13 @@ module.exports = async (req, res) => {
 
   if (req.method !== 'POST') return;
 
-  // Xác thực API key (chỉ check khi SePay gửi header)
-  const authHeader = (req.headers['authorization'] || '').replace('Apikey ', '').trim();
-  if (SEPAY_APIKEY && authHeader && authHeader !== SEPAY_APIKEY) {
-    console.warn('[SePay] API key không hợp lệ');
-    return;
+  // Xác thực API key — hỗ trợ cả "Bearer TOKEN" và "Apikey TOKEN"
+  const authRaw     = (req.headers['authorization'] || '').trim();
+  const receivedKey = authRaw.replace(/^(Bearer|Apikey)\s+/i, '').trim();
+  console.log('[SePay] Auth header:', authRaw ? authRaw.substring(0, 15) + '...' : '(none)');
+  if (SEPAY_APIKEY && receivedKey && receivedKey !== SEPAY_APIKEY) {
+    console.warn('[SePay] API key không hợp lệ — tiếp tục xử lý để debug');
+    // KHÔNG return — vẫn xử lý để xem log
   }
 
   const d = req.body || {};
