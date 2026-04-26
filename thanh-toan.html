@@ -646,11 +646,15 @@ function startPolling(order) {
   _pollTimer = setInterval(async () => {
     attempts++;
     try {
-      const res  = await fetch(`/api/order/check?email=${encodeURIComponent(email)}&pkgId=${encodeURIComponent(pId)}`);
-      const data = await res.json();
-      if (data.paid) {
+      // Kiểm tra thanh toán: gọi GAS trực tiếp từ browser (không qua server)
+      // Browser ↔ GAS luôn hoạt động (GAS có CORS header cho GET)
+      const gasPayload = encodeURIComponent(JSON.stringify({
+        formType: 'check-payment', email, pkgId: pId
+      }));
+      const gasRes  = await fetch(GAS_URL + '?payload=' + gasPayload);
+      const gasData = await gasRes.json();
+      if (gasData.paid) {
         clearInterval(_pollTimer);
-        // Cập nhật UI thành công trước khi redirect
         const icon = document.querySelector('.success-icon');
         if (icon) icon.textContent = '✅';
         const title = document.querySelector('.success-title');
