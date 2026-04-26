@@ -25,7 +25,7 @@
       justify-content: flex-start; padding: 2rem 1.2rem 4rem;
     }
     #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-    .wrap { position: relative; z-index: 1; width: 100%; max-width: 580px; }
+    .wrap { position: relative; z-index: 1; width: 100%; max-width: 680px; }
 
     /* LOGO BAR */
     .logo-bar { text-align: center; margin: 1.6rem 0 2.2rem; }
@@ -88,12 +88,48 @@
     .order-price .op-num { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700; color: var(--gold2); display: block; line-height: 1; }
     .order-price .op-unit { font-size: .72rem; color: var(--muted); }
 
-    /* BANK INFO */
-    .bank-section { padding: 1.6rem 2.2rem; }
-    .bank-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .18em; color: var(--neon); margin-bottom: 1rem; display: block; }
+    /* ── 2-COLUMN PAYMENT LAYOUT ── */
+    .payment-body {
+      display: grid;
+      grid-template-columns: 196px 1fr;
+      gap: 1.4rem;
+      padding: 1.6rem 2rem;
+      align-items: start;
+    }
+
+    /* LEFT: QR */
+    .qr-col { display: flex; flex-direction: column; align-items: center; gap: .75rem; }
+    .qr-wrap {
+      background: #fff; border-radius: 16px; padding: 10px;
+      width: 176px; height: 176px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(0,0,0,.35);
+    }
+    .qr-wrap img { width: 156px; height: 156px; display: block; }
+    .qr-caption {
+      font-size: .68rem; color: var(--gold2);
+      text-transform: uppercase; letter-spacing: .12em;
+      text-align: center; line-height: 1.55;
+    }
+    .qr-steps {
+      width: 100%; display: flex; flex-direction: column; gap: .4rem;
+      background: rgba(201,168,76,.07); border: 1px solid rgba(201,168,76,.18);
+      border-radius: 10px; padding: .7rem .85rem;
+    }
+    .qr-step { font-size: .7rem; color: var(--muted); display: flex; gap: .45rem; align-items: flex-start; }
+    .qr-step-num {
+      width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(201,168,76,.2); border: 1px solid rgba(201,168,76,.35);
+      color: var(--gold2); font-size: .6rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* RIGHT: Bank info */
+    .bank-col {}
+    .bank-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .18em; color: var(--neon); margin-bottom: .75rem; display: block; }
     .bank-card {
       background: rgba(13,10,0,0.55); border: 1px solid rgba(201,168,76,0.30);
-      border-radius: 18px; overflow: hidden; position: relative;
+      border-radius: 14px; overflow: hidden; position: relative;
     }
     .bank-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
@@ -101,57 +137,44 @@
     }
     .bank-row {
       display: flex; align-items: center; justify-content: space-between;
-      padding: .85rem 1.4rem; border-bottom: 1px solid rgba(201,168,76,0.10);
-      gap: .8rem;
+      padding: .7rem 1rem; border-bottom: 1px solid rgba(201,168,76,0.10); gap: .6rem;
     }
     .bank-row:last-child { border-bottom: none; }
-    .bank-row-label { font-size: .72rem; color: var(--muted); flex-shrink: 0; min-width: 110px; }
-    .bank-row-val { font-size: .9rem; color: var(--text); font-weight: 500; flex: 1; }
-    .bank-row-val.highlight { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--gold2); letter-spacing: .06em; }
+    .bank-row-label { font-size: .68rem; color: var(--muted); flex-shrink: 0; min-width: 90px; }
+    .bank-row-val { font-size: .85rem; color: var(--text); font-weight: 500; flex: 1; }
+    .bank-row-val.highlight { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--gold2); letter-spacing: .04em; }
     .btn-copy {
       flex-shrink: 0; background: rgba(167,139,250,0.12);
-      border: 1px solid rgba(167,139,250,0.28); border-radius: 8px;
-      color: var(--neon); font-size: .72rem; font-weight: 500;
-      padding: .3rem .7rem; cursor: pointer;
+      border: 1px solid rgba(167,139,250,0.28); border-radius: 7px;
+      color: var(--neon); font-size: .68rem; font-weight: 500;
+      padding: .25rem .55rem; cursor: pointer;
       font-family: 'Be Vietnam Pro', sans-serif;
-      transition: background .25s, border-color .25s;
-      white-space: nowrap;
+      transition: background .25s, border-color .25s; white-space: nowrap;
     }
     .btn-copy:hover { background: rgba(167,139,250,0.22); border-color: var(--neon); }
     .btn-copy.copied { background: rgba(45,212,191,0.14); border-color: rgba(45,212,191,0.40); color: var(--teal); }
 
     /* TRANSFER CONTENT */
     .ck-box {
-      margin: 1.2rem 0 0;
+      margin-top: .75rem;
       background: rgba(79,107,255,0.08); border: 1px solid rgba(79,107,255,0.22);
-      border-radius: 14px; padding: 1rem 1.3rem;
+      border-radius: 12px; padding: .85rem 1rem;
     }
-    .ck-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .14em; color: var(--neon); margin-bottom: .4rem; display: block; }
-    .ck-value-wrap { display: flex; align-items: center; justify-content: space-between; gap: .8rem; }
-    .ck-value { font-size: .9rem; color: var(--text); font-weight: 500; word-break: break-word; }
+    .ck-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .14em; color: var(--neon); margin-bottom: .35rem; display: block; }
+    .ck-value-wrap { display: flex; align-items: center; justify-content: space-between; gap: .7rem; }
+    .ck-value { font-size: .88rem; color: var(--text); font-weight: 600; word-break: break-word; }
 
-    /* QR CODE */
-    .qr-section {
-      margin: 1.4rem 2.2rem 0;
-      background: rgba(4,5,26,.55); border: 1px solid rgba(201,168,76,.28);
-      border-radius: 16px; padding: 1.4rem;
-      display: flex; align-items: center; gap: 1.4rem;
+    /* Mobile: stack vertically */
+    @media (max-width: 560px) {
+      .payment-body { grid-template-columns: 1fr; }
+      .qr-col { flex-direction: row; align-items: flex-start; gap: 1rem; }
+      .qr-wrap { width: 130px; height: 130px; flex-shrink: 0; }
+      .qr-wrap img { width: 110px; height: 110px; }
+      .qr-steps { display: none; }
     }
-    .qr-img-wrap {
-      flex-shrink: 0;
-      background: #fff; border-radius: 12px;
-      padding: 8px; width: 120px; height: 120px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .qr-img-wrap img { width: 104px; height: 104px; display: block; }
-    .qr-info {}
-    .qr-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .14em; color: var(--gold2); margin-bottom: .4rem; display: block; }
-    .qr-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
-    .qr-desc { font-size: .78rem; color: var(--muted); line-height: 1.65; }
-    @media (max-width: 480px) {
-      .qr-section { flex-direction: column; align-items: center; text-align: center; margin: 1.2rem 1.2rem 0; }
-      .qr-img-wrap { width: 140px; height: 140px; }
-      .qr-img-wrap img { width: 124px; height: 124px; }
+    @media (max-width: 400px) {
+      .qr-col { flex-direction: column; align-items: center; }
+      .payment-body { padding: 1.2rem 1.2rem; }
     }
 
     /* INSTRUCTIONS */
@@ -279,48 +302,53 @@
       </div>
     </div>
 
-    <!-- BANK INFO -->
-    <div class="bank-section">
-      <span class="bank-label">Thông Tin Chuyển Khoản</span>
-      <div class="bank-card">
-        <div class="bank-row">
-          <span class="bank-row-label">Ngân hàng</span>
-          <span class="bank-row-val">ACB — Á Châu</span>
+    <!-- 2-COLUMN: QR + BANK INFO -->
+    <div class="payment-body">
+
+      <!-- CỘT TRÁI: QR -->
+      <div class="qr-col">
+        <div class="qr-wrap">
+          <img id="sePayQR" src="" alt="QR Thanh Toán" loading="lazy">
         </div>
-        <div class="bank-row">
-          <span class="bank-row-label">Số tài khoản</span>
-          <span class="bank-row-val highlight">6855117</span>
-          <button class="btn-copy" onclick="copyText('6855117', this)">Sao chép</button>
-        </div>
-        <div class="bank-row">
-          <span class="bank-row-label">Chủ tài khoản</span>
-          <span class="bank-row-val">Truong Thi Diem Kieu</span>
-        </div>
-        <div class="bank-row">
-          <span class="bank-row-label">Số tiền</span>
-          <span class="bank-row-val highlight" id="bankAmount">—</span>
+        <div class="qr-caption">✦ Quét mã để<br>thanh toán nhanh</div>
+        <div class="qr-steps">
+          <div class="qr-step"><span class="qr-step-num">1</span><span>Mở app ngân hàng</span></div>
+          <div class="qr-step"><span class="qr-step-num">2</span><span>Quét mã QR</span></div>
+          <div class="qr-step"><span class="qr-step-num">3</span><span>Xác nhận thanh toán</span></div>
         </div>
       </div>
 
-      <div class="ck-box">
-        <span class="ck-label">Nội Dung Chuyển Khoản</span>
-        <div class="ck-value-wrap">
-          <span class="ck-value" id="ckContent">—</span>
-          <button class="btn-copy" id="ckCopyBtn" onclick="copyCK(this)">Sao chép</button>
+      <!-- CỘT PHẢI: THÔNG TIN CK -->
+      <div class="bank-col">
+        <span class="bank-label">Thông Tin Chuyển Khoản</span>
+        <div class="bank-card">
+          <div class="bank-row">
+            <span class="bank-row-label">Ngân hàng</span>
+            <span class="bank-row-val">ACB — Á Châu</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-row-label">Số tài khoản</span>
+            <span class="bank-row-val highlight">6855117</span>
+            <button class="btn-copy" onclick="copyText('6855117', this)">Sao chép</button>
+          </div>
+          <div class="bank-row">
+            <span class="bank-row-label">Chủ tài khoản</span>
+            <span class="bank-row-val">Truong Thi Diem Kieu</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-row-label">Số tiền</span>
+            <span class="bank-row-val highlight" id="bankAmount">—</span>
+          </div>
+        </div>
+        <div class="ck-box">
+          <span class="ck-label">Nội Dung Chuyển Khoản</span>
+          <div class="ck-value-wrap">
+            <span class="ck-value" id="ckContent">—</span>
+            <button class="btn-copy" id="ckCopyBtn" onclick="copyCK(this)">Sao chép</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- QR CODE -->
-    <div class="qr-section">
-      <div class="qr-img-wrap">
-        <img id="sePayQR" src="" alt="QR Thanh Toán" loading="lazy">
-      </div>
-      <div class="qr-info">
-        <span class="qr-label">✦ Quét Mã Thanh Toán</span>
-        <div class="qr-title">Thanh toán nhanh qua QR</div>
-        <div class="qr-desc">Mở app ngân hàng → Quét mã → Số tiền & nội dung tự điền sẵn → Xác nhận.</div>
-      </div>
     </div>
 
     <!-- INSTRUCTIONS -->
