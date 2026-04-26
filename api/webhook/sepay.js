@@ -21,13 +21,11 @@ module.exports = async (req, res) => {
 
   if (req.method !== 'POST') return;
 
-  // Xác thực API key
-  if (SEPAY_APIKEY) {
-    const auth = (req.headers['authorization'] || '').replace('Apikey ', '').trim();
-    if (auth !== SEPAY_APIKEY) {
-      console.warn('[SePay] API key không hợp lệ');
-      return;
-    }
+  // Xác thực API key (chỉ check khi SePay gửi header)
+  const authHeader = (req.headers['authorization'] || '').replace('Apikey ', '').trim();
+  if (SEPAY_APIKEY && authHeader && authHeader !== SEPAY_APIKEY) {
+    console.warn('[SePay] API key không hợp lệ');
+    return;
   }
 
   const d = req.body || {};
