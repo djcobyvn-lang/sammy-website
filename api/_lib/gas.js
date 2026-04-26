@@ -1,27 +1,22 @@
-const https = require('https');
-
 const GAS_URL = process.env.GAS_URL ||
   'https://script.google.com/macros/s/AKfycbwFi3Iq79XFFA9BBAUar9Ius727HeZncIHOVQdxMXczbpNRJ_TiBUgHnsI-YJDYnNl-ew/exec';
 
-// Gửi GET request đến GAS (không bị CORS block phía server)
-function gasCall(payload) {
-  return new Promise((resolve) => {
+// Dùng fetch (Node 18+) — tự follow redirect, không như https.get()
+async function gasCall(payload) {
+  try {
     const url = GAS_URL + '?payload=' + encodeURIComponent(JSON.stringify(payload));
-    https.get(url, (res) => {
-      let body = '';
-      res.on('data', d => body += d);
-      res.on('end', () => {
-        try { resolve(JSON.parse(body)); }
-        catch { resolve({ success: true }); }
-      });
-    }).on('error', (e) => {
-      console.warn('[GAS]', e.message);
-      resolve({ success: false, error: e.message });
-    });
-  });
+    console.log('[GAS] Calling:', url.substring(0, 80) + '...');
+    const res  = await fetch(url);
+    const text = await res.text();
+    console.log('[GAS] Response:', text.substring(0, 200));
+    try { return JSON.parse(text); }
+    catch { return { success: true }; }
+  } catch(e) {
+    console.warn('[GAS] Error:', e.message);
+    return { success: false, error: e.message };
+  }
 }
 
-// Kiểm tra email đã đăng ký khoá học và đã thanh toán chưa
 async function checkCourseAccess(email) {
   const result = await gasCall({ formType: 'check-access', email });
   return result.activated === true;
