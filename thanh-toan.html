@@ -103,11 +103,35 @@
       grid-template-columns: 1fr 212px;
       gap: 1.8rem;
       padding: 2rem 2.4rem;
-      align-items: start;
+      align-items: stretch;
     }
 
-    /* LEFT: QR */
-    .qr-col { display: flex; flex-direction: column; align-items: center; gap: .75rem; }
+    /* LEFT: Bank info */
+    .bank-col {
+      display: flex; flex-direction: column;
+    }
+    .bank-card {
+      flex: 1;
+      background: rgba(13,10,0,0.55); border: 1px solid rgba(201,168,76,0.30);
+      border-radius: 14px; overflow: hidden; position: relative;
+      display: flex; flex-direction: column;
+    }
+    .bank-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold2), transparent);
+    }
+    .bank-card-header {
+      padding: .75rem 1rem .6rem;
+      border-bottom: 1px solid rgba(201,168,76,.12);
+      font-size: .65rem; text-transform: uppercase;
+      letter-spacing: .16em; color: var(--gold2);
+    }
+    .bank-label { display: none; } /* không dùng nữa */
+
+    /* RIGHT: QR */
+    .qr-col {
+      display: flex; flex-direction: column; align-items: center; gap: .75rem;
+    }
     .qr-wrap {
       background: #fff; border-radius: 16px; padding: 10px;
       width: 202px; height: 202px;
@@ -131,18 +155,6 @@
       background: rgba(201,168,76,.2); border: 1px solid rgba(201,168,76,.35);
       color: var(--gold2); font-size: .6rem; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
-    }
-
-    /* RIGHT: Bank info */
-    .bank-col {}
-    .bank-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .18em; color: var(--neon); margin-bottom: .75rem; display: block; }
-    .bank-card {
-      background: rgba(13,10,0,0.55); border: 1px solid rgba(201,168,76,0.30);
-      border-radius: 14px; overflow: hidden; position: relative;
-    }
-    .bank-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold2), transparent);
     }
     .bank-row {
       display: flex; align-items: center; justify-content: space-between;
@@ -333,8 +345,8 @@
 
       <!-- CỘT TRÁI: THÔNG TIN CK -->
       <div class="bank-col">
-        <span class="bank-label">Thông Tin Chuyển Khoản</span>
         <div class="bank-card">
+          <div class="bank-card-header">✦ Thông Tin Chuyển Khoản</div>
           <div class="bank-row">
             <span class="bank-row-label">Ngân hàng</span>
             <span class="bank-row-val">ACB — Á Châu</span>
