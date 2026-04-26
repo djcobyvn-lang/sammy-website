@@ -558,6 +558,9 @@ if (!pkg) {
   // QR SePay
   const qrUrl = `https://qr.sepay.vn/img?bank=ACB&acc=6855117&template=compact&amount=${pkg.price}&des=${encodeURIComponent(ckContent)}`;
   document.getElementById('sePayQR').src = qrUrl;
+
+  // Bắt đầu polling NGAY KHI MỞ TRANG — không cần chờ bấm button
+  startPolling({ packageId: pkgId, email: sessionStorage.getItem('sammy_email') || '' });
 }
 
 /* ─── COPY ─── */
@@ -623,41 +626,56 @@ async function handleConfirm() {
   document.querySelector('.instructions').style.display  = 'none';
   document.querySelector('.cta-section').style.display   = 'none';
   document.getElementById('successPanel').style.display  = 'block';
-
-  startPolling(order);
+  // Polling đã chạy từ lúc mở trang — không cần gọi lại
 }
 
 /* ─── POLLING — chờ SePay xác nhận ─── */
+let _pollTimer = null;
+
 function startPolling(order) {
-  const email = sessionStorage.getItem('sammy_email') || order.email || '';
-  const pkgId = order.packageId || sessionStorage.getItem('sammy_pkg') || '';
-  if (!email && !pkgId) return;
+  const email    = sessionStorage.getItem('sammy_email') || order.email || '';
+  const pId      = order.packageId || sessionStorage.getItem('sammy_pkg') || '';
+  const pageType = (PACKAGES_DATA[pId]?.type === 'khoa-hoc') ? 'khoa-hoc' : 'luan-giai';
+
+  if (!pId) return;
+  if (_pollTimer) clearInterval(_pollTimer); // evita duplicados
 
   let attempts = 0;
-  const MAX      = 18; // 18 × 5s = 90 giây
-  const pageType = (PACKAGES_DATA[pkgId]?.type === 'khoa-hoc') ? 'khoa-hoc' : 'luan-giai';
-  const cdEl     = document.getElementById('countdownText');
+  const MAX    = 200; // 200 × 3s = 10 minutos
 
-  function redirect() {
-    clearInterval(timer);
-    window.location.href = `cam-on.html?type=${pageType}`;
-  }
-
-  const timer = setInterval(async () => {
+  _pollTimer = setInterval(async () => {
     attempts++;
-    const remaining = Math.max(0, (MAX - attempts) * 5);
-    if (cdEl) cdEl.textContent = remaining > 0
-      ? `Tự động chuyển sau ${remaining} giây...`
-      : 'Đang chuyển trang...';
-
     try {
-      const res  = await fetch(`/api/order/check?email=${encodeURIComponent(email)}&pkgId=${encodeURIComponent(pkgId)}`);
+      const res  = await fetch(`/api/order/check?email=${encodeURIComponent(email)}&pkgId=${encodeURIComponent(pId)}`);
       const data = await res.json();
-      if (data.paid) { redirect(); return; }
-    } catch { /* network error — keep polling */ }
+      if (data.paid) {
+        clearInterval(_pollTimer);
+        // Cập nhật UI thành công trước khi redirect
+        const icon = document.querySelector('.success-icon');
+        if (icon) icon.textContent = '✅';
+        const title = document.querySelector('.success-title');
+        if (title) title.textContent = 'Thanh Toán Xác Nhận!';
+        setTimeout(() => {
+          window.location.href = `cam-on.html?type=${pageType}`;
+        }, 800);
+        return;
+      }
+    } catch { /* giữ polling */ }
 
-    if (attempts >= MAX) redirect();
-  }, 5000);
+    // Cập nhật countdown nếu đang ở success panel
+    const cdEl = document.getElementById('countdownText');
+    if (cdEl && cdEl.closest('#successPanel')?.style.display !== 'none') {
+      const remaining = Math.max(0, (MAX - attempts) * 3);
+      cdEl.textContent = remaining > 0
+        ? `Đang xác nhận... (${remaining}s)`
+        : 'Đang chuyển trang...';
+    }
+
+    if (attempts >= MAX) {
+      clearInterval(_pollTimer);
+      window.location.href = `cam-on.html?type=${pageType}`;
+    }
+  }, 3000); // kiểm tra mỗi 3 giây
 }
 
 /* ─── STARFIELD ─── */
