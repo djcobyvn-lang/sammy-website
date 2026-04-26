@@ -416,6 +416,13 @@ const PACKAGES_DATA = {
     sub:  'Zoom · ~120 phút',
     price: 3000000,
     code: 'TRUC-TIEP'
+  },
+  'khoa-hoc-3-goc': {
+    name: 'Khóa Học Thần Số Học 3 Gốc',
+    sub:  'Video · Bài tập · Hỗ trợ trực tiếp',
+    price: 2868000,
+    code: '3GOC',
+    type: 'khoa-hoc'
   }
 };
 
@@ -445,8 +452,15 @@ if (!pkg) {
   document.getElementById('mainCard').style.display = 'none';
   document.getElementById('notFound').style.display = 'block';
 } else {
-  // Nội dung CK: chỉ tên khách hàng (dễ đọc, SePay vẫn match được)
-  const ckContent = custName;
+  // Nội dung CK theo loại
+  let ckContent;
+  if (pkg.type === 'khoa-hoc') {
+    const hvCode = Math.floor(1000 + Math.random() * 9000);
+    ckContent = `${custName} HV${hvCode}`;
+    sessionStorage.setItem('sammy_hv_code', hvCode.toString());
+  } else {
+    ckContent = `${custName} ${pkg.code}`;
+  }
 
   document.getElementById('pkgName').textContent    = pkg.name;
   document.getElementById('pkgSub').textContent     = pkg.sub;
@@ -455,7 +469,7 @@ if (!pkg) {
   document.getElementById('ckContent').textContent  = ckContent;
   document.title = `Thanh toán ${pkg.name} | Sammy Trương`;
 
-  // Tạo QR SePay động
+  // QR SePay
   const qrUrl = `https://qr.sepay.vn/img?bank=ACB&acc=6855117&template=compact&amount=${pkg.price}&des=${encodeURIComponent(ckContent)}`;
   document.getElementById('sePayQR').src = qrUrl;
 }
@@ -546,14 +560,15 @@ function startPolling(order) {
       const data = await res.json();
       if (data.paid) {
         clearInterval(timer);
-        window.location.href = 'cam-on.html';
+        const t = (PACKAGES_DATA[pkgId]?.type === 'khoa-hoc') ? 'khoa-hoc' : 'luan-giai';
+        window.location.href = `cam-on.html?type=${t}`;
       }
     } catch { /* network error — keep polling */ }
 
     if (attempts >= MAX) {
       clearInterval(timer);
-      // Sau 3 phút không xác nhận → chuyển sang cam-on vẫn để UX tốt
-      window.location.href = 'cam-on.html';
+      const t = (PACKAGES_DATA[pkgId]?.type === 'khoa-hoc') ? 'khoa-hoc' : 'luan-giai';
+      window.location.href = `cam-on.html?type=${t}`;
     }
   }, 5000); // kiểm tra mỗi 5 giây
 }

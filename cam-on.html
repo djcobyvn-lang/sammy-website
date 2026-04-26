@@ -185,17 +185,67 @@ h1{
   window.addEventListener('resize',()=>{resize();init();});
 })();
 
-// Đọc thông tin từ sessionStorage
-const name = sessionStorage.getItem('sammy_ten') || '';
-const pkg  = sessionStorage.getItem('sammy_pkg') || '';
+const params  = new URLSearchParams(location.search);
+const type    = params.get('type') || 'luan-giai';
+const name    = sessionStorage.getItem('sammy_ten') || '';
+const pkg     = sessionStorage.getItem('sammy_pkg') || '';
 const PKG_NAMES = {
   'co-ban':'Gói Cơ Bản','nang-cao':'Gói Nâng Cao','dac-biet':'Gói Đặc Biệt',
   'me-be-nang-cao':'Gói Mẹ & Bé — Nâng Cao','me-be-dac-biet':'Gói Mẹ & Bé — Đặc Biệt',
   '2-ngay-sinh-nang-cao':'Gói 2 Ngày Sinh — Nâng Cao','2-ngay-sinh-dac-biet':'Gói 2 Ngày Sinh — Đặc Biệt',
-  'truc-tiep-11':'Gói Trực Tiếp 1:1'
+  'truc-tiep-11':'Gói Trực Tiếp 1:1','khoa-hoc-3-goc':'Khóa Học Thần Số Học 3 Gốc'
 };
 if(name) document.getElementById('oName').textContent = name;
 if(pkg)  document.getElementById('oPkg').textContent  = PKG_NAMES[pkg] || pkg;
+
+// Nội dung động theo loại
+if (type === 'khoa-hoc') {
+  document.querySelector('h1').textContent               = 'Khóa Học Đã Kích Hoạt!';
+  document.querySelector('.sub').innerHTML               = 'Tài khoản học viên của bạn đã được kích hoạt.<br>Kiểm tra email để nhận thông tin đăng nhập.';
+  document.querySelector('.order-val.status').textContent = '✓ Đã kích hoạt';
+
+  // Timeline khóa học
+  document.querySelector('.timeline').innerHTML = `
+    <div class="tl-item">
+      <div class="tl-dot">✦</div>
+      <div class="tl-body"><div class="tl-title">Ngay bây giờ</div>
+      <div class="tl-desc">Thanh toán xác nhận — tài khoản học viên đã được kích hoạt.</div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">📧</div>
+      <div class="tl-body"><div class="tl-title">Kiểm tra email</div>
+      <div class="tl-desc">Thông tin đăng nhập và hướng dẫn vào học đã được gửi về email của bạn.</div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🎓</div>
+      <div class="tl-body"><div class="tl-title">Bắt đầu học ngay</div>
+      <div class="tl-desc">Đăng nhập vào Cổng Học Viên và bắt đầu hành trình Thần Số Học 3 Gốc.</div></div>
+    </div>`;
+
+  // Thêm nút vào học
+  document.querySelector('.btns').innerHTML = `
+    <a href="hoc-vien-dang-nhap.html" class="btn-primary">🎓 Vào Học Ngay</a>
+    <a href="https://zalo.me/0362676159" target="_blank" class="btn-zalo">💬 Hỗ trợ Zalo</a>`;
+} else {
+  // Timeline luận giải
+  const pkg_detail = PKG_NAMES[pkg] || 'bài luận giải';
+  document.querySelector('.timeline').innerHTML = `
+    <div class="tl-item">
+      <div class="tl-dot">✦</div>
+      <div class="tl-body"><div class="tl-title">Ngay bây giờ</div>
+      <div class="tl-desc">Sammy đã nhận được thông tin đăng ký ${pkg_detail} của bạn.</div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">📋</div>
+      <div class="tl-body"><div class="tl-title">Trong vòng 24 giờ</div>
+      <div class="tl-desc">Sammy sẽ liên hệ qua Zalo / Email để xác nhận lịch luận giải.</div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">📧</div>
+      <div class="tl-body"><div class="tl-title">Sau khi hoàn thành</div>
+      <div class="tl-desc">Bài luận giải cá nhân sẽ được gửi về <strong style="color:var(--neon)">${sessionStorage.getItem('sammy_email') || 'email của bạn'}</strong>.</div></div>
+    </div>`;
+}
 </script>
 </body>
 </html>

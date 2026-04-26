@@ -36,6 +36,8 @@ function doGet(e) {
       return buildResponse(checkPayment(data));
     } else if (type === 'activate-course') {
       result = activateCourse(data);
+    } else if (type === 'update-khoa-hoc-by-hv') {
+      result = updateKhoaHocByHV(data);
     } else if (type === 'xac-nhan-ck') {
       result = saveXacNhanCK(data);
     } else if (type === 'khoa-hoc') {
@@ -175,6 +177,24 @@ function formatTime() {
 
 function clean(val) {
   return val ? String(val).trim() : '';
+}
+
+function updateKhoaHocByHV(data) {
+  const hvCode = clean(data.hvCode || '');
+  const status = clean(data.status || 'Đã Thanh Toán ✓');
+  if (!hvCode) return null;
+  const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_KHOA_HOC);
+  if (!sheet) return null;
+  const values = sheet.getDataRange().getValues();
+  for (let i = values.length - 1; i >= 1; i--) {
+    const rowStatus = String(values[i][6] || '');
+    if (rowStatus !== 'Đã Thanh Toán ✓') {
+      sheet.getRange(i + 1, 7).setValue(status);
+      Logger.log('Kích hoạt HV' + hvCode + ' dòng ' + (i + 1));
+      return i + 1;
+    }
+  }
+  return null;
 }
 
 // ────────────────────────────────────────────────────

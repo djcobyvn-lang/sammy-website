@@ -787,22 +787,23 @@ async function handleSubmit(e){
     await fetch(GAS_URL + '?payload=' + encodeURIComponent(JSON.stringify(body)), { mode: 'no-cors' });
   } catch { /* non-blocking */ }
 
-  /* Backend nội bộ */
-  try {
-    const res  = await fetch('/api/auth/register', {
-      method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(body)
-    });
-    const data = await res.json();
-    btn.textContent = '✓ Đăng ký thành công!';
-    btn.style.background = 'linear-gradient(135deg, #0e7490, #2DD4BF)';
-    btn.style.color = '#fff';
-  } catch {
-    /* Offline — vẫn báo thành công */
-    btn.textContent = '✓ Đã ghi nhận — Sammy sẽ liên hệ sớm!';
-    btn.style.background = 'linear-gradient(135deg, #0e7490, #2DD4BF)';
-    btn.style.color = '#fff';
-  }
+  /* Lưu vào sessionStorage cho trang thanh toán */
+  sessionStorage.setItem('sammy_pkg',   'khoa-hoc-3-goc');
+  sessionStorage.setItem('sammy_ten',   body.fullName);
+  sessionStorage.setItem('sammy_email', body.email);
+  sessionStorage.setItem('sammy_zalo',  body.zalo);
+
+  /* Backend nội bộ (non-blocking) */
+  fetch('/api/auth/register', {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(body)
+  }).catch(() => {});
+
+  /* Chuyển sang trang thanh toán */
+  btn.textContent = '✓ Đang chuyển đến trang thanh toán...';
+  setTimeout(() => {
+    window.location.href = 'thanh-toan.html?goi=khoa-hoc-3-goc&ten=' + encodeURIComponent(body.fullName);
+  }, 800);
 }
 </script>
 </body>
