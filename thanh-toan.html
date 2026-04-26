@@ -130,6 +130,30 @@
     .ck-value-wrap { display: flex; align-items: center; justify-content: space-between; gap: .8rem; }
     .ck-value { font-size: .9rem; color: var(--text); font-weight: 500; word-break: break-word; }
 
+    /* QR CODE */
+    .qr-section {
+      margin: 1.4rem 2.2rem 0;
+      background: rgba(4,5,26,.55); border: 1px solid rgba(201,168,76,.28);
+      border-radius: 16px; padding: 1.4rem;
+      display: flex; align-items: center; gap: 1.4rem;
+    }
+    .qr-img-wrap {
+      flex-shrink: 0;
+      background: #fff; border-radius: 12px;
+      padding: 8px; width: 120px; height: 120px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .qr-img-wrap img { width: 104px; height: 104px; display: block; }
+    .qr-info {}
+    .qr-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .14em; color: var(--gold2); margin-bottom: .4rem; display: block; }
+    .qr-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
+    .qr-desc { font-size: .78rem; color: var(--muted); line-height: 1.65; }
+    @media (max-width: 480px) {
+      .qr-section { flex-direction: column; align-items: center; text-align: center; margin: 1.2rem 1.2rem 0; }
+      .qr-img-wrap { width: 140px; height: 140px; }
+      .qr-img-wrap img { width: 124px; height: 124px; }
+    }
+
     /* INSTRUCTIONS */
     .instructions {
       margin: 1.2rem 2.2rem 0;
@@ -287,6 +311,18 @@
       </div>
     </div>
 
+    <!-- QR CODE -->
+    <div class="qr-section">
+      <div class="qr-img-wrap">
+        <img id="sePayQR" src="" alt="QR Thanh Toán" loading="lazy">
+      </div>
+      <div class="qr-info">
+        <span class="qr-label">✦ Quét Mã Thanh Toán</span>
+        <div class="qr-title">Thanh toán nhanh qua QR</div>
+        <div class="qr-desc">Mở app ngân hàng → Quét mã → Số tiền & nội dung tự điền sẵn → Xác nhận.</div>
+      </div>
+    </div>
+
     <!-- INSTRUCTIONS -->
     <div class="instructions">
       <ol>
@@ -392,9 +428,16 @@ function fmt(n) {
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwFi3Iq79XFFA9BBAUar9Ius727HeZncIHOVQdxMXczbpNRJ_TiBUgHnsI-YJDYnNl-ew/exec';
 
 /* ─── READ PARAMS ─── */
-const params  = new URLSearchParams(location.search);
-const pkgId   = params.get('goi') || sessionStorage.getItem('sammy_pkg');
-const custName = params.get('ten') || sessionStorage.getItem('sammy_ten') || 'Khach Hang';
+const params = new URLSearchParams(location.search);
+const pkgId  = params.get('goi') || sessionStorage.getItem('sammy_pkg');
+
+// Decode tên khách hàng (xử lý cả trường hợp double-encoded)
+function decodeName(raw) {
+  if (!raw) return '';
+  try { return decodeURIComponent(raw); } catch { return raw; }
+}
+const rawName  = params.get('ten') || sessionStorage.getItem('sammy_ten') || '';
+const custName = decodeName(rawName) || 'Khach Hang';
 
 const pkg = PACKAGES_DATA[pkgId];
 
@@ -402,14 +445,19 @@ if (!pkg) {
   document.getElementById('mainCard').style.display = 'none';
   document.getElementById('notFound').style.display = 'block';
 } else {
-  const ckContent = `${custName} - ${pkg.code}`;
+  // Nội dung CK: chỉ tên khách hàng (dễ đọc, SePay vẫn match được)
+  const ckContent = custName;
 
-  document.getElementById('pkgName').textContent  = pkg.name;
-  document.getElementById('pkgSub').textContent   = pkg.sub;
-  document.getElementById('pkgPrice').textContent = fmt(pkg.price);
+  document.getElementById('pkgName').textContent    = pkg.name;
+  document.getElementById('pkgSub').textContent     = pkg.sub;
+  document.getElementById('pkgPrice').textContent   = fmt(pkg.price);
   document.getElementById('bankAmount').textContent = fmt(pkg.price) + ' VNĐ';
   document.getElementById('ckContent').textContent  = ckContent;
   document.title = `Thanh toán ${pkg.name} | Sammy Trương`;
+
+  // Tạo QR SePay động
+  const qrUrl = `https://qr.sepay.vn/img?bank=ACB&acc=6855117&template=compact&amount=${pkg.price}&des=${encodeURIComponent(ckContent)}`;
+  document.getElementById('sePayQR').src = qrUrl;
 }
 
 /* ─── COPY ─── */
