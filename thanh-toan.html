@@ -427,11 +427,14 @@
 
     <!-- SUCCESS -->
     <div class="success-panel" id="successPanel">
-      <span class="success-icon">🎉</span>
-      <div class="success-title">Đã Ghi Nhận!</div>
+      <span class="success-icon">⏳</span>
+      <div class="success-title">Đang Xác Nhận Thanh Toán...</div>
       <p class="success-sub">
-        Cảm ơn bạn đã đăng ký. Sammy sẽ xác nhận thanh toán và gửi thông tin kích hoạt qua email trong vòng <strong style="color:var(--teal);">24 giờ</strong>.<br><br>
-        Nếu cần hỗ trợ ngay: Zalo <strong style="color:var(--gold2);">0972 624 729</strong>
+        Hệ thống đang kiểm tra giao dịch của bạn. Trang sẽ tự động chuyển sau khi xác nhận xong.<br><br>
+        <span id="countdownText" style="color:var(--teal);font-weight:600;"></span>
+      </p>
+      <p style="margin-top:1rem;font-size:.78rem;color:var(--muted);">
+        Nếu không tự chuyển: <a href="cam-on.html" style="color:var(--neon);">click vào đây</a> &nbsp;·&nbsp; Hỗ trợ: Zalo <strong style="color:var(--gold2);">0362676159</strong>
       </p>
     </div>
 
@@ -631,26 +634,30 @@ function startPolling(order) {
   if (!email && !pkgId) return;
 
   let attempts = 0;
-  const MAX = 36; // 36 × 5s = 3 phút
+  const MAX      = 18; // 18 × 5s = 90 giây
+  const pageType = (PACKAGES_DATA[pkgId]?.type === 'khoa-hoc') ? 'khoa-hoc' : 'luan-giai';
+  const cdEl     = document.getElementById('countdownText');
+
+  function redirect() {
+    clearInterval(timer);
+    window.location.href = `cam-on.html?type=${pageType}`;
+  }
 
   const timer = setInterval(async () => {
     attempts++;
+    const remaining = Math.max(0, (MAX - attempts) * 5);
+    if (cdEl) cdEl.textContent = remaining > 0
+      ? `Tự động chuyển sau ${remaining} giây...`
+      : 'Đang chuyển trang...';
+
     try {
       const res  = await fetch(`/api/order/check?email=${encodeURIComponent(email)}&pkgId=${encodeURIComponent(pkgId)}`);
       const data = await res.json();
-      if (data.paid) {
-        clearInterval(timer);
-        const t = (PACKAGES_DATA[pkgId]?.type === 'khoa-hoc') ? 'khoa-hoc' : 'luan-giai';
-        window.location.href = `cam-on.html?type=${t}`;
-      }
+      if (data.paid) { redirect(); return; }
     } catch { /* network error — keep polling */ }
 
-    if (attempts >= MAX) {
-      clearInterval(timer);
-      const t = (PACKAGES_DATA[pkgId]?.type === 'khoa-hoc') ? 'khoa-hoc' : 'luan-giai';
-      window.location.href = `cam-on.html?type=${t}`;
-    }
-  }, 5000); // kiểm tra mỗi 5 giây
+    if (attempts >= MAX) redirect();
+  }, 5000);
 }
 
 /* ─── STARFIELD ─── */
