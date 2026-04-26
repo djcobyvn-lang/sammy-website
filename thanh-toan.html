@@ -629,7 +629,7 @@ async function handleConfirm() {
 
 /* ─── POLLING — chờ SePay xác nhận ─── */
 function startPolling(order) {
-  const email = order.customerName ? '' : (sessionStorage.getItem('sammy_email') || '');
+  const email = sessionStorage.getItem('sammy_email') || order.email || '';
   const pkgId = order.packageId || sessionStorage.getItem('sammy_pkg') || '';
   if (!email && !pkgId) return;
 

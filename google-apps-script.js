@@ -200,9 +200,21 @@ function updateKhoaHocByHV(data) {
 // ────────────────────────────────────────────────────
 // Kiểm tra học viên đã thanh toán khoá học chưa
 // ────────────────────────────────────────────────────
+// Chuyển pkgId (co-ban) → từ khóa tiếng Việt (cơ bản) để tìm trong sheet
+function pkgKeyword(pkgId) {
+  const map = {
+    'co-ban':'cơ bản','nang-cao':'nâng cao','dac-biet':'đặc biệt',
+    'me-be-nang-cao':'mẹ','me-be-dac-biet':'mẹ',
+    '2-ngay-sinh-nang-cao':'ngày sinh','2-ngay-sinh-dac-biet':'ngày sinh',
+    'truc-tiep-11':'trực tiếp','khoa-hoc-3-goc':'khóa học'
+  };
+  return map[pkgId] || pkgId;
+}
+
 function checkPayment(data) {
-  const email = clean(data.email || '').toLowerCase();
-  const pkgId = clean(data.pkgId || '');
+  const email     = clean(data.email || '').toLowerCase();
+  const pkgId     = clean(data.pkgId || '');
+  const pkgSearch = pkgKeyword(pkgId);
   const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_DANG_KY);
   if (!sheet) return { paid: false };
   const values = sheet.getDataRange().getValues();
@@ -210,8 +222,9 @@ function checkPayment(data) {
     const rowEmail  = String(values[i][3] || '').toLowerCase();
     const rowPkg    = String(values[i][5] || '').toLowerCase();
     const rowStatus = String(values[i][7] || '');
-    const match = (email && rowEmail === email) || (pkgId && rowPkg.includes(pkgId));
-    if (match && rowStatus === 'Đã Thanh Toán ✓') return { paid: true };
+    const emailMatch = email && rowEmail === email;
+    const pkgMatch   = pkgSearch && rowPkg.includes(pkgSearch);
+    if ((emailMatch || pkgMatch) && rowStatus === 'Đã Thanh Toán ✓') return { paid: true };
   }
   return { paid: false };
 }
@@ -281,15 +294,16 @@ function updateStatus(data) {
     if (rowStt === 'Đã Thanh Toán ✓') continue;
 
     const emailMatch = email && rowEmail === email;
-    const pkgMatch   = pkgId && rowPkg.includes(pkgId.toLowerCase());
+    const pkgSearch = pkgKeyword(pkgId);
+    const pkgMatch  = pkgSearch && rowPkg.includes(pkgSearch);
 
     if (emailMatch || pkgMatch) {
       sheet.getRange(i + 1, COL_STATUS).setValue(status);
-      Logger.log('Cập nhật trạng thái dòng ' + (i + 1) + ': ' + status);
+      Logger.log('Cập nhật dòng ' + (i + 1) + ' → ' + status);
       return i + 1;
     }
   }
 
-  Logger.log('Không tìm thấy dòng để cập nhật: email=' + email + ' pkgId=' + pkgId);
+  Logger.log('Không tìm thấy: email=' + email + ' pkg=' + pkgKeyword(pkgId));
   return null;
 }
