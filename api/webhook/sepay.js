@@ -32,13 +32,16 @@ module.exports = async (req, res) => {
 
   if (d.transferType !== 'in') return;
 
-  const amount  = Number(d.transferAmount) || 0;
-  const content = (d.content || '').toUpperCase();
+  const amount       = Number(d.transferAmount) || 0;
+  const contentRaw   = (d.content || '').toUpperCase();
+  // Chuẩn hóa: xóa mọi ký tự không phải chữ/số
+  // (ngân hàng hay bỏ dấu gạch ngang, thêm prefix IB/CK...)
+  const contentNorm  = contentRaw.replace(/[^A-Z0-9]/g, '');
 
   // ──────────────────────────────────────────────
   // CASE 1: KHÓA HỌC — nội dung có "HV" + 4 số
   // ──────────────────────────────────────────────
-  const hvMatch = content.match(/HV(\d{4})/);
+  const hvMatch = contentRaw.match(/HV(\d{4})/);
   if (hvMatch) {
     console.log('[SePay] → Khóa học, mã HV:', hvMatch[1]);
 
@@ -76,7 +79,9 @@ module.exports = async (req, res) => {
   let matchedPkg  = null;
 
   for (const [code, info] of Object.entries(PKG_CODES)) {
-    if (content.includes(code)) {
+    // Chuẩn hóa code: NANG-CAO → NANGCAO, 2NS-NC → 2NSNC
+    const codeNorm = code.replace(/[^A-Z0-9]/g, '');
+    if (contentNorm.includes(codeNorm)) {
       matchedCode = code;
       matchedPkg  = info;
       break;
@@ -84,7 +89,7 @@ module.exports = async (req, res) => {
   }
 
   if (!matchedPkg) {
-    console.warn('[SePay] Không tìm thấy mã gói trong nội dung:', content);
+    console.warn('[SePay] Không tìm thấy mã gói. Content gốc:', contentRaw, '| Chuẩn hóa:', contentNorm);
     return;
   }
 
