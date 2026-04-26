@@ -91,7 +91,7 @@
     /* ── 2-COLUMN PAYMENT LAYOUT ── */
     .payment-body {
       display: grid;
-      grid-template-columns: 196px 1fr;
+      grid-template-columns: 1fr 210px;
       gap: 1.4rem;
       padding: 1.6rem 2rem;
       align-items: start;
@@ -101,11 +101,11 @@
     .qr-col { display: flex; flex-direction: column; align-items: center; gap: .75rem; }
     .qr-wrap {
       background: #fff; border-radius: 16px; padding: 10px;
-      width: 176px; height: 176px;
+      width: 202px; height: 202px;
       display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 24px rgba(0,0,0,.35);
     }
-    .qr-wrap img { width: 156px; height: 156px; display: block; }
+    .qr-wrap img { width: 182px; height: 182px; display: block; }
     .qr-caption {
       font-size: .68rem; color: var(--gold2);
       text-transform: uppercase; letter-spacing: .12em;
@@ -305,20 +305,7 @@
     <!-- 2-COLUMN: QR + BANK INFO -->
     <div class="payment-body">
 
-      <!-- CỘT TRÁI: QR -->
-      <div class="qr-col">
-        <div class="qr-wrap">
-          <img id="sePayQR" src="" alt="QR Thanh Toán" loading="lazy">
-        </div>
-        <div class="qr-caption">✦ Quét mã để<br>thanh toán nhanh</div>
-        <div class="qr-steps">
-          <div class="qr-step"><span class="qr-step-num">1</span><span>Mở app ngân hàng</span></div>
-          <div class="qr-step"><span class="qr-step-num">2</span><span>Quét mã QR</span></div>
-          <div class="qr-step"><span class="qr-step-num">3</span><span>Xác nhận thanh toán</span></div>
-        </div>
-      </div>
-
-      <!-- CỘT PHẢI: THÔNG TIN CK -->
+      <!-- CỘT TRÁI: THÔNG TIN CK -->
       <div class="bank-col">
         <span class="bank-label">Thông Tin Chuyển Khoản</span>
         <div class="bank-card">
@@ -346,6 +333,19 @@
             <span class="ck-value" id="ckContent">—</span>
             <button class="btn-copy" id="ckCopyBtn" onclick="copyCK(this)">Sao chép</button>
           </div>
+        </div>
+      </div>
+
+      <!-- CỘT PHẢI: QR -->
+      <div class="qr-col">
+        <div class="qr-wrap">
+          <img id="sePayQR" src="" alt="QR Thanh Toán" loading="lazy">
+        </div>
+        <div class="qr-caption">✦ Quét mã để<br>thanh toán nhanh</div>
+        <div class="qr-steps">
+          <div class="qr-step"><span class="qr-step-num">1</span><span>Mở app ngân hàng</span></div>
+          <div class="qr-step"><span class="qr-step-num">2</span><span>Quét mã QR</span></div>
+          <div class="qr-step"><span class="qr-step-num">3</span><span>Xác nhận thanh toán</span></div>
         </div>
       </div>
 
