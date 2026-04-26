@@ -1,19 +1,20 @@
-// Vercel KV (Upstash Redis) — REST API, không cần SDK
-const KV_URL   = process.env.KV_REST_API_URL;
-const KV_TOKEN = process.env.KV_REST_API_TOKEN;
+// Upstash Redis REST API (tương thích với Vercel KV)
+// Hỗ trợ cả Vercel KV vars và Upstash direct vars
+const KV_URL   = process.env.KV_REST_API_URL   || process.env.UPSTASH_REDIS_REST_URL;
+const KV_TOKEN = process.env.KV_REST_API_TOKEN  || process.env.UPSTASH_REDIS_REST_TOKEN;
 
 async function kvSet(key, value, exSeconds) {
   if (!KV_URL || !KV_TOKEN) {
-    console.warn('[KV] env vars missing');
+    console.warn('[KV] env vars missing — KV_REST_API_URL hoặc UPSTASH_REDIS_REST_URL chưa set');
     return false;
   }
   try {
-    const args = exSeconds ? `${value}/ex/${exSeconds}` : value;
-    const res = await fetch(`${KV_URL}/set/${encodeURIComponent(key)}/${encodeURIComponent(args)}`, {
-      headers: { Authorization: `Bearer ${KV_TOKEN}` }
-    });
-    const data = await res.json();
-    console.log('[KV] set', key, '→', JSON.stringify(data));
+    // Upstash REST: GET /set/<key>/<value>?ex=<seconds>
+    const expiry = exSeconds ? `?ex=${exSeconds}` : '';
+    const url    = `${KV_URL}/set/${encodeURIComponent(key)}/${encodeURIComponent(value)}${expiry}`;
+    const res    = await fetch(url, { headers: { Authorization: `Bearer ${KV_TOKEN}` } });
+    const data   = await res.json();
+    console.log('[KV] set', key, '=', value, '→', data.result);
     return data.result === 'OK';
   } catch(e) {
     console.warn('[KV] set error:', e.message);
@@ -24,9 +25,8 @@ async function kvSet(key, value, exSeconds) {
 async function kvGet(key) {
   if (!KV_URL || !KV_TOKEN) return null;
   try {
-    const res  = await fetch(`${KV_URL}/get/${encodeURIComponent(key)}`, {
-      headers: { Authorization: `Bearer ${KV_TOKEN}` }
-    });
+    const url  = `${KV_URL}/get/${encodeURIComponent(key)}`;
+    const res  = await fetch(url, { headers: { Authorization: `Bearer ${KV_TOKEN}` } });
     const data = await res.json();
     return data.result;
   } catch(e) {
@@ -35,13 +35,4 @@ async function kvGet(key) {
   }
 }
 
-async function kvDel(key) {
-  if (!KV_URL || !KV_TOKEN) return;
-  try {
-    await fetch(`${KV_URL}/del/${encodeURIComponent(key)}`, {
-      headers: { Authorization: `Bearer ${KV_TOKEN}` }
-    });
-  } catch(e) {}
-}
-
-module.exports = { kvSet, kvGet, kvDel };
+module.exports = { kvSet, kvGet };
