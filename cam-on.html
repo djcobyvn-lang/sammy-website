@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cảm Ơn Bạn | Sammy Trương</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04051A;--card:rgba(13,18,64,.62);
+  --violet:#7B5EA7;--indigo:#4F6BFF;--neon:#A78BFA;
+  --teal:#2DD4BF;--gold:#C9A84C;--gold2:#E8C56A;
+  --text:#E8E8F0;--muted:#9898B8;
+  --border:rgba(167,139,250,.18);
+}
+body{
+  font-family:'Be Vietnam Pro',sans-serif;
+  background:var(--bg) url('/assets/anh-nen-sammy.png') center top/100% auto no-repeat;
+  color:var(--text);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:2rem 1.2rem 4rem;
+  position:relative;overflow:hidden;
+}
+canvas#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.wrap{position:relative;z-index:1;width:100%;max-width:560px;text-align:center;}
+
+/* orb */
+.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;}
+.orb-1{width:420px;height:420px;background:radial-gradient(circle,rgba(123,94,167,.16),transparent 70%);top:-10%;left:-15%;}
+.orb-2{width:360px;height:360px;background:radial-gradient(circle,rgba(45,212,191,.1),transparent 70%);bottom:-5%;right:-10%;}
+
+/* checkmark */
+.check-wrap{
+  width:88px;height:88px;border-radius:50%;margin:0 auto 1.8rem;
+  background:rgba(45,212,191,.12);border:2px solid rgba(45,212,191,.4);
+  display:flex;align-items:center;justify-content:center;
+  animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.check-icon{font-size:2.4rem;}
+
+.tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.68rem;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--teal);margin-bottom:.9rem;
+}
+.tag-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);}
+
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;
+  background:linear-gradient(135deg,#F0ECFF 20%,#C084FC 55%,#2DD4BF 90%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.6rem;line-height:1.1;
+}
+.sub{color:var(--muted);font-size:.95rem;line-height:1.75;margin-bottom:2rem;}
+
+/* order card */
+.order-card{
+  background:var(--card);backdrop-filter:blur(20px);
+  border:1px solid var(--border);border-radius:20px;
+  padding:1.6rem 1.8rem;margin-bottom:2rem;text-align:left;
+  position:relative;overflow:hidden;
+}
+.order-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--violet),var(--indigo),var(--teal));
+}
+.order-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.5rem 0;border-bottom:1px solid rgba(167,139,250,.08);
+  font-size:.85rem;gap:1rem;
+}
+.order-row:last-child{border-bottom:none;padding-bottom:0;}
+.order-label{color:var(--muted);}
+.order-val{color:var(--text);font-weight:500;text-align:right;}
+.order-val.status{color:var(--teal);font-weight:600;}
+
+/* timeline */
+.timeline{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;text-align:left;}
+.tl-item{display:flex;gap:.9rem;align-items:flex-start;}
+.tl-dot{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;
+  background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.28);
+}
+.tl-body{}
+.tl-title{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:.15rem;}
+.tl-desc{font-size:.78rem;color:var(--muted);line-height:1.6;}
+
+/* buttons */
+.btns{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;}
+.btn-primary{
+  background:linear-gradient(135deg,var(--violet),var(--indigo));
+  border:none;border-radius:100px;padding:.75rem 1.8rem;
+  color:#fff;font-family:'Be Vietnam Pro',sans-serif;font-size:.88rem;font-weight:600;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  box-shadow:0 4px 20px rgba(123,94,167,.35);
+  transition:opacity .2s,transform .15s;
+}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px);}
+.btn-zalo{
+  background:transparent;border:1px solid rgba(74,222,128,.4);border-radius:100px;
+  padding:.75rem 1.8rem;color:#4ADE80;
+  font-family:'Be Vietnam Pro',sans-serif;font-size:.88rem;font-weight:500;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:background .2s,border-color .2s;
+}
+.btn-zalo:hover{background:rgba(74,222,128,.1);border-color:#4ADE80;}
+
+@media(max-width:480px){
+  .order-card{padding:1.3rem 1.2rem;}
+  .btns{flex-direction:column;}
+  .btn-primary,.btn-zalo{text-align:center;}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="wrap">
+  <div class="check-wrap"><span class="check-icon">✓</span></div>
+
+  <div class="tag"><span class="tag-dot"></span>Xác Nhận Thành Công<span class="tag-dot"></span></div>
+  <h1>Cảm Ơn Bạn!</h1>
+  <p class="sub">Thanh toán của bạn đã được xác nhận.<br>Sammy sẽ liên hệ sớm nhất có thể.</p>
+
+  <div class="order-card" id="orderCard">
+    <div class="order-row">
+      <span class="order-label">Họ tên</span>
+      <span class="order-val" id="oName">—</span>
+    </div>
+    <div class="order-row">
+      <span class="order-label">Gói dịch vụ</span>
+      <span class="order-val" id="oPkg">—</span>
+    </div>
+    <div class="order-row">
+      <span class="order-label">Trạng thái</span>
+      <span class="order-val status">✓ Đã thanh toán</span>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">✦</div>
+      <div class="tl-body">
+        <div class="tl-title">Ngay bây giờ</div>
+        <div class="tl-desc">Sammy đã nhận được thông tin đơn hàng của bạn.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">📋</div>
+      <div class="tl-body">
+        <div class="tl-title">Trong vòng 24 giờ</div>
+        <div class="tl-desc">Sammy sẽ liên hệ qua Zalo / Email để xác nhận lịch luận giải.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">🔮</div>
+      <div class="tl-body">
+        <div class="tl-title">Sau khi xác nhận lịch</div>
+        <div class="tl-desc">Bài luận giải cá nhân của bạn sẽ được gửi đúng hẹn.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btns">
+    <a href="https://zalo.me/0362676159" target="_blank" class="btn-zalo">💬 Liên hệ Zalo</a>
+    <a href="index.html" class="btn-primary">← Về trang chủ</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  function init(){stars=[];for(let i=0;i<220;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.1,o:Math.random()*.5+.1,speed:Math.random()*.015+.003,phase:Math.random()*Math.PI*2});}
+  function draw(t){ctx.clearRect(0,0,W,H);stars.forEach(s=>{const tw=Math.sin(t*.001*s.speed*1000+s.phase)*.3+.7;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,185,255,${s.o*tw})`;ctx.fill();});requestAnimationFrame(draw);}
+  resize();init();requestAnimationFrame(draw);
+  window.addEventListener('resize',()=>{resize();init();});
+})();
+
+// Đọc thông tin từ sessionStorage
+const name = sessionStorage.getItem('sammy_ten') || '';
+const pkg  = sessionStorage.getItem('sammy_pkg') || '';
+const PKG_NAMES = {
+  'co-ban':'Gói Cơ Bản','nang-cao':'Gói Nâng Cao','dac-biet':'Gói Đặc Biệt',
+  'me-be-nang-cao':'Gói Mẹ & Bé — Nâng Cao','me-be-dac-biet':'Gói Mẹ & Bé — Đặc Biệt',
+  '2-ngay-sinh-nang-cao':'Gói 2 Ngày Sinh — Nâng Cao','2-ngay-sinh-dac-biet':'Gói 2 Ngày Sinh — Đặc Biệt',
+  'truc-tiep-11':'Gói Trực Tiếp 1:1'
+};
+if(name) document.getElementById('oName').textContent = name;
+if(pkg)  document.getElementById('oPkg').textContent  = PKG_NAMES[pkg] || pkg;
+</script>
+</body>
+</html>

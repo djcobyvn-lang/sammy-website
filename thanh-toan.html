@@ -468,16 +468,46 @@ async function handleConfirm() {
     /* Offline — proceed anyway */
   }
 
-  /* Save to sessionStorage as fallback */
+  /* Save to sessionStorage */
   sessionStorage.setItem('sammy_order', JSON.stringify(order));
 
-  /* Show success */
+  /* Show success panel & start polling */
   document.querySelector('.card-header').style.display   = 'none';
   document.getElementById('orderBox').style.display      = 'none';
   document.querySelector('.bank-section').style.display  = 'none';
   document.querySelector('.instructions').style.display  = 'none';
   document.querySelector('.cta-section').style.display   = 'none';
   document.getElementById('successPanel').style.display  = 'block';
+
+  startPolling(order);
+}
+
+/* ─── POLLING — chờ SePay xác nhận ─── */
+function startPolling(order) {
+  const email = order.customerName ? '' : (sessionStorage.getItem('sammy_email') || '');
+  const pkgId = order.packageId || sessionStorage.getItem('sammy_pkg') || '';
+  if (!email && !pkgId) return;
+
+  let attempts = 0;
+  const MAX = 36; // 36 × 5s = 3 phút
+
+  const timer = setInterval(async () => {
+    attempts++;
+    try {
+      const res  = await fetch(`/api/order/check?email=${encodeURIComponent(email)}&pkgId=${encodeURIComponent(pkgId)}`);
+      const data = await res.json();
+      if (data.paid) {
+        clearInterval(timer);
+        window.location.href = 'cam-on.html';
+      }
+    } catch { /* network error — keep polling */ }
+
+    if (attempts >= MAX) {
+      clearInterval(timer);
+      // Sau 3 phút không xác nhận → chuyển sang cam-on vẫn để UX tốt
+      window.location.href = 'cam-on.html';
+    }
+  }, 5000); // kiểm tra mỗi 5 giây
 }
 
 /* ─── STARFIELD ─── */

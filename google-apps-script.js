@@ -32,6 +32,8 @@ function doGet(e) {
     } else if (type === 'check-access') {
       result = checkCourseAccess(data);
       return buildResponse(result);
+    } else if (type === 'check-payment') {
+      return buildResponse(checkPayment(data));
     } else if (type === 'activate-course') {
       result = activateCourse(data);
     } else if (type === 'xac-nhan-ck') {
@@ -178,6 +180,22 @@ function clean(val) {
 // ────────────────────────────────────────────────────
 // Kiểm tra học viên đã thanh toán khoá học chưa
 // ────────────────────────────────────────────────────
+function checkPayment(data) {
+  const email = clean(data.email || '').toLowerCase();
+  const pkgId = clean(data.pkgId || '');
+  const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_DANG_KY);
+  if (!sheet) return { paid: false };
+  const values = sheet.getDataRange().getValues();
+  for (let i = values.length - 1; i >= 1; i--) {
+    const rowEmail  = String(values[i][3] || '').toLowerCase();
+    const rowPkg    = String(values[i][5] || '').toLowerCase();
+    const rowStatus = String(values[i][7] || '');
+    const match = (email && rowEmail === email) || (pkgId && rowPkg.includes(pkgId));
+    if (match && rowStatus === 'Đã Thanh Toán ✓') return { paid: true };
+  }
+  return { paid: false };
+}
+
 function checkCourseAccess(data) {
   const email = clean(data.email || '').toLowerCase();
   if (!email) return { activated: false };
