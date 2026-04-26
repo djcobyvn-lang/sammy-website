@@ -1,5 +1,6 @@
 const { gasCall }                                          = require('../_lib/gas');
 const { sendPaymentConfirmEmail, sendActivationEmail }     = require('../_lib/mailer');
+const { kvSet }                                            = require('../_lib/kv');
 
 const SEPAY_APIKEY = process.env.SEPAY_APIKEY || '';
 
@@ -102,8 +103,14 @@ module.exports = async (req, res) => {
 
   console.log('[SePay] → Luận giải, gói:', matchedCode);
 
-  // Cập nhật GAS: đánh dấu đã thanh toán
-  await gasCall({ formType: 'update-status', pkgId: matchedPkg.id, status: 'Đã Thanh Toán ✓' });
+  // 1. Lưu vào Vercel KV ngay lập tức — browser sẽ detect trong vài giây
+  await kvSet(`paid:${matchedPkg.id}`, '1', 86400); // hết hạn 24 giờ
+  console.log('[SePay] ✓ KV set paid:', matchedPkg.id);
+
+  // 2. Cố gắng cập nhật GAS (best-effort, có thể fail do network)
+  gasCall({ formType: 'update-status', pkgId: matchedPkg.id, status: 'Đã Thanh Toán ✓' })
+    .then(r => console.log('[GAS] update-status:', JSON.stringify(r)))
+    .catch(e => console.warn('[GAS] update-status failed (non-blocking):', e.message));
 
   // Trích tên khách từ nội dung CK để gửi email
   const customerName = extractName(d.content || '', matchedCode);

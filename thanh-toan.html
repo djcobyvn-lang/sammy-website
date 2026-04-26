@@ -646,15 +646,15 @@ function startPolling(order) {
   _pollTimer = setInterval(async () => {
     attempts++;
     try {
-      // Kiểm tra thanh toán: gọi GAS trực tiếp từ browser (không qua server)
-      // Browser ↔ GAS luôn hoạt động (GAS có CORS header cho GET)
-      const gasPayload = encodeURIComponent(JSON.stringify({
-        formType: 'check-payment', email, pkgId: pId
-      }));
-      const gasRes  = await fetch(GAS_URL + '?payload=' + gasPayload);
-      const gasData = await gasRes.json();
-      if (gasData.paid) {
+      // Kiểm tra qua Vercel KV (nhanh, đáng tin cậy)
+      const checkRes  = await fetch(`/api/order/check?pkgId=${encodeURIComponent(pId)}&email=${encodeURIComponent(email)}`);
+      const checkData = await checkRes.json();
+      if (checkData.paid) {
         clearInterval(_pollTimer);
+        // Cập nhật GAS trực tiếp từ browser (browser → GAS luôn work)
+        fetch(GAS_URL + '?payload=' + encodeURIComponent(JSON.stringify({
+          formType: 'update-status', pkgId: pId, status: 'Đã Thanh Toán ✓'
+        }))).catch(() => {});
         const icon = document.querySelector('.success-icon');
         if (icon) icon.textContent = '✅';
         const title = document.querySelector('.success-title');

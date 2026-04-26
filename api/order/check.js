@@ -1,17 +1,14 @@
-const { gasCall } = require('../_lib/gas');
+const { kvGet } = require('../_lib/kv');
 
 module.exports = async (req, res) => {
-  const { email, pkgId } = req.query;
-  if (!email && !pkgId)
+  const { pkgId, email } = req.query;
+  if (!pkgId && !email)
     return res.status(400).json({ paid: false });
 
-  // Thử gọi GAS từ server
-  try {
-    const result = await gasCall({ formType: 'check-payment', email, pkgId });
-    console.log('[check] GAS result:', JSON.stringify(result));
-    return res.json({ paid: result.paid === true });
-  } catch(e) {
-    console.warn('[check] GAS failed:', e.message);
-    return res.json({ paid: false });
-  }
+  // Kiểm tra KV store — được set bởi webhook khi SePay xác nhận
+  const key   = `paid:${pkgId || 'unknown'}`;
+  const value = await kvGet(key);
+
+  console.log('[check] key:', key, '→', value);
+  return res.json({ paid: value === '1' });
 };
