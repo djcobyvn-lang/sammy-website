@@ -1471,7 +1471,19 @@ function nmRender(text){
   }).join('');
 }
 function nmOpenModal(title,text){
-  if(!text)return;
+  if(!window._nmMeanings){
+    document.getElementById('nmModalTitle').textContent='Đang tải dữ liệu...';
+    document.getElementById('nmModalBody').innerHTML='<p class="mp" style="text-align:center;padding:1rem;">Vui lòng thử lại sau vài giây.</p>';
+    document.getElementById('nmModal').classList.add('open');
+    nmLoadMeanings();
+    return;
+  }
+  if(!text){
+    document.getElementById('nmModalTitle').textContent=title;
+    document.getElementById('nmModalBody').innerHTML='<p class="mp" style="text-align:center;color:var(--muted);padding:1rem;">Chưa có dữ liệu ý nghĩa cho chỉ số này.</p>';
+    document.getElementById('nmModal').classList.add('open');
+    return;
+  }
   document.getElementById('nmModalTitle').textContent=title;
   document.getElementById('nmModalBody').innerHTML=nmRender(text);
   document.getElementById('nmModal').classList.add('open');
@@ -1713,7 +1725,8 @@ function nmRenderAll(r){
     <div class="nm-footer">Giải mã ngày sinh – Làm chủ cuộc đời</div>`;
 }
 
-/* ── INIT MEANINGS load on first tool open ── */
+/* ── Load meanings immediately on page load ── */
+nmLoadMeanings();
 </script>
 </body>
 </html>
