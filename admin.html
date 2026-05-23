@@ -299,6 +299,111 @@ option{background:var(--card);color:var(--txt);}
   font-size:1.2rem;cursor:pointer;padding:.25rem;
 }
 
+/* ── NUMEROLOGY TOOL ── */
+.nm-tool-item{
+  position:relative;display:flex;align-items:center;gap:.65rem;
+  padding:.65rem .75rem;border-radius:10px;cursor:pointer;
+  border:1px solid transparent;transition:background .15s,border-color .15s;
+}
+.nm-tool-item:hover{background:rgba(123,94,167,.12);border-color:var(--border);}
+.nm-tool-item.active{background:rgba(123,94,167,.2);border-color:rgba(167,139,250,.45);}
+.nm-tool-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:2px;border-radius:2px;background:var(--glow);}
+
+.nm-tab-btn{
+  padding:.4rem .9rem;border-radius:9px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);
+  font-family:'Be Vietnam Pro',sans-serif;font-size:.78rem;cursor:pointer;transition:all .15s;
+}
+.nm-tab-btn.active{background:rgba(123,94,167,.2);border-color:rgba(167,139,250,.4);color:var(--glow);}
+
+/* Document layout */
+.nm-doc{font-size:.875rem;line-height:1.7;}
+.nm-doc-header{padding-bottom:.9rem;border-bottom:1px solid var(--border);margin-bottom:1rem;}
+.nm-doc-badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem;}
+.nm-doc-name{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;color:var(--txt);letter-spacing:.06em;text-transform:uppercase;}
+.nm-doc-meta{font-size:.75rem;color:var(--muted);margin-top:.2rem;}
+
+.nm-divider{border:none;border-top:1px solid rgba(123,94,167,.18);margin:.85rem 0;}
+.nm-divider-light{border:none;border-top:1px solid rgba(123,94,167,.08);margin:.55rem 0;}
+
+/* Number value (clickable) */
+.nm-num{
+  font-weight:700;color:var(--glow);
+  border-bottom:1.5px dotted rgba(167,139,250,.45);
+  cursor:pointer;transition:color .15s;display:inline;
+}
+.nm-num:hover{color:var(--teal);}
+.nm-num-xl{font-size:1.55rem;}
+.nm-num-lg{font-size:1.15rem;}
+.nm-num-md{font-size:.95rem;}
+.nm-num-sm{font-size:.85rem;}
+.nm-raw{font-size:.7rem;color:rgba(152,152,184,.5);margin-left:.15rem;}
+
+/* Field label */
+.nm-lbl{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+
+/* Row layouts */
+.nm-row-2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 2rem;align-items:baseline;}
+.nm-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem 1.2rem;align-items:baseline;}
+.nm-field{display:flex;align-items:baseline;gap:.4rem;flex-wrap:wrap;}
+.nm-col-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+
+/* Matrix */
+.nm-matrix-wrap{display:flex;flex-direction:column;align-items:center;gap:.5rem;}
+.nm-matrix-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-align:center;}
+.nm-matrix-sublabel{font-size:.6rem;color:rgba(152,152,184,.38);text-align:center;margin-top:.1rem;}
+.nm-grid{display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:3px;}
+.nm-cell{
+  border:1px solid rgba(123,94,167,.2);border-radius:6px;
+  background:transparent;cursor:default;transition:background .15s;
+  position:relative;width:52px;height:52px;
+}
+.nm-cell.has-val{background:rgba(45,212,191,.07);border-color:rgba(45,212,191,.35);cursor:pointer;}
+.nm-cell.has-val:hover{background:rgba(45,212,191,.14);}
+.nm-cell.oc{border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.05);}
+.nm-cell-digit{font-size:1.15rem;font-weight:700;color:var(--teal);line-height:1;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.nm-cell-count{font-size:.55rem;font-weight:600;color:rgba(45,212,191,.65);line-height:1;position:absolute;top:4px;right:5px;}
+.nm-cell-empty{font-size:.78rem;color:rgba(152,152,184,.15);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+
+/* Year/month lists */
+.nm-year-row{display:flex;align-items:center;gap:.6rem;padding:.4rem 0;border-bottom:1px solid rgba(123,94,167,.08);}
+.nm-year-row:last-child{border-bottom:none;}
+.nm-badge-year{font-size:.62rem;font-weight:600;padding:.12rem .5rem;border-radius:20px;background:rgba(123,94,167,.28);color:var(--glow);border:1px solid rgba(167,139,250,.35);}
+.nm-badge-cur{font-size:.62rem;font-weight:600;padding:.12rem .5rem;border-radius:20px;background:rgba(45,212,191,.18);color:var(--teal);border:1px solid rgba(45,212,191,.35);}
+.nm-month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;}
+.nm-month-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.35rem .6rem;border-radius:8px;cursor:pointer;
+  border:1px solid rgba(123,94,167,.12);background:rgba(4,5,26,.5);
+  transition:border-color .15s;font-size:.75rem;
+}
+.nm-month-item:hover{border-color:rgba(167,139,250,.3);}
+.nm-month-item.cur{background:rgba(45,212,191,.09);border-color:rgba(45,212,191,.35);}
+.nm-month-item .nm-month-lbl{color:var(--muted);}
+.nm-month-item.cur .nm-month-lbl{color:var(--teal);}
+.nm-month-item .nm-month-val{font-weight:700;color:var(--glow);}
+.nm-month-item.cur .nm-month-val{color:var(--teal);}
+
+/* Peak / challenge list */
+.nm-peak-item{display:flex;align-items:center;gap:.55rem;padding:.45rem 0;border-bottom:1px solid rgba(123,94,167,.08);}
+.nm-peak-item:last-child{border-bottom:none;}
+.nm-peak-dot{width:7px;height:7px;border-radius:50%;background:var(--grad);flex-shrink:0;}
+.nm-peak-dot.gold{background:linear-gradient(135deg,#C9A84C,#e0c068);}
+.nm-section-title{font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:.65rem;}
+.nm-footer{text-align:center;font-size:.68rem;color:rgba(152,152,184,.28);font-style:italic;padding-top:1rem;margin-top:.5rem;border-top:1px solid rgba(123,94,167,.1);}
+
+/* Modal */
+.nm-modal{position:fixed;inset:0;z-index:9999;background:rgba(4,5,26,.88);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem;}
+.nm-modal.open{display:flex;}
+.nm-modal-inner{background:#080C2E;border:1px solid rgba(123,94,167,.38);border-radius:16px;width:100%;max-width:520px;max-height:80vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.7);}
+.nm-modal-head{position:sticky;top:0;background:#080C2E;display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.15rem;border-bottom:1px solid rgba(123,94,167,.18);border-radius:16px 16px 0 0;}
+.nm-modal-title{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--glow);}
+.nm-modal-close{background:none;border:1px solid var(--border);border-radius:7px;color:var(--muted);cursor:pointer;padding:.2rem .5rem;font-size:.8rem;}
+.nm-modal-close:hover{border-color:var(--glow);color:var(--txt);}
+.nm-modal-body{padding:.9rem 1.15rem 1.2rem;}
+.nm-modal-body .mh{font-weight:700;color:var(--teal);margin-bottom:4px;font-size:.78rem;letter-spacing:.04em;}
+.nm-modal-body .mp{color:var(--txt);line-height:1.8;margin-bottom:.75rem;font-size:.875rem;}
+
 /* ── RESPONSIVE ── */
 @media(min-width:960px){
   .topbar-name{display:block;}
@@ -316,7 +421,39 @@ option{background:var(--card);color:var(--txt);}
   .f-grid-2,.f-grid-3{grid-template-columns:1fr;}
   .editor-toolbar{flex-direction:column;align-items:flex-start;}
   .toolbar-actions{width:100%;justify-content:flex-end;}
+
+  /* ── Numerology mobile ── */
+  .nm-row-2,.nm-row-3{grid-template-columns:1fr!important;gap:.4rem;}
+  .nm-col-2{grid-template-columns:1fr!important;gap:1rem;}
+  .nm-month-grid{grid-template-columns:repeat(2,1fr);}
+  .nm-field{flex-wrap:wrap;}
+
+  /* Matrix: stack vertically */
+  #nmMatrixRow{grid-template-columns:1fr!important;padding:.75rem 0;}
+  .nm-grid{
+    grid-template-columns:repeat(3,46px)!important;
+    grid-template-rows:repeat(3,46px)!important;
+  }
+  .nm-cell{width:46px!important;height:46px!important;}
+
+  /* Peaks row: stack */
+  #nmPeaksRow{grid-template-columns:1fr!important;}
+
+  /* Tab toolbar wrap */
+  .editor-wrap{padding:1rem .85rem 3rem;}
+  #nmTabBtns{flex-wrap:wrap;gap:.35rem;}
+
+  /* Numerology form */
+  #nmFormCard .f-grid-3{grid-template-columns:1fr 1fr 1fr!important;}
+
+  /* Doc layout tighter */
+  .nm-doc-name{font-size:1.1rem;}
+  .nm-num-xl{font-size:1.25rem;}
 }
+.analytics-row{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;transition:border-color .2s;}
+.analytics-row:hover{border-color:var(--border-h);}
+#analyticsStats{grid-template-columns:repeat(2,1fr);}
+@media(min-width:600px){#analyticsStats{grid-template-columns:repeat(4,1fr);}}
 </style>
 </head>
 <body>
@@ -355,6 +492,27 @@ option{background:var(--card);color:var(--txt);}
         <div class="post-list" id="postList"></div>
       </div>
 
+      <!-- CÔNG CỤ -->
+      <div>
+        <div class="sidebar-section-head">
+          <span class="sidebar-section-title">Công Cụ</span>
+        </div>
+        <div class="nm-tool-item" id="navNumerology" onclick="switchView('numerology')">
+          <span style="font-size:1rem;">✦</span>
+          <div>
+            <div style="font-size:.8rem;font-weight:500;color:var(--txt);">Thần Số Học</div>
+            <div style="font-size:.68rem;color:var(--muted);">25 chỉ số Pythagoras</div>
+          </div>
+        </div>
+        <div class="nm-tool-item" id="navAnalytics" onclick="switchView('analytics')">
+          <span style="font-size:1rem;">📊</span>
+          <div>
+            <div style="font-size:.8rem;font-weight:500;color:var(--txt);">Lịch Sử Chat</div>
+            <div style="font-size:.68rem;color:var(--muted);">Analytics & hội thoại</div>
+          </div>
+        </div>
+      </div>
+
       <div class="sidebar-stats" id="sidebarStats"></div>
 
     </div>
@@ -363,6 +521,18 @@ option{background:var(--card);color:var(--txt);}
   <!-- MAIN -->
   <main class="main" id="mainEditor">
     <div class="editor-wrap">
+
+      <!-- Token warning banner -->
+      <div id="tokenBanner" style="display:none;margin-bottom:1rem;padding:.75rem 1rem;border-radius:10px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.28);display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;">
+        <span style="font-size:.8rem;color:rgba(251,191,36,0.9);">⚠️ Bài viết đang lưu cục bộ — chưa hiện trên website công khai. <strong style="color:#fff;">Đăng xuất và đăng nhập lại</strong> để kích hoạt đồng bộ.</span>
+        <button onclick="document.getElementById('logoutBtn').click()" style="background:rgba(251,191,36,0.18);border:1px solid rgba(251,191,36,0.35);border-radius:8px;color:rgba(251,191,36,0.9);font-family:'Be Vietnam Pro',sans-serif;font-size:.75rem;padding:.35rem .85rem;cursor:pointer;white-space:nowrap;">Đăng nhập lại →</button>
+      </div>
+
+      <!-- Sync all banner (hiện sau khi có token) -->
+      <div id="syncBanner" style="display:none;margin-bottom:1rem;padding:.75rem 1rem;border-radius:10px;background:rgba(45,212,191,0.07);border:1px solid rgba(45,212,191,0.25);display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;">
+        <span id="syncBannerText" style="font-size:.8rem;color:rgba(45,212,191,0.85);">☁️ Đã kết nối cloud — đồng bộ bài viết lên website công khai.</span>
+        <button id="syncAllBtn" onclick="syncAllArticles()" style="background:rgba(45,212,191,0.14);border:1px solid rgba(45,212,191,0.32);border-radius:8px;color:var(--teal);font-family:'Be Vietnam Pro',sans-serif;font-size:.75rem;padding:.35rem .85rem;cursor:pointer;white-space:nowrap;">⟳ Đồng bộ tất cả bài</button>
+      </div>
 
       <!-- Toolbar -->
       <div class="editor-toolbar">
@@ -502,6 +672,115 @@ option{background:var(--card);color:var(--txt);}
 
     </div>
   </main>
+
+  <!-- NUMEROLOGY MAIN PANEL -->
+  <main class="main" id="mainNumerology" style="display:none">
+    <div class="editor-wrap" style="max-width:960px;">
+
+      <div class="editor-toolbar">
+        <div class="editor-title-area">
+          <span class="editor-label">✦ Thần Số Học Pythagoras</span>
+          <div class="editor-status"><div class="status-dot" id="nmStatusDot"></div><span id="nmStatusTxt">Nhập tên và ngày sinh</span></div>
+        </div>
+        <div class="toolbar-actions">
+          <div style="display:flex;gap:.4rem;" id="nmTabBtns" style="display:none">
+            <button class="nm-tab-btn active" id="nmTab1Btn" onclick="nmShowTab(1)">Bảng Tính</button>
+            <button class="nm-tab-btn" id="nmTab2Btn" onclick="nmShowTab(2)">Chu Kỳ</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="nm-card" id="nmFormCard">
+        <div class="nm-card-title">📋 Thông Tin Tra Cứu</div>
+        <div class="f-grid" style="gap:.85rem;">
+          <div class="f-group">
+            <label class="f-label">Họ và tên đầy đủ <span class="req">*</span></label>
+            <input class="f-input" id="nmName" type="text" placeholder="Nguyễn Thị Lan">
+          </div>
+          <div class="f-grid f-grid-3" style="gap:.75rem;">
+            <div class="f-group">
+              <label class="f-label">Ngày sinh <span class="req">*</span></label>
+              <input class="f-input" id="nmDay" type="number" min="1" max="31" placeholder="15">
+            </div>
+            <div class="f-group">
+              <label class="f-label">Tháng <span class="req">*</span></label>
+              <input class="f-input" id="nmMonth" type="number" min="1" max="12" placeholder="8">
+            </div>
+            <div class="f-group">
+              <label class="f-label">Năm <span class="req">*</span></label>
+              <input class="f-input" id="nmYear" type="number" min="1900" max="2100" placeholder="1990">
+            </div>
+          </div>
+          <div>
+            <button class="btn-publish" id="nmCalcBtn" onclick="nmCalculate()" style="width:100%;">✦ Tính Toán</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULT AREA -->
+      <div id="nmResults" style="display:none">
+
+        <!-- TAB 1: Bảng tính -->
+        <div id="nmTab1">
+          <div id="nmSubject" style="margin-bottom:0;"></div>
+          <div id="nm4Core" style="background:rgba(4,5,26,.55);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:.6rem;"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.6rem;background:rgba(4,5,26,.55);border:1px solid var(--border);border-radius:12px;" id="nmMatrixRow"></div>
+          <div style="display:grid;grid-template-columns:1fr;gap:.6rem;" id="nmSecondary">
+            <div style="background:rgba(4,5,26,.55);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;"></div>
+          </div>
+          <div id="nmArrows" style="display:none;"></div>
+          <div id="nmDebt" style="display:none;"></div>
+          <div id="nmMisc" style="display:none;"></div>
+        </div>
+
+        <!-- TAB 2: Chu kỳ -->
+        <div id="nmTab2" style="display:none">
+          <div style="background:rgba(4,5,26,.55);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:.6rem;">
+            <div id="nmYears"></div>
+            <div id="nmMonths"></div>
+          </div>
+          <div style="background:rgba(4,5,26,.55);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:.6rem;" id="nmPeaksRow"></div>
+          <div style="background:rgba(4,5,26,.55);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;" id="nmPhases"></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ANALYTICS PANEL -->
+  <main class="main" id="mainAnalytics" style="display:none;padding:2rem;">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.8rem;">
+        <div>
+          <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:.3rem;">📊 Lịch Sử Chat</h2>
+          <p style="font-size:.8rem;color:var(--muted);">Thống kê và hội thoại với khách hàng qua chatbot</p>
+        </div>
+        <button onclick="loadAnalytics(0)" style="background:var(--accent);color:#fff;border:none;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.82rem;">↻ Tải lại</button>
+      </div>
+
+      <!-- Stats row -->
+      <div id="analyticsStats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.8rem;"></div>
+
+      <!-- Session list -->
+      <div id="analyticsTable"></div>
+
+      <!-- Pagination -->
+      <div id="analyticsPager" style="display:flex;gap:.5rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;"></div>
+    </div>
+  </main>
+
+</div>
+
+<!-- Numerology modal -->
+<div class="nm-modal" id="nmModal" onclick="if(event.target===this)nmCloseModal()">
+  <div class="nm-modal-inner">
+    <div class="nm-modal-head">
+      <span class="nm-modal-title" id="nmModalTitle">—</span>
+      <button class="nm-modal-close" onclick="nmCloseModal()">✕</button>
+    </div>
+    <div class="nm-modal-body" id="nmModalBody"></div>
+  </div>
 </div>
 
 <!-- Toast -->
@@ -512,13 +791,35 @@ option{background:var(--card);color:var(--txt);}
 
 <script>
 /* ── AUTH ── */
-if(!sessionStorage.getItem('admin_auth')){
-  document.getElementById('authGuard').style.display='flex';
-  document.querySelector('.topbar').style.display='none';
-  document.querySelector('.admin-layout').style.display='none';
-}
+(function checkAdminAuth(){
+  if(!localStorage.getItem('admin_auth')){
+    document.getElementById('authGuard').style.display='flex';
+    document.querySelector('.topbar').style.display='none';
+    document.querySelector('.admin-layout').style.display='none';
+    return;
+  }
+  // Kiểm tra JWT token còn hiệu lực không
+  const token=localStorage.getItem('admin_token');
+  if(token){
+    try{
+      const payload=JSON.parse(atob(token.split('.')[1]));
+      if(payload.exp && Date.now()/1000 > payload.exp){
+        // Token hết hạn → xóa và yêu cầu đăng nhập lại
+        localStorage.removeItem('admin_auth');
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_email');
+        document.getElementById('authGuard').style.display='flex';
+        document.querySelector('.topbar').style.display='none';
+        document.querySelector('.admin-layout').style.display='none';
+      }
+    }catch(e){}
+  }
+})();
+
 document.getElementById('logoutBtn').addEventListener('click',()=>{
-  sessionStorage.removeItem('admin_auth');
+  localStorage.removeItem('admin_auth');
+  localStorage.removeItem('admin_token');
+  localStorage.removeItem('admin_email');
   window.location.href='admin-login.html';
 });
 
@@ -584,6 +885,10 @@ function loadPost(id){
   const p=posts.find(x=>x.id===id);
   if(!p) return;
   currentId=id;
+  // khi mở bài viết, chuyển về editor view
+  document.getElementById('mainEditor').style.display='';
+  document.getElementById('mainNumerology').style.display='none';
+  document.getElementById('navNumerology').classList.remove('active');
   document.getElementById('fTitle').value=p.title||'';
   document.getElementById('fSlug').value=p.slug||'';
   document.getElementById('fExcerpt').value=p.excerpt||'';
@@ -659,10 +964,18 @@ function saveCurrentPost(status){
   renderSidebar();
   setStatus('saved');
   dirty=false;
+  // Đồng bộ lên cloud
+  syncArticleToCloud(posts.find(p=>p.id===currentId));
 }
 
 function deletePost(id){
   if(!confirm('Xóa bài viết này?')) return;
+  const token=localStorage.getItem('admin_token');
+  if(token){
+    fetch('/api/admin/articles',{method:'DELETE',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({id})})
+      .then(()=>toast('🗑️ Đã xóa và đồng bộ','warn'))
+      .catch(()=>toast('🗑️ Đã xóa (offline)','warn'));
+  }
   posts=posts.filter(p=>p.id!==id);
   savePosts(posts);
   if(currentId===id){
@@ -787,9 +1100,620 @@ setInterval(()=>{
 /* ── SET TODAY AS DEFAULT DATE ── */
 document.getElementById('fDate').value=new Date().toISOString().split('T')[0];
 
+/* ── CLOUD SYNC ── */
+async function syncArticleToCloud(article){
+  if(!article) return;
+  const email=localStorage.getItem('admin_email')||'';
+
+  // Sync toàn bộ published (đảm bảo KV luôn đúng)
+  const published=posts.filter(p=>p.status==='published');
+  try{
+    const res=await fetch('/api/admin/sync-articles',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,articles:published})
+    });
+    const d=await res.json();
+    if(res.ok && d.success){
+      if(article.status==='published'){
+        toast('☁️ Bài viết đã hiện trên website ('+d.count+' bài)','success');
+        const b=document.getElementById('syncBannerText');
+        if(b) b.textContent='☁️ Đồng bộ thành công — bài viết đã hiện trên website công khai.';
+      }
+      return;
+    }
+    toast('⚠️ Lỗi đồng bộ: '+(d.error||'unknown'),'warn');
+  }catch(e){
+    toast('⚠️ Mất kết nối — bài đã lưu cục bộ','warn');
+  }
+}
+
+async function syncAllArticles(){
+  const published=posts.filter(p=>p.status==='published');
+  if(!published.length){ toast('Không có bài đã đăng nào để đồng bộ','warn'); return; }
+
+  const btn=document.getElementById('syncAllBtn');
+  btn.textContent='Đang đồng bộ...';
+  btn.disabled=true;
+
+  const email=localStorage.getItem('admin_email')||'';
+  const token=localStorage.getItem('admin_token')||'';
+
+  try{
+    // Thử endpoint đơn giản trước (không cần JWT)
+    const res=await fetch('/api/admin/sync-articles',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,articles:published})
+    });
+    const d=await res.json();
+    if(res.ok && d.success){
+      document.getElementById('syncBannerText').textContent=`☁️ Đã đồng bộ ${d.count} bài lên website công khai.`;
+      toast(`☁️ Đồng bộ ${d.count} bài thành công`,'success');
+      btn.textContent='⟳ Đồng bộ tất cả bài';
+      btn.disabled=false;
+      return;
+    }
+    // Fallback: dùng JWT nếu có
+    if(token){
+      let ok=0;
+      for(const a of published){
+        const r=await fetch('/api/admin/articles',{
+          method:'POST',
+          headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+          body:JSON.stringify(a)
+        });
+        if(r.ok) ok++;
+      }
+      document.getElementById('syncBannerText').textContent=`☁️ Đã đồng bộ ${ok}/${published.length} bài lên website công khai.`;
+      toast(`☁️ Đồng bộ ${ok}/${published.length} bài thành công`,'success');
+    } else {
+      toast('⚠️ '+d.error,'warn');
+    }
+  }catch(e){
+    toast('⚠️ Lỗi kết nối','warn');
+  }
+  btn.textContent='⟳ Đồng bộ tất cả bài';
+  btn.disabled=false;
+}
+
+function updateSyncBanners(){
+  const email=localStorage.getItem('admin_email');
+  const tokenBanner=document.getElementById('tokenBanner');
+  const syncBanner=document.getElementById('syncBanner');
+  if(!tokenBanner||!syncBanner) return;
+  // Không cần JWT nữa — chỉ cần email
+  tokenBanner.style.display='none';
+  syncBanner.style.display=email?'flex':'none';
+}
+
 /* ── INIT ── */
 renderSidebar();
 if(posts.length) loadPost(posts[0].id);
+updateSyncBanners();
+
+/* ════════════════════════════════════════════════════════════
+   VIEW SWITCHER
+════════════════════════════════════════════════════════════ */
+function switchView(view){
+  document.getElementById('mainEditor').style.display     = view==='editor'    ? '' : 'none';
+  document.getElementById('mainNumerology').style.display = view==='numerology' ? '' : 'none';
+  document.getElementById('mainAnalytics').style.display  = view==='analytics'  ? '' : 'none';
+  document.getElementById('navNumerology').classList.toggle('active', view==='numerology');
+  document.getElementById('navAnalytics').classList.toggle('active', view==='analytics');
+  document.querySelectorAll('.post-item').forEach(el=>el.classList.toggle('active', view==='editor'&&el.dataset.id===currentId));
+  if(view==='numerology' && !window._nmMeanings) nmLoadMeanings();
+  if(view==='analytics') loadAnalytics(0);
+  if(window.innerWidth<768) closeSidebar();
+}
+document.getElementById('mainNumerology').addEventListener('click',()=>{
+  if(window.innerWidth<768) closeSidebar();
+});
+
+/* ════════════════════════════════════════════════════════════
+   ANALYTICS
+════════════════════════════════════════════════════════════ */
+var _analyticsPage = 0;
+
+function loadAnalytics(page) {
+  _analyticsPage = page;
+  var email = window._adminEmail || localStorage.getItem('admin_email') || '';
+  if (!email) { document.getElementById('analyticsTable').innerHTML='<p style="color:var(--muted);text-align:center;padding:2rem;">Cần đăng nhập để xem analytics.</p>'; return; }
+
+  document.getElementById('analyticsTable').innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem;">Đang tải...</p>';
+
+  fetch('/api/track-chat?email='+encodeURIComponent(email)+'&page='+page)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if(data.error){ document.getElementById('analyticsTable').innerHTML='<p style="color:#f87171;text-align:center;padding:2rem;">'+data.error+'</p>'; return; }
+      renderAnalyticsStats(data);
+      renderAnalyticsSessions(data.sessions);
+      renderAnalyticsPager(data.total, data.limit, page);
+    })
+    .catch(function(e){ document.getElementById('analyticsTable').innerHTML='<p style="color:#f87171;padding:2rem;">Lỗi kết nối.</p>'; });
+}
+
+function renderAnalyticsStats(data) {
+  var sessions = data.sessions || [];
+  var total = data.total || 0;
+  var today = new Date(); today.setHours(0,0,0,0);
+  var todayCount = sessions.filter(function(s){ return s.ts >= today.getTime(); }).length;
+  var countries = [...new Set(sessions.map(function(s){ return s.country; }).filter(Boolean))];
+  var regCount  = sessions.filter(function(s){ return s.registered; }).length;
+
+  var cards = [
+    { label:'Tổng phiên chat', value: total, icon:'💬' },
+    { label:'Hôm nay',         value: todayCount, icon:'📅' },
+    { label:'Quốc gia', value: countries.join(', ')||'—', icon:'🌏', small:true },
+    { label:'Đã đăng ký',     value: regCount, icon:'✅' },
+  ];
+  document.getElementById('analyticsStats').innerHTML = cards.map(function(c){
+    return '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;">'
+      + '<div style="font-size:1.4rem;margin-bottom:.4rem;">'+c.icon+'</div>'
+      + '<div style="font-size:'+(c.small?'.8rem':'1.5rem')+';font-weight:700;color:var(--txt);">'+c.value+'</div>'
+      + '<div style="font-size:.72rem;color:var(--muted);margin-top:.2rem;">'+c.label+'</div>'
+      + '</div>';
+  }).join('');
+}
+
+function renderAnalyticsSessions(sessions) {
+  if(!sessions||!sessions.length){
+    document.getElementById('analyticsTable').innerHTML='<p style="color:var(--muted);text-align:center;padding:3rem;">Chưa có dữ liệu chat.</p>';
+    return;
+  }
+
+  var FLAG = { VN:'🇻🇳', US:'🇺🇸', TH:'🇹🇭', SG:'🇸🇬', AU:'🇦🇺', GB:'🇬🇧', KR:'🇰🇷', JP:'🇯🇵', FR:'🇫🇷', DE:'🇩🇪' };
+
+  var rows = sessions.map(function(s,i){
+    var dt = new Date(s.ts);
+    var dateStr = dt.toLocaleDateString('vi-VN')+' '+dt.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});
+    var flag = FLAG[s.country]||'🌐';
+    var loc = flag+' '+(s.city&&s.city!=='—'?s.city+', ':'')+(s.country||'—');
+    var device = s.mobile ? '📱 Mobile' : '💻 Desktop';
+    var svcs = (s.services||[]).map(function(sid){ return '<span style="background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.25);border-radius:5px;padding:1px 6px;font-size:.7rem;">'+sid+'</span>'; }).join(' ');
+    var msgPreview = '';
+    if(s.messages&&s.messages.length){
+      var firstUser = s.messages.find(function(m){ return m.role==='user'; });
+      if(firstUser) msgPreview = '<div style="font-size:.75rem;color:var(--muted);margin-top:.3rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px;">'+escAdmin(firstUser.content.slice(0,80))+'</div>';
+    }
+    return '<div class="analytics-row" id="arow-'+i+'">'
+      + '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;cursor:pointer;" onclick="toggleConvo('+i+')">'
+      + '<div style="flex:1;min-width:0;">'
+      + '<div style="font-size:.82rem;font-weight:600;color:var(--txt);">'+dateStr+'</div>'
+      + msgPreview
+      + (svcs?'<div style="margin-top:.4rem;">'+svcs+'</div>':'')
+      + '</div>'
+      + '<div style="flex-shrink:0;text-align:right;font-size:.78rem;color:var(--muted);">'
+      + '<div>'+loc+'</div>'
+      + '<div>'+device+'</div>'
+      + '<div>'+s.msgCount+' tin nhắn</div>'
+      + '</div>'
+      + '<div style="color:var(--muted);font-size:.9rem;flex-shrink:0;" id="arrow-'+i+'">▾</div>'
+      + '</div>'
+      + '<div id="convo-'+i+'" style="display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:.8rem;">'
+      + renderConvo(s.messages)
+      + '</div>'
+      + '</div>';
+  }).join('');
+
+  document.getElementById('analyticsTable').innerHTML =
+    '<div style="display:flex;flex-direction:column;gap:.75rem;">'+rows+'</div>';
+}
+
+function renderConvo(messages) {
+  if(!messages||!messages.length) return '<p style="color:var(--muted);font-size:.8rem;">Không có tin nhắn.</p>';
+  return messages.map(function(m){
+    var isUser = m.role==='user';
+    var bg = isUser ? 'rgba(123,94,167,.18)' : 'rgba(13,18,64,.5)';
+    var align = isUser ? 'flex-end' : 'flex-start';
+    var label = isUser ? '👤 Khách' : '🤖 Bot';
+    return '<div style="display:flex;flex-direction:column;align-items:'+align+';margin-bottom:.6rem;">'
+      + '<div style="font-size:.68rem;color:var(--muted);margin-bottom:.2rem;">'+label+'</div>'
+      + '<div style="background:'+bg+';border-radius:10px;padding:.5rem .8rem;max-width:85%;font-size:.8rem;line-height:1.5;white-space:pre-wrap;">'+escAdmin(m.content)+'</div>'
+      + '</div>';
+  }).join('');
+}
+
+function toggleConvo(i) {
+  var convo = document.getElementById('convo-'+i);
+  var arrow = document.getElementById('arrow-'+i);
+  var open = convo.style.display === 'none';
+  convo.style.display = open ? '' : 'none';
+  arrow.textContent = open ? '▴' : '▾';
+}
+
+function renderAnalyticsPager(total, limit, page) {
+  var pages = Math.ceil(total/limit);
+  if(pages<=1){ document.getElementById('analyticsPager').innerHTML=''; return; }
+  var btns = '';
+  for(var p=0;p<Math.min(pages,20);p++){
+    var active = p===page ? 'background:var(--accent);color:#fff;' : 'background:var(--card);color:var(--txt);';
+    btns += '<button onclick="loadAnalytics('+p+')" style="'+active+'border:1px solid var(--border);padding:.35rem .75rem;border-radius:7px;cursor:pointer;font-size:.8rem;">'+( p+1)+'</button>';
+  }
+  document.getElementById('analyticsPager').innerHTML = btns;
+}
+
+function escAdmin(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ════════════════════════════════════════════════════════════
+   NUMEROLOGY ENGINE
+════════════════════════════════════════════════════════════ */
+const PYTH={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8};
+const NM_VOWELS=new Set(['A','E','I','O','U']);
+const NM_MASTER=new Set([10,11,22,33]);
+const NM_DEBTS=new Set([13,14,16,19]);
+const NM_ARROWS=[
+  {cells:[1,2,3],label:'1-2-3',name:'Kế hoạch'},
+  {cells:[4,5,6],label:'4-5-6',name:'Ý chí'},
+  {cells:[7,8,9],label:'7-8-9',name:'Năng Động'},
+  {cells:[1,4,7],label:'1-4-7',name:'Thực tế'},
+  {cells:[2,5,8],label:'2-5-8',name:'Cân bằng'},
+  {cells:[3,6,9],label:'3-6-9',name:'Sáng trí'},
+  {cells:[1,5,9],label:'1-5-9',name:'Quyết tâm'},
+  {cells:[3,5,7],label:'3-5-7',name:'Tâm linh'},
+];
+const NM_EMPTY={'1-2-3':'UẤT GIẬN','4-5-6':'UẤT GIẬN','7-8-9':'THỤ ĐỘNG','1-4-7':'HỖN ĐỘN','2-5-8':'NHẠY CẢM','3-6-9':'TRÍ NHỚ NGẮN HẠN','1-5-9':'TRÌ HOÃN','3-5-7':'HOÀI NGHI'};
+const NM_OC_NEIGH={1:new Set([2,4,5]),2:new Set([1,3,5]),3:new Set([2,5,6]),7:new Set([4,5,8]),9:new Set([5,6,8])};
+
+function nmDiac(t){
+  t=t.toUpperCase().replace(/Đ/g,'D');
+  const m={'À':'A','Á':'A','Ả':'A','Ã':'A','Ạ':'A','Ă':'A','Ắ':'A','Ặ':'A','Ẳ':'A','Ẵ':'A','Ấ':'A','Ầ':'A','Ẩ':'A','Ẫ':'A','Ậ':'A','Â':'A','È':'E','É':'E','Ẻ':'E','Ẽ':'E','Ẹ':'E','Ê':'E','Ế':'E','Ề':'E','Ể':'E','Ễ':'E','Ệ':'E','Ì':'I','Í':'I','Ỉ':'I','Ĩ':'I','Ị':'I','Ò':'O','Ó':'O','Ỏ':'O','Õ':'O','Ọ':'O','Ô':'O','Ố':'O','Ồ':'O','Ổ':'O','Ỗ':'O','Ộ':'O','Ơ':'O','Ớ':'O','Ờ':'O','Ở':'O','Ỡ':'O','Ợ':'O','Ù':'U','Ú':'U','Ủ':'U','Ũ':'U','Ụ':'U','Ư':'U','Ứ':'U','Ừ':'U','Ử':'U','Ữ':'U','Ự':'U','Ỳ':'Y','Ý':'Y','Ỷ':'Y','Ỹ':'Y','Ỵ':'Y'};
+  return t.split('').map(c=>m[c]||c).join('').replace(/[^A-Z\s]/g,'');
+}
+function nmReduce(n,km=true){while(n>9&&!(km&&NM_MASTER.has(n)))n=String(n).split('').reduce((s,d)=>s+parseInt(d),0);return n;}
+function nmRS(n){while(n>9)n=String(n).split('').reduce((s,d)=>s+parseInt(d),0);return n;}
+function nmDS(s){return s.split('').reduce((a,c)=>a+(parseInt(c)||0),0);}
+function nmOcDao(fd){
+  const pres=new Set([1,2,3,4,5,6,7,8,9].filter(d=>fd[d]>0));
+  const iso=new Set();
+  for(const [d,nb] of Object.entries(NM_OC_NEIGH)){const di=parseInt(d);if(pres.has(di)&&![...nb].some(n=>pres.has(n)))iso.add(di);}
+  return iso;
+}
+
+function nmCalc(name,day,month,year){
+  const clean=nmDiac(name);
+  const cls=[];
+  const words=clean.trim().split(/\s+/);
+  for(const w of words){
+    const lts=w.split('').filter(c=>/[A-Z]/.test(c));
+    lts.forEach((ch,i)=>{
+      if(ch!=='Y'){cls.push({ch,v:NM_VOWELS.has(ch)});}
+      else{if(i===0){cls.push({ch:'Y',v:false});}else{const hov=lts.some((l,j)=>j!==i&&NM_VOWELS.has(l));cls.push({ch:'Y',v:!hov});}}
+    });
+  }
+  const all=cls.map(c=>c.ch),vowels=cls.filter(c=>c.v).map(c=>c.ch),cons=cls.filter(c=>!c.v).map(c=>c.ch);
+  const firsts=words.map(w=>w.split('').find(c=>/[A-Z]/.test(c))).filter(Boolean);
+  const rawVM=all.reduce((s,l)=>s+(PYTH[l]||0),0);
+  const rawTH=vowels.reduce((s,l)=>s+(PYTH[l]||0),0);
+  const rawTC=cons.reduce((s,l)=>s+(PYTH[l]||0),0);
+  const rawCB=firsts.reduce((s,l)=>s+(PYTH[l]||0),0);
+  const d_r=nmReduce(day),m_r=nmReduce(month),ySum=nmDS(String(year)),y_r=nmReduce(ySum);
+  const d_s=nmRS(day),m_s=nmRS(month),y_s=nmRS(ySum),cluster=d_r+m_r+y_r;
+  const duongDoi=nmReduce(cluster);
+  const tamHon=nmReduce(rawTH),tinhCach=nmReduce(rawTC);
+  const _thTcSum=tamHon+tinhCach;
+  const vanMemh=NM_MASTER.has(_thTcSum)?_thTcSum:nmReduce(rawVM);
+  const ngaySinh=nmReduce(day),thaiDo=nmReduce(d_r+m_r),truongThanh=nmReduce(duongDoi+vanMemh),canBang=nmReduce(rawCB);
+  const tienThan=nmDS(String(day)+String(month)+String(year));
+  const today=new Date();
+  const yCurSum=nmDS(String(today.getFullYear()));
+  const namCN=nmReduce(d_r+m_r+nmReduce(yCurSum));
+  const thangCN=nmReduce(namCN+(today.getMonth()+1));
+  const dateStr=String(day)+String(month)+String(year);
+  const dateNums=dateStr.split('').map(Number).filter(n=>n>=1&&n<=9);
+  const nameNums=all.map(l=>PYTH[l]||0).filter(n=>n>=1);
+  const fd={},fa={};for(let i=1;i<=9;i++){fd[i]=0;fa[i]=0;}
+  dateNums.forEach(n=>{fd[n]++;fa[n]++;});nameNums.forEach(n=>fa[n]++);
+  const noiCam=[1,2,3,4,5,6,7,8,9].filter(i=>fa[i]>=4);
+  const strongArrows=NM_ARROWS.filter(a=>a.cells.every(c=>fd[c]>0)).map(a=>({label:a.label,name:a.name}));
+  const emptyArrows=NM_ARROWS.filter(a=>a.cells.every(c=>fd[c]===0)).map(a=>({label:a.label,name:a.name,en:NM_EMPTY[a.label]}));
+  const dateSet=new Set(dateNums);
+  const soThieu=[1,2,3,4,5,6,7,8,9].filter(i=>!dateSet.has(i));
+  const N2L={};for(const [l,n] of Object.entries(PYTH)){if(!N2L[n])N2L[n]=[];N2L[n].push(l);}
+  const lset=new Set(all);
+  const soKhuyet=[];for(let i=1;i<=9;i++){const g=N2L[i]||[];if(g.length&&!g.some(l=>lset.has(l)))soKhuyet.push({num:i,miss:g.filter(l=>!lset.has(l))});}
+  const tcThSum=tinhCach+tamHon;
+  const dcs=[['Vận mệnh',rawVM],['Tâm hồn',rawTH],['Tính cách',rawTC],['Cân bằng',rawCB],['Ngày sinh',day],['Thái độ',day+month],['Trưởng thành',duongDoi+vanMemh],['Cụm đường đời',cluster],['TC+TH',tcThSum]];
+  const noNghiep={};for(const [lb,v] of dcs){if(NM_DEBTS.has(v)){if(!noNghiep[v])noNghiep[v]=[];noNghiep[v].push(lb);}}
+  const d1=nmReduce(m_r+d_r),d2=nmReduce(d_r+y_r);
+  const d3r=d1+d2,d3=(d3r===10||d3r===11)?d3r:nmReduce(d3r);
+  const d4r=m_r+y_r,d4=(d4r===10||d4r===11)?d4r:nmReduce(d4r);
+  const tt1=Math.abs(m_s-d_s),tt2=Math.abs(y_s-d_s),tt3=Math.abs(tt1-tt2),tt4=Math.abs(m_s-y_s);
+  const age1=36-duongDoi;
+  const namCNList=[],thangCNList=[];
+  for(let i=0;i<4;i++){const yr=today.getFullYear()+i;namCNList.push({year:yr,num:nmReduce(d_r+m_r+nmReduce(nmDS(String(yr))))});}
+  for(let i=0;i<12;i++){const off=today.getMonth()+i;const mo=off%12+1;const yr=today.getFullYear()+Math.floor(off/12);const ncn=nmReduce(d_r+m_r+nmReduce(nmDS(String(yr))));thangCNList.push({month:mo,year:yr,num:nmReduce(ncn+mo),cur:i===0});}
+  const peaks=[{num:d1,age:age1,year:year+age1},{num:d2,age:age1+9,year:year+age1+9},{num:d3,age:age1+18,year:year+age1+18},{num:d4,age:age1+27,year:year+age1+27}];
+  const tuoiDC=[`0–${age1}`,`${age1+1}–${age1+9}`,`${age1+10}–${age1+18}`,`${age1+19}+`];
+  return {name,clean,day,month,year,
+    duongDoi,vanMemh,tamHon,tinhCach,
+    ngaySinh,thaiDo,truongThanh,canBang,tienThan,
+    namCN,thangCN,noiCam,noNghiep,soThieu,soKhuyet,
+    fd,fa,strongArrows,emptyArrows,
+    dinhCao:[d1,d2,d3,d4],thuThach:[tt1,tt2,tt3,tt4],tuoiDC,
+    giaiDoan:[nmReduce(month),nmReduce(day),nmReduce(ySum)],
+    cauNoiTC:nmReduce(Math.abs(duongDoi-vanMemh)),
+    cauNoiHP:nmReduce(Math.abs(tamHon-tinhCach)),
+    tcThSum,peaks,namCNList,thangCNList,
+    // raw values for display
+    rawVM,rawTH,rawTC,rawCB,
+    clusterSum:cluster,
+    rawThaiDo:d_r+m_r,
+    rawTruongThanh:duongDoi+vanMemh,
+    age1,
+  };
+}
+
+/* ════════════════════════════════════════════════════════════
+   MEANINGS
+════════════════════════════════════════════════════════════ */
+window._nmMeanings=null;
+function nmLoadMeanings(){
+  fetch('/meanings_data.json').then(r=>r.json()).then(m=>{window._nmMeanings=m;}).catch(()=>{});
+}
+function nmGet(sec,key){
+  const M=window._nmMeanings;if(!M)return '';
+  const e=M[sec]?.[String(key)];if(e?.mo_ta)return e.mo_ta;
+  const n=parseInt(String(key));
+  if(n>9){let r=n;while(r>9)r=String(r).split('').reduce((s,d)=>s+parseInt(d),0);return M[sec]?.[String(r)]?.mo_ta||'';}
+  return '';
+}
+const NM_ICONS=[['BẢN CHẤT','🔮'],['ĐIỂM MẠNH','⚡'],['ĐIỂM YẾU','🧩'],['TÌNH YÊU','❤️'],['MẶT TỐI','🌑'],['NGHỀ NGHIỆP','💼'],['HƯỚNG PHÁT TRIỂN','🌱'],['LỜI KHUYÊN','💡'],['BÀI HỌC','📚'],['THÀNH CÔNG','🏆'],['NỢ NGHIỆP','⚖️'],['TÀI CHÍNH','💰'],['SỨC KHO','🌿'],['TÂM LINH','🛕'],['LÃNH ĐẠO','🎯'],['CHỮA LÀNH','🌸'],['TIỀN THÂ','✨']];
+function nmIcon(line){const up=line.toUpperCase();for(const[kw,ic]of NM_ICONS)if(up.includes(kw))return ic;return'◆';}
+function nmRender(text){
+  if(!text)return'';
+  return text.trim().split(/\n{2,}/).map(blk=>{
+    const f=blk.trim();const fu=f.toUpperCase();
+    const isCap=f===fu&&f.length<100&&/[A-ZÀÁẢÃẠ]/.test(f);
+    const hasEmoji=/^\p{Emoji}/u.test(f);
+    if(isCap||hasEmoji){const ic=hasEmoji?'':nmIcon(f);return`<p class="mh">${ic?ic+' ':''}${f.replace(/</g,'&lt;')}</p>`;}
+    return`<p class="mp">${f.replace(/</g,'&lt;').replace(/\n/g,'<br>')}</p>`;
+  }).join('');
+}
+function nmOpenModal(title,text){
+  if(!text)return;
+  document.getElementById('nmModalTitle').textContent=title;
+  document.getElementById('nmModalBody').innerHTML=nmRender(text);
+  document.getElementById('nmModal').classList.add('open');
+}
+function nmCloseModal(){document.getElementById('nmModal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')nmCloseModal();});
+
+/* ════════════════════════════════════════════════════════════
+   RENDER RESULTS
+════════════════════════════════════════════════════════════ */
+let _nmResult=null;
+
+function nmCircle(val,size,accent,sec,key,label){
+  const a=accent||'';
+  return `<div class="nm-circle ${size} ${a}" onclick="nmOpenModal('${label||sec+' '+key}',nmGet('${sec}','${key}'))" style="cursor:pointer" title="${label||''}">${val}</div>`;
+}
+
+function nmRenderMatrix(freq,label,sublabel){
+  const ocDao=nmOcDao(freq);
+  const rows=[[3,6,9],[2,5,8],[1,4,7]];
+  let cells='';
+  for(const row of rows){for(const d of row){
+    const c=freq[d]||0;const isOc=ocDao.has(d);
+    const oc=`onclick="nmCellClick(${d},${c},${isOc})"`;
+    if(c>0){
+      cells+=`<div class="nm-cell has-val${isOc?' oc':''}" ${oc}><span class="nm-cell-digit">${d}</span>${c>1?`<span class="nm-cell-count">${c}</span>`:''}</div>`;
+    } else {
+      cells+=`<div class="nm-cell"><span class="nm-cell-empty">${d}</span></div>`;
+    }
+  }}
+  return `<div class="nm-matrix-wrap"><p class="nm-matrix-label">${label}</p><div class="nm-grid">${cells}</div>${sublabel?`<p class="nm-matrix-sublabel">${sublabel}</p>`:''}</div>`;
+}
+function nmCellClick(d,count,isOc){
+  const key=`${d}_${Math.min(count,4)}`;
+  let text=nmGet('luot_giai',key);
+  if(!text&&count>4)text=nmGet('luot_giai',`${d}_4`);
+  if(isOc){const oc=nmGet('luot_giai',`oc_dao_${d}`);if(oc)text=text?text+'\n\n──────────────\n\n'+oc:oc;}
+  nmOpenModal(`Ô ${d} — ${String(d).repeat(count)}`,text);
+}
+
+function nmShowTab(t){
+  document.getElementById('nmTab1').style.display=t===1?'':'none';
+  document.getElementById('nmTab2').style.display=t===2?'':'none';
+  document.getElementById('nmTab1Btn').classList.toggle('active',t===1);
+  document.getElementById('nmTab2Btn').classList.toggle('active',t===2);
+}
+
+function nmCalculate(){
+  const name=document.getElementById('nmName').value.trim();
+  const day=parseInt(document.getElementById('nmDay').value);
+  const month=parseInt(document.getElementById('nmMonth').value);
+  const year=parseInt(document.getElementById('nmYear').value);
+  if(!name||isNaN(day)||isNaN(month)||isNaN(year)){toast('⚠️ Vui lòng nhập đầy đủ thông tin','warn');return;}
+  _nmResult=nmCalc(name,day,month,year);
+  nmRenderAll(_nmResult);
+  document.getElementById('nmResults').style.display='';
+  document.getElementById('nmTabBtns').style.display='flex';
+  nmShowTab(1);
+  document.getElementById('nmStatusDot').className='status-dot saved';
+  document.getElementById('nmStatusTxt').textContent='Kết quả: '+name;
+}
+
+function nmRenderAll(r){
+  const today=new Date();
+
+  // Helper: clickable number
+  function N(val,sec,size='lg'){
+    size=size||'lg';
+    const fs={'xl':'nm-num-xl','lg':'nm-num-lg','md':'nm-num-md','sm':'nm-num-sm'}[size]||'nm-num-lg';
+    return `<span class="nm-num ${fs}" onclick="nmOpenModal('${sec} — Số ${val}',nmGet('${sec}','${val}'))">${val}</span>`;
+  }
+  function raw(v){return `<span class="nm-raw">(${v})</span>`;}
+  function lbl(txt){return `<span class="nm-lbl">${txt}</span>`;}
+
+  /* ════ TAB 1 ════ */
+
+  // Header
+  document.getElementById('nmSubject').innerHTML=`
+    <div class="nm-doc">
+      <div class="nm-doc-header">
+        <div class="nm-doc-badge">✦ Bài Luận Thần Số Học</div>
+        <div class="nm-doc-name">${r.clean}</div>
+        <div class="nm-doc-meta">Ngày sinh: ${r.day}/${r.month}/${r.year} &nbsp;·&nbsp; Tên chuẩn hoá: <span style="color:var(--glow);">${r.clean}</span></div>
+      </div>
+    </div>`;
+
+  // 4 Core block
+  document.getElementById('nm4Core').innerHTML=`<div class="nm-doc">
+    <div class="nm-row-2" style="margin-bottom:.7rem;">
+      <div class="nm-field">${lbl('Số Chủ Đạo :')} ${N(r.duongDoi,'duong_doi','xl')} ${raw(r.clusterSum)}</div>
+      <div class="nm-field">${lbl('Số Tiền Thân :')} ${N(r.tienThan,'tien_than','xl')}</div>
+    </div>
+    <div class="nm-divider-light"></div>
+    <div class="nm-row-3" style="margin:.6rem 0;">
+      <div class="nm-field">${lbl('Số Vận Mệnh :')} ${N(r.vanMemh,'van_menh','md')} ${raw(r.rawVM)}</div>
+      <div class="nm-field">${lbl('Số Tâm Hồn :')} ${N(r.tamHon,'tam_hon','md')} ${raw(r.rawTH)}</div>
+      <div class="nm-field">${lbl('Số Tính Cách :')} ${N(r.tinhCach,'tinh_cach','md')} ${raw(r.rawTC)}</div>
+    </div>
+    <div class="nm-divider-light"></div>
+    <div class="nm-row-3" style="margin-top:.6rem;">
+      <div class="nm-field">${lbl('Số Ngày Sinh :')} ${N(r.ngaySinh,'ngay_sinh','md')}</div>
+      <div class="nm-field">${lbl('Số Thái Độ :')} ${N(r.thaiDo,'thai_do','md')} ${raw(r.rawThaiDo)}</div>
+      <div class="nm-field">${lbl('Số Trưởng Thành :')} ${N(r.truongThanh,'truong_thanh','md')} ${raw(r.rawTruongThanh)}</div>
+    </div>
+  </div>`;
+
+  // Matrix row
+  document.getElementById('nmMatrixRow').innerHTML=`
+    <div style="display:flex;justify-content:center;padding:1rem 0;">${nmRenderMatrix(r.fd,'Biểu Đồ Ngày Sinh','Ngày/tháng/năm · dùng cho mũi tên')}</div>
+    <div style="display:flex;justify-content:center;padding:1rem 0;">${nmRenderMatrix(r.fa,'Biểu Đồ Tổng Hợp','Tên + ngày sinh · dùng cho nội cảm')}</div>
+  `;
+
+  // Secondary (debt, misc, cauNoi)
+  const hasDebt=Object.keys(r.noNghiep).length>0;
+  let debtHtml='';
+  if(hasDebt){
+    debtHtml=`<div class="nm-divider"></div>
+      <div class="nm-field" style="margin-bottom:.3rem;">
+        ${lbl('Số Nợ Nghiệp :')}
+        <span style="color:#fca5a5;font-weight:700;font-size:1rem;">
+          ${Object.entries(r.noNghiep).map(([num,lbls])=>`<span class="nm-num nm-num-md" style="color:#fca5a5;border-color:rgba(239,68,68,.4);" onclick="nmOpenModal('Nợ Nghiệp ${num}',nmGet('no_nghiep','${num}'))">${num}</span> <span style="font-size:.78rem;color:rgba(239,68,68,.7);">(${lbls.join(', ')})</span>`).join(' &nbsp; ')}
+        </span>
+      </div>
+      <div style="font-size:.72rem;color:var(--muted);margin-bottom:.5rem;">Tính cách ${r.tinhCach} + Tâm hồn ${r.tamHon} = <strong style="color:var(--txt);">${r.tcThSum}</strong></div>`;
+  }
+
+  const thieuStr=r.soThieu.length
+    ? r.soThieu.map(n=>`<span class="nm-num nm-num-sm" onclick="nmOpenModal('Số Thiếu ${n}',nmGet('so_thieu','${n}'))">${n}</span>`).join(', ')
+    : '<span style="color:var(--muted);">—</span>';
+  const khuyetStr=r.soKhuyet.length
+    ? r.soKhuyet.map(({num})=>`<span class="nm-num nm-num-sm" onclick="nmOpenModal('Số Khuyết ${num}',nmGet('so_khuyet','${num}'))">${num}</span>`).join(', ')
+    : '<span style="color:var(--muted);">—</span>';
+  const noiCamStr=r.noiCam.length
+    ? r.noiCam.map(n=>`<span class="nm-num nm-num-sm" onclick="nmOpenModal('Nội Cảm Số ${n}',nmGet('noi_cam','${n}'))">${n}</span>`).join(', ')
+    : '<span style="color:var(--muted);">—</span>';
+
+  // Arrows
+  const strongStr=r.strongArrows.length
+    ? r.strongArrows.map(a=>`<span class="nm-num nm-num-sm" onclick="nmOpenModal('Mũi Tên ${a.label} — ${a.name}',nmGet('arrow_strong','${a.label}'))">${a.label} ${a.name}</span>`).join(' · ')
+    : '<span style="color:var(--muted);">Không có</span>';
+  const emptyStr=r.emptyArrows.length
+    ? r.emptyArrows.map(a=>`<span class="nm-num nm-num-sm" style="border-color:rgba(239,68,68,.4);color:#fca5a5;" onclick="nmOpenModal('Mũi Tên Trống ${a.label}',nmGet('arrow_empty','${a.label}'))">${a.label} ${a.en}</span>`).join(' · ')
+    : '<span style="color:var(--muted);">Không có</span>';
+
+  document.getElementById('nmSecondary').innerHTML=`<div class="nm-doc" style="grid-column:1/-1;">
+    ${debtHtml}
+    <div class="nm-divider"></div>
+    <div class="nm-row-2" style="margin-bottom:.6rem;">
+      <div class="nm-field">${lbl('Số Thiếu :')} <span>${thieuStr}</span></div>
+      <div class="nm-field">${lbl('Số Nội Cảm :')} <span>${noiCamStr}</span></div>
+    </div>
+    <div class="nm-row-2" style="margin-bottom:.6rem;">
+      <div class="nm-field">${lbl('Số Cân Bằng :')} ${N(r.canBang,'can_bang','md')} ${raw(r.rawCB)}</div>
+      <div class="nm-field">${lbl('Số Khuyết :')} <span>${khuyetStr}</span></div>
+    </div>
+    <div class="nm-row-2" style="margin-bottom:.65rem;">
+      <div class="nm-field">${lbl('Cầu Nối Thành Công :')} ${N(r.cauNoiTC,'cau_noi_thanh_cong','md')}</div>
+      <div class="nm-field">${lbl('Cầu Nối Hạnh Phúc :')} ${N(r.cauNoiHP,'cau_noi_hanh_phuc','md')}</div>
+    </div>
+    <div class="nm-divider"></div>
+    <div style="margin-top:.5rem;">
+      <div class="nm-field" style="margin-bottom:.35rem;">${lbl('Mũi Tên Sức Mạnh :')} <span>${strongStr}</span></div>
+      <div class="nm-field">${lbl('Mũi Tên Trống :')} <span>${emptyStr}</span></div>
+    </div>
+  </div>`;
+
+  document.getElementById('nmArrows').style.display='none';
+  document.getElementById('nmDebt').style.display='none';
+  document.getElementById('nmMisc').style.display='none';
+
+  /* ════ TAB 2 ════ */
+
+  // Năm CN
+  document.getElementById('nmYears').innerHTML=`
+    <div class="nm-section-title">Năm Cá Nhân : ${N(r.namCN,'nam_cn','lg')}</div>
+    <div>
+      ${r.namCNList.map(({year,num})=>{
+        const cur=year===today.getFullYear();
+        return`<div class="nm-year-row" onclick="nmOpenModal('Năm ${year} — Số ${num}',nmGet('nam_cn','${num}'))" style="cursor:pointer;">
+          <span style="font-size:.82rem;color:var(--muted);min-width:38px;">${year}</span>
+          <span style="font-size:.78rem;color:var(--muted);">=&nbsp; năm cá nhân số</span>
+          <span class="nm-num nm-num-md">${num}</span>
+          ${cur?'<span class="nm-badge-year">năm nay</span>':''}
+        </div>`;
+      }).join('')}
+    </div>`;
+
+  // Tháng CN
+  document.getElementById('nmMonths').innerHTML=`
+    <div class="nm-section-title" style="margin-top:.75rem;">Tháng Cá Nhân</div>
+    <div class="nm-month-grid">
+      ${r.thangCNList.map(({month,year,num,cur})=>`
+        <div class="nm-month-item${cur?' cur':''}" onclick="nmOpenModal('T${month}/${year} — Số ${num}',nmGet('thang_cn','${num}'))">
+          <span class="nm-month-lbl">Tháng ${month}${year!==today.getFullYear()?` (${year})`:''} ${cur?'<span class="nm-badge-cur">hiện tại</span>':''}</span>
+          <span class="nm-month-val">= ${num}</span>
+        </div>
+      `).join('')}
+    </div>`;
+
+  // Đỉnh tiền kỳ + peaks + challenges
+  const tienKyYear=r.year+r.age1-9;
+  const tienKyAge=r.age1-9;
+  document.getElementById('nmPeaksRow').innerHTML=`
+    <div>
+      <div class="nm-section-title" style="margin-top:.75rem;">Đỉnh Tiền Kỳ : <span style="color:var(--muted);font-weight:400;">(${tienKyYear} – ${tienKyAge} tuổi)</span></div>
+      <div class="nm-col-2" style="gap:2rem;">
+        <div>
+          <div class="nm-section-title">4 Đỉnh Cao</div>
+          ${r.peaks.map((p,i)=>`
+            <div class="nm-peak-item" onclick="nmOpenModal('Đỉnh Cao ${i+1} — Số ${p.num}',nmGet('dinh_cao','${p.num}'))" style="cursor:pointer;">
+              <span class="nm-peak-dot gold"></span>
+              <span style="font-size:.78rem;color:var(--muted);">(${p.year} – ${p.age} tuổi)</span>
+              <span style="font-size:.8rem;color:var(--muted);">đỉnh cao số</span>
+              ${N(p.num,'dinh_cao','md')}
+            </div>
+          `).join('')}
+        </div>
+        <div>
+          <div class="nm-section-title">4 Thử Thách</div>
+          ${r.thuThach.map((tt,i)=>`
+            <div class="nm-peak-item" onclick="nmOpenModal('Thử Thách ${i+1} — Số ${tt}',nmGet('thu_thach','${tt}'))" style="cursor:pointer;">
+              <span class="nm-peak-dot"></span>
+              <span style="font-size:.78rem;color:var(--muted);">Thử thách ${i+1}${i===2?' (chính)':''} :</span>
+              ${N(tt,'thu_thach','md')}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>`;
+
+  // Giai đoạn
+  document.getElementById('nmPhases').innerHTML=`
+    <div class="nm-section-title" style="margin-top:.75rem;">3 Giai Đoạn Đời Người</div>
+    <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+      <div class="nm-field">${lbl('Tuổi trẻ')} ${N(r.giaiDoan[0],'giai_doan_tre','lg')}</div>
+      <div class="nm-field">${lbl('Trưởng thành')} ${N(r.giaiDoan[1],'giai_doan_truong_thanh','lg')}</div>
+      <div class="nm-field">${lbl('Viên mãn')} ${N(r.giaiDoan[2],'giai_doan_vien_man','lg')}</div>
+    </div>
+    <div class="nm-footer">Giải mã ngày sinh – Làm chủ cuộc đời</div>`;
+}
+
+/* ── INIT MEANINGS load on first tool open ── */
 </script>
 </body>
 </html>
