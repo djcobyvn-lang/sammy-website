@@ -1390,7 +1390,8 @@ function nmCalc(name,day,month,year){
   const d_r=nmReduce(day),m_r=nmReduce(month),ySum=nmDS(String(year)),y_r=nmReduce(ySum);
   const d_s=nmRS(day),m_s=nmRS(month),y_s=nmRS(ySum),cluster=d_r+m_r+y_r;
   const duongDoi=nmReduce(cluster);
-  const tamHon=nmReduce(rawTH),tinhCach=nmReduce(rawTC);
+  const tamHon=nmReduce(rawTH);
+  let tinhCach=nmReduce(rawTC);if(tinhCach===10)tinhCach=1;
   const _thTcSum=tamHon+tinhCach;
   const vanMemh=NM_MASTER.has(_thTcSum)?_thTcSum:nmReduce(rawVM);
   const ngaySinh=nmReduce(day),thaiDo=nmReduce(d_r+m_r),truongThanh=nmReduce(duongDoi+vanMemh),canBang=nmReduce(rawCB);
