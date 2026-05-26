@@ -9,7 +9,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#04051A;--card:rgba(13,18,64,.62);
+  --bg:     #03030C;--card:rgba(6,6,20,.72);
   --violet:#7B5EA7;--indigo:#4F6BFF;--neon:#A78BFA;
   --teal:#2DD4BF;--gold:#C9A84C;--gold2:#E8C56A;
   --text:#E8E8F0;--muted:#9898B8;
@@ -116,6 +116,16 @@ h1{
   .btn-primary,.btn-zalo{text-align:center;}
 }
 </style>
+  <!-- Vercel Analytics + Speed Insights -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="180x180" href="/assets/logo-180.png">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png">
+  <meta property="og:image" content="https://www.sammytruong.com/assets/logo-circle.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="theme-color" content="#03030C">
 </head>
 <body>
 <canvas id="starfield"></canvas>
@@ -193,7 +203,9 @@ const PKG_NAMES = {
   'co-ban':'Gói Cơ Bản','nang-cao':'Gói Nâng Cao','dac-biet':'Gói Đặc Biệt',
   'me-be-nang-cao':'Gói Mẹ & Bé — Nâng Cao','me-be-dac-biet':'Gói Mẹ & Bé — Đặc Biệt',
   '2-ngay-sinh-nang-cao':'Gói 2 Ngày Sinh — Nâng Cao','2-ngay-sinh-dac-biet':'Gói 2 Ngày Sinh — Đặc Biệt',
-  'truc-tiep-11':'Gói Trực Tiếp 1:1','khoa-hoc-3-goc':'Khóa Học Thần Số Học 3 Gốc'
+  'truc-tiep-11':'Gói Trực Tiếp 1:1','khoa-hoc-3-goc':'Khóa Học Thần Số Học 3 Gốc',
+  'khoa-hoc-chuyen-sau':'Khóa Học Thần Số Chuyên Sâu','ebook':'Ebook Hành Trình Tiến Hóa Tối Thượng',
+  'tarot':'Trải Bài Tarot'
 };
 if(name) document.getElementById('oName').textContent = name;
 if(pkg)  document.getElementById('oPkg').textContent  = PKG_NAMES[pkg] || pkg;
@@ -226,26 +238,75 @@ if (type === 'khoa-hoc') {
   document.querySelector('.btns').innerHTML = `
     <a href="hoc-vien-dang-nhap.html" class="btn-primary">🎓 Vào Học Ngay</a>
     <a href="https://zalo.me/0362676159" target="_blank" class="btn-zalo">💬 Hỗ trợ Zalo</a>`;
+} else if (type === 'ebook') {
+  document.querySelector('h1').textContent  = 'Ebook Đang Trên Đường Đến!';
+  document.querySelector('.sub').innerHTML  = 'Thanh toán đã xác nhận. Kiểm tra email để nhận link tải ebook.';
+  document.querySelector('.order-val.status').textContent = '✓ Đã xác nhận';
+  document.querySelector('.timeline').innerHTML = `
+    <div class="tl-item"><div class="tl-dot">✦</div>
+    <div class="tl-body"><div class="tl-title">Ngay bây giờ</div>
+    <div class="tl-desc">Thanh toán xác nhận — hệ thống đang gửi link tải ebook.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">📧</div>
+    <div class="tl-body"><div class="tl-title">Kiểm tra email</div>
+    <div class="tl-desc">Link tải ebook PDF đã được gửi về <strong style="color:var(--gold2)">${sessionStorage.getItem('sammy_email') || 'email của bạn'}</strong>. Kiểm tra cả Spam.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">📖</div>
+    <div class="tl-body"><div class="tl-title">Bắt đầu hành trình</div>
+    <div class="tl-desc">Tải về và bắt đầu khám phá Hành Trình Tiến Hóa Tối Thượng.</div></div></div>`;
+  document.querySelector('.btns').innerHTML = `
+    <a href="ebook.html" class="btn-primary">📖 Về Trang Ebook</a>
+    <a href="https://zalo.me/0362676159" target="_blank" class="btn-zalo">💬 Hỗ trợ Zalo</a>`;
+
+} else if (type === 'chuyen-sau') {
+  document.querySelector('h1').textContent  = 'Chào Mừng Bạn Tham Gia!';
+  document.querySelector('.sub').innerHTML  = 'Đăng ký Khóa Học Chuyên Sâu đã xác nhận.<br>Kiểm tra email để nhận thông tin nhóm Zalo học viên.';
+  document.querySelector('.order-val.status').textContent = '✓ Đã xác nhận';
+  document.querySelector('.timeline').innerHTML = `
+    <div class="tl-item"><div class="tl-dot">✦</div>
+    <div class="tl-body"><div class="tl-title">Ngay bây giờ</div>
+    <div class="tl-desc">Thanh toán xác nhận — bạn chính thức là học viên Khóa Chuyên Sâu.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">📧</div>
+    <div class="tl-body"><div class="tl-title">Kiểm tra email</div>
+    <div class="tl-desc">Link nhóm Zalo học viên đã được gửi về email của bạn.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">🔥</div>
+    <div class="tl-body"><div class="tl-title">Khai giảng Tháng 6 · 2026</div>
+    <div class="tl-desc">Sammy sẽ liên hệ trực tiếp để xác nhận lịch học chi tiết.</div></div></div>`;
+  document.querySelector('.btns').innerHTML = `
+    <a href="https://zalo.me/0362676159" target="_blank" class="btn-primary">💬 Liên Hệ Sammy</a>
+    <a href="index.html" class="btn-zalo">🏠 Về Trang Chủ</a>`;
+
+} else if (type === 'tarot') {
+  document.querySelector('h1').textContent  = 'Đặt Bài Thành Công!';
+  document.querySelector('.sub').innerHTML  = 'Sammy đã nhận được câu hỏi của bạn.<br>Video trải bài sẽ được gửi về email trong 3–5 ngày làm việc.';
+  document.querySelector('.order-val.status').textContent = '✓ Đã xác nhận';
+  document.querySelector('.timeline').innerHTML = `
+    <div class="tl-item"><div class="tl-dot">🔮</div>
+    <div class="tl-body"><div class="tl-title">Ngay bây giờ</div>
+    <div class="tl-desc">Sammy đã nhận được thanh toán và sẽ bắt đầu trải bài cho bạn.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">🎴</div>
+    <div class="tl-body"><div class="tl-title">Trong 3–5 ngày làm việc</div>
+    <div class="tl-desc">Video trải bài Tarot cá nhân sẽ được gửi về <strong style="color:var(--neon)">${sessionStorage.getItem('sammy_email') || 'email của bạn'}</strong>.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">📧</div>
+    <div class="tl-body"><div class="tl-title">Kiểm tra email</div>
+    <div class="tl-desc">Nhớ kiểm tra cả mục Spam / Quảng cáo.</div></div></div>`;
+  document.querySelector('.btns').innerHTML = `
+    <a href="tarot.html" class="btn-primary">🔮 Về Trang Tarot</a>
+    <a href="https://zalo.me/0362676159" target="_blank" class="btn-zalo">💬 Hỗ trợ Zalo</a>`;
+
 } else {
   // Timeline luận giải
   const pkg_detail = PKG_NAMES[pkg] || 'bài luận giải';
   document.querySelector('.timeline').innerHTML = `
-    <div class="tl-item">
-      <div class="tl-dot">✦</div>
-      <div class="tl-body"><div class="tl-title">Ngay bây giờ</div>
-      <div class="tl-desc">Sammy đã nhận được thông tin đăng ký ${pkg_detail} của bạn.</div></div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot">📋</div>
-      <div class="tl-body"><div class="tl-title">Trong vòng 24 giờ</div>
-      <div class="tl-desc">Sammy sẽ liên hệ qua Zalo / Email để xác nhận lịch luận giải.</div></div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot">📧</div>
-      <div class="tl-body"><div class="tl-title">Sau khi hoàn thành</div>
-      <div class="tl-desc">Bài luận giải cá nhân sẽ được gửi về <strong style="color:var(--neon)">${sessionStorage.getItem('sammy_email') || 'email của bạn'}</strong>.</div></div>
-    </div>`;
+    <div class="tl-item"><div class="tl-dot">✦</div>
+    <div class="tl-body"><div class="tl-title">Ngay bây giờ</div>
+    <div class="tl-desc">Sammy đã nhận được thông tin đăng ký ${pkg_detail} của bạn.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">📋</div>
+    <div class="tl-body"><div class="tl-title">Trong vòng 24 giờ</div>
+    <div class="tl-desc">Sammy sẽ liên hệ qua Zalo / Email để xác nhận lịch luận giải.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">📧</div>
+    <div class="tl-body"><div class="tl-title">Sau khi hoàn thành</div>
+    <div class="tl-desc">Bài luận giải cá nhân sẽ được gửi về <strong style="color:var(--neon)">${sessionStorage.getItem('sammy_email') || 'email của bạn'}</strong>.</div></div></div>`;
 }
 </script>
+<script src="/assets/chatbot-embed.js" defer></script>
 </body>
 </html>

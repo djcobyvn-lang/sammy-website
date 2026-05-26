@@ -361,6 +361,25 @@
     .pf-msg.err { display:block; color:#FCA5A5; background:rgba(239,68,68,0.10); border:1px solid rgba(239,68,68,0.20); }
     @media (max-width:480px) { .pf-row { grid-template-columns:1fr; } }
 
+    /* SAMPLE IMAGES */
+    .sample-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+    .sample-item { text-align:center; }
+    .sample-item img { width:100%; border-radius:14px; border:1px solid rgba(167,139,250,0.28); box-shadow:0 8px 40px rgba(0,0,0,.55),0 0 60px rgba(167,139,250,0.10); cursor:pointer; display:block; transition:transform .28s,box-shadow .28s; }
+    .sample-item img:hover { transform:scale(1.025); box-shadow:0 12px 56px rgba(0,0,0,.65),0 0 80px rgba(167,139,250,0.22); }
+    .sample-caption { font-size:.74rem; color:var(--muted); margin-top:.65rem; letter-spacing:.03em; }
+    .lb-overlay { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.92); align-items:center; justify-content:center; padding:1.5rem; cursor:zoom-out; }
+    .lb-overlay.open { display:flex; }
+    .lb-overlay img { max-width:96%; max-height:92vh; border-radius:12px; object-fit:contain; cursor:default; box-shadow:0 0 80px rgba(0,0,0,.7); }
+    .lb-close { position:absolute; top:1.2rem; right:1.8rem; color:#fff; font-size:2.2rem; cursor:pointer; opacity:.65; line-height:1; user-select:none; transition:opacity .2s; }
+    .lb-close:hover { opacity:1; }
+    @media (max-width:600px) { .sample-grid { grid-template-columns:1fr; } }
+    .sample-group-label { font-size:.7rem; text-transform:uppercase; letter-spacing:.14em; color:var(--neon); opacity:.7; text-align:center; margin-bottom:1rem; }
+    .sample-grid-sm { display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:52%; margin:0 auto; }
+    .sample-single { text-align:center; max-width:480px; margin:2rem auto 0; }
+    .sample-single img { width:100%; border-radius:14px; border:1px solid rgba(167,139,250,0.28); box-shadow:0 8px 40px rgba(0,0,0,.55),0 0 60px rgba(167,139,250,0.10); cursor:pointer; display:block; transition:transform .28s,box-shadow .28s; }
+    .sample-single img:hover { transform:scale(1.025); box-shadow:0 12px 56px rgba(0,0,0,.65),0 0 80px rgba(167,139,250,0.22); }
+    @media (max-width:600px) { .sample-grid-sm { max-width:88%; } }
+
     /* ── RESPONSIVE IMPROVEMENTS ── */
     @media (max-width: 768px) {
       .hero { padding-top: 105px; padding-bottom: 50px; }
@@ -586,7 +605,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;" class="rev">
       <div class="format-note" style="margin-top:0;flex-direction:column;align-items:flex-start;gap:.6rem;">
         <div class="fn-ic">📩</div>
-        <p><strong>Kết Quả Bài Luận:</strong> <strong>PDF + Video cá nhân</strong> gửi qua Email — trong vòng <strong>3–4 ngày làm việc</strong>.</p>
+        <p><strong>Kết Quả Bài Luận:</strong> <strong>PDF + Video cá nhân</strong> gửi qua Email — trong vòng <strong>3 ngày làm việc</strong>.</p>
       </div>
       <div class="price-box" style="margin-top:0;display:flex;flex-direction:column;justify-content:center;">
         <span class="pb-label">Phí Dịch Vụ</span>
@@ -596,6 +615,52 @@
     </div>
   </div>
 </section>
+
+<div class="divider"></div>
+
+<!-- KẾT QUẢ MẪU -->
+<section class="section">
+  <div class="inner">
+    <div class="sec-head rev">
+      <span class="sec-tag">✦ Kết Quả Mẫu ✦</span>
+      <h2 class="sec-title">Sản Phẩm Bạn Nhận Được</h2>
+      <p class="sec-sub">Đây là ví dụ thực tế về bài luận giải mà Sam thực hiện — cá nhân hoá hoàn toàn cho từng khách hàng.</p>
+    </div>
+    <div class="sample-group rev">
+      <p class="sample-group-label">✦ Mẫu Luận</p>
+      <div class="sample-grid-sm">
+        <div class="sample-item">
+          <img src="/nangcao.jpg" class="lb-trigger" alt="Mẫu luận gói nâng cao — mặt trước" loading="lazy" />
+          <p class="sample-caption">✦ Mặt trước — nhấn để phóng to</p>
+        </div>
+        <div class="sample-item">
+          <img src="/nangcao2.jpg" class="lb-trigger" alt="Mẫu luận gói nâng cao — mặt sau" loading="lazy" />
+          <p class="sample-caption">✦ Mặt sau — nhấn để phóng to</p>
+        </div>
+      </div>
+    </div>
+    <div class="sample-group rev" style="margin-top:2.2rem;">
+      <p class="sample-group-label">✦ Mẫu Đã Luận</p>
+      <div class="sample-grid-sm">
+        <div class="sample-item">
+          <img src="/nangcaodaluan.jpg" class="lb-trigger" alt="Mẫu đã luận gói nâng cao — mặt trước" loading="lazy" />
+          <p class="sample-caption">✦ Mặt trước</p>
+        </div>
+        <div class="sample-item">
+          <img src="/nangcaodaluan2.jpg" class="lb-trigger" alt="Mẫu đã luận gói nâng cao — mặt sau" loading="lazy" />
+          <p class="sample-caption">✦ Mặt sau</p>
+        </div>
+      </div>
+    </div>
+    <div class="sample-single rev">
+      <p class="sample-group-label" style="margin-top:2.2rem;">✦ Video Luận Giải Cá Nhân</p>
+      <img src="/videoluangiai.jpg" class="lb-trigger" alt="Video luận giải cá nhân — gói nâng cao" loading="lazy" />
+      <p class="sample-caption" style="margin-top:.65rem;">✦ Minh hoạ video luận giải Sam gửi riêng — nhấn để phóng to</p>
+    </div>
+  </div>
+</section>
+
+<div class="lb-overlay" id="lb"><span class="lb-close" id="lb-close">✕</span><img id="lb-img" src="" alt="" /></div>
 
 <div class="divider"></div>
 
@@ -685,6 +750,17 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:.08,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(el=>obs.observe(el));
 
+(function(){
+  var lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img');
+  if(!lb)return;
+  function openLb(src){lbImg.src=src;lb.classList.add('open');document.body.style.overflow='hidden';}
+  function closeLb(){lb.classList.remove('open');document.body.style.overflow='';lbImg.src='';}
+  document.querySelectorAll('.lb-trigger').forEach(function(img){img.addEventListener('click',function(){openLb(this.src);});});
+  document.getElementById('lb-close').addEventListener('click',closeLb);
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
+})();
+
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwFi3Iq79XFFA9BBAUar9Ius727HeZncIHOVQdxMXczbpNRJ_TiBUgHnsI-YJDYnNl-ew/exec';
 
 async function submitPkgForm(e, tenGoi) {
@@ -724,5 +800,6 @@ async function submitPkgForm(e, tenGoi) {
   }
 }
 </script>
+<script src="/assets/chatbot-embed.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Đặt Tên Thương Hiệu Cá Nhân hoặc Doanh Nghiệp | Sammy Trương</title>
+  <meta name="description" content="Đặt tên thương hiệu cá nhân hoặc doanh nghiệp theo Thần Số Học — nhận 3 tên độc quyền kèm video luận giải năng lượng chi tiết. Cá Nhân 1.000.000 VNĐ / Doanh Nghiệp 2.000.000 VNĐ."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px;}
+    :root{
+      --bg:#03030C; --bg2:#080C2E; --bg3:#0D1240;
+      --card:rgba(13,18,64,0.58);
+      --violet:#7B5EA7; --indigo:#4F6BFF; --neon:#A78BFA;
+      --teal:#2DD4BF; --gold:#C9A84C;
+      --text:#E8E8F0; --muted:#9898B8;
+      --border:rgba(167,139,250,0.16); --border-h:rgba(167,139,250,0.48);
+    }
+    body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg) url('/assets/anh-nen-sammy.png') center top/100% auto no-repeat;color:var(--text);overflow-x:hidden;line-height:1.75;}
+    #starfield{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .nebula{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 65% 80% at 0% 15%,rgba(123,94,167,0.12) 0%,transparent 65%),radial-gradient(ellipse 50% 65% at 100% 8%,rgba(45,212,191,0.06) 0%,transparent 60%);}
+    nav,main,footer,.mobile-menu{position:relative;z-index:2;}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:72px;background:rgba(4,5,26,0.65);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--border);transition:background .35s;}
+    nav.scrolled{background:rgba(4,5,26,0.96);}
+    .logo{display:flex;align-items:center;gap:.75rem;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:600;color:var(--text);letter-spacing:.05em;}
+    .logo-mark{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid rgba(167,139,250,0.55);box-shadow:0 0 14px rgba(167,139,250,0.55),0 0 28px rgba(167,139,250,0.28);flex-shrink:0;}
+    .nav-links{display:flex;gap:2.4rem;list-style:none;}
+    .nav-links a{color:#B0A0D0;text-decoration:none;font-size:.875rem;transition:color .25s;}
+    .nav-links a:hover{color:var(--text);}
+    .btn-primary{background:linear-gradient(135deg,var(--violet),var(--indigo));color:#fff;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:.88rem;font-weight:500;padding:.6rem 1.55rem;border-radius:100px;box-shadow:0 0 22px rgba(123,94,167,0.28);transition:box-shadow .3s,transform .2s;white-space:nowrap;text-decoration:none;display:inline-block;}
+    .btn-primary:hover{box-shadow:0 0 44px rgba(123,94,167,0.55);transform:translateY(-1px);}
+    .nav-actions{display:flex;align-items:center;gap:.6rem;}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+    .hamburger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:.3s;}
+    .mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;z-index:99;background:rgba(4,5,26,0.98);backdrop-filter:blur(20px);padding:1.6rem 6% 2.2rem;border-bottom:1px solid var(--border);}
+    .mobile-menu.open{display:block;}
+    .mobile-menu .nav-links{flex-direction:column;gap:1.2rem;}
+    .mobile-menu .nav-links a{font-size:1rem;}
+    .mobile-menu .btn-primary{margin-top:1.4rem;width:100%;padding:.8rem;text-align:center;display:block;}
+
+    /* ── SHARED ── */
+    .section{padding:6rem 6%;}
+    .section-sm{padding:4rem 6%;}
+    .sec-tag{font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:var(--neon);margin-bottom:.8rem;display:block;}
+    .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,3.6vw,2.8rem);font-weight:600;background:linear-gradient(135deg,var(--text) 40%,var(--neon) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem;}
+    .sec-sub{color:var(--muted);max-width:600px;margin:0 auto;font-size:.93rem;line-height:1.88;}
+    .sec-head{text-align:center;margin-bottom:3.8rem;}
+    .divider{height:1px;margin:0 6%;background:linear-gradient(90deg,transparent,rgba(167,139,250,0.28),transparent);}
+
+    /* ── HERO ── */
+    .hero{min-height:72vh;display:flex;align-items:center;justify-content:center;padding:130px 6% 80px;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(123,94,167,0.15) 0%,transparent 68%);pointer-events:none;}
+    .hero-inner{max-width:820px;width:100%;position:relative;z-index:1;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.65rem;background:rgba(123,94,167,0.12);border:1px solid rgba(167,139,250,0.28);border-radius:100px;padding:.42rem 1.2rem;font-size:.7rem;color:var(--neon);letter-spacing:.15em;text-transform:uppercase;margin-bottom:2rem;}
+    .hero-eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--neon);opacity:.7;}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vw,4.8rem);font-weight:700;line-height:1.1;margin-bottom:1.6rem;background:linear-gradient(155deg,#F0ECFF 20%,#C084FC 52%,#2DD4BF 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero-sub{color:var(--muted);font-size:clamp(.95rem,2vw,1.1rem);line-height:1.9;max-width:640px;margin:0 auto 2.8rem;}
+    .hero-price-badge{display:inline-flex;align-items:center;gap:.75rem;background:rgba(13,18,64,0.65);border:1px solid rgba(167,139,250,0.32);border-radius:16px;padding:.85rem 1.8rem;margin-bottom:2.4rem;}
+    .hero-price-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--neon);}
+    .hero-price-unit{font-size:.8rem;color:var(--muted);text-align:left;line-height:1.4;}
+    .hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .btn-hero{background:linear-gradient(135deg,var(--violet),var(--indigo));color:#fff;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:.95rem;font-weight:600;padding:.85rem 2.2rem;border-radius:100px;box-shadow:0 0 32px rgba(123,94,167,0.4);transition:box-shadow .3s,transform .2s;text-decoration:none;display:inline-block;letter-spacing:.02em;}
+    .btn-hero:hover{box-shadow:0 0 56px rgba(123,94,167,0.65);transform:translateY(-2px);}
+    .btn-hero-ghost{background:transparent;color:var(--text);border:1px solid rgba(167,139,250,0.36);padding:.85rem 2.2rem;border-radius:100px;font-family:'Be Vietnam Pro',sans-serif;font-size:.95rem;cursor:pointer;transition:border-color .3s,box-shadow .3s;text-decoration:none;display:inline-block;}
+    .btn-hero-ghost:hover{border-color:var(--neon);box-shadow:0 0 22px rgba(167,139,250,0.18);}
+
+    /* ── OPTION CARDS ── */
+    .option-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:680px;margin:0 auto 2.5rem;}
+    .option-card{background:rgba(13,18,64,0.5);border:2px solid rgba(167,139,250,0.18);border-radius:20px;padding:2rem 1.8rem;cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .2s;text-align:center;position:relative;}
+    .option-card:hover{border-color:rgba(167,139,250,0.4);transform:translateY(-3px);}
+    .option-card.selected{border-color:var(--neon);box-shadow:0 0 32px rgba(167,139,250,0.2);background:rgba(123,94,167,0.12);}
+    .option-card.selected::after{content:'✓';position:absolute;top:.75rem;right:.9rem;font-size:.85rem;font-weight:700;color:var(--neon);}
+    .opt-icon{font-size:2.2rem;margin-bottom:.85rem;display:block;}
+    .opt-label{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--text);margin-bottom:.4rem;}
+    .opt-price{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--neon);margin-bottom:.75rem;}
+    .opt-price-unit{font-size:.78rem;color:var(--muted);display:block;margin-top:-.5rem;margin-bottom:.75rem;}
+    .opt-notes{list-style:none;text-align:left;}
+    .opt-notes li{font-size:.82rem;color:var(--muted);padding:.28rem 0;display:flex;gap:.5rem;}
+    .opt-notes li::before{content:'✦';color:var(--teal);font-size:.65rem;flex-shrink:0;margin-top:.22rem;}
+    .badge-type{display:inline-block;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .75rem;border-radius:100px;margin-bottom:1rem;}
+    .badge-canhan{background:rgba(45,212,191,0.12);color:var(--teal);border:1px solid rgba(45,212,191,0.25);}
+    .badge-doanhnghiep{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid rgba(201,168,76,0.25);}
+    .option-cta{width:100%;background:linear-gradient(135deg,var(--violet),var(--indigo));color:#fff;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:1rem;font-weight:600;padding:1rem;border-radius:100px;box-shadow:0 0 28px rgba(123,94,167,0.35);transition:box-shadow .3s,transform .2s;max-width:420px;margin:0 auto;display:block;}
+    .option-cta:hover{box-shadow:0 0 50px rgba(123,94,167,0.6);transform:translateY(-1px);}
+    .selected-badge{text-align:center;font-size:.8rem;color:var(--muted);margin-bottom:1.5rem;min-height:1.2rem;}
+    .selected-badge strong{color:var(--neon);}
+
+    /* ── WHAT YOU GET ── */
+    .gets-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto;}
+    .get-card{background:var(--card);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:20px;padding:2.2rem 1.8rem;text-align:center;transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden;}
+    .get-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--border-h),transparent);}
+    .get-card:hover{transform:translateY(-6px);border-color:rgba(167,139,250,0.38);box-shadow:0 0 40px rgba(123,94,167,0.18);}
+    .get-icon{font-size:2.4rem;margin-bottom:1rem;display:block;}
+    .get-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--text);margin-bottom:.6rem;}
+    .get-desc{font-size:.88rem;color:var(--muted);line-height:1.8;}
+
+    /* ── PROCESS ── */
+    .process-list{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:0;}
+    .process-step{display:flex;gap:1.5rem;padding:1.8rem 0;border-bottom:1px solid rgba(167,139,250,0.1);}
+    .process-step:last-child{border-bottom:none;}
+    .step-num{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--indigo));display:grid;place-items:center;font-weight:700;font-size:.9rem;color:#fff;flex-shrink:0;box-shadow:0 0 16px rgba(123,94,167,0.35);}
+    .step-body{}
+    .step-title{font-weight:600;color:var(--text);margin-bottom:.3rem;font-size:.95rem;}
+    .step-desc{font-size:.87rem;color:var(--muted);line-height:1.75;}
+
+    /* ── FOR WHOM ── */
+    .for-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:700px;margin:0 auto;}
+    .for-item{display:flex;align-items:flex-start;gap:.75rem;background:rgba(13,18,64,0.45);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;}
+    .for-icon{font-size:1.4rem;flex-shrink:0;margin-top:.1rem;}
+    .for-text{font-size:.875rem;color:var(--muted);line-height:1.7;}
+    .for-text strong{color:var(--text);}
+
+    /* ── PAYMENT INFO ── */
+    .payment-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:640px;margin:0 auto 2.5rem;}
+    .payment-card{background:var(--card);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:18px;padding:1.8rem;text-align:center;}
+    .pay-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.15em;color:var(--neon);display:block;margin-bottom:.75rem;}
+    .pay-num{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;color:var(--text);margin-bottom:.3rem;}
+    .pay-name{font-size:.85rem;color:var(--muted);}
+    .delivery-note{background:rgba(13,18,64,0.5);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.8rem;max-width:640px;margin:0 auto;display:flex;align-items:flex-start;gap:1rem;}
+    .delivery-note .icon{font-size:1.4rem;flex-shrink:0;}
+    .delivery-note p{font-size:.875rem;color:var(--muted);line-height:1.75;}
+    .delivery-note strong{color:var(--text);}
+
+    /* ── FORM ── */
+    .form-wrap{max-width:580px;margin:0 auto;background:var(--card);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:24px;padding:2.8rem 2.5rem;}
+    .form-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--text);margin-bottom:.4rem;}
+    .form-sub{font-size:.85rem;color:var(--muted);margin-bottom:2rem;line-height:1.7;}
+    .form-group{margin-bottom:1.3rem;}
+    .form-group label{display:block;font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+    .form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(3,3,12,0.6);border:1px solid rgba(167,139,250,0.22);border-radius:10px;padding:.72rem 1rem;color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical;}
+    .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(152,152,184,0.35);}
+    .form-group select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239898B8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;}
+    option{background:var(--bg3);}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--neon);box-shadow:0 0 0 3px rgba(167,139,250,0.12);}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .form-submit{width:100%;background:linear-gradient(135deg,var(--violet),var(--indigo));color:#fff;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:1rem;font-weight:600;padding:1rem;border-radius:100px;box-shadow:0 0 28px rgba(123,94,167,0.35);transition:box-shadow .3s,transform .2s;margin-top:.5rem;}
+    .form-submit:hover{box-shadow:0 0 50px rgba(123,94,167,0.6);transform:translateY(-1px);}
+    .form-note{font-size:.78rem;color:rgba(152,152,184,0.48);text-align:center;margin-top:.85rem;line-height:1.6;}
+    .form-pkg-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(123,94,167,0.12);border:1px solid rgba(167,139,250,0.28);border-radius:100px;padding:.3rem .9rem;font-size:.75rem;color:var(--neon);margin-bottom:1.5rem;}
+
+    /* ── FAQ ── */
+    .faq-list{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:.75rem;}
+    .faq-item{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .25s;}
+    .faq-item.open{border-color:rgba(167,139,250,0.38);}
+    .faq-q{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.25rem 1.5rem;cursor:pointer;font-weight:500;font-size:.93rem;color:var(--text);}
+    .faq-q .arrow{font-size:.75rem;color:var(--neon);transition:transform .25s;flex-shrink:0;}
+    .faq-item.open .faq-q .arrow{transform:rotate(180deg);}
+    .faq-a{display:none;padding:0 1.5rem 1.25rem;font-size:.875rem;color:var(--muted);line-height:1.8;}
+    .faq-item.open .faq-a{display:block;}
+
+    /* ── FOOTER ── */
+    footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 6% 2rem;text-align:center;}
+    .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--text);letter-spacing:.06em;margin-bottom:.5rem;}
+    .footer-text{font-size:.8rem;color:var(--muted);}
+
+    /* Reveal animation */
+    .rev{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+    .rev.visible{opacity:1;transform:translateY(0);}
+    .d1{transition-delay:.08s;} .d2{transition-delay:.16s;} .d3{transition-delay:.24s;} .d4{transition-delay:.32s;} .d5{transition-delay:.40s;}
+
+    @media(max-width:900px){
+      .gets-grid{grid-template-columns:1fr;}
+      .for-grid{grid-template-columns:1fr;}
+      .payment-grid{grid-template-columns:1fr;}
+    }
+    @media(max-width:680px){
+      .option-grid{grid-template-columns:1fr;}
+    }
+    /* SAMPLE IMAGES */
+    .sample-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; max-width:680px; margin:0 auto; }
+    .sample-item { text-align:center; }
+    .sample-item img { width:100%; border-radius:14px; border:1px solid rgba(45,212,191,0.28); box-shadow:0 8px 40px rgba(0,0,0,.55),0 0 60px rgba(45,212,191,0.10); cursor:pointer; display:block; transition:transform .28s,box-shadow .28s; }
+    .sample-item img:hover { transform:scale(1.025); box-shadow:0 12px 56px rgba(0,0,0,.65),0 0 80px rgba(45,212,191,0.22); }
+    .sample-caption { font-size:.74rem; color:var(--muted); margin-top:.65rem; letter-spacing:.03em; }
+    .sample-single { text-align:center; max-width:480px; margin:2rem auto 0; }
+    .sample-single img { width:100%; border-radius:14px; border:1px solid rgba(45,212,191,0.28); box-shadow:0 8px 40px rgba(0,0,0,.55),0 0 60px rgba(45,212,191,0.10); cursor:pointer; display:block; transition:transform .28s,box-shadow .28s; }
+    .sample-single img:hover { transform:scale(1.025); box-shadow:0 12px 56px rgba(0,0,0,.65),0 0 80px rgba(45,212,191,0.22); }
+    .sample-group-label { font-size:.7rem; text-transform:uppercase; letter-spacing:.14em; color:var(--teal); opacity:.8; text-align:center; margin-bottom:1rem; }
+    .lb-overlay { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.92); align-items:center; justify-content:center; padding:1.5rem; cursor:zoom-out; }
+    .lb-overlay.open { display:flex; }
+    .lb-overlay img { max-width:96%; max-height:92vh; border-radius:12px; object-fit:contain; cursor:default; box-shadow:0 0 80px rgba(0,0,0,.7); }
+    .lb-close { position:absolute; top:1.2rem; right:1.8rem; color:#fff; font-size:2.2rem; cursor:pointer; opacity:.65; line-height:1; user-select:none; transition:opacity .2s; }
+    .lb-close:hover { opacity:1; }
+    @media(max-width:600px){ .sample-grid-2 { grid-template-columns:1fr; } }
+    @media(max-width:768px){
+      .nav-links{display:none;}
+      .hamburger{display:flex;}
+      .form-row{grid-template-columns:1fr;}
+      .form-wrap{padding:1.8rem 1.4rem;}
+      .hero-ctas{flex-direction:column;align-items:center;}
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="nebula"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo">
+    <img src="sammy%20logo.jpg" alt="Sammy Trương" class="logo-mark">
+    <span style="text-transform:uppercase;letter-spacing:.12em;font-size:1rem;font-weight:700;background:linear-gradient(155deg,#F0ECFF 20%,#C084FC 52%,#2DD4BF 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Sammy Trương</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="luan-giai-ca-nhan.html">Luận Giải Cá Nhân</a></li>
+    <li><a href="dat-ten-nickname.html" class="active" style="color:var(--neon);">Đặt Tên Thương Hiệu</a></li>
+    <li><a href="khoa-hoc.html">Khóa Học</a></li>
+    <li><a href="ebook.html">Ebook</a></li>
+    <li><a href="index.html#contact">Liên Hệ</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#chon-goi" class="btn-primary">Đặt Tên — Từ 1 Triệu</a>
+  </div>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mob">
+  <ul class="nav-links">
+    <li><a href="luan-giai-ca-nhan.html">Luận Giải Cá Nhân</a></li>
+    <li><a href="khoa-hoc.html">Khóa Học</a></li>
+    <li><a href="ebook.html">Ebook</a></li>
+    <li><a href="index.html#contact">Liên Hệ</a></li>
+  </ul>
+  <a href="#chon-goi" class="btn-primary">✦ Đặt Tên Thương Hiệu — Từ 1 Triệu</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow rev">
+      <span class="dot"></span> Thần Số Học Ứng Dụng <span class="dot"></span>
+    </div>
+    <h1 class="hero-title rev">Tên Thương Hiệu<br>Mang Năng Lượng Của Bạn</h1>
+    <p class="hero-sub rev">
+      Không chỉ là một cái tên đẹp — mà là tên chứa đựng tần số rung động phù hợp với con số năng lượng riêng của bạn, được Sam luận giải chi tiết qua video. Dành cho cả thương hiệu cá nhân lẫn doanh nghiệp.
+    </p>
+    <div class="hero-price-badge rev">
+      <div>
+        <div class="hero-price-num">Từ 1.000.000</div>
+      </div>
+      <div class="hero-price-unit">VNĐ<br>Cá Nhân · Doanh Nghiệp</div>
+    </div>
+    <div class="hero-ctas rev">
+      <a href="#chon-goi" class="btn-hero">✦ Chọn Gói & Đặt Tên Ngay</a>
+      <a href="#what-you-get" class="btn-hero-ghost">Xem gói bao gồm ↓</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT YOU GET -->
+<section class="section" id="what-you-get">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Gói Dịch Vụ ✦</span>
+    <h2 class="sec-title">Bạn Nhận Được Gì?</h2>
+    <p class="sec-sub">Mỗi tên được tạo ra từ việc phân tích bản đồ năng lượng ngày sinh, không phải ngẫu nhiên.</p>
+  </div>
+  <div class="gets-grid">
+    <div class="get-card rev d1">
+      <span class="get-icon">✦ ✦ ✦</span>
+      <div class="get-title">3 Tên Độc Quyền</div>
+      <p class="get-desc">3 tên được Sam tạo riêng cho bạn dựa trên số chủ đạo, số vận mệnh và năng lượng ngày sinh — mỗi tên mang một sắc thái năng lượng khác nhau để bạn lựa chọn.</p>
+    </div>
+    <div class="get-card rev d2">
+      <span class="get-icon">🎬</span>
+      <div class="get-title">Video Luận Giải So Sánh</div>
+      <p class="get-desc">Sam quay video phân tích và so sánh chi tiết năng lượng của từng tên — ưu điểm, đặc trưng và lý do tại sao tên đó phù hợp với bạn hoặc thương hiệu của bạn.</p>
+    </div>
+    <div class="get-card rev d3">
+      <span class="get-icon">🔢</span>
+      <div class="get-title">Phân Tích Thần Số Học</div>
+      <p class="get-desc">Kèm bảng phân tích chỉ số thần số học của từng tên — số vận mệnh, số tâm hồn từ tên mới — để bạn thấy rõ sự khác biệt năng lượng giữa các lựa chọn.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KẾT QUẢ MẪU -->
+<section class="section-sm">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Kết Quả Mẫu ✦</span>
+    <h2 class="sec-title">Sản Phẩm Bạn Nhận Được</h2>
+    <p class="sec-sub">Đây là ví dụ thực tế về bài phân tích đặt tên và video luận giải mà Sam thực hiện.</p>
+  </div>
+  <div class="sample-single rev">
+    <p class="sample-group-label">✦ Mẫu Bài Phân Tích Đặt Tên</p>
+    <img src="/mauluanchonten.jpg" class="lb-trigger" alt="Mẫu bài phân tích đặt tên thương hiệu" loading="lazy" />
+    <p class="sample-caption" style="margin-top:.65rem;">✦ Bảng phân tích Thần Số Học từng tên — nhấn để phóng to</p>
+  </div>
+  <div class="sample-single rev">
+    <p class="sample-group-label" style="margin-top:2.2rem;">✦ Video Luận Giải So Sánh Tên</p>
+    <img src="/videoluangiai.jpg" class="lb-trigger" alt="Video luận giải so sánh tên thương hiệu" loading="lazy" />
+    <p class="sample-caption" style="margin-top:.65rem;">✦ Minh hoạ video luận giải Sam gửi riêng — nhấn để phóng to</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOR WHOM -->
+<section class="section-sm">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Ai Phù Hợp ✦</span>
+    <h2 class="sec-title">Dịch Vụ Này Dành Cho Bạn</h2>
+  </div>
+  <div class="for-grid">
+    <div class="for-item rev d1">
+      <span class="for-icon">🎮</span>
+      <div class="for-text"><strong>Gamer / Streamer / Creator</strong><br>Muốn có tên thương hiệu cá nhân trên YouTube, TikTok, Twitch mang năng lượng mạnh mẽ và dễ được nhớ đến.</div>
+    </div>
+    <div class="for-item rev d2">
+      <span class="for-icon">📱</span>
+      <div class="for-text"><strong>Thương Hiệu Cá Nhân Online</strong><br>Xây dựng thương hiệu trên mạng xã hội với tên gọi phù hợp với định hướng phát triển và năng lượng bản thân.</div>
+    </div>
+    <div class="for-item rev d3">
+      <span class="for-icon">💼</span>
+      <div class="for-text"><strong>Doanh Nghiệp / Startup</strong><br>Đặt tên thương hiệu, tên công ty, tên sản phẩm mang năng lượng thu hút khách hàng và phù hợp với sứ mệnh kinh doanh.</div>
+    </div>
+    <div class="for-item rev d4">
+      <span class="for-icon">🌙</span>
+      <div class="for-text"><strong>Ai Đang Chuyển Hướng</strong><br>Bắt đầu chương mới — tái định vị thương hiệu cá nhân hoặc doanh nghiệp với tên mang năng lượng của hành trình mới.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHOOSE PACKAGE -->
+<section class="section-sm" id="chon-goi">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Chọn Gói ✦</span>
+    <h2 class="sec-title">Cá Nhân hay Doanh Nghiệp?</h2>
+    <p class="sec-sub">Chọn loại thương hiệu bạn muốn đặt tên — Sam sẽ phân tích theo đặc thù riêng của từng loại.</p>
+  </div>
+
+  <div class="option-grid rev">
+    <!-- Cá Nhân -->
+    <div class="option-card selected" id="card-ca-nhan" onclick="selectPkg('ca-nhan')">
+      <span class="badge-type badge-canhan">Thương Hiệu Cá Nhân</span>
+      <span class="opt-icon">🌟</span>
+      <div class="opt-label">Cá Nhân</div>
+      <div class="opt-price">1.000.000</div>
+      <span class="opt-price-unit">VNĐ · Trọn gói</span>
+      <ul class="opt-notes">
+        <li>3 tên thương hiệu cá nhân độc quyền</li>
+        <li>Video luận giải so sánh chi tiết</li>
+        <li>Phân tích chỉ số Thần Số Học từng tên</li>
+        <li>Phù hợp: content creator, influencer, nghệ danh, tên mạng xã hội</li>
+        <li>Nhận kết quả trong 3–5 ngày làm việc</li>
+      </ul>
+    </div>
+    <!-- Doanh Nghiệp -->
+    <div class="option-card" id="card-doanh-nghiep" onclick="selectPkg('doanh-nghiep')">
+      <span class="badge-type badge-doanhnghiep">Thương Hiệu Doanh Nghiệp</span>
+      <span class="opt-icon">🏢</span>
+      <div class="opt-label">Doanh Nghiệp</div>
+      <div class="opt-price" style="color:var(--gold);">2.000.000</div>
+      <span class="opt-price-unit">VNĐ · Trọn gói</span>
+      <ul class="opt-notes">
+        <li>3 tên thương hiệu / công ty độc quyền</li>
+        <li>Video luận giải so sánh chi tiết</li>
+        <li>Phân tích chỉ số Thần Số Học từng tên</li>
+        <li>Phù hợp: tên công ty, tên shop, tên sản phẩm, startup</li>
+        <li>Nhận kết quả trong 3–5 ngày làm việc</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="selected-badge rev" id="selected-badge">
+    Bạn đang chọn: <strong id="badge-text">Thương Hiệu Cá Nhân — 1.000.000 VNĐ</strong>
+  </div>
+  <div style="text-align:center;" class="rev">
+    <a href="#register" class="option-cta" id="cta-btn">✦ Đặt Tên Cá Nhân Ngay →</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROCESS -->
+<section class="section-sm">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Quy Trình ✦</span>
+    <h2 class="sec-title">Cách Thực Hiện</h2>
+  </div>
+  <div class="process-list">
+    <div class="process-step rev d1">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Chọn gói & Điền thông tin</div>
+        <div class="step-desc">Chọn gói Cá Nhân (1.000.000 VNĐ) hoặc Doanh Nghiệp (2.000.000 VNĐ). Cung cấp thông tin ngày sinh, lĩnh vực hoạt động và định hướng thương hiệu mong muốn.</div>
+      </div>
+    </div>
+    <div class="process-step rev d2">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Thanh toán xác nhận</div>
+        <div class="step-desc">Chuyển khoản đúng số tiền theo gói đã chọn với mã đơn riêng. Hệ thống sẽ tự động xác nhận và Sam liên hệ qua Zalo trong 24h.</div>
+      </div>
+    </div>
+    <div class="process-step rev d3">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Sam phân tích & tạo tên</div>
+        <div class="step-desc">Sam phân tích bản đồ năng lượng từ ngày sinh, lĩnh vực và định hướng thương hiệu của bạn, sau đó tạo ra 3 tên có tần số rung động phù hợp nhất.</div>
+      </div>
+    </div>
+    <div class="process-step rev d4">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Nhận kết quả qua Zalo / Email</div>
+        <div class="step-desc">Trong vòng 3–5 ngày làm việc, bạn nhận được video luận giải + bảng phân tích thần số học. Sau đó có thể trao đổi thêm với Sam qua Zalo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PAYMENT INFO -->
+<section class="section-sm" id="payment">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Thanh Toán ✦</span>
+    <h2 class="sec-title">Thông Tin Chuyển Khoản</h2>
+  </div>
+  <div class="payment-grid">
+    <div class="payment-card rev d1">
+      <span class="pay-label">Ngân Hàng ACB — Á Châu</span>
+      <div class="pay-num">6855117</div>
+      <div class="pay-name">Trương Thị Diễm Kiều</div>
+    </div>
+    <div class="payment-card rev d2">
+      <span class="pay-label">Ví MoMo</span>
+      <div class="pay-num">0972 624 729</div>
+      <div class="pay-name">Trương Thị Diễm Kiều</div>
+    </div>
+  </div>
+  <div class="delivery-note rev" style="margin-top:1.5rem;">
+    <div class="icon">💡</div>
+    <p><strong>Nội dung chuyển khoản:</strong> Nhập mã <strong style="color:var(--neon);">THUONGHIEU + 4 chữ số cuối SĐT</strong> (ví dụ: <em>THUONGHIEU3678</em>). Hệ thống sẽ tự động xác nhận và Sam sẽ liên hệ qua Zalo trong 24h.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REGISTRATION FORM -->
+<section class="section" id="register">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Đăng Ký ✦</span>
+    <h2 class="sec-title">Bắt Đầu Ngay</h2>
+    <p class="sec-sub">Điền thông tin bên dưới để Sam hiểu rõ bạn và tạo tên thương hiệu phù hợp nhất.</p>
+  </div>
+  <div class="form-wrap rev">
+    <div class="form-title">Thông Tin Đặt Tên Thương Hiệu</div>
+    <div class="form-pkg-badge" id="form-badge">✦ Thương Hiệu Cá Nhân — 1.000.000 VNĐ</div>
+    <p class="form-sub">Càng chi tiết, tên thương hiệu của bạn càng phù hợp với năng lượng thực sự của mình.</p>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Họ và tên đầy đủ *</label>
+          <input id="fName" type="text" placeholder="Nguyễn Thị Hoa" required/>
+        </div>
+        <div class="form-group">
+          <label>Ngày sinh *</label>
+          <input id="fDob" type="text" placeholder="DD/MM/YYYY" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email nhận kết quả *</label>
+          <input id="fEmail" type="email" placeholder="email@example.com" required/>
+        </div>
+        <div class="form-group">
+          <label>Số điện thoại / Zalo *</label>
+          <input id="fPhone" type="tel" placeholder="0912 345 678" required/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Lĩnh vực / Ngành nghề *</label>
+        <select id="fField" required>
+          <option value="" disabled selected>Chọn lĩnh vực...</option>
+          <option>Gaming / Esports</option>
+          <option>Streaming (YouTube, Twitch, TikTok)</option>
+          <option>Mạng xã hội / Thương hiệu cá nhân</option>
+          <option>Kinh doanh / Thương mại điện tử</option>
+          <option>Công ty / Startup / Doanh nghiệp</option>
+          <option>Cộng đồng tâm linh / Healing</option>
+          <option>Sáng tạo nội dung / Nghệ thuật</option>
+          <option>Khác</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Phong cách mong muốn *</label>
+        <select id="fStyle" required>
+          <option value="" disabled selected>Chọn phong cách...</option>
+          <option>Mạnh mẽ — uy lực — lãnh đạo</option>
+          <option>Huyền bí — tâm linh — sâu sắc</option>
+          <option>Nhẹ nhàng — chữa lành — bình yên</option>
+          <option>Sáng tạo — độc đáo — nổi bật</option>
+          <option>Sang trọng — tinh tế — chuyên nghiệp</option>
+          <option>Vui tươi — năng động — trẻ trung</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tên hiện tại đang dùng (nếu có)</label>
+        <input id="fCurrent" type="text" placeholder="Tên / thương hiệu bạn đang dùng..."/>
+      </div>
+      <div class="form-group">
+        <label>Ghi chú thêm (không bắt buộc)</label>
+        <textarea id="fNote" rows="3" placeholder="Điều bạn muốn tên thể hiện, tránh từ ngữ nào, ngôn ngữ (Việt / Anh / kết hợp), hoặc bất kỳ yêu cầu đặc biệt..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Tiếp Tục Thanh Toán →</button>
+      <p class="form-note">Sau khi điền xong, bạn sẽ được chuyển đến trang thanh toán với mã đơn riêng.</p>
+    </form>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="section-sm">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Giải Đáp ✦</span>
+    <h2 class="sec-title">Câu Hỏi Thường Gặp</h2>
+  </div>
+  <div class="faq-list rev">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Sự khác biệt giữa gói Cá Nhân và Doanh Nghiệp là gì?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">Gói Cá Nhân (1.000.000 VNĐ) tập trung vào năng lượng cá nhân — phù hợp với tên thương hiệu cá nhân, nghệ danh, tên mạng xã hội. Gói Doanh Nghiệp (2.000.000 VNĐ) phân tích thêm yếu tố ngành nghề, sứ mệnh kinh doanh và năng lượng thu hút khách hàng — phù hợp với tên công ty, tên shop, tên sản phẩm, startup.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Tên được tạo dựa trên tiêu chí nào?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">Sam phân tích số chủ đạo, số vận mệnh và các chỉ số từ ngày sinh và họ tên đầy đủ của bạn. Từ đó lựa chọn cấu trúc âm thanh, chữ cái và số học của tên sao cho tần số rung động của tên mới hài hòa hoặc bổ trợ cho năng lượng bản thân và mục tiêu thương hiệu.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Tên có phải tiếng Việt không?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">Hoàn toàn linh hoạt — Sam có thể tạo tên tiếng Việt, tiếng Anh, hoặc kết hợp cả hai tùy theo lĩnh vực và phong cách bạn chọn. Bạn có thể ghi rõ ngôn ngữ mong muốn trong phần ghi chú.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Nếu tôi không thích cả 3 tên thì sao?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">Sam sẽ lắng nghe phản hồi của bạn và điều chỉnh theo hướng phù hợp hơn. Mục tiêu là bạn có được ít nhất 1 tên thực sự cộng hưởng với năng lượng và định hướng thương hiệu của mình.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Bao lâu thì nhận được kết quả?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">Trong vòng 3–5 ngày làm việc kể từ khi nhận thanh toán. Sam sẽ gửi xác nhận qua Zalo/email trong 24h đầu.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Tôi có thể trao đổi thêm sau khi nhận kết quả không?
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">Có. Sau khi nhận video và bảng phân tích, bạn tiếp tục trao đổi với Sam qua Zalo để làm rõ thêm bất kỳ điều gì.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="lb-overlay" id="lb"><span class="lb-close" id="lb-close">✕</span><img id="lb-img" src="" alt="" /></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SAMMY TRƯƠNG</div>
+  <p class="footer-text" style="margin-top:.4rem;">Thần Số Học Chữa Lành · sammytruong.com</p>
+  <p class="footer-text" style="margin-top:1rem;">
+    <a href="index.html" style="color:var(--muted);text-decoration:none;margin:0 .75rem;">Trang Chủ</a>
+    <a href="luan-giai-ca-nhan.html" style="color:var(--muted);text-decoration:none;margin:0 .75rem;">Luận Giải</a>
+    <a href="khoa-hoc.html" style="color:var(--muted);text-decoration:none;margin:0 .75rem;">Khóa Học</a>
+    <a href="ebook.html" style="color:var(--muted);text-decoration:none;margin:0 .75rem;">Ebook</a>
+  </p>
+  <p class="footer-text" style="margin-top:1.2rem;font-size:.75rem;">© 2026 Sammy Trương. All rights reserved.</p>
+</footer>
+
+<script>
+/* ── STARFIELD ── */
+(function(){
+  const canvas=document.getElementById('starfield');
+  const ctx=canvas.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  function init(){resize();stars=Array.from({length:140},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*.9+.2,o:Math.random()*.5+.1,s:Math.random()*.3+.05}));}
+  function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.o+=s.s*.012;if(s.o>0.65||s.o<0.1)s.s*=-1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,2*Math.PI);ctx.fillStyle=`rgba(167,139,250,${s.o})`;ctx.fill();});requestAnimationFrame(draw);}
+  window.addEventListener('resize',init);init();draw();
+})();
+
+/* ── SCROLL NAV ── */
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',scrollY>40);});
+
+/* ── MOBILE NAV ── */
+document.getElementById('ham').addEventListener('click',function(){document.getElementById('mob').classList.toggle('open');});
+
+/* ── REVEAL ── */
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.12});
+document.querySelectorAll('.rev').forEach(el=>observer.observe(el));
+
+/* ── FAQ ── */
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+/* ── LIGHTBOX ── */
+(function(){
+  var lb=document.getElementById('lb'),lbImg=document.getElementById('lb-img');
+  if(!lb)return;
+  function openLb(src){lbImg.src=src;lb.classList.add('open');document.body.style.overflow='hidden';}
+  function closeLb(){lb.classList.remove('open');document.body.style.overflow='';lbImg.src='';}
+  document.querySelectorAll('.lb-trigger').forEach(function(img){img.addEventListener('click',function(){openLb(this.src);});});
+  document.getElementById('lb-close').addEventListener('click',closeLb);
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
+})();
+
+/* ── PACKAGE SELECTOR ── */
+var PKGS = {
+  'ca-nhan': {
+    service: 'thuong-hieu-ca-nhan',
+    service_name: 'Đặt Tên Thương Hiệu Cá Nhân',
+    price: 1000000,
+    priceLabel: '1.000.000 VNĐ',
+    label: 'Thương Hiệu Cá Nhân',
+    code: 'THUONGHIEU'
+  },
+  'doanh-nghiep': {
+    service: 'thuong-hieu-doanh-nghiep',
+    service_name: 'Đặt Tên Thương Hiệu Doanh Nghiệp',
+    price: 2000000,
+    priceLabel: '2.000.000 VNĐ',
+    label: 'Thương Hiệu Doanh Nghiệp',
+    code: 'THUONGHIEU'
+  }
+};
+var selectedPkg = 'ca-nhan';
+
+function selectPkg(key) {
+  selectedPkg = key;
+  var pkg = PKGS[key];
+  // Update card states
+  document.querySelectorAll('.option-card').forEach(function(c){c.classList.remove('selected');});
+  document.getElementById('card-' + key).classList.add('selected');
+  // Update badge
+  document.getElementById('badge-text').textContent = pkg.label + ' — ' + pkg.priceLabel;
+  document.getElementById('form-badge').textContent = '✦ ' + pkg.label + ' — ' + pkg.priceLabel;
+  document.getElementById('cta-btn').textContent = '✦ Đặt Tên ' + (key === 'ca-nhan' ? 'Cá Nhân' : 'Doanh Nghiệp') + ' Ngay →';
+}
+
+/* ── FORM SUBMIT ── */
+function handleSubmit(e){
+  e.preventDefault();
+  var pkg   = PKGS[selectedPkg];
+  var name  = document.getElementById('fName').value.trim();
+  var dob   = document.getElementById('fDob').value.trim();
+  var email = document.getElementById('fEmail').value.trim();
+  var phone = document.getElementById('fPhone').value.trim();
+  var field = document.getElementById('fField').value;
+  var style = document.getElementById('fStyle').value;
+  var note  = document.getElementById('fNote').value.trim();
+
+  var digits = phone.replace(/\D/g,'');
+  var code   = pkg.code + digits.slice(-4);
+
+  var orderData = {name,dob,email,phone,field,style,note,service:pkg.service,service_name:pkg.service_name,code,amount:pkg.price};
+  localStorage.setItem('nickname_order', JSON.stringify(orderData));
+
+  var params = new URLSearchParams({
+    goi  : pkg.service,
+    name,
+    email,
+    phone,
+    code,
+    amount: String(pkg.price),
+    pkg_label: pkg.label
+  });
+  window.location.href = 'thanh-toan-nickname.html?' + params.toString();
+}
+</script>
+<script src="/assets/chatbot-embed.js" defer></script>
+</body>
+</html>

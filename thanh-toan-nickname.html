@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Thanh Toán — Đặt Tên Thương Hiệu | Sammy Trương</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#03030C;--card:rgba(13,18,64,0.58);--violet:#7B5EA7;--indigo:#4F6BFF;--neon:#A78BFA;--teal:#2DD4BF;--text:#E8E8F0;--muted:#9898B8;--border:rgba(167,139,250,0.16);--grad:linear-gradient(135deg,#7B5EA7,#4F6BFF);}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 0% 12%,rgba(123,94,167,0.10) 0%,transparent 60%);}
+
+.wrap{position:relative;z-index:1;width:100%;max-width:500px;}
+
+.brand{text-align:center;margin-bottom:1.8rem;}
+.brand-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;letter-spacing:.08em;background:linear-gradient(155deg,#F0ECFF 20%,#C084FC 52%,#2DD4BF 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.brand-sub{font-size:.72rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-top:.25rem;}
+
+.card{background:var(--card);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;padding:2.2rem 2rem;box-shadow:0 8px 40px rgba(0,0,0,.5);}
+
+.order-summary{background:rgba(4,5,26,.6);border:1px solid rgba(167,139,250,.18);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.5rem;}
+.order-service{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--neon);margin-bottom:.35rem;}
+.order-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:.2rem;}
+.order-detail{font-size:.8rem;color:var(--muted);}
+.order-price{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--text);margin-top:.6rem;}
+.order-price span{font-size:.9rem;color:var(--muted);font-family:'Be Vietnam Pro',sans-serif;font-weight:400;}
+
+.sec-title{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem;}
+
+.bank-cards{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.4rem;}
+.bank-card{background:rgba(4,5,26,.7);border:1px solid rgba(167,139,250,.18);border-radius:12px;padding:1rem 1.1rem;text-align:center;}
+.bank-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--neon);display:block;margin-bottom:.45rem;}
+.bank-num{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--text);}
+.bank-owner{font-size:.75rem;color:var(--muted);margin-top:.15rem;}
+
+.code-box{background:rgba(123,94,167,.12);border:1px solid rgba(167,139,250,.32);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.4rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;}
+.code-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem;}
+.code-value{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--neon);letter-spacing:.06em;}
+.btn-copy{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.3);border-radius:8px;color:var(--neon);cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:.75rem;padding:.4rem .8rem;transition:background .2s;white-space:nowrap;}
+.btn-copy:hover{background:rgba(167,139,250,.25);}
+.btn-copy.copied{color:var(--teal);border-color:rgba(45,212,191,.35);}
+
+.note{font-size:.8rem;color:var(--muted);line-height:1.7;margin-bottom:1.4rem;padding:.85rem 1rem;background:rgba(4,5,26,.5);border-radius:10px;border-left:3px solid rgba(167,139,250,.35);}
+.note strong{color:var(--text);}
+
+.btn-done{width:100%;background:var(--grad);border:none;border-radius:12px;padding:.9rem;color:#fff;font-family:'Be Vietnam Pro',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(123,94,167,.35);transition:opacity .2s,transform .15s;text-decoration:none;display:block;text-align:center;}
+.btn-done:hover{opacity:.9;transform:translateY(-1px);}
+
+.back-link{display:block;text-align:center;margin-top:1.2rem;font-size:.8rem;color:var(--muted);text-decoration:none;}
+.back-link:hover{color:var(--neon);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="brand-name">SAMMY TRƯƠNG</div>
+    <div class="brand-sub">Đặt Tên Thương Hiệu</div>
+  </div>
+
+  <div class="card">
+    <!-- Order summary -->
+    <div class="order-summary">
+      <div class="order-service">✦ Dịch Vụ</div>
+      <div class="order-name" id="orderName">Đặt Tên Thương Hiệu</div>
+      <div class="order-detail" id="orderDetail">3 tên độc quyền + video luận giải so sánh</div>
+      <div class="order-price" id="orderPrice">1.000.000 <span>VNĐ</span></div>
+    </div>
+
+    <!-- Bank info -->
+    <p class="sec-title">Chuyển khoản về</p>
+    <div class="bank-cards">
+      <div class="bank-card">
+        <span class="bank-label">ACB — Á Châu</span>
+        <div class="bank-num">6855117</div>
+        <div class="bank-owner">Trương Thị Diễm Kiều</div>
+      </div>
+      <div class="bank-card">
+        <span class="bank-label">Ví MoMo</span>
+        <div class="bank-num">0972 624 729</div>
+        <div class="bank-owner">Trương Thị Diễm Kiều</div>
+      </div>
+    </div>
+
+    <!-- Transfer code -->
+    <p class="sec-title">Nội dung chuyển khoản</p>
+    <div class="code-box">
+      <div>
+        <div class="code-label">Nhập chính xác mã này</div>
+        <div class="code-value" id="transferCode">NICKNAME0000</div>
+      </div>
+      <button class="btn-copy" id="copyBtn" onclick="copyCode()">Sao chép</button>
+    </div>
+
+    <div class="note">
+      Chuyển khoản <strong id="noteAmount">đúng số tiền</strong> với nội dung như trên. Hệ thống sẽ tự động xác nhận và <strong>Sam sẽ liên hệ bạn qua Zalo trong 24h</strong> để bắt đầu thực hiện.
+    </div>
+
+    <a href="index.html" class="btn-done">✦ Về Trang Chủ</a>
+    <a href="dat-ten-nickname.html" class="back-link">← Quay lại trang dịch vụ</a>
+  </div>
+</div>
+
+<script>
+// Đọc tham số từ URL
+const params    = new URLSearchParams(window.location.search);
+const code      = params.get('code')      || 'THUONGHIEU0000';
+const name      = params.get('name')      || '';
+const phone     = params.get('phone')     || '';
+const amountRaw = parseInt(params.get('amount') || '1000000', 10);
+const pkgLabel  = params.get('pkg_label') || 'Thương Hiệu Cá Nhân';
+
+// Format price: 1000000 → "1.000.000"
+const amountFmt = amountRaw.toLocaleString('vi-VN');
+
+document.getElementById('transferCode').textContent = code;
+document.getElementById('orderName').textContent = 'Đặt Tên ' + pkgLabel;
+document.getElementById('orderPrice').innerHTML = amountFmt + ' <span>VNĐ</span>';
+document.getElementById('noteAmount').textContent = 'đúng số tiền ' + amountFmt + ' VNĐ';
+
+if (name) {
+  document.getElementById('orderDetail').textContent = '3 tên độc quyền + video luận giải · ' + name;
+}
+
+// Lưu thông tin vào KV khi trang load (gọi API save-info)
+(async function saveInfo(){
+  try {
+    const order = JSON.parse(localStorage.getItem('nickname_order') || '{}');
+    if (!order.email) return;
+    await fetch('/api/order?action=save-info', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        code,
+        email   : order.email,
+        name    : order.name    || name,
+        phone   : order.phone   || phone,
+        service : order.service || 'thuong-hieu-ca-nhan',
+        amount  : order.amount  || amountRaw,
+        note    : [order.field, order.style, order.note].filter(Boolean).join(' | '),
+      })
+    });
+  } catch(e) {}
+})();
+
+// Copy code
+function copyCode(){
+  const btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(code).then(()=>{
+    btn.textContent = '✓ Đã sao chép';
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent='Sao chép'; btn.classList.remove('copied'); }, 2200);
+  }).catch(()=>{
+    const ta = document.createElement('textarea');
+    ta.value = code; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    btn.textContent = '✓ Đã sao chép'; btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent='Sao chép'; btn.classList.remove('copied'); }, 2200);
+  });
+}
+</script>
+<script src="/assets/chatbot-embed.js" defer></script>
+</body>
+</html>

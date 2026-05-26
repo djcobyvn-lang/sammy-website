@@ -13,7 +13,7 @@
     html { scroll-behavior: smooth; font-size: 16px; }
 
     :root {
-      --bg:       #04051A;
+      --bg:     #03030C;
       --bg2:      #080C2E;
       --bg3:      #0D1240;
       --card:     rgba(13,18,64,0.58);
@@ -65,13 +65,10 @@
       font-size: 1.18rem; font-weight: 600; color: var(--text); letter-spacing: .05em;
     }
     .logo-mark {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--violet), var(--indigo));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      font-size: .8rem; font-weight: 700; color: #fff;
-      border: 1.5px solid rgba(167,139,250,0.42);
-      box-shadow: 0 0 18px rgba(167,139,250,0.35); flex-shrink: 0;
+      width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
+      border: 2px solid rgba(167,139,250,0.55);
+      box-shadow: 0 0 14px rgba(167,139,250,0.55), 0 0 28px rgba(167,139,250,0.28);
+      flex-shrink: 0;
     }
     .nav-links { display: flex; gap: 2.4rem; list-style: none; }
     .nav-links a { color: #B0A0D0; text-decoration: none; font-size: .875rem; transition: color .25s; }
@@ -166,7 +163,7 @@
 
     /* ── PACKAGES ── */
     .packages-grid {
-      display: grid; grid-template-columns: repeat(6, 1fr);
+      display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 1.2rem; max-width: 1500px; margin: 0 auto;
     }
     .pkg-card {
@@ -492,7 +489,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1400px) {
-      .packages-grid { grid-template-columns: repeat(3,1fr); }
+      .packages-grid { grid-template-columns: repeat(4,1fr); }
     }
     @media (max-width: 1100px) {
       .packages-grid { grid-template-columns: repeat(2,1fr); }
@@ -534,6 +531,16 @@
       section { padding: 4rem 5%; }
     }
   </style>
+  <!-- Vercel Analytics + Speed Insights -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="180x180" href="/assets/logo-180.png">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png">
+  <meta property="og:image" content="https://www.sammytruong.com/assets/logo-circle.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="theme-color" content="#03030C">
 </head>
 <body>
 
@@ -543,7 +550,7 @@
 <!-- NAVBAR -->
 <nav id="navbar">
   <a href="index.html" class="logo">
-    <div class="logo-mark">ST</div>
+    <img src="sammy%20logo.jpg" alt="Sammy Trương" class="logo-mark">
     <span style="text-transform:uppercase;letter-spacing:.12em;font-size:1rem;font-weight:700;">Sammy Trương</span>
   </a>
   <ul class="nav-links">
@@ -665,7 +672,7 @@
       <div class="pkg-footer">
         <div style="text-align:center;margin-bottom:.4rem;"><span style="background:linear-gradient(135deg,rgba(201,168,76,0.22),rgba(123,94,167,0.18));border:1px solid rgba(201,168,76,0.35);color:var(--gold2);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .75rem;border-radius:100px;">Được chọn nhiều nhất</span></div>
         <div class="pkg-price"><span class="pp-num" style="color:var(--gold2);">2.000.000</span><span class="pp-unit">VNĐ</span></div>
-        <div class="pkg-cta-text">Đánh thức tiềm năng đích thực.</div>
+        <div class="pkg-cta-text">Đánh thức tiềm năng.</div>
         <a href="goi-04-dac-biet.html" class="pkg-btn ghost" style="margin-bottom:.6rem;">Xem Chi Tiết</a>
         <a href="#register" class="pkg-btn">Đăng Ký Ngay</a>
       </div>
@@ -693,6 +700,34 @@
         <div class="pkg-cta-text">Thấu hiểu để yêu thương.</div>
         <a href="goi-03-me-va-be.html" class="pkg-btn ghost" style="margin-bottom:.6rem;">Xem Chi Tiết</a>
         <a href="#register" class="pkg-btn">Đăng Ký Ngay</a>
+      </div>
+    </div>
+
+    <!-- Gói Gia Đình -->
+    <div class="pkg-card rev" style="border-color:rgba(201,168,76,0.32);transition-delay:.35s;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C9A84C,#A78BFA,#7B5EA7);opacity:0;transition:opacity .3s;"></div>
+      <div class="pkg-icon" style="background:linear-gradient(135deg,rgba(201,168,76,0.22),rgba(123,94,167,0.14));border-color:rgba(201,168,76,0.30);">🏠</div>
+      <span class="pkg-tag" style="color:#C9A84C;">Gia Đình</span>
+      <div class="pkg-name">Gói Gia Đình</div>
+      <div class="pkg-subtitle">Năng lượng cả nhà</div>
+
+      <button class="benefit-toggle" onclick="toggleBenefit(this)">
+        <span>✦ Lợi ích nhận được</span>
+        <span class="arrow">▾</span>
+      </button>
+      <div class="benefit-body">
+        <p>"Phân tích bản đồ số cá nhân của từng thành viên kết hợp với các chỉ số tương tác trong gia đình — giúp cả nhà hiểu nhau sâu hơn và biết cách cư xử phù hợp với từng người."</p>
+      </div>
+
+      <div class="pkg-fit" style="border-left-color:rgba(201,168,76,0.45);background:rgba(201,168,76,0.05);">
+        <strong style="color:#C9A84C;">Phù hợp:</strong> Ba mẹ muốn hiểu con, gia đình hay có xung đột, hoặc chuẩn bị đón thêm thành viên mới.
+      </div>
+
+      <div class="pkg-footer">
+        <div class="pkg-price"><span class="pp-from">Từ</span><span class="pp-num" style="color:#C9A84C;">2.500.000</span><span class="pp-unit">VNĐ / 3–4 người</span></div>
+        <div class="pkg-cta-text">PDF cá nhân + bài kết hợp gia đình.</div>
+        <a href="gia-dinh.html" class="pkg-btn ghost" style="margin-bottom:.6rem;border-color:rgba(201,168,76,0.35);color:#C9A84C;">Xem Chi Tiết</a>
+        <a href="gia-dinh.html#dang-ky" class="pkg-btn" style="background:linear-gradient(135deg,#A8893A,#7B5EA7);box-shadow:0 0 22px rgba(201,168,76,0.30);">Đăng Ký Ngay</a>
       </div>
     </div>
 
@@ -749,6 +784,90 @@
       </div>
     </div>
 
+    <!-- Tarot -->
+    <div class="pkg-card rev" style="border-color:rgba(192,100,200,0.35);transition-delay:.50s;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#9333EA,#EC4899,#7B5EA7);opacity:0;transition:opacity .3s;"></div>
+      <div class="pkg-icon" style="background:linear-gradient(135deg,rgba(147,51,234,0.22),rgba(236,72,153,0.14));border-color:rgba(192,100,200,0.32);">🔮</div>
+      <span class="pkg-tag" style="color:#D87EF5;">Tarot</span>
+      <div class="pkg-name">Trải Bài Tarot</div>
+      <div class="pkg-subtitle">Thông điệp từ vũ trụ</div>
+
+      <button class="benefit-toggle" onclick="toggleBenefit(this)">
+        <span>✦ Lợi ích nhận được</span>
+        <span class="arrow">▾</span>
+      </button>
+      <div class="benefit-body">
+        <p>"Lá bài Tarot như một tấm gương phản chiếu năng lượng hiện tại — giúp bạn nhìn thấy rõ hơn những gì đang diễn ra và con đường phía trước."</p>
+      </div>
+
+      <div class="pkg-fit" style="border-left-color:rgba(192,100,200,0.45);background:rgba(147,51,234,0.06);">
+        <strong style="color:#D87EF5;">Phù hợp:</strong> Người đang băn khoăn về tình cảm, sự nghiệp hoặc cần một góc nhìn khác cho quyết định quan trọng.
+      </div>
+
+      <div class="pkg-footer">
+        <div class="pkg-price"><span class="pp-num" style="color:#D87EF5;">500.000</span><span class="pp-unit">VNĐ</span></div>
+        <div class="pkg-cta-text">Lắng nghe vũ trụ nói.</div>
+        <a href="tarot.html" class="pkg-btn ghost" style="margin-bottom:.6rem;border-color:rgba(192,100,200,0.35);color:#D87EF5;">Xem Chi Tiết</a>
+        <a href="tarot.html#register" class="pkg-btn" style="background:linear-gradient(135deg,#9333EA,#EC4899);box-shadow:0 0 22px rgba(147,51,234,0.35);">Đặt Ngay</a>
+      </div>
+    </div>
+
+    <!-- Đặt Tên Thương Hiệu -->
+    <div class="pkg-card rev" style="border-color:rgba(45,212,191,0.30);transition-delay:.58s;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#2DD4BF,#A78BFA,#4F6BFF);opacity:0;transition:opacity .3s;"></div>
+      <div class="pkg-icon" style="background:linear-gradient(135deg,rgba(45,212,191,0.18),rgba(123,94,167,0.14));border-color:rgba(45,212,191,0.28);">✦</div>
+      <span class="pkg-tag" style="color:var(--teal);">Mới</span>
+      <div class="pkg-name">Đặt Tên Thương Hiệu</div>
+      <div class="pkg-subtitle">Cá Nhân hoặc Doanh Nghiệp</div>
+
+      <button class="benefit-toggle" onclick="toggleBenefit(this)">
+        <span>✦ Lợi ích nhận được</span>
+        <span class="arrow">▾</span>
+      </button>
+      <div class="benefit-body">
+        <p>"Nhận 3 tên thương hiệu được tạo riêng từ bản đồ năng lượng ngày sinh, kèm video luận giải so sánh chi tiết từng tên để bạn lựa chọn. Áp dụng cho cả cá nhân và doanh nghiệp."</p>
+      </div>
+
+      <div class="pkg-fit" style="border-left-color:rgba(45,212,191,0.45);background:rgba(45,212,191,0.05);">
+        <strong style="color:var(--teal);">Phù hợp:</strong> Content creator, influencer, người kinh doanh, startup muốn có tên thương hiệu phù hợp với tần số năng lượng của mình.
+      </div>
+
+      <div class="pkg-footer">
+        <div class="pkg-price"><span class="pp-from">Từ</span><span class="pp-num" style="color:var(--teal);">1.000.000</span><span class="pp-unit">VNĐ</span></div>
+        <div class="pkg-cta-text">Tên mang năng lượng đúng.</div>
+        <a href="dat-ten-nickname.html" class="pkg-btn ghost" style="margin-bottom:.6rem;border-color:rgba(45,212,191,0.32);color:var(--teal);">Xem Chi Tiết</a>
+        <a href="dat-ten-nickname.html#chon-goi" class="pkg-btn" style="background:linear-gradient(135deg,#2DD4BF,#4F6BFF);box-shadow:0 0 22px rgba(45,212,191,0.30);">Đặt Ngay</a>
+      </div>
+    </div>
+
+    <!-- Luận Giải Tiền Duyên -->
+    <div class="pkg-card rev" style="border-color:rgba(244,114,182,0.30);transition-delay:.65s;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#F472B6,#A78BFA,#4F6BFF);opacity:0;transition:opacity .3s;"></div>
+      <div class="pkg-icon" style="background:linear-gradient(135deg,rgba(244,114,182,0.18),rgba(123,94,167,0.14));border-color:rgba(244,114,182,0.28);">♡</div>
+      <span class="pkg-tag" style="color:#F472B6;">Cặp Đôi</span>
+      <div class="pkg-name">Luận Giải Tiền Duyên</div>
+      <div class="pkg-subtitle">Bản đồ năng lượng hai tâm hồn</div>
+
+      <button class="benefit-toggle" onclick="toggleBenefit(this)">
+        <span>✦ Lợi ích nhận được</span>
+        <span class="arrow">▾</span>
+      </button>
+      <div class="benefit-body">
+        <p>"Phân tích song song bản đồ năng lượng của cả hai — tiền duyên, điểm dung hoà, thử thách và cách hai năng lượng cộng hưởng cùng nhau."</p>
+      </div>
+
+      <div class="pkg-fit" style="border-left-color:rgba(244,114,182,0.45);background:rgba(244,114,182,0.05);">
+        <strong style="color:#F472B6;">Phù hợp:</strong> Cặp đôi đang yêu, sắp kết hôn, đang tìm hiểu muốn ra quyết định, hoặc vợ chồng muốn hiểu nhau sâu hơn.
+      </div>
+
+      <div class="pkg-footer">
+        <div class="pkg-price"><span class="pp-num" style="color:#F472B6;">2.000.000</span><span class="pp-unit">VNĐ / 2 người</span></div>
+        <div class="pkg-cta-text">2 file PDF + Video luận giải riêng.</div>
+        <a href="tien-duyen.html" class="pkg-btn ghost" style="margin-bottom:.6rem;border-color:rgba(244,114,182,0.35);color:#F472B6;">Xem Chi Tiết</a>
+        <a href="tien-duyen.html#dang-ky" class="pkg-btn" style="background:linear-gradient(135deg,#DB2777,#7B5EA7);box-shadow:0 0 22px rgba(244,114,182,0.32);">Đăng Ký Ngay</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -783,12 +902,8 @@
           <td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td>
         </tr>
         <tr>
-          <td>Lộ trình 9 tháng cá nhân</td>
-          <td><span class="check">✓</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="cross">—</span></td>
-        </tr>
-        <tr>
-          <td>Lộ trình 12 tháng theo năm cá nhân</td>
-          <td><span class="cross">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td>
+          <td>Lộ trình 12 tháng cá nhân</td>
+          <td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td>
         </tr>
         <tr>
           <td>Phân tích cho con (ngày sinh + tên)</td>
@@ -808,7 +923,7 @@
         </tr>
         <tr>
           <td>Thời gian / hình thức</td>
-          <td>2 ngày</td><td>3–4 ngày</td><td>4–5 ngày</td><td>3–4 ngày</td><td>2–3 ngày</td><td style="color:#FCD34D;font-weight:600;">~120 phút · Live</td>
+          <td>24 giờ</td><td>3 ngày</td><td>4 ngày</td><td>3–4 ngày</td><td>2–3 ngày</td><td style="color:#FCD34D;font-weight:600;">~120 phút · Live</td>
         </tr>
       </tbody>
     </table>
@@ -838,7 +953,7 @@
     <div class="step-card rev d3">
       <div class="step-num">3</div>
       <h3>Nhận Kết Quả</h3>
-      <p>Bản luận giải chi tiết được gửi qua email theo thời gian cam kết (2–5 ngày tùy gói). Bao gồm hướng dẫn đọc kết quả.</p>
+      <p>Bản luận giải chi tiết được gửi qua email theo thời gian cam kết (24 giờ–4 ngày tùy gói). Bao gồm hướng dẫn đọc kết quả.</p>
     </div>
   </div>
 </section>
@@ -911,11 +1026,15 @@
         <input type="email" placeholder="email@example.com" required />
       </div>
       <div class="form-group">
+        <label>Số điện thoại / Zalo *</label>
+        <input type="tel" placeholder="0912 345 678" required />
+      </div>
+      <div class="form-group">
         <label>Ghi chú thêm (không bắt buộc)</label>
         <input type="text" placeholder="Câu hỏi hoặc vấn đề bạn muốn làm rõ..." />
       </div>
-      <button type="submit" class="form-submit">Gửi Đăng Ký →</button>
-      <p class="form-note">Sau khi gửi form, bạn sẽ nhận email hướng dẫn thanh toán trong vòng 2–4 giờ.</p>
+      <button type="submit" class="form-submit">Tiếp Tục Thanh Toán →</button>
+      <p class="form-note">Điền đầy đủ thông tin để tiếp tục đến trang thanh toán.</p>
     </form>
   </div>
 </section>
@@ -948,7 +1067,7 @@
         Tôi có thể hỏi thêm sau khi nhận kết quả không?
         <span class="faq-arrow">▾</span>
       </button>
-      <div class="faq-a">Có. Sau khi nhận bản luận giải, bạn có thể đặt tối đa 3 câu hỏi phúc đáp qua email trong vòng 7 ngày. Sam sẽ phản hồi trong 24–48 giờ.</div>
+      <div class="faq-a">Có. Sau khi nhận bài luận giải đầy đủ, bạn tiếp tục trao đổi với Sam qua zalo.</div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)">
@@ -1129,5 +1248,6 @@ async function handleSubmit(e){
   }, 800);
 }
 </script>
+<script src="/assets/chatbot-embed.js" defer></script>
 </body>
 </html>

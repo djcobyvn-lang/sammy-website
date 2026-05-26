@@ -12,7 +12,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
     :root {
-      --bg:      #04051A; --bg2: #080C2E; --bg3: #0D1240;
+      --bg:     #03030C; --bg2: #080C2E; --bg3: #0D1240;
       --card:    rgba(13,18,64,0.60);
       --violet:  #7B5EA7; --indigo: #4F6BFF; --neon: #A78BFA;
       --teal:    #2DD4BF; --gold: #C9A84C; --gold2: #E8C56A;
@@ -50,11 +50,10 @@
       color: var(--text); letter-spacing: .05em;
     }
     .logo-mark {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--violet), var(--indigo));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Be Vietnam Pro', sans-serif; font-size: .8rem; font-weight: 700; color: #fff;
-      border: 1.5px solid rgba(167,139,250,0.42); box-shadow: 0 0 18px rgba(167,139,250,0.35); flex-shrink: 0;
+      width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
+      border: 2px solid rgba(167,139,250,0.55);
+      box-shadow: 0 0 14px rgba(167,139,250,0.55), 0 0 28px rgba(167,139,250,0.28);
+      flex-shrink: 0;
     }
     .nav-links { display: flex; gap: 2.4rem; list-style: none; }
     .nav-links a { color: #B0A0D0; text-decoration: none; font-size: .875rem; transition: color .25s; }
@@ -421,6 +420,16 @@
       section { padding: 4rem 5%; }
     }
   </style>
+  <!-- Vercel Analytics + Speed Insights -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="180x180" href="/assets/logo-180.png">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png">
+  <meta property="og:image" content="https://www.sammytruong.com/assets/logo-circle.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="theme-color" content="#03030C">
 </head>
 <body>
 
@@ -430,7 +439,7 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="logo">
-    <div class="logo-mark">ST</div>
+    <img src="sammy%20logo.jpg" alt="Sammy Trương" class="logo-mark">
     <span style="text-transform:uppercase;letter-spacing:.12em;font-size:1rem;font-weight:700;">Sammy Trương</span>
   </a>
   <ul class="nav-links">
@@ -457,7 +466,7 @@
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow rev">
-      <span class="dot"></span>Khóa Học Chuyên Sâu<span class="dot"></span>
+      <span class="dot"></span>Khóa Học Nền Tảng<span class="dot"></span>
     </div>
     <h1 class="hero-title rev">Thần Số Học<br>3 Gốc</h1>
     <p class="hero-sub rev">Khai mở nội lực tiềm ẩn — xây dựng nền tảng Trí Tuệ, Đạo Đức và Nghị Lực vững chắc để sống đúng với bản chất sâu nhất của chính mình.</p>
@@ -528,7 +537,7 @@
     <div class="sec-head rev">
       <span class="sec-tag">✦ Nội Dung ✦</span>
       <h2 class="sec-title">Chương Trình Học</h2>
-      <p class="sec-sub">15 chương học chia thành 3 module chuyên sâu — từ nền tảng lý thuyết đến ứng dụng thực tiễn và chuyển hóa toàn diện.</p>
+      <p class="sec-sub">16 chương học (Chương 0–15) chia thành 3 module chuyên sâu — từ nền tảng triết lý đến giải mã chỉ số và vận trình chuyển hóa toàn diện.</p>
     </div>
     <div class="module-stack rev">
 
@@ -537,19 +546,18 @@
         <button class="module-toggle" onclick="toggleModule('mod1')">
           <div class="module-num-badge">01</div>
           <div class="module-info">
-            <span class="module-label">Module 1 · 5 Bài Học</span>
-            <div class="module-name">Nền Tảng 3 Gốc & Sự Vận Hành</div>
-            <div class="module-meta">Ý nghĩa con số, cách tính chỉ số, biểu đồ ngày sinh và mũi tên năng lượng</div>
+            <span class="module-label">Module 1 · 4 Chương · 14 Bài Học</span>
+            <div class="module-name">Nền Tảng & Công Cụ</div>
+            <div class="module-meta">Triết lý 3 Gốc, kiến thức nền tảng Thần Số Học, công thức và cách tính các chỉ số cốt lõi</div>
           </div>
           <div class="module-arrow">▾</div>
         </button>
         <div class="module-body" id="mod1-body">
           <ul class="chapter-list">
-            <li><span class="ch-num">1</span><div class="ch-text"><strong>Ý Nghĩa Các Con Số 1–9</strong>Mỗi con số là một tần số rung động riêng biệt. Bạn sẽ hiểu bản chất sâu xa của từng con số — từ năng lượng, điểm mạnh, bóng tối, đến bài học linh hồn ẩn bên trong.</div></li>
-            <li><span class="ch-num">2</span><div class="ch-text"><strong>Cách Tính Các Chỉ Số Cốt Lõi</strong>Học cách chính xác để tính toán các chỉ số từ tên và ngày sinh. Bước nền tảng để bạn tự luận giải cho bất kỳ ai — không phụ thuộc vào công cụ hay phần mềm.</div></li>
-            <li><span class="ch-num">3</span><div class="ch-text"><strong>Biểu Đồ Ngày Sinh & Mũi Tên</strong>Biểu đồ ngày sinh là "bản đồ nội lực" trực quan nhất. Bạn sẽ đọc được Mũi tên Sức Mạnh (những gì bạn sở hữu) và Mũi tên Trống (những gì cần bổ sung) để hiểu cách năng lượng vận hành trong thực tế.</div></li>
-            <li><span class="ch-num">4</span><div class="ch-text"><strong>Chỉ Số Ngày Sinh</strong>Con số ẩn trong ngày bạn chào đời — tiết lộ tài năng thiên phú, năng khiếu tự nhiên và cách bạn tiếp cận mọi tình huống một cách bản năng nhất.</div></li>
-            <li><span class="ch-num">5</span><div class="ch-text"><strong>Chỉ Số Thái Độ</strong>Cách bạn phản ứng với thế giới xung quanh — lớp "mặt nạ đầu tiên" mà người khác nhìn thấy trước khi hiểu bạn thực sự. Hiểu Thái Độ giúp bạn điều chỉnh cách giao tiếp và tạo ấn tượng đúng hướng.</div></li>
+            <li><span class="ch-num">0</span><div class="ch-text"><strong>Cảm Nhận Học Viên</strong>Lắng nghe chia sẻ thực tế từ học viên đã trải qua hành trình — để bạn hình dung rõ những chuyển hóa cụ thể mà khóa học này mang lại.</div></li>
+            <li><span class="ch-num">1</span><div class="ch-text"><strong>Nền Tảng 3 Gốc</strong>Khái niệm cốt lõi của triết lý 3 Gốc — Trí Tuệ, Đạo Đức, Nghị Lực — và mối liên hệ với 3 Độc. Hiểu tại sao thiếu một trong ba gốc sẽ ảnh hưởng toàn diện đến cuộc sống. (3 bài)</div></li>
+            <li><span class="ch-num">2</span><div class="ch-text"><strong>Kiến Thức Nền Tảng Về Thần Số Học</strong>Thần số học là gì, 3 trục năng lượng, 3 thể cơ bản, ý nghĩa 3 Gốc và 3 Độc của 9 số tự nhiên, tổng quan các con số chủ đạo và các nhóm số trong hệ thống. (5 bài)</div></li>
+            <li><span class="ch-num">3</span><div class="ch-text"><strong>Công Thức Và Cách Tính Các Chỉ Số</strong>Cách tính chính xác Số Chủ Đạo, Vận Mệnh, Tâm Hồn, Tính Cách, Ngày Sinh, Thái Độ, Trưởng Thành và Chỉ Số Nợ Nghiệp từ tên và ngày sinh. (5 bài)</div></li>
           </ul>
         </div>
       </div>
@@ -559,19 +567,20 @@
         <button class="module-toggle" onclick="toggleModule('mod2')">
           <div class="module-num-badge">02</div>
           <div class="module-info">
-            <span class="module-label">Module 2 · 5 Bài Học</span>
-            <div class="module-name">Bản Đồ Chiến Lược & Vận Trình</div>
-            <div class="module-meta">Con đường đời, sứ mệnh, linh hồn, nhân cách, chu kỳ năm và các giai đoạn đời người</div>
+            <span class="module-label">Module 2 · 6 Chương · 50 Bài Học</span>
+            <div class="module-name">Giải Mã Các Chỉ Số</div>
+            <div class="module-meta">Số Chủ Đạo, Vận Mệnh, Tâm Hồn, Tính Cách, Biểu Đồ Ngày Sinh và Ốc Đảo</div>
           </div>
           <div class="module-arrow">▾</div>
         </button>
         <div class="module-body" id="mod2-body">
           <ul class="chapter-list">
-            <li><span class="ch-num">6</span><div class="ch-text"><strong>Con Đường Đời & Sứ Mệnh</strong>Hai chỉ số quan trọng nhất — Con đường Đời cho biết bạn được sinh ra để làm gì, Sứ Mệnh tiết lộ điều bạn phải hoàn thành trong kiếp này. Khi hai chỉ số này hòa hợp, cuộc đời chảy tự nhiên như nước.</div></li>
-            <li><span class="ch-num">7</span><div class="ch-text"><strong>Linh Hồn, Nhân Cách & Trưởng Thành</strong>Bộ ba chỉ số định hình con người bên trong: Linh Hồn là điều bạn khao khát sâu thẳm, Nhân Cách là hình ảnh bạn chiếu ra ngoài, Trưởng Thành là người bạn tiến hóa thành khi đạt đến đỉnh cao bản thân.</div></li>
-            <li><span class="ch-num">8</span><div class="ch-text"><strong>Năm Cá Nhân & Tháng Cá Nhân</strong>Vũ trụ vận hành theo chu kỳ 9 năm. Biết mình đang ở năm nào giúp bạn hành động đúng nhịp — khi nào gieo hạt, khi nào thu hoạch, khi nào cần buông bỏ để tái sinh.</div></li>
-            <li><span class="ch-num">9</span><div class="ch-text"><strong>4 Đỉnh Cao & 4 Thử Thách</strong>Bản đồ thời gian trọn đời: 4 giai đoạn bạn tỏa sáng rực rỡ nhất và 4 giai đoạn thử thách đặt ra bài học quan trọng nhất. Nắm được lịch vũ trụ này, bạn không còn bất ngờ trước bất kỳ thăng trầm nào.</div></li>
-            <li><span class="ch-num">10</span><div class="ch-text"><strong>Ứng Dụng Thực Tế: Lập Kế Hoạch Theo Năng Lượng</strong>Tổng hợp toàn bộ Module 2 vào bài thực hành lập kế hoạch sống cá nhân — xác định thời điểm vàng cho sự nghiệp, tình cảm, sức khỏe và các quyết định quan trọng trong năm tới.</div></li>
+            <li><span class="ch-num">4</span><div class="ch-text"><strong>Ý Nghĩa Số Chủ Đạo</strong>Giải mã toàn bộ Số Chủ Đạo từ 2 đến 33 — con số trung tâm xác định sứ mệnh, bài học và con đường phát triển trọn đời của bạn. (12 bài)</div></li>
+            <li><span class="ch-num">5</span><div class="ch-text"><strong>Ý Nghĩa Chỉ Số Vận Mệnh</strong>Từ Vận Mệnh 1 đến 33 — chỉ số tiết lộ tài năng tiềm ẩn, thiên hướng nghề nghiệp và đích đến cuối cùng bạn cần hướng tới. (12 bài)</div></li>
+            <li><span class="ch-num">6</span><div class="ch-text"><strong>Ý Nghĩa Chỉ Số Tâm Hồn</strong>Từ Tâm Hồn 1 đến 33 — khao khát sâu thẳm nhất, điều bạn thực sự muốn nhưng ít khi nói ra, động lực thúc đẩy mọi lựa chọn từ bên trong. (12 bài)</div></li>
+            <li><span class="ch-num">7</span><div class="ch-text"><strong>Ý Nghĩa Chỉ Số Tính Cách</strong>Từ Tính Cách 1 đến 33 — hình ảnh bạn chiếu ra ngoài, cách người khác nhìn nhận bạn và lớp "mặt nạ xã hội" bạn mặc hàng ngày. (12 bài)</div></li>
+            <li><span class="ch-num">8</span><div class="ch-text"><strong>Ý Nghĩa Các Con Số Trong Biểu Đồ Ngày Sinh</strong>Đọc hiểu toàn bộ bản đồ nội lực trực quan — cách các con số xuất hiện (hoặc vắng mặt) trong biểu đồ ngày sinh tiết lộ điều gì về bạn. (1 bài · 61 phút)</div></li>
+            <li><span class="ch-num">9</span><div class="ch-text"><strong>Ốc Đảo Là Gì?</strong>Khái niệm đặc biệt trong Thần Số Học — khi một con số xuất hiện quá nhiều tạo thành "ốc đảo năng lượng" và ảnh hưởng thế nào đến tính cách, hành vi. (1 bài · 15 phút)</div></li>
           </ul>
         </div>
       </div>
@@ -581,19 +590,20 @@
         <button class="module-toggle" onclick="toggleModule('mod3')">
           <div class="module-num-badge">03</div>
           <div class="module-info">
-            <span class="module-label">Module 3 · 5 Bài Học</span>
-            <div class="module-name">Chuyển Hóa & Chữa Lành</div>
-            <div class="module-meta">Nợ nghiệp, chỉ số thiếu, nội cảm và thực hành chuyển hóa 3 Gốc trong đời sống thực</div>
+            <span class="module-label">Module 3 · 6 Chương · 65 Bài Học</span>
+            <div class="module-name">Vận Trình & Chuyển Hóa</div>
+            <div class="module-meta">Chỉ Số Thiếu, Năm & Tháng Cá Nhân, Mũi Tên, Đỉnh Cao, Thử Thách và 3 Giai Đoạn Đời Người</div>
           </div>
           <div class="module-arrow">▾</div>
         </button>
         <div class="module-body" id="mod3-body">
           <ul class="chapter-list">
-            <li><span class="ch-num">11</span><div class="ch-text"><strong>Nợ Nghiệp</strong>Những bài học chưa hoàn thành từ quá khứ đang lặp lại trong hiện tại. Bạn sẽ nhận diện các mẫu hành vi tự phá hoại bản thân, hiểu nguyên nhân gốc rễ và học cách chuyển hóa thay vì tiếp tục mang nặng.</div></li>
-            <li><span class="ch-num">12</span><div class="ch-text"><strong>Chỉ Số Thiếu</strong>Những năng lượng vắng mặt trong bản đồ của bạn — không phải điểm yếu, mà là bài học cần bổ sung. Hiểu Số Thiếu giúp bạn chủ động phát triển những khía cạnh còn thiếu thay vì bị chúng chi phối vô thức.</div></li>
-            <li><span class="ch-num">13</span><div class="ch-text"><strong>Nội Cảm</strong>Tần số rung động sâu nhất của linh hồn bạn — tiếng thì thầm bên trong mà ít ai lắng nghe. Học cách kết nối và tin tưởng vào trực giác nội tâm như một la bàn dẫn đường chính xác nhất trong mọi quyết định.</div></li>
-            <li><span class="ch-num">14</span><div class="ch-text"><strong>Thực Hành Chuyển Hóa 3 Gốc — Trí Tuệ</strong>Bài thực hành đầu tiên: dùng toàn bộ kiến thức đã học để xây dựng "bản đồ tự nhận thức" cá nhân. Hiểu rõ mình là ai, tại sao mình hành động như vậy và cách tối ưu hóa Gốc Trí Tuệ trong đời sống thực.</div></li>
-            <li><span class="ch-num">15</span><div class="ch-text"><strong>Thực Hành Chuyển Hóa 3 Gốc — Đạo Đức & Nghị Lực</strong>Bài thực hành tổng kết: kết hợp Gốc Đạo Đức (sống đúng với giá trị cốt lõi) và Gốc Nghị Lực (hành động đúng thời điểm) thành lộ trình chuyển hóa toàn diện — từ hiểu biết đến ứng dụng thực tế mỗi ngày.</div></li>
+            <li><span class="ch-num">10</span><div class="ch-text"><strong>Ý Nghĩa Chỉ Số Thiếu Và Chỉ Số Nội Cảm</strong>Giải mã 9 Chỉ Số Thiếu (năng lượng vắng mặt cần bổ sung) và 9 Chỉ Số Nội Cảm (tần số rung động sâu nhất) — cùng bài đúc kết tổng hợp ứng dụng thực tế. (20 bài)</div></li>
+            <li><span class="ch-num">11</span><div class="ch-text"><strong>Ý Nghĩa Chỉ Số Năm Cá Nhân Và Tháng Cá Nhân</strong>Chu kỳ 9 năm vận hành như thế nào, ý nghĩa từng Năm Cá Nhân (1–9), cách đọc Tháng Cá Nhân và bài chiêm nghiệm về đỉnh — đáy trong vận trình. (12 bài)</div></li>
+            <li><span class="ch-num">12</span><div class="ch-text"><strong>Ý Nghĩa Mũi Tên Sức Mạnh & Mũi Tên Trống</strong>Những năng lượng bạn SỞ HỮU (Mũi Tên Sức Mạnh) và những năng lượng bạn THIẾU (Mũi Tên Trống) trong biểu đồ — công cụ nhìn thấy "bản đồ nội lực" trực quan nhất. (2 bài · 58 phút)</div></li>
+            <li><span class="ch-num">13</span><div class="ch-text"><strong>Ý Nghĩa Chỉ Số Đỉnh Cao</strong>Công thức tính, ý nghĩa Đỉnh Cao số 1–11 và Đỉnh Cao Tiền Kỳ — 4 giai đoạn rực rỡ nhất trong đời bạn và tuổi bước vào từng đỉnh cao. (14 bài)</div></li>
+            <li><span class="ch-num">14</span><div class="ch-text"><strong>Ý Nghĩa Chỉ Số Thử Thách</strong>Công thức tính và ý nghĩa Thử Thách số 0–8 — 4 giai đoạn bài học quan trọng nhất buộc bạn phải đối mặt và vượt qua để tiến hóa. (10 bài)</div></li>
+            <li><span class="ch-num">15</span><div class="ch-text"><strong>3 Giai Đoạn Đời Người + Bonus</strong>Tuổi Trẻ, Trưởng Thành, Viên Mãn — ba giai đoạn định hình trọn vẹn cuộc đời. Kèm 3 bài Bonus chuyên sâu về Chỉ Số Ngày Sinh, Thái Độ và Trưởng Thành. (7 bài)</div></li>
           </ul>
         </div>
       </div>
@@ -643,6 +653,36 @@
 
 <div class="divider"></div>
 
+<!-- ── KÍCH HOẠT TỰ ĐỘNG ── -->
+<section class="section">
+  <div class="inner-sm">
+    <div class="sec-head rev">
+      <span class="sec-tag">✦ Sau Khi Đăng Ký ✦</span>
+      <h2 class="sec-title">Vào Học Ngay — Không Cần Chờ</h2>
+      <p class="sec-sub">Quy trình đơn giản, hoàn toàn tự động. Bạn đăng ký xong là học được ngay.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:860px;margin:0 auto;">
+      <div class="rev d1" style="background:rgba(6,6,20,0.70);border:1px solid rgba(201,168,76,0.22);border-radius:20px;padding:1.6rem 1.4rem;text-align:center;position:relative;">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.35);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--gold2);">1</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;margin-bottom:.4rem;">Điền Form & Thanh Toán</div>
+        <p style="font-size:.8rem;color:var(--muted);line-height:1.7;">Điền thông tin đăng ký và chuyển khoản theo hướng dẫn.</p>
+      </div>
+      <div class="rev d2" style="background:rgba(6,6,20,0.70);border:1px solid rgba(167,139,250,0.22);border-radius:20px;padding:1.6rem 1.4rem;text-align:center;position:relative;">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.35);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--neon);">2</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;margin-bottom:.4rem;">Hệ Thống Tự Động Xác Nhận</div>
+        <p style="font-size:.8rem;color:var(--muted);line-height:1.7;">Sau khi nhận được thanh toán, hệ thống tự động kích hoạt tài khoản học viên cho email của bạn.</p>
+      </div>
+      <div class="rev d3" style="background:rgba(6,6,20,0.70);border:1px solid rgba(45,212,191,0.22);border-radius:20px;padding:1.6rem 1.4rem;text-align:center;position:relative;">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(45,212,191,0.12);border:1px solid rgba(45,212,191,0.30);display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--teal);">3</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;margin-bottom:.4rem;">Đăng Nhập & Học Ngay</div>
+        <p style="font-size:.8rem;color:var(--muted);line-height:1.7;">Vào trang Học Viên, nhập email — nhận mã OTP — đăng nhập và bắt đầu học ngay lập tức.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ── ĐĂNG KÝ ── -->
 <section class="section" id="register">
   <div class="inner">
@@ -671,15 +711,15 @@
             <input type="email" placeholder="email@example.com" required />
           </div>
           <div class="form-group">
-            <label>Số Zalo *</label>
+            <label>Số điện thoại / Zalo *</label>
             <input type="tel" placeholder="0912 345 678" required />
           </div>
           <div class="form-group">
             <label>Mục tiêu tham gia khóa học</label>
             <textarea rows="3" placeholder="Bạn muốn đạt được điều gì sau khóa học này?"></textarea>
           </div>
-          <button type="submit" class="form-submit">Đăng Ký Khóa Học →</button>
-          <p class="form-note">Sau khi đăng ký và thanh toán, tài khoản học sẽ được kích hoạt tự động và gửi qua Email.</p>
+          <button type="submit" class="form-submit">Tiếp Tục Thanh Toán →</button>
+          <p class="form-note">Điền đầy đủ thông tin để tiếp tục đến trang thanh toán.</p>
         </form>
       </div>
 
@@ -689,7 +729,7 @@
           <span class="ph-label">Học Phí Khóa Học</span>
           <span class="price-original">4.868.000 ₫</span>
           <div class="ph-num">2.868.000 ₫</div>
-          <span class="price-badge">Tiết kiệm 2.000.000 ₫</span>
+          <span class="price-badge">Giá Ưu Đãi</span>
         </div>
 
         <div>
@@ -709,9 +749,9 @@
           <div class="pay-name">Trương Thị Diễm Kiều</div>
         </div>
 
-        <div class="delivery-note">
-          <div class="dn-ic">📌</div>
-          <p>Ghi chú chuyển khoản: <strong>Họ tên + Khóa học 3 Gốc</strong>. Tài liệu và thông tin học sẽ được gửi trong vòng <strong>24 giờ</strong> sau khi xác nhận thanh toán.</p>
+        <div class="delivery-note" style="background:rgba(45,212,191,0.07);border-color:rgba(45,212,191,0.24);">
+          <div class="dn-ic">⚡</div>
+          <p><strong style="color:var(--teal);">Hoàn toàn tự động</strong> — không cần chờ xác nhận thủ công. Ngay khi thanh toán được ghi nhận, email của bạn được kích hoạt và bạn có thể vào học ngay trong vài phút.</p>
         </div>
       </div>
 
@@ -806,5 +846,6 @@ async function handleSubmit(e){
   }, 800);
 }
 </script>
+<script src="/assets/chatbot-embed.js" defer></script>
 </body>
 </html>

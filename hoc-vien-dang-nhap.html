@@ -10,7 +10,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #04051A; --card: rgba(13,18,64,0.65);
+      --bg:     #03030C; --card: rgba(6,6,20,0.72);
       --violet: #7B5EA7; --indigo: #4F6BFF; --neon: #A78BFA;
       --gold: #C9A84C; --gold2: #E8C56A; --teal: #2DD4BF;
       --text: #E8E8F0; --muted: #9898B8;
@@ -27,17 +27,17 @@
 
     .logo-bar { text-align: center; margin-bottom: 2.4rem; }
     .logo-mark {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--violet), var(--indigo));
-      display: flex; align-items: center; justify-content: center;
-      font-size: .9rem; font-weight: 700; color: #fff;
-      border: 1.5px solid rgba(167,139,250,0.42);
-      box-shadow: 0 0 24px rgba(167,139,250,0.38); margin: 0 auto .9rem;
+      width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+      border: 2px solid rgba(167,139,250,0.55);
+      box-shadow: 0 0 16px rgba(167,139,250,0.55), 0 0 32px rgba(167,139,250,0.28);
+      margin: 0 auto .9rem; display: block;
     }
     .logo-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 600; letter-spacing: .1em;
+      font-size: 1.1rem; font-weight: 700; letter-spacing: .12em;
       text-transform: uppercase;
+      background: linear-gradient(155deg,#F0ECFF 20%,#C084FC 52%,#2DD4BF 90%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
     .card {
@@ -156,13 +156,23 @@
       .btn-primary { min-height: 48px; }
     }
 </style>
+  <!-- Vercel Analytics + Speed Insights -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="180x180" href="/assets/logo-180.png">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png">
+  <meta property="og:image" content="https://www.sammytruong.com/assets/logo-circle.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="theme-color" content="#03030C">
 </head>
 <body>
 <canvas id="starfield"></canvas>
 
 <div class="wrap">
   <div class="logo-bar">
-    <div class="logo-mark">ST</div>
+    <img src="sammy%20logo.jpg" alt="Sammy Trương" class="logo-mark">
     <div class="logo-name">Sammy Trương</div>
   </div>
 
@@ -300,10 +310,7 @@ async function sendOTP(e) {
     document.getElementById('emailShown').textContent = currentEmail;
     goPanel(2);
   } catch {
-    /* Dev mode — skip API, proceed anyway */
-    document.getElementById('emailShown').textContent = currentEmail;
-    showMsg('msg1', 'Server chưa kết nối — chế độ demo', 'success');
-    setTimeout(() => { goPanel(2); }, 800);
+    showMsg('msg1', 'Không thể kết nối máy chủ. Vui lòng thử lại sau ít phút hoặc nhắn Zalo 0362 676 159.', 'error');
   } finally {
     btn.disabled = false; btn.textContent = 'Gửi Mã Đăng Nhập →';
   }
@@ -333,7 +340,7 @@ async function verifyOTP() {
     const data = await res.json();
     if (!res.ok) { showMsg('msg2', data.error || 'Mã không đúng hoặc đã hết hạn.', 'error'); btn.disabled = false; btn.textContent = 'Xác Nhận Mã →'; return; }
     localStorage.setItem('sammy_token', data.token);
-    localStorage.setItem('sammy_name', data.name || currentEmail);
+    localStorage.setItem('sammy_name', data.name || data.email || currentEmail);
     clearInterval(countdownTimer);
     goPanel(3);
     setTimeout(() => window.location.href = 'hoc-vien-khoa-hoc.html', 1500);
@@ -384,5 +391,6 @@ function startCountdown() {
   });
 });
 </script>
+<script src="/assets/chatbot-embed.js" defer></script>
 </body>
 </html>

@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const SECRET = process.env.JWT_SECRET || 'sammy-jwt-secret-2026';
 
-function signToken(payload, expiresIn = '30d') {
+function signToken(payload, expiresIn = '365d') {
   return jwt.sign(payload, SECRET, { expiresIn });
 }
 
