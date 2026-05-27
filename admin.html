@@ -1420,7 +1420,7 @@ function nmCalc(name,day,month,year){
   const d1=peakReduce(m_r+d_r),d2=peakReduce(d_r+y_r);
   const d3=peakReduce(d1+d2),d4=peakReduce(m_r+y_r);
   const tt1=Math.abs(m_s-d_s),tt2=Math.abs(y_s-d_s),tt3=Math.abs(tt1-tt2),tt4=Math.abs(m_s-y_s);
-  const age1=36-duongDoi;
+  const age1=36-(duongDoi===22?4:duongDoi===33?6:duongDoi);
   const namCNList=[],thangCNList=[];
   for(let i=0;i<4;i++){const yr=today.getFullYear()+i;namCNList.push({year:yr,num:nmReduce(d_r+m_r+nmReduce(nmDS(String(yr))))});}
   for(let i=0;i<12;i++){const off=today.getMonth()+i;const mo=off%12+1;const yr=today.getFullYear()+Math.floor(off/12);const ncn=nmReduce(d_r+m_r+nmReduce(nmDS(String(yr))));thangCNList.push({month:mo,year:yr,num:nmReduce(ncn+mo),cur:i===0});}
