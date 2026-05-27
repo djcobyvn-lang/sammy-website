@@ -1362,6 +1362,7 @@ function nmDiac(t){
 }
 function nmReduce(n,km=true){while(n>9&&!(km&&NM_MASTER.has(n)))n=String(n).split('').reduce((s,d)=>s+parseInt(d),0);return n;}
 function nmRS(n){while(n>9)n=String(n).split('').reduce((s,d)=>s+parseInt(d),0);return n;}
+function peakReduce(n){if(n===10||n===11)return n;while(n>9){n=String(n).split('').reduce((s,d)=>s+parseInt(d),0);if(n===10||n===11)return n;}return n;}
 function nmDS(s){return s.split('').reduce((a,c)=>a+(parseInt(c)||0),0);}
 function nmOcDao(fd){
   const pres=new Set([1,2,3,4,5,6,7,8,9].filter(d=>fd[d]>0));
@@ -1416,9 +1417,8 @@ function nmCalc(name,day,month,year){
   const tcThSum=tinhCach+tamHon;
   const dcs=[['Vận mệnh',rawVM],['Tâm hồn',rawTH],['Tính cách',rawTC],['Cân bằng',rawCB],['Ngày sinh',day],['Thái độ',day+month],['Trưởng thành',duongDoi+vanMemh],['Cụm đường đời',cluster],['TC+TH',tcThSum]];
   const noNghiep={};for(const [lb,v] of dcs){if(NM_DEBTS.has(v)){if(!noNghiep[v])noNghiep[v]=[];noNghiep[v].push(lb);}}
-  const d1=nmReduce(m_r+d_r),d2=nmReduce(d_r+y_r);
-  const d3r=d1+d2,d3=(d3r===10||d3r===11)?d3r:nmReduce(d3r);
-  const d4r=m_r+y_r,d4=(d4r===10||d4r===11)?d4r:nmReduce(d4r);
+  const d1=peakReduce(m_r+d_r),d2=peakReduce(d_r+y_r);
+  const d3=peakReduce(d1+d2),d4=peakReduce(m_r+y_r);
   const tt1=Math.abs(m_s-d_s),tt2=Math.abs(y_s-d_s),tt3=Math.abs(tt1-tt2),tt4=Math.abs(m_s-y_s);
   const age1=36-duongDoi;
   const namCNList=[],thangCNList=[];
