@@ -1389,7 +1389,7 @@ function nmCalc(name,day,month,year){
   const rawTC=cons.reduce((s,l)=>s+(PYTH[l]||0),0);
   const rawCB=firsts.reduce((s,l)=>s+(PYTH[l]||0),0);
   const d_r=nmReduce(day),m_r=nmReduce(month),ySum=nmDS(String(year)),y_r=nmReduce(ySum);
-  const d_s=nmRS(day),m_s=nmRS(month),y_s=nmRS(ySum),cluster=d_r+m_r+y_r;
+  const d_s=nmRS(day),m_s=nmRS(month),y_s=nmRS(ySum),cluster=d_s+m_s+y_s;
   const duongDoi=nmReduce(cluster);
   const tamHon=nmReduce(rawTH);
   let tinhCach=nmReduce(rawTC);if(tinhCach===10)tinhCach=1;
