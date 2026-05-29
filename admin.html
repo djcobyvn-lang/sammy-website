@@ -1397,7 +1397,7 @@ function nmCalc(name,day,month,year){
   let tinhCach=nmReduce(rawTC);if(tinhCach===10)tinhCach=1;
   const _thTcSum=tamHon+tinhCach;
   const vanMemh=NM_MASTER.has(_thTcSum)?_thTcSum:nmReduce(rawVM);
-  const ngaySinh=nmReduce(day),thaiDo=nmReduce(d_r+m_r),truongThanh=nmReduce(duongDoi+vanMemh),canBang=nmReduce(rawCB);
+  const ngaySinh=nmReduce(day),thaiDo=nmReduce(day+month),truongThanh=nmReduce(duongDoi+vanMemh),canBang=nmReduce(rawCB);
   const tienThan=nmDS(String(day)+String(month)+String(year));
   const today=new Date();
   const yCurSum=nmDS(String(today.getFullYear()));
