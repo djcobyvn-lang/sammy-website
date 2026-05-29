@@ -1391,7 +1391,7 @@ function nmCalc(name,day,month,year){
   const d_r=nmReduce(day),m_r=nmReduce(month),ySum=nmDS(String(year)),y_r=nmReduce(ySum);
   const d_s=nmRS(day),m_s=nmRS(month),y_s=nmRS(ySum),cluster=d_s+m_s+y_s;
   const duongDoi=nmReduce(cluster);
-  const tamHon=nmReduce(rawTH);
+  let tamHon=nmReduce(rawTH);if(tamHon===10)tamHon=1;
   let tinhCach=nmReduce(rawTC);if(tinhCach===10)tinhCach=1;
   const _thTcSum=tamHon+tinhCach;
   const vanMemh=NM_MASTER.has(_thTcSum)?_thTcSum:nmReduce(rawVM);
