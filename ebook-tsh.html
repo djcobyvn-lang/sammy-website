@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full Tài Liệu Công Thức + Ý Nghĩa Thần Số Học — Sammy Trương</title>
+  <meta name="description" content="Bộ tài liệu đầy đủ nhất về Thần Số Học Pythagoras — toàn bộ công thức tính và ý nghĩa 25+ chỉ số. Tài liệu độc quyền từ Sammy Trương." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png">
+  <meta property="og:image" content="https://www.sammytruong.com/assets/logo-circle.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="theme-color" content="#03030C">
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    :root {
+      --bg: #03030C; --bg2: #04020F;
+      --card: rgba(10,6,28,0.70);
+      --violet: #7B5EA7; --violet2: #9B7FD4; --violet3: #C4B5FD;
+      --neon:  #A78BFA; --teal: #2DD4BF; --teal2: #5EEAD4;
+      --indigo: #4F6BFF;
+      --text: #EDE9FF; --muted: #8B82B0;
+      --border: rgba(167,139,250,0.18); --border-h: rgba(167,139,250,0.48);
+    }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--bg) url('/assets/anh-nen-sammy.png') center top / 100% auto no-repeat;
+      color: var(--text); overflow-x: hidden; line-height: 1.75;
+    }
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .nebula {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 65% at 0% 20%, rgba(123,94,167,0.13) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 50% at 100% 5%, rgba(45,212,191,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 65% 45% at 50% 95%, rgba(167,139,250,0.07) 0%, transparent 60%);
+    }
+    nav, main, footer, .mobile-menu { position: relative; z-index: 2; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 72px;
+      background: rgba(3,3,12,0.65); backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border); transition: background .35s;
+    }
+    nav.scrolled { background: rgba(3,3,12,0.96); }
+    .logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; font-family: 'Cormorant Garamond', serif; font-size: 1.18rem; font-weight: 600; color: var(--text); letter-spacing: .05em; }
+    .logo-mark { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(167,139,250,0.55); box-shadow: 0 0 14px rgba(167,139,250,0.55), 0 0 28px rgba(167,139,250,0.28); flex-shrink: 0; }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a { color: #B0A0D0; text-decoration: none; font-size: .875rem; transition: color .25s; }
+    .nav-links a:hover { color: var(--text); }
+    .btn-hocvien { background: transparent; color: var(--neon); font-family: 'Be Vietnam Pro', sans-serif; font-size: .88rem; font-weight: 500; padding: .6rem 1.55rem; border-radius: 100px; border: 1px solid rgba(167,139,250,0.40); transition: background .3s; text-decoration: none; display: inline-flex; align-items: center; gap: .35rem; white-space: nowrap; }
+    .btn-hocvien:hover { background: rgba(167,139,250,0.10); }
+    .nav-actions { display: flex; align-items: center; gap: .6rem; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+    .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 99; background: rgba(3,3,12,0.98); backdrop-filter: blur(20px); padding: 1.6rem 6% 2.2rem; border-bottom: 1px solid var(--border); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu .nav-links { flex-direction: column; gap: 1.2rem; }
+    .mobile-menu .nav-links a { font-size: 1rem; }
+
+    /* ── SHARED ── */
+    .section { padding: 5.5rem 6%; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+    .inner-sm { max-width: 820px; margin: 0 auto; }
+    .divider { height: 1px; margin: 0 6%; background: linear-gradient(90deg, transparent, rgba(167,139,250,0.28), transparent); }
+
+    /* ── BTN VIOLET ── */
+    .btn-violet {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      background: linear-gradient(135deg, #5B3FA0, var(--violet2), var(--teal));
+      color: #fff; border: none; cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 1rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 1.05rem 2.8rem; border-radius: 12px;
+      box-shadow: 0 0 32px rgba(123,94,167,0.50); transition: box-shadow .3s, transform .2s;
+      text-decoration: none;
+    }
+    .btn-violet:hover { box-shadow: 0 0 60px rgba(167,139,250,0.65); transform: translateY(-2px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; padding: 110px 6% 80px;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 30% 50%, rgba(123,94,167,0.09) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: 5rem; align-items: center; position: relative; z-index: 1;
+    }
+
+    /* Book cover */
+    .book-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
+    .book-wrap::before {
+      content: '';
+      position: absolute; inset: -30px;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(167,139,250,0.18) 0%, rgba(45,212,191,0.08) 50%, transparent 75%);
+      border-radius: 50%; filter: blur(20px);
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%,100% { opacity: .7; transform: scale(1); }
+      50%      { opacity: 1; transform: scale(1.05); }
+    }
+    .book-cover {
+      width: 100%; max-width: 340px;
+      border-radius: 8px 20px 20px 8px;
+      box-shadow:
+        -8px 0 0 rgba(0,0,0,0.4),
+        -14px 4px 20px rgba(0,0,0,0.5),
+        0 0 50px rgba(167,139,250,0.35),
+        0 0 100px rgba(45,212,191,0.15),
+        0 30px 70px rgba(123,94,167,0.20);
+      transform: perspective(1000px) rotateY(6deg);
+      transition: transform .4s ease, box-shadow .4s ease;
+      position: relative; z-index: 1;
+      animation: bookFloat 4.5s ease-in-out infinite;
+    }
+    .book-cover:hover {
+      transform: perspective(1000px) rotateY(2deg) translateY(-8px);
+      box-shadow: -8px 0 0 rgba(0,0,0,0.4), -14px 4px 20px rgba(0,0,0,0.5), 0 0 80px rgba(167,139,250,0.55), 0 0 140px rgba(45,212,191,0.22), 0 40px 90px rgba(123,94,167,0.28);
+    }
+    @keyframes bookFloat {
+      0%,100% { transform: perspective(1000px) rotateY(6deg) translateY(0px); }
+      50%      { transform: perspective(1000px) rotateY(6deg) translateY(-16px); }
+    }
+    @keyframes bookFloatMobile {
+      0%,100% { transform: translateY(0px); }
+      50%      { transform: translateY(-12px); }
+    }
+
+    /* Hero text */
+    .hero-text { display: flex; flex-direction: column; gap: 0; }
+    .hero-title-block { display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.6rem; }
+    .hero-text-body { display: flex; flex-direction: column; gap: 1.5rem; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.35);
+      border-radius: 100px; padding: .35rem .9rem;
+      font-size: .62rem; color: var(--violet3); letter-spacing: .18em; text-transform: uppercase;
+      width: fit-content;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4.8vw, 4rem); font-weight: 700; line-height: 1.1;
+      background: linear-gradient(155deg, #EDE9FF 20%, var(--neon) 50%, var(--teal2) 90%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-quote {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.05rem; color: rgba(237,233,255,0.60); line-height: 2;
+      border-left: 2px solid rgba(167,139,250,0.38); padding-left: 1rem;
+    }
+    .hero-desc { font-size: .9rem; color: var(--muted); line-height: 1.9; }
+
+    .for-whom {
+      background: rgba(10,6,28,0.65); border: 1px solid rgba(167,139,250,0.20);
+      border-radius: 14px; padding: 1.4rem 1.6rem;
+    }
+    .for-whom-title { font-size: .62rem; text-transform: uppercase; letter-spacing: .18em; color: var(--violet3); margin-bottom: 1rem; display: block; font-weight: 600; }
+    .for-whom ul { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+    .for-whom ul li { display: flex; align-items: flex-start; gap: .6rem; font-size: .86rem; color: var(--muted); line-height: 1.75; }
+    .for-whom ul li::before { content: '◆'; color: var(--teal); font-size: .5rem; flex-shrink: 0; margin-top: .5rem; }
+
+    .inside-title { font-size: .62rem; text-transform: uppercase; letter-spacing: .18em; color: var(--violet3); margin-bottom: 1rem; display: block; font-weight: 600; }
+    .inside-list { list-style: none; display: flex; flex-direction: column; gap: .95rem; }
+    .inside-list li { display: flex; align-items: flex-start; gap: .8rem; font-size: .88rem; color: var(--muted); line-height: 1.75; }
+    .inside-num { width: 24px; height: 24px; border-radius: 50%; background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.38); color: var(--violet3); font-size: .7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .18rem; }
+    .inside-list strong { color: var(--text); }
+
+    .hero-cta-text {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: .97rem; color: rgba(237,233,255,0.50); line-height: 1.9;
+    }
+
+    /* Price box */
+    .price-box {
+      background: rgba(10,6,28,0.70); border: 1px solid rgba(167,139,250,0.30);
+      border-radius: 14px; padding: 1.4rem 1.6rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      position: relative; overflow: hidden;
+    }
+    .price-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--violet), var(--neon), var(--teal));
+    }
+    .price-badge-row { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+    .price-badge {
+      background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.30);
+      border-radius: 100px; padding: .2rem .65rem;
+      font-size: .58rem; color: var(--violet3); font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    }
+    .price-badge-sale {
+      background: rgba(45,212,191,0.12); border: 1px solid rgba(45,212,191,0.32);
+      border-radius: 100px; padding: .2rem .65rem;
+      font-size: .58rem; color: var(--teal2); font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .price-row { display: flex; align-items: center; gap: 1.2rem; }
+    .price-old { font-size: 1rem; color: var(--muted); text-decoration: line-through; opacity: .6; }
+    .price-arrow { color: var(--neon); font-size: 1rem; }
+    .price-new { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: var(--violet3); line-height: 1; }
+    .price-deadline { font-size: .76rem; color: var(--teal2); display: flex; align-items: center; gap: .4rem; }
+
+    /* ── CHAPTERS ── */
+    .chapters-section {
+      background: linear-gradient(180deg, rgba(4,2,15,0) 0%, rgba(4,2,15,0.40) 40%, rgba(4,2,15,0) 100%);
+    }
+    .ch-head { text-align: center; margin-bottom: 3.5rem; }
+    .ch-tag { font-size: .68rem; text-transform: uppercase; letter-spacing: .2em; color: var(--violet3); margin-bottom: .6rem; display: block; }
+    .ch-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
+      background: linear-gradient(135deg, var(--text) 30%, var(--neon) 70%, var(--teal) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: .03em;
+    }
+    .ch-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--neon), transparent); margin: 1rem auto 0; }
+    .ch-sub-text { font-size: .88rem; color: var(--muted); margin-top: .8rem; }
+
+    .chapters-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; max-width: 1100px; margin: 0 auto; }
+    .ch-card {
+      background: rgba(8,5,22,0.65); border: 1px solid rgba(167,139,250,0.14);
+      border-radius: 14px; padding: 1.2rem 1.4rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: border-color .3s, background .3s, box-shadow .3s;
+    }
+    .ch-card:hover { border-color: rgba(167,139,250,0.38); background: rgba(14,8,36,0.72); box-shadow: 0 0 24px rgba(167,139,250,0.08); }
+    .ch-num-badge {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 300; color: rgba(167,139,250,0.30);
+      letter-spacing: .04em; flex-shrink: 0; min-width: 34px; line-height: 1;
+      padding-top: .1rem;
+    }
+    .ch-info { flex: 1; }
+    .ch-name { font-size: .82rem; font-weight: 600; color: var(--text); text-transform: uppercase; letter-spacing: .06em; line-height: 1.4; margin-bottom: .28rem; }
+    .ch-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: .88rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── VALUE SECTION ── */
+    .value-wrap { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem; max-width: 1000px; margin: 0 auto; }
+    .val-card {
+      background: rgba(8,5,22,0.65); border: 1px solid rgba(167,139,250,0.16);
+      border-radius: 18px; padding: 1.8rem 1.6rem; text-align: center;
+      transition: border-color .3s, transform .3s;
+    }
+    .val-card:hover { border-color: rgba(167,139,250,0.40); transform: translateY(-5px); }
+    .val-icon { font-size: 2rem; margin-bottom: .8rem; display: block; }
+    .val-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+    .val-desc { font-size: .82rem; color: var(--muted); line-height: 1.75; }
+
+    /* ── CTA BOTTOM ── */
+    .cta-section {
+      text-align: center;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(123,94,167,0.10) 0%, transparent 70%);
+    }
+    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem,3.5vw,2.6rem); font-weight: 600; background: linear-gradient(135deg, var(--text) 30%, var(--neon) 70%, var(--teal) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: .8rem; }
+    .cta-sub { font-size: .92rem; color: var(--muted); max-width: 560px; margin: 0 auto 2.2rem; line-height: 1.85; }
+    .cta-price-row { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: .7rem; flex-wrap: wrap; }
+    .cta-price-old { font-size: 1.1rem; color: var(--muted); text-decoration: line-through; opacity: .6; }
+    .cta-price-arrow { color: var(--neon); font-size: 1.1rem; }
+    .cta-price-new { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: var(--violet3); line-height: 1; }
+    .cta-deadline { font-size: .78rem; color: var(--teal2); margin-bottom: 1.8rem; }
+    .cta-note { margin-top: 1rem; font-size: .78rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer { background: rgba(3,3,12,0.97); border-top: 1px solid var(--border); padding: 3rem 6% 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.8rem; border-bottom: 1px solid var(--border); }
+    .footer-logo { display: flex; align-items: center; gap: .65rem; text-decoration: none; font-family: 'Cormorant Garamond', serif; font-size: .95rem; font-weight: 600; color: var(--text); }
+    .footer-logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .footer-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: .82rem; transition: color .25s; }
+    .footer-links a:hover { color: var(--neon); }
+    .footer-copy { max-width: 1100px; margin: 1.2rem auto 0; font-size: .75rem; color: var(--muted); }
+
+    /* ── ANIM ── */
+    .rev { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .rev.visible { opacity: 1; transform: translateY(0); }
+    .rev-l { opacity: 0; transform: translateX(-32px); transition: opacity .7s ease, transform .7s ease; }
+    .rev-l.visible { opacity: 1; transform: translateX(0); }
+    .rev-r { opacity: 0; transform: translateX(32px); transition: opacity .7s ease, transform .7s ease; }
+    .rev-r.visible { opacity: 1; transform: translateX(0); }
+    .d1{transition-delay:.06s;} .d2{transition-delay:.12s;} .d3{transition-delay:.18s;} .d4{transition-delay:.24s;} .d5{transition-delay:.30s;}
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { display: flex; flex-direction: column; align-items: center; gap: 0; text-align: center; }
+      .hero-text { display: contents; }
+      .hero-title-block { order: 1; width: 100%; padding-bottom: 1.6rem; display: flex; flex-direction: column; align-items: center; gap: .8rem; }
+      .book-wrap { order: 2; padding-bottom: 1.8rem; }
+      .hero-text-body { order: 3; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+      .hero-badge { align-self: center; }
+      .for-whom, .price-box { text-align: left; width: 100%; }
+      .hero-quote { border-left: none; border-top: 2px solid rgba(167,139,250,0.35); padding-left: 0; padding-top: .75rem; }
+      .book-cover { animation: bookFloatMobile 4.5s ease-in-out infinite; max-width: 240px; }
+      .value-wrap { grid-template-columns: 1fr; max-width: 420px; }
+    }
+    @media (max-width: 768px) {
+      .chapters-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 4rem 5%; }
+      .hero { padding: 100px 5% 60px; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="nebula"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo">
+    <img src="sammy%20logo.jpg" alt="Sammy Trương" class="logo-mark">
+    <span style="text-transform:uppercase;letter-spacing:.12em;font-size:1rem;font-weight:700;background:linear-gradient(155deg,#F0ECFF 20%,#C084FC 52%,#2DD4BF 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Sammy Trương</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Trang Chủ</a></li>
+    <li><a href="luan-giai-ca-nhan.html">Luận Giải</a></li>
+    <li><a href="ebook.html">Ebook</a></li>
+    <li><a href="ebook-tsh.html" style="color:var(--violet3);">Tài Liệu TSH</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="hoc-vien-dang-nhap.html" class="btn-hocvien">👤 Học Viên</a>
+  </div>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mob">
+  <ul class="nav-links" style="display:flex;">
+    <li><a href="index.html">Trang Chủ</a></li>
+    <li><a href="luan-giai-ca-nhan.html">Luận Giải</a></li>
+    <li><a href="ebook.html">Ebook</a></li>
+    <li><a href="ebook-tsh.html">Tài Liệu TSH</a></li>
+  </ul>
+  <a href="#own-ebook" class="btn-violet" style="margin-top:1.4rem;display:block;text-align:center;padding:.8rem;border-radius:12px;font-size:.9rem;">Sở Hữu Tài Liệu Ngay</a>
+</div>
+
+<main>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <div class="book-wrap rev-l">
+      <img src="anhmockup.png" alt="Full Tài Liệu Công Thức + Ý Nghĩa Thần Số Học" class="book-cover" />
+    </div>
+
+    <div class="hero-text rev-r">
+
+      <div class="hero-title-block">
+        <div class="hero-badge">✦ Bộ Tài Liệu Độc Quyền · Sammy Numerology</div>
+        <h1 class="hero-title">Full Tài Liệu<br>Công Thức &<br>Ý Nghĩa TSH</h1>
+      </div>
+
+      <div class="hero-text-body">
+        <div class="hero-quote">
+          "Toàn bộ hệ thống Thần Số Học Pythagoras —<br>
+          từ công thức tính đến ý nghĩa sâu sắc của từng chỉ số"
+        </div>
+
+        <p class="hero-desc">Bộ tài liệu đầy đủ và chi tiết nhất về Thần Số Học được Sammy Trương biên soạn sau nhiều năm nghiên cứu và thực hành. Không chỉ là công thức — đây là hệ thống giải mã hoàn chỉnh để bạn hiểu chính mình và người khác ở chiều sâu nhất.</p>
+
+        <div class="for-whom">
+          <span class="for-whom-title">Bộ Tài Liệu Này Dành Cho Bạn, Nếu:</span>
+          <ul>
+            <li>Bạn đang học hoặc muốn ứng dụng Thần Số Học một cách bài bản và chuyên sâu.</li>
+            <li>Bạn muốn có tài liệu tra cứu đầy đủ — công thức, ý nghĩa từng chỉ số — để tự luận giải.</li>
+            <li>Bạn đang xây dựng sự nghiệp tư vấn và cần bộ tài liệu chuẩn mực làm nền tảng.</li>
+            <li>Bạn muốn hiểu sâu về con số chủ đạo, vận mệnh, tiền thân và hành trình linh hồn của chính mình.</li>
+          </ul>
+        </div>
+
+        <div>
+          <span class="inside-title">Bên Trong Bộ Tài Liệu, Bạn Nhận Được:</span>
+          <ul class="inside-list">
+            <li><span class="inside-num">25+</span><span><strong>Tài liệu PDF đầy đủ:</strong> Mỗi chỉ số được trình bày riêng, rõ ràng, dễ tra cứu và ứng dụng ngay.</span></li>
+            <li><span class="inside-num">✦</span><span><strong>Bảng công thức tổng hợp:</strong> Tất cả công thức tính các chỉ số Thần Số Học trong 1 tài liệu duy nhất — tra cứu nhanh, không bỏ sót.</span></li>
+            <li><span class="inside-num">✦</span><span><strong>Ý nghĩa sâu từng con số:</strong> Từ lượt giải cơ bản đến các chỉ số nâng cao như Tiền Thân, Đỉnh Cao, Cầu Nối, Mũi Tên.</span></li>
+          </ul>
+        </div>
+
+        <p class="hero-cta-text">Đừng học Thần Số Học mà thiếu nền tảng.<br>Đây là tài liệu bạn cần ngay từ đầu.</p>
+
+        <div class="price-box">
+          <div class="price-badge-row">
+            <span class="price-badge">✦ Giá Gốc</span>
+            <span class="price-badge-sale">⚡ Ưu Đãi Đến 07/07/2026</span>
+          </div>
+          <div class="price-row">
+            <span class="price-old">793.000đ</span>
+            <span class="price-arrow">→</span>
+            <span class="price-new">379.000đ</span>
+          </div>
+          <div class="price-deadline">⏳ Giá ưu đãi kết thúc ngày 07 tháng 07, 2026</div>
+          <a href="thanh-toan.html?goi=ebook-tsh&ten=Khach+Hang" class="btn-violet">Sở Hữu Tài Liệu Ngay</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── GIÁ TRỊ ── -->
+<section class="section">
+  <div class="inner">
+    <div class="ch-head rev">
+      <span class="ch-tag">✦ Tại Sao Bộ Tài Liệu Này Khác Biệt ✦</span>
+      <div class="ch-title">Hệ Thống — Đầy Đủ — Thực Dụng</div>
+      <div class="ch-divider"></div>
+    </div>
+    <div class="value-wrap">
+      <div class="val-card rev d1">
+        <span class="val-icon">📐</span>
+        <div class="val-title">Công Thức Chuẩn Xác</div>
+        <div class="val-desc">Tất cả công thức tính từng chỉ số được trình bày rõ ràng, kèm ví dụ minh họa — không cần đoán mò, không sợ tính sai.</div>
+      </div>
+      <div class="val-card rev d2">
+        <span class="val-icon">📖</span>
+        <div class="val-title">Ý Nghĩa Sâu Sắc</div>
+        <div class="val-desc">Mỗi con số được giải thích theo ngôn ngữ tâm lý học và năng lượng — không chỉ định nghĩa khô khan mà chạm đến chiều sâu nội tâm.</div>
+      </div>
+      <div class="val-card rev d3">
+        <span class="val-icon">🛠️</span>
+        <div class="val-title">Ứng Dụng Ngay</div>
+        <div class="val-desc">Tài liệu được thiết kế để tra cứu nhanh trong khi tư vấn — dùng cho cả học tập cá nhân lẫn nghề tư vấn Thần Số chuyên nghiệp.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── NỘI DUNG 25 FILE ── -->
+<section class="section chapters-section">
+  <div class="inner">
+    <div class="ch-head rev">
+      <span class="ch-tag">Nội Dung Bộ Tài Liệu</span>
+      <div class="ch-title">25+ Tài Liệu Thần Số Học</div>
+      <div class="ch-divider"></div>
+      <p class="ch-sub-text">Bao phủ toàn bộ hệ thống chỉ số Pythagoras — từ nền tảng đến chuyên sâu</p>
+    </div>
+    <div class="chapters-grid">
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">00</span>
+        <div class="ch-info">
+          <div class="ch-name">Bảng Công Thức Tổng Hợp</div>
+          <div class="ch-sub">Toàn bộ công thức tính tất cả chỉ số trong một tài liệu</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">01</span>
+        <div class="ch-info">
+          <div class="ch-name">Lượt Giải Các Con Số</div>
+          <div class="ch-sub">Ý nghĩa nền tảng của các con số 1 đến 9, 11, 22, 33</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">02</span>
+        <div class="ch-info">
+          <div class="ch-name">Con Số Chủ Đạo</div>
+          <div class="ch-sub">Sứ mệnh linh hồn — chỉ số trung tâm của toàn bộ biểu đồ</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">03</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Vận Mệnh</div>
+          <div class="ch-sub">Con đường tiến hóa và những bài học cuộc đời</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">04</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Tâm Hồn</div>
+          <div class="ch-sub">Khao khát sâu thẳm, động lực nội tâm và năng lượng cảm xúc</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">05</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Tính Cách</div>
+          <div class="ch-sub">Bề ngoài và cách người khác nhìn nhận bạn trong cuộc sống</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">06</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Ngày Sinh</div>
+          <div class="ch-sub">Tài năng đặc biệt và năng lượng bẩm sinh từ ngày ra đời</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">07</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Thái Độ</div>
+          <div class="ch-sub">Cách tiếp cận cuộc sống — bộ lọc nhìn nhận thế giới</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">08</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Trưởng Thành</div>
+          <div class="ch-sub">Năng lượng và sức mạnh xuất hiện ở nửa sau cuộc đời</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">09</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Nợ Nghiệp</div>
+          <div class="ch-sub">Những bài học nghiệp quả cần hoàn thành trong kiếp này</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">10</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Thiếu</div>
+          <div class="ch-sub">Những con số vắng mặt và bài học ẩn sau sự thiếu hụt</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">11</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Nội Cảm</div>
+          <div class="ch-sub">Năng lượng trực giác và chiều sâu cảm nhận nội tâm</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">12</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Cân Bằng</div>
+          <div class="ch-sub">Phong cách phản ứng và xử lý tình huống căng thẳng</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">13</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Khuyết</div>
+          <div class="ch-sub">Những chữ cái vắng mặt — chìa khóa để hiểu điểm mù tiềm thức</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">14</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Cầu Nối Thành Công</div>
+          <div class="ch-sub">Con đường kết nối chủ đạo và vận mệnh — chìa khóa sự nghiệp</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">15</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Cầu Nối Hạnh Phúc</div>
+          <div class="ch-sub">Năng lượng kết nối tâm hồn và tính cách — bí mật các mối quan hệ</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">16</span>
+        <div class="ch-info">
+          <div class="ch-name">Mũi Tên Sức Mạnh</div>
+          <div class="ch-sub">Những cụm số hội tụ sức mạnh — tài năng và năng lực nổi trội</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">17</span>
+        <div class="ch-info">
+          <div class="ch-name">Mũi Tên Trống</div>
+          <div class="ch-sub">Những vùng thiếu hụt năng lượng — thách thức cần vượt qua</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">18</span>
+        <div class="ch-info">
+          <div class="ch-name">Năm Cá Nhân</div>
+          <div class="ch-sub">Chu kỳ năng lượng theo từng năm — đọc đúng thời điểm, đúng hành động</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">19</span>
+        <div class="ch-info">
+          <div class="ch-name">Tháng Cá Nhân</div>
+          <div class="ch-sub">Chu kỳ năng lượng theo từng tháng trong năm cá nhân</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">20</span>
+        <div class="ch-info">
+          <div class="ch-name">Đỉnh Cao Đời Người</div>
+          <div class="ch-sub">4 đỉnh cao và thời điểm nở rộ — bản đồ tiến hóa theo tuổi đời</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">21</span>
+        <div class="ch-info">
+          <div class="ch-name">Chỉ Số Thử Thách</div>
+          <div class="ch-sub">Những bài kiểm tra số phận — chuyển hóa thách thức thành trí tuệ</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">22</span>
+        <div class="ch-info">
+          <div class="ch-name">Giai Đoạn Tuổi Trẻ</div>
+          <div class="ch-sub">Năng lượng và bài học chi phối giai đoạn đầu đời</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">23</span>
+        <div class="ch-info">
+          <div class="ch-name">Giai Đoạn Trưởng Thành</div>
+          <div class="ch-sub">Năng lượng định hình sự nghiệp và trách nhiệm giai đoạn giữa</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">24</span>
+        <div class="ch-info">
+          <div class="ch-name">Giai Đoạn Viên Mãn</div>
+          <div class="ch-sub">Năng lượng thu hoạch và trí tuệ giai đoạn cuối hành trình</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2" style="border-color:rgba(167,139,250,0.28);background:rgba(14,8,36,0.75);">
+        <span class="ch-num-badge" style="color:rgba(167,139,250,0.55);">25</span>
+        <div class="ch-info">
+          <div class="ch-name" style="color:var(--neon);">Tiền Thân — Hành Trình Linh Hồn</div>
+          <div class="ch-sub">Kiếp trước và năng lượng linh hồn mang vào kiếp này · Đầy đủ 9 biến thể Tiền Thân</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CTA BOTTOM ── -->
+<section class="section cta-section" id="own-ebook">
+  <div class="inner-sm rev">
+    <div class="ch-tag" style="text-align:center;">✦ Sở Hữu Ngay Hôm Nay ✦</div>
+    <div class="cta-title">Nắm Trọn Hệ Thống<br>Thần Số Học Trong Tay</div>
+    <p class="cta-sub">Bộ tài liệu hoàn chỉnh nhất — để bạn không còn phải mò mẫm từng chỉ số, không thiếu công thức khi cần, và tự tin luận giải bất kỳ ai.</p>
+    <div class="cta-price-row">
+      <span class="cta-price-old">793.000đ</span>
+      <span class="cta-price-arrow">→</span>
+      <span class="cta-price-new">379.000đ</span>
+    </div>
+    <div class="cta-deadline">⏳ Giá ưu đãi kết thúc ngày 07 tháng 07, 2026</div>
+    <a href="thanh-toan.html?goi=ebook-tsh&ten=Khach+Hang" class="btn-violet" style="font-size:1.05rem;padding:1.1rem 3.2rem;">
+      Sở Hữu Tài Liệu Ngay
+    </a>
+    <p class="cta-note">Sau khi thanh toán, bộ tài liệu PDF sẽ được gửi qua Zalo hoặc Email trong vòng 24 giờ.<br>Liên hệ hỗ trợ: <strong style="color:var(--violet3);">Zalo 0362.676.159</strong></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <img src="sammy%20logo.jpg" alt="Sammy Trương">
+      Sammy Trương
+    </a>
+    <div class="footer-links">
+      <a href="index.html">Trang Chủ</a>
+      <a href="luan-giai-ca-nhan.html">Luận Giải</a>
+      <a href="ebook.html">Ebook</a>
+      <a href="khoa-hoc-chuyen-sau.html">Khóa Học</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2025 Sammy Trương · Thần Số Học Chữa Lành</p>
+</footer>
+
+<script>
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  function init(){stars=[];for(let i=0;i<200;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.1,o:Math.random()*.4+.1,speed:Math.random()*.016+.004,phase:Math.random()*Math.PI*2});}
+  function draw(t){ctx.clearRect(0,0,W,H);stars.forEach(s=>{const tw=Math.sin(t*.001*s.speed*1000+s.phase)*.28+.72;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(180,160,255,${s.o*tw})`;ctx.fill();});requestAnimationFrame(draw);}
+  resize();init();requestAnimationFrame(draw);
+  window.addEventListener('resize',()=>{resize();init();});
+})();
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>50));
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mob').classList.toggle('open'));
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(el=>io.observe(el));
+</script>
+<script src="/assets/chatbot-embed.js" defer></script>
+</body>
+</html>
