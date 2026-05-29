@@ -1726,6 +1726,13 @@ function nmRenderAll(r){
     <div class="nm-footer">Giải mã ngày sinh – Làm chủ cuộc đời</div>`;
 }
 
+/* ── Enter key triggers calculation from any input field ── */
+['nmName','nmDay','nmMonth','nmYear'].forEach(id=>{
+  document.getElementById(id).addEventListener('keydown',e=>{
+    if(e.key==='Enter')nmCalculate();
+  });
+});
+
 /* ── Load meanings immediately on page load ── */
 nmLoadMeanings();
 </script>
