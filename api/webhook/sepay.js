@@ -4,6 +4,7 @@ const {
   sendActivationEmail,
   sendAdvancedCourseEmail,
   sendEbookEmail,
+  sendEbookTshEmail,
   sendTarotConfirmEmail,
   sendPaymentConfirmEmail
 } = require('../_lib/mailer');
@@ -90,7 +91,30 @@ async function processWebhook(req) {
   }
 
   // ══════════════════════════════════════════════════════
-  // CASE 3: KHÓA HỌC CHUYÊN SÂU — CHUYENSAU + 4 digits
+  // CASE 3: EBOOK TSH — EBOKTSH + 4 digits
+  // ══════════════════════════════════════════════════════
+  const ebookTshMatch = contentNorm.match(/EBOKTSH(\d{4})/);
+  if (ebookTshMatch) {
+    if (amount < 379000) { console.warn('[EBOOK-TSH] Thiếu tiền:', amount); return; }
+    const code = ebookTshMatch[1];
+    await kvSet(`paid:ebook-tsh-${code}`, '1', 86400);
+    await kvSet('paid:ebook-tsh', '1', 86400);
+    console.log('[EBOOK-TSH] ✓ paid:ebook-tsh set');
+
+    const infoRaw = await kvGet(`info:EBOKTSH${code}`);
+    const info = safeParseJSON(infoRaw);
+    if (info?.email) {
+      await sendEbookTshEmail({ email: info.email, name: info.name || '' }).catch(console.warn);
+      await gasCall({ formType: 'ebook-order', email: info.email, name: info.name, phone: info.phone, status: 'Đã Thanh Toán ✓', note: 'Bộ Tài Liệu TSH' }).catch(console.warn);
+      console.log('[EBOOK-TSH] ✓ tsh email →', info.email);
+    } else {
+      console.warn('[EBOOK-TSH] Không có info trong KV cho code EBOKTSH' + code);
+    }
+    return;
+  }
+
+  // ══════════════════════════════════════════════════════
+  // CASE 4: KHÓA HỌC CHUYÊN SÂU — CHUYENSAU + 4 digits
   // ══════════════════════════════════════════════════════
   const csMatch = contentNorm.match(/CHUYENSAU(\d{4})/);
   if (csMatch) {

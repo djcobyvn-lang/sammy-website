@@ -87,6 +87,35 @@ async function sendEbookEmail({ email, name }) {
   });
 }
 
+// ─── EBOOK TSH ───────────────────────────────────────────
+const EBOOK_TSH_LINK = process.env.EBOOK_TSH_LINK || 'https://ebookzone.b-cdn.net/FULL%20T%C3%80I%20LI%E1%BB%86U%20C%C3%94NG%20TH%E1%BB%A8C%20%2B%20%C3%9D%20NGH%C4%A8A%20TSH%20-%20%20SAMMY%20TR%C6%AF%C6%A0NG.rar';
+
+async function sendEbookTshEmail({ email, name }) {
+  await transporter.sendMail({
+    from: FROM, to: email,
+    subject: '📚 Bộ Tài Liệu Công Thức Tính & Ý Nghĩa Các Chỉ Số — Link Tải Của Bạn',
+    html: `
+      <div style="font-family:sans-serif;max-width:560px;margin:0 auto;background:#04020F;color:#EDE9FF;padding:40px;border-radius:16px;">
+        <h2 style="background:linear-gradient(135deg,#C4B5FD,#A78BFA,#5EEAD4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:1.5rem;margin-bottom:8px;">Cảm ơn bạn đã tin tưởng! 📚</h2>
+        <p style="color:#8B82B0;margin-bottom:24px;">Xin chào <strong style="color:#EDE9FF;">${name || 'bạn'}</strong>, bộ tài liệu của bạn đã sẵn sàng để tải về.</p>
+        <div style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.28);border-radius:14px;padding:28px;text-align:center;margin-bottom:24px;">
+          <p style="font-size:.88rem;color:#8B82B0;margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;">Bộ Tài Liệu Của Bạn</p>
+          <p style="font-size:1rem;color:#EDE9FF;font-weight:700;margin-bottom:20px;">Công Thức Tính & Ý Nghĩa Các Chỉ Số Thần Số Học</p>
+          <a href="${EBOOK_TSH_LINK}" style="display:inline-block;background:linear-gradient(135deg,#5B3FA0,#A78BFA,#2DD4BF);color:#fff;font-weight:700;padding:14px 32px;border-radius:100px;text-decoration:none;font-size:1rem;">📥 Tải Bộ Tài Liệu Ngay</a>
+          <p style="font-size:.75rem;color:#8B82B0;margin-top:14px;">File định dạng <strong style="color:#EDE9FF;">.RAR</strong> — giải nén để nhận toàn bộ 25+ tài liệu PDF.<br>Link có hiệu lực vĩnh viễn — lưu email này để truy cập lại.</p>
+        </div>
+        <div style="background:rgba(45,212,191,0.07);border:1px solid rgba(45,212,191,0.22);border-radius:12px;padding:16px;margin-bottom:20px;">
+          <p style="font-size:.83rem;color:#8B82B0;line-height:1.75;margin:0;">
+            ✦ Bộ tài liệu gồm <strong style="color:#EDE9FF;">25+ file PDF</strong> — mỗi chỉ số một file riêng biệt.<br>
+            ✦ Bao gồm bảng công thức tổng hợp để tra cứu nhanh.<br>
+            ✦ Nếu gặp vấn đề khi tải, liên hệ Zalo <strong style="color:#EDE9FF;">${ZALO}</strong>.
+          </p>
+        </div>
+        <p style="margin-top:24px;font-size:.78rem;color:#8B82B0;">Sammy Trương · Thần Số Học Pythagoras</p>
+      </div>`
+  });
+}
+
 // ─── KHÓA HỌC CHUYÊN SÂU ─────────────────────────────────
 // Thay ZALO_GROUP_LINK bằng link nhóm Zalo thực tế khi có
 const ZALO_GROUP_LINK = process.env.ZALO_GROUP_LINK || 'https://zalo.me/0362676159';
@@ -126,4 +155,4 @@ async function sendTarotConfirmEmail({ email, name }) {
   });
 }
 
-module.exports = { sendOTPEmail, sendPaymentConfirmEmail, sendActivationEmail, sendEbookEmail, sendAdvancedCourseEmail, sendTarotConfirmEmail };
+module.exports = { sendOTPEmail, sendPaymentConfirmEmail, sendActivationEmail, sendEbookEmail, sendEbookTshEmail, sendAdvancedCourseEmail, sendTarotConfirmEmail };
