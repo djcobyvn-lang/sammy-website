@@ -10,7 +10,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #04051A; --card: rgba(13,18,64,0.62);
+      --bg:     #03030C; --card: rgba(6,6,20,0.72);
       --violet: #7B5EA7; --indigo: #4F6BFF; --neon: #A78BFA;
       --teal: #2DD4BF; --gold: #C9A84C; --gold2: #E8C56A;
       --text: #E8E8F0; --muted: #9898B8;
@@ -30,14 +30,12 @@
     /* LOGO BAR */
     .logo-bar { text-align: center; margin: 1.6rem 0 2.2rem; }
     .logo-mark {
-      width: 46px; height: 46px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--violet), var(--indigo));
-      display: flex; align-items: center; justify-content: center;
-      font-size: .82rem; font-weight: 700; color: #fff;
-      border: 1.5px solid rgba(167,139,250,0.42);
-      box-shadow: 0 0 20px rgba(167,139,250,0.38); margin: 0 auto .75rem;
+      width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
+      border: 2px solid rgba(167,139,250,0.55);
+      box-shadow: 0 0 16px rgba(167,139,250,0.55), 0 0 32px rgba(167,139,250,0.28);
+      margin: 0 auto .75rem; display: block;
     }
-    .logo-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text); }
+    .logo-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; background: linear-gradient(155deg,#F0ECFF 20%,#C084FC 52%,#2DD4BF 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
     /* STEP BAR */
     .steps { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 2.4rem; }
@@ -271,6 +269,35 @@
       .order-price { text-align: left; }
     }
 
+    /* ── EBOOK FORM ── */
+    .ebook-form-section {
+      display: none; padding: 1.4rem 2rem 1rem;
+      border-bottom: 1px solid rgba(167,139,250,0.10);
+    }
+    .ebook-form-section.show { display: block; }
+    .ebook-form-title {
+      font-size: .68rem; text-transform: uppercase; letter-spacing: .15em;
+      color: var(--neon); margin-bottom: 1.1rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .ebook-form-title::before { content: '✉'; font-size: .8rem; }
+    .ef-group { margin-bottom: .9rem; }
+    .ef-group label {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .72rem; color: var(--muted); margin-bottom: .4rem; letter-spacing: .03em;
+    }
+    .ef-group label .ef-icon { font-size: .78rem; opacity: .7; }
+    .ef-group input {
+      width: 100%; background: rgba(3,3,12,0.72);
+      border: 1px solid rgba(167,139,250,0.22); border-radius: 10px;
+      padding: .75rem 1rem; color: var(--text);
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: .9rem; outline: none;
+      transition: border-color .3s;
+    }
+    .ef-group input:focus { border-color: var(--neon); }
+    .ef-group input::placeholder { color: var(--muted); }
+    .ef-note { font-size: .72rem; color: var(--muted); display: flex; align-items: center; gap: .4rem; margin-top: .5rem; }
+    .ef-note::before { content: '⚠'; font-size: .72rem; opacity: .6; }
+
     /* ── RESPONSIVE IMPROVEMENTS ── */
     @media (max-width: 480px) {
       body { padding: 1rem .8rem 3rem; }
@@ -289,13 +316,23 @@
       .order-price .op-num { font-size: 1.4rem; }
     }
   </style>
+  <!-- Vercel Analytics + Speed Insights -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="180x180" href="/assets/logo-180.png">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png">
+  <meta property="og:image" content="https://www.sammytruong.com/assets/logo-circle.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="theme-color" content="#03030C">
 </head>
 <body>
 <canvas id="starfield"></canvas>
 
 <div class="wrap">
   <div class="logo-bar">
-    <div class="logo-mark">ST</div>
+    <img src="sammy%20logo.jpg" alt="Sammy Trương" class="logo-mark">
     <div class="logo-name">Sammy Trương</div>
   </div>
 
@@ -338,6 +375,24 @@
         <span class="op-num" id="pkgPrice">—</span>
         <span class="op-unit">VNĐ</span>
       </div>
+    </div>
+
+    <!-- EBOOK: form thu thập thông tin khách hàng -->
+    <div class="ebook-form-section" id="ebookForm">
+      <div class="ebook-form-title" id="ebookFormTitle">Thông Tin Nhận Kết Quả *</div>
+      <div class="ef-group">
+        <label><span class="ef-icon">✉</span>Email nhận file *</label>
+        <input type="email" id="ef-email" placeholder="ban@email.com" oninput="updateCkWithEmail()" />
+      </div>
+      <div class="ef-group">
+        <label><span class="ef-icon">👤</span>Họ và tên *</label>
+        <input type="text" id="ef-name" placeholder="Nguyễn Văn A" oninput="saveInfoToKV()" />
+      </div>
+      <div class="ef-group">
+        <label><span class="ef-icon">📞</span>Số điện thoại *</label>
+        <input type="tel" id="ef-phone" placeholder="0912 345 678" oninput="saveInfoToKV()" />
+      </div>
+      <p class="ef-note">Vui lòng nhập đúng thông tin để nhận file tự động.</p>
     </div>
 
     <!-- 2-COLUMN: QR + BANK INFO -->
@@ -494,7 +549,7 @@ const PACKAGES_DATA = {
   '2-ngay-sinh-dac-biet': {
     name: 'Gói 2 Ngày Sinh — Đặc Biệt',
     sub:  'Hợp nhất',
-    price: 3000000,
+    price: 2500000,
     code: '2NS-DB'
   },
   'truc-tiep-11': {
@@ -508,6 +563,34 @@ const PACKAGES_DATA = {
     sub:  'Video · Bài tập · Hỗ trợ trực tiếp',
     price: 2868000,
     code: '3GOC',
+    type: 'khoa-hoc'
+  },
+  'ebook': {
+    name: 'Hành Trình Tiến Hóa Tối Thượng',
+    sub:  'Ebook PDF · Gửi qua Email sau thanh toán',
+    price: 89000,
+    code: 'EBOOK',
+    type: 'luan-giai'
+  },
+  'ebook-tsh': {
+    name: 'Bộ Tài Liệu Công Thức Tính & Ý Nghĩa Các Chỉ Số',
+    sub:  'Bộ tài liệu PDF · Gửi qua Email sau thanh toán',
+    price: 379000,
+    code: 'EBOOK-TSH',
+    type: 'luan-giai'
+  },
+  'tarot': {
+    name: 'Trải Bài Tarot',
+    sub:  'Video trải bài cá nhân',
+    price: 500000,
+    code: 'TAROT',
+    type: 'luan-giai'
+  },
+  'khoa-hoc-chuyen-sau': {
+    name: 'Khóa Học Thần Số Chuyên Sâu',
+    sub:  'Trực tiếp Zoom · Tháng 6/2026',
+    price: 6868000,
+    code: 'CHUYEN-SAU',
     type: 'khoa-hoc'
   }
 };
@@ -538,14 +621,34 @@ if (!pkg) {
   document.getElementById('mainCard').style.display = 'none';
   document.getElementById('notFound').style.display = 'block';
 } else {
-  // Nội dung CK theo loại
-  let ckContent;
-  if (pkg.type === 'khoa-hoc') {
-    const hvCode = Math.floor(1000 + Math.random() * 9000);
-    ckContent = `${custName} HV${hvCode}`;
-    sessionStorage.setItem('sammy_hv_code', hvCode.toString());
+  // Nội dung CK — dùng mã 4 số duy nhất cho mọi loại
+  function randCode() { return String(Math.floor(1000 + Math.random() * 9000)); }
+  let ckContent, orderCode;
+  if (pkgId === 'khoa-hoc-3-goc') {
+    orderCode = randCode();
+    ckContent = `${custName} HV${orderCode}`;
+    sessionStorage.setItem('sammy_hv_code', orderCode);
+  } else if (pkgId === 'ebook') {
+    orderCode = randCode();
+    ckContent = `EBOOK${orderCode}`;
+    sessionStorage.setItem('sammy_ebook_code', orderCode);
+  } else if (pkgId === 'ebook-tsh') {
+    orderCode = randCode();
+    ckContent = `EBOKTSH${orderCode}`;
+    sessionStorage.setItem('sammy_ebook_tsh_code', orderCode);
+  } else if (pkgId === 'khoa-hoc-chuyen-sau') {
+    orderCode = randCode();
+    ckContent = `${custName} CHUYENSAU${orderCode}`;
+    sessionStorage.setItem('sammy_cs_code', orderCode);
+  } else if (pkgId === 'tarot') {
+    orderCode = randCode();
+    ckContent = `${custName} TAROT${orderCode}`;
+    sessionStorage.setItem('sammy_tarot_code', orderCode);
   } else {
-    ckContent = `${custName} ${pkg.code}`;
+    // Luận giải — thêm code để webhook nhận diện duy nhất
+    orderCode = randCode();
+    ckContent = `${custName} ${pkg.code}${orderCode}`;
+    sessionStorage.setItem('sammy_luan_giai_code', orderCode);
   }
 
   document.getElementById('pkgName').textContent    = pkg.name;
@@ -555,12 +658,126 @@ if (!pkg) {
   document.getElementById('ckContent').textContent  = ckContent;
   document.title = `Thanh toán ${pkg.name} | Sammy Trương`;
 
+  // Hiện form thu thập email cho: ebook, khóa học, tarot
+  if (['ebook','ebook-tsh','khoa-hoc-3-goc','khoa-hoc-chuyen-sau','tarot'].includes(pkgId)) {
+    document.getElementById('ebookForm').classList.add('show');
+    // Pre-fill từ sessionStorage nếu có
+    const ssEmail = sessionStorage.getItem('sammy_email') || '';
+    const ssName  = sessionStorage.getItem('sammy_ten')   || custName;
+    const ssPhone = sessionStorage.getItem('sammy_zalo')  || '';
+    if (ssEmail) document.getElementById('ef-email').value = ssEmail;
+    if (ssName)  document.getElementById('ef-name').value  = ssName;
+    if (ssPhone) document.getElementById('ef-phone').value = ssPhone;
+  }
+
   // QR SePay
   const qrUrl = `https://qr.sepay.vn/img?bank=ACB&acc=6855117&template=compact&amount=${pkg.price}&des=${encodeURIComponent(ckContent)}`;
   document.getElementById('sePayQR').src = qrUrl;
 
-  // Bắt đầu polling NGAY KHI MỞ TRANG — không cần chờ bấm button
+  // Auto-save info ngay khi load (dùng sessionStorage sẵn có)
+  setTimeout(() => saveInfoNow(), 300);
+
+  // Bắt đầu polling NGAY KHI MỞ TRANG
   startPolling({ packageId: pkgId, email: sessionStorage.getItem('sammy_email') || '' });
+}
+
+/* ─── LƯU THÔNG TIN KHÁCH VÀO KV (gọi khi form thay đổi) ─── */
+let _saveTimer = null;
+function saveInfoToKV() {
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(async () => {
+    const codeKey = pkgId === 'ebook'              ? 'sammy_ebook_code'
+                  : pkgId === 'ebook-tsh'          ? 'sammy_ebook_tsh_code'
+                  : pkgId === 'khoa-hoc-3-goc'     ? 'sammy_hv_code'
+                  : pkgId === 'khoa-hoc-chuyen-sau' ? 'sammy_cs_code'
+                  : pkgId === 'tarot'               ? 'sammy_tarot_code'
+                  : null;
+    if (!codeKey) return;
+    const code  = sessionStorage.getItem(codeKey);
+    if (!code) return;
+
+    const prefix = pkgId === 'ebook'              ? 'EBOOK'
+                 : pkgId === 'ebook-tsh'          ? 'EBOKTSH'
+                 : pkgId === 'khoa-hoc-3-goc'     ? 'HV'
+                 : pkgId === 'khoa-hoc-chuyen-sau' ? 'CHUYENSAU'
+                 : 'TAROT';
+
+    const email = document.getElementById('ef-email')?.value?.trim()
+               || document.getElementById('f-email')?.value?.trim()
+               || sessionStorage.getItem('sammy_email') || '';
+    const name  = document.getElementById('ef-name')?.value?.trim()
+               || sessionStorage.getItem('sammy_ten') || '';
+    const phone = document.getElementById('ef-phone')?.value?.trim()
+               || sessionStorage.getItem('sammy_zalo') || '';
+
+    if (!email) return;
+    sessionStorage.setItem('sammy_email', email);
+
+    try {
+      await fetch('/api/order?action=save-info', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: `${prefix}${code}`, email, name, phone })
+      });
+      console.log('[save-info] saved', prefix + code, '→', email);
+    } catch(e) { console.warn('[save-info] failed:', e.message); }
+  }, 800); // debounce 800ms
+}
+
+/* ─── Save ngay không debounce — dùng trong handleConfirm ─── */
+async function saveInfoNow() {
+  const codeMap = {
+    'ebook':               'sammy_ebook_code',
+    'ebook-tsh':           'sammy_ebook_tsh_code',
+    'khoa-hoc-3-goc':      'sammy_hv_code',
+    'khoa-hoc-chuyen-sau': 'sammy_cs_code',
+    'tarot':               'sammy_tarot_code',
+  };
+  const prefixMap = {
+    'ebook':               'EBOOK',
+    'ebook-tsh':           'EBOKTSH',
+    'khoa-hoc-3-goc':      'HV',
+    'khoa-hoc-chuyen-sau': 'CHUYENSAU',
+    'tarot':               'TAROT',
+  };
+  // Luận giải
+  if (!codeMap[pkgId]) {
+    const code = sessionStorage.getItem('sammy_luan_giai_code');
+    if (!code) return;
+    const email = document.getElementById('ef-email')?.value?.trim() || sessionStorage.getItem('sammy_email') || '';
+    const name  = document.getElementById('ef-name')?.value?.trim()  || sessionStorage.getItem('sammy_ten')   || custName;
+    const phone = document.getElementById('ef-phone')?.value?.trim() || sessionStorage.getItem('sammy_zalo')  || '';
+    if (email) sessionStorage.setItem('sammy_email', email);
+    if (!email) return;
+    try {
+      await fetch('/api/order?action=save-info', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: `${pkg.code.replace(/[^A-Z0-9]/g,'')}${code}`, email, name, phone })
+      });
+    } catch(e) { console.warn('[save-info]', e.message); }
+    return;
+  }
+  const codeKey = codeMap[pkgId];
+  const prefix  = prefixMap[pkgId];
+  const code    = sessionStorage.getItem(codeKey);
+  if (!code) return;
+  const email = document.getElementById('ef-email')?.value?.trim() || sessionStorage.getItem('sammy_email') || '';
+  const name  = document.getElementById('ef-name')?.value?.trim()  || sessionStorage.getItem('sammy_ten')   || custName;
+  const phone = document.getElementById('ef-phone')?.value?.trim() || sessionStorage.getItem('sammy_zalo')  || '';
+  if (email) sessionStorage.setItem('sammy_email', email);
+  if (!email) return;
+  try {
+    await fetch('/api/order?action=save-info', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: `${prefix}${code}`, email, name, phone })
+    });
+    console.log('[save-info] saved', prefix + code, '→', email);
+  } catch(e) { console.warn('[save-info]', e.message); }
+}
+
+/* ─── EBOOK: trigger save khi điền email ─── */
+function updateCkWithEmail() {
+  saveInfoToKV();
+  // Cập nhật QR không cần email trong CK — chỉ save KV
 }
 
 /* ─── COPY ─── */
@@ -589,6 +806,8 @@ async function handleConfirm() {
   const btn = document.getElementById('confirmBtn');
   btn.disabled = true;
   btn.textContent = 'Đang ghi nhận...';
+  // Đảm bảo thông tin khách được lưu vào KV trước khi webhook xử lý
+  await saveInfoNow();
 
   const order = {
     packageId:   pkgId,
@@ -607,7 +826,7 @@ async function handleConfirm() {
 
   /* POST to backend */
   try {
-    await fetch('/api/order/confirm', {
+    await fetch('/api/order?action=confirm', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(order)
@@ -635,7 +854,12 @@ let _pollTimer = null;
 function startPolling(order) {
   const email    = sessionStorage.getItem('sammy_email') || order.email || '';
   const pId      = order.packageId || sessionStorage.getItem('sammy_pkg') || '';
-  const pageType = (PACKAGES_DATA[pId]?.type === 'khoa-hoc') ? 'khoa-hoc' : 'luan-giai';
+  const pageType = pId === 'khoa-hoc-3-goc'     ? 'khoa-hoc'
+                 : pId === 'khoa-hoc-chuyen-sau' ? 'chuyen-sau'
+                 : pId === 'ebook'               ? 'ebook'
+                 : pId === 'ebook-tsh'           ? 'ebook'
+                 : pId === 'tarot'               ? 'tarot'
+                 : 'luan-giai';
 
   if (!pId) return;
   if (_pollTimer) clearInterval(_pollTimer); // evita duplicados
@@ -647,7 +871,7 @@ function startPolling(order) {
     attempts++;
     try {
       // Kiểm tra qua Vercel KV (nhanh, đáng tin cậy)
-      const checkRes  = await fetch(`/api/order/check?pkgId=${encodeURIComponent(pId)}&email=${encodeURIComponent(email)}`);
+      const checkRes  = await fetch(`/api/order?action=check?pkgId=${encodeURIComponent(pId)}&email=${encodeURIComponent(email)}`);
       const checkData = await checkRes.json();
       if (checkData.paid) {
         clearInterval(_pollTimer);
@@ -693,5 +917,6 @@ function startPolling(order) {
   window.addEventListener('resize',()=>{resize();init();});
 })();
 </script>
+<script src="/assets/chatbot-embed.js" defer></script>
 </body>
 </html>
