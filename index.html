@@ -671,6 +671,102 @@
       .course-desc { text-align: center; }
     }
 
+    /* ── EBOOK SECTION ── */
+    .ebook-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; max-width: 1060px; margin: 0 auto;
+    }
+    .eb-card {
+      background: var(--card); backdrop-filter: blur(18px);
+      border: 1px solid rgba(167,139,250,0.18); border-radius: 24px;
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: border-color .35s, box-shadow .35s, transform .35s;
+      position: relative;
+    }
+    .eb-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .eb-card.gold::before  { background: linear-gradient(90deg, #92600a, #E8C56A, #FCD34D); }
+    .eb-card.violet::before { background: linear-gradient(90deg, var(--violet), var(--neon), var(--teal)); }
+    .eb-card:hover { border-color: rgba(167,139,250,0.42); box-shadow: 0 16px 50px rgba(123,94,167,0.15); transform: translateY(-5px); }
+    .eb-cover-area {
+      padding: 2.2rem 2.2rem 1.2rem;
+      display: flex; justify-content: center; align-items: center;
+      position: relative; min-height: 260px;
+    }
+    .eb-glow {
+      position: absolute; width: 140px; height: 140px; border-radius: 50%;
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      filter: blur(40px); opacity: .5; pointer-events: none;
+      animation: ebGlow 5s ease-in-out infinite;
+    }
+    .eb-card.gold .eb-glow  { background: radial-gradient(circle, rgba(201,168,76,0.55) 0%, transparent 70%); }
+    .eb-card.violet .eb-glow { background: radial-gradient(circle, rgba(167,139,250,0.55) 0%, rgba(45,212,191,0.20) 60%, transparent 80%); }
+    @keyframes ebGlow { 0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1);}50%{opacity:.7;transform:translate(-50%,-50%) scale(1.1);} }
+    .eb-img {
+      width: 100%; max-width: 175px; position: relative; z-index: 1;
+      border-radius: 6px 14px 14px 6px;
+      box-shadow: -5px 0 0 rgba(0,0,0,0.38), -10px 3px 14px rgba(0,0,0,0.45);
+      transform: perspective(800px) rotateY(6deg);
+      transition: transform .4s ease;
+    }
+    .eb-card.gold .eb-img  { box-shadow: -5px 0 0 rgba(0,0,0,0.38), -10px 3px 14px rgba(0,0,0,0.45), 0 0 40px rgba(201,168,76,0.30); animation: ebFloatGold 5s ease-in-out infinite; }
+    .eb-card.violet .eb-img { box-shadow: -5px 0 0 rgba(0,0,0,0.38), -10px 3px 14px rgba(0,0,0,0.45), 0 0 50px rgba(167,139,250,0.38), 0 0 80px rgba(45,212,191,0.12); animation: ebFloatViolet 5s ease-in-out infinite; }
+    .eb-card:hover .eb-img { transform: perspective(800px) rotateY(2deg) translateY(-6px); }
+    @keyframes ebFloatGold   { 0%,100%{transform:perspective(800px) rotateY(6deg) translateY(0);}50%{transform:perspective(800px) rotateY(6deg) translateY(-12px);} }
+    @keyframes ebFloatViolet { 0%,100%{transform:perspective(800px) rotateY(6deg) translateY(0);}50%{transform:perspective(800px) rotateY(6deg) translateY(-12px);} }
+    .eb-body { padding: 0 1.8rem 2rem; display: flex; flex-direction: column; gap: .85rem; flex: 1; }
+    .eb-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      border-radius: 100px; padding: .2rem .7rem;
+      font-size: .58rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; width: fit-content;
+    }
+    .eb-card.gold  .eb-badge { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.32); color: #E8C56A; }
+    .eb-card.violet .eb-badge { background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.32); color: #C4B5FD; }
+    .eb-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.32rem; font-weight: 700; line-height: 1.2;
+    }
+    .eb-card.gold  .eb-title { background: linear-gradient(135deg,#FDE68A 20%,#E8C56A 55%,#F59E0B 90%); -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .eb-card.violet .eb-title { background: linear-gradient(135deg,#EDE9FF 20%,#A78BFA 55%,#5EEAD4 90%); -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .eb-desc { font-size: .82rem; color: var(--muted); line-height: 1.8; }
+    .eb-price-row {
+      display: flex; align-items: center; gap: .8rem;
+      padding: .85rem 1rem; border-radius: 11px; margin-top: auto;
+    }
+    .eb-card.gold  .eb-price-row { background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.18); }
+    .eb-card.violet .eb-price-row { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.18); }
+    .eb-price-old { font-size: .82rem; color: var(--muted); text-decoration: line-through; opacity: .55; }
+    .eb-price-arr { color: var(--neon); font-size: .82rem; opacity: .7; }
+    .eb-price-new { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700; line-height: 1; }
+    .eb-card.gold  .eb-price-new { color: #E8C56A; }
+    .eb-card.violet .eb-price-new { color: #C4B5FD; }
+    .eb-btns { display: flex; flex-direction: column; gap: .6rem; }
+    .eb-btn-main {
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: .88rem; font-weight: 700;
+      letter-spacing: .05em; text-transform: uppercase;
+      padding: .8rem 1.4rem; border-radius: 10px; text-decoration: none;
+      transition: box-shadow .3s, transform .2s;
+    }
+    .eb-card.gold  .eb-btn-main { background: linear-gradient(135deg,#92600a,#E8C56A,#FCD34D); color: #1a0e00; box-shadow: 0 0 20px rgba(201,168,76,0.30); }
+    .eb-card.gold  .eb-btn-main:hover { box-shadow: 0 0 42px rgba(201,168,76,0.52); transform: translateY(-2px); }
+    .eb-card.violet .eb-btn-main { background: linear-gradient(135deg,#5B3FA0,#A78BFA,#2DD4BF); color: #fff; box-shadow: 0 0 20px rgba(167,139,250,0.30); }
+    .eb-card.violet .eb-btn-main:hover { box-shadow: 0 0 42px rgba(167,139,250,0.52); transform: translateY(-2px); }
+    .eb-btn-ghost {
+      display: flex; align-items: center; justify-content: center;
+      background: transparent; border: 1px solid rgba(167,139,250,0.22);
+      color: var(--muted); font-size: .78rem; padding: .58rem 1rem;
+      border-radius: 8px; text-decoration: none; transition: border-color .25s, color .25s;
+    }
+    .eb-btn-ghost:hover { border-color: var(--neon); color: var(--text); }
+    .eb-sale-tag {
+      position: absolute; top: 1rem; right: 1rem; z-index: 2;
+      background: rgba(45,212,191,0.15); border: 1px solid rgba(45,212,191,0.38);
+      color: #5EEAD4; font-size: .58rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .2rem .6rem; border-radius: 100px;
+    }
+    @media (max-width: 840px) { .ebook-cards { grid-template-columns: 1fr; max-width: 460px; } }
+
     /* ── FOOTER ── */
     footer {
       background: rgba(4,5,26,0.97); border-top: 1px solid var(--border);
@@ -1440,6 +1536,65 @@
       <div style="display:flex;gap:1rem;flex-wrap:wrap;">
         <a href="khoa-hoc-chuyen-sau.html#register" class="btn-rose-sm">Đăng Ký Ngay</a>
         <a href="khoa-hoc-chuyen-sau.html" class="btn-ghost" style="text-decoration:none;">Xem Nội Dung</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EBOOK -->
+<section id="ebooks">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Ebook Độc Quyền ✦</span>
+    <h2 class="sec-title">2 Cuốn Sách Điện Tử</h2>
+    <p class="sec-sub">Kiến thức chuyên sâu, trải nghiệm chữa lành — chọn cuốn sách phù hợp với hành trình của bạn.</p>
+  </div>
+  <div class="ebook-cards">
+
+    <!-- Ebook 1: Hành Trình Tiến Hóa -->
+    <div class="eb-card gold rev d1">
+      <div class="eb-cover-area">
+        <div class="eb-glow"></div>
+        <img src="ebook-mockup.png" alt="Hành Trình Tiến Hóa Tối Thượng" class="eb-img" />
+      </div>
+      <div class="eb-body">
+        <span class="eb-badge">✦ Tâm Linh · Chữa Lành</span>
+        <div class="eb-title">Hành Trình<br>Tiến Hóa Tối Thượng</div>
+        <p class="eb-desc">10 chương thức tỉnh — từ chữa lành vết thương nội tâm đến tiến hóa tâm thức trọn vẹn.</p>
+        <div class="eb-price-row">
+          <span class="eb-price-old">179.000đ</span>
+          <span class="eb-price-arr">→</span>
+          <span class="eb-price-new">89.000đ</span>
+        </div>
+        <div class="eb-btns">
+          <a href="thanh-toan.html?goi=ebook&ten=Khach+Hang" class="eb-btn-main">Sở Hữu Ngay →</a>
+          <a href="ebook-hanh-trinh.html" class="eb-btn-ghost">Xem Chi Tiết ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ebook 2: Bộ Tài Liệu TSH -->
+    <div class="eb-card violet rev d2">
+      <span class="eb-sale-tag">⚡ Ưu Đãi Đến 07/07</span>
+      <div class="eb-cover-area">
+        <div class="eb-glow"></div>
+        <img src="ebook_mockupsammy.png" alt="Bộ Tài Liệu Công Thức Tính & Ý Nghĩa Các Chỉ Số" class="eb-img" />
+      </div>
+      <div class="eb-body">
+        <span class="eb-badge">✦ Thần Số Học · Tài Liệu</span>
+        <div class="eb-title">Bộ Tài Liệu<br>Công Thức & Ý Nghĩa Các Chỉ Số</div>
+        <p class="eb-desc">25+ tài liệu PDF — toàn bộ công thức tính và ý nghĩa các chỉ số Thần Số Học Pythagoras.</p>
+        <div class="eb-price-row">
+          <span class="eb-price-old">793.000đ</span>
+          <span class="eb-price-arr">→</span>
+          <span class="eb-price-new">379.000đ</span>
+        </div>
+        <div class="eb-btns">
+          <a href="thanh-toan.html?goi=ebook-tsh&ten=Khach+Hang" class="eb-btn-main">Sở Hữu Ngay →</a>
+          <a href="ebook-tsh.html" class="eb-btn-ghost">Xem Chi Tiết ↗</a>
+        </div>
       </div>
     </div>
 
