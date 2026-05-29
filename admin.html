@@ -1362,6 +1362,8 @@ function nmDiac(t){
 }
 function nmReduce(n,km=true){while(n>9&&!(km&&NM_MASTER.has(n)))n=String(n).split('').reduce((s,d)=>s+parseInt(d),0);return n;}
 function nmRS(n){while(n>9)n=String(n).split('').reduce((s,d)=>s+parseInt(d),0);return n;}
+/* reduce giữ {11,22,33} — dùng cho d_r/m_r/y_r (Thái Độ, NCN, TCN, Đỉnh 1&2) */
+function nmR3(n){while(n>9&&n!==11&&n!==22&&n!==33)n=String(n).split('').reduce((s,d)=>s+parseInt(d),0);return n;}
 function peakReduce(n){if(n===10||n===11)return n;while(n>9){n=String(n).split('').reduce((s,d)=>s+parseInt(d),0);if(n===10||n===11)return n;}return n;}
 function nmDS(s){return s.split('').reduce((a,c)=>a+(parseInt(c)||0),0);}
 function nmOcDao(fd){
@@ -1388,7 +1390,7 @@ function nmCalc(name,day,month,year){
   const rawTH=vowels.reduce((s,l)=>s+(PYTH[l]||0),0);
   const rawTC=cons.reduce((s,l)=>s+(PYTH[l]||0),0);
   const rawCB=firsts.reduce((s,l)=>s+(PYTH[l]||0),0);
-  const d_r=nmReduce(day),m_r=nmReduce(month),ySum=nmDS(String(year)),y_r=nmReduce(ySum);
+  const d_r=nmR3(day),m_r=nmR3(month),ySum=nmDS(String(year)),y_r=nmR3(ySum);
   const d_s=nmRS(day),m_s=nmRS(month),y_s=nmRS(ySum),cluster=d_s+m_s+y_s;
   const duongDoi=nmReduce(cluster);
   let tamHon=nmReduce(rawTH);if(tamHon===10)tamHon=1;
