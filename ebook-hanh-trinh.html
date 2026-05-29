@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hành Trình Tiến Hóa Tối Thượng — Ebook | Sammy Trương</title>
+  <meta name="description" content="Khi khoa học đối đầu tâm linh — Khi vết thương trở thành ánh sáng dẫn đường. Bộ sách điện tử độc quyền." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png">
+  <meta property="og:image" content="https://www.sammytruong.com/assets/logo-circle.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta name="theme-color" content="#03030C">
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    :root {
+      --bg: #03030C; --bg2: #0a0800;
+      --card: rgba(20,14,0,0.70);
+      --gold:  #C9A84C; --gold2: #E8C56A; --gold3: #FDE68A;
+      --amber: #F59E0B; --amber2: #FCD34D;
+      --violet: #7B5EA7; --neon: #A78BFA; --teal: #2DD4BF;
+      --text: #F0EAD6; --muted: #9A8B6E;
+      --border: rgba(201,168,76,0.18); --border-h: rgba(201,168,76,0.45);
+    }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--bg) url('/assets/anh-nen-sammy.png') center top / 100% auto no-repeat;
+      color: var(--text); overflow-x: hidden; line-height: 1.75;
+    }
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .nebula {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 65% at 0% 20%, rgba(201,168,76,0.09) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 50% at 100% 5%, rgba(123,94,167,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 65% 45% at 50% 95%, rgba(201,168,76,0.06) 0%, transparent 60%);
+    }
+    nav, main, footer, .mobile-menu { position: relative; z-index: 2; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 72px;
+      background: rgba(3,3,12,0.65); backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--border); transition: background .35s;
+    }
+    nav.scrolled { background: rgba(3,3,12,0.96); }
+    .logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; font-family: 'Cormorant Garamond', serif; font-size: 1.18rem; font-weight: 600; color: var(--text); letter-spacing: .05em; }
+    .logo-mark { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(167,139,250,0.55); box-shadow: 0 0 14px rgba(167,139,250,0.55), 0 0 28px rgba(167,139,250,0.28); flex-shrink: 0; }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a { color: #B0A0D0; text-decoration: none; font-size: .875rem; transition: color .25s; }
+    .nav-links a:hover { color: var(--text); }
+    .btn-hocvien { background: transparent; color: var(--neon); font-family: 'Be Vietnam Pro', sans-serif; font-size: .88rem; font-weight: 500; padding: .6rem 1.55rem; border-radius: 100px; border: 1px solid rgba(167,139,250,0.40); transition: background .3s; text-decoration: none; display: inline-flex; align-items: center; gap: .35rem; white-space: nowrap; }
+    .btn-hocvien:hover { background: rgba(167,139,250,0.10); }
+    .nav-actions { display: flex; align-items: center; gap: .6rem; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+    .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 99; background: rgba(3,3,12,0.98); backdrop-filter: blur(20px); padding: 1.6rem 6% 2.2rem; border-bottom: 1px solid var(--border); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu .nav-links { flex-direction: column; gap: 1.2rem; }
+    .mobile-menu .nav-links a { font-size: 1rem; }
+
+    /* ── SHARED ── */
+    .section { padding: 5.5rem 6%; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+    .inner-sm { max-width: 820px; margin: 0 auto; }
+    .divider { height: 1px; margin: 0 6%; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.28), transparent); }
+
+    /* ── BTN GOLD ── */
+    .btn-gold {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      background: linear-gradient(135deg, #92600a, var(--gold2), var(--amber2));
+      color: #1a0e00; border: none; cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 1rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 1.05rem 2.8rem; border-radius: 12px;
+      box-shadow: 0 0 32px rgba(201,168,76,0.42); transition: box-shadow .3s, transform .2s;
+      text-decoration: none;
+    }
+    .btn-gold:hover { box-shadow: 0 0 60px rgba(201,168,76,0.60); transform: translateY(-2px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; padding: 110px 6% 80px;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 30% 50%, rgba(201,168,76,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: 5rem; align-items: center; position: relative; z-index: 1;
+    }
+
+    /* Book cover */
+    .book-wrap { display: flex; justify-content: center; align-items: center; }
+    .book-cover {
+      width: 100%; max-width: 360px;
+      border-radius: 8px 20px 20px 8px;
+      box-shadow:
+        -8px 0 0 rgba(0,0,0,0.35),
+        -14px 4px 20px rgba(0,0,0,0.5),
+        0 30px 70px rgba(201,168,76,0.18),
+        0 0 80px rgba(123,94,167,0.12);
+      transform: perspective(1000px) rotateY(6deg);
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    .book-cover:hover {
+      transform: perspective(1000px) rotateY(2deg) translateY(-6px);
+      box-shadow: -8px 0 0 rgba(0,0,0,0.35), -14px 4px 20px rgba(0,0,0,0.5), 0 40px 90px rgba(201,168,76,0.25), 0 0 100px rgba(123,94,167,0.18);
+    }
+
+    /* Hero text */
+    .hero-text { display: flex; flex-direction: column; gap: 0; }
+    .hero-title-block { display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.6rem; }
+    .hero-text-body { display: flex; flex-direction: column; gap: 1.5rem; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.32);
+      border-radius: 100px; padding: .35rem .9rem;
+      font-size: .62rem; color: var(--gold2); letter-spacing: .18em; text-transform: uppercase;
+      width: fit-content;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 700; line-height: 1.1;
+      background: linear-gradient(155deg, #FDE68A 20%, var(--gold2) 55%, #F59E0B 90%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-quote {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 1.05rem; color: rgba(240,234,214,0.65); line-height: 2;
+      border-left: 2px solid rgba(201,168,76,0.35); padding-left: 1rem;
+    }
+    .hero-desc { font-size: .9rem; color: var(--muted); line-height: 1.9; }
+
+    /* Target audience */
+    .for-whom {
+      background: rgba(20,14,0,0.60); border: 1px solid rgba(201,168,76,0.20);
+      border-radius: 14px; padding: 1.4rem 1.6rem;
+    }
+    .for-whom-title { font-size: .62rem; text-transform: uppercase; letter-spacing: .18em; color: var(--gold2); margin-bottom: 1rem; display: block; font-weight: 600; }
+    .for-whom ul { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+    .for-whom ul li { display: flex; align-items: flex-start; gap: .6rem; font-size: .86rem; color: var(--muted); line-height: 1.75; }
+    .for-whom ul li::before { content: '◆'; color: var(--gold); font-size: .5rem; flex-shrink: 0; margin-top: .5rem; }
+
+    /* Inside book */
+    .inside-title { font-size: .62rem; text-transform: uppercase; letter-spacing: .18em; color: var(--gold2); margin-bottom: 1rem; display: block; font-weight: 600; }
+    .inside-list { list-style: none; display: flex; flex-direction: column; gap: .95rem; }
+    .inside-list li { display: flex; align-items: flex-start; gap: .8rem; font-size: .88rem; color: var(--muted); line-height: 1.75; }
+    .inside-num { width: 24px; height: 24px; border-radius: 50%; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.35); color: var(--gold2); font-size: .7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .18rem; }
+    .inside-list strong { color: var(--text); }
+
+    .hero-cta-text {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: .97rem; color: rgba(240,234,214,0.55); line-height: 1.9;
+    }
+
+    /* Price box */
+    .price-box {
+      background: rgba(20,14,0,0.65); border: 1px solid rgba(201,168,76,0.28);
+      border-radius: 14px; padding: 1.4rem 1.6rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .price-badge-row { display: flex; align-items: center; gap: .5rem; }
+    .price-badge {
+      background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.28);
+      border-radius: 100px; padding: .2rem .65rem;
+      font-size: .58rem; color: var(--gold2); font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    }
+    .price-row { display: flex; align-items: center; gap: 1.2rem; }
+    .price-old { font-size: 1rem; color: var(--muted); text-decoration: line-through; opacity: .6; }
+    .price-arrow { color: var(--gold2); font-size: 1rem; }
+    .price-new { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 700; color: var(--gold2); line-height: 1; }
+
+    /* ── CHAPTERS ── */
+    .chapters-section {
+      background: linear-gradient(180deg, rgba(10,8,0,0) 0%, rgba(10,8,0,0.40) 40%, rgba(10,8,0,0) 100%);
+    }
+    .ch-head { text-align: center; margin-bottom: 3.5rem; }
+    .ch-tag { font-size: .68rem; text-transform: uppercase; letter-spacing: .2em; color: var(--gold2); margin-bottom: .6rem; display: block; }
+    .ch-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
+      color: var(--gold2); letter-spacing: .04em;
+    }
+    .ch-divider { width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold2), transparent); margin: 1rem auto 0; }
+
+    .chapters-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; max-width: 1100px; margin: 0 auto; }
+    .ch-card {
+      background: rgba(15,10,0,0.65); border: 1px solid rgba(201,168,76,0.14);
+      border-radius: 14px; padding: 1.3rem 1.5rem;
+      display: flex; align-items: flex-start; gap: 1.1rem;
+      transition: border-color .3s, background .3s;
+    }
+    .ch-card:hover { border-color: rgba(201,168,76,0.35); background: rgba(25,17,0,0.70); }
+    .ch-num-badge {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 300; color: rgba(201,168,76,0.35);
+      letter-spacing: .04em; flex-shrink: 0; min-width: 36px; line-height: 1;
+      padding-top: .1rem;
+    }
+    .ch-info { flex: 1; }
+    .ch-name { font-size: .82rem; font-weight: 600; color: var(--text); text-transform: uppercase; letter-spacing: .06em; line-height: 1.4; margin-bottom: .3rem; }
+    .ch-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: .88rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── CTA BOTTOM ── */
+    .cta-section {
+      text-align: center;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+    }
+    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem,3.5vw,2.6rem); font-weight: 600; color: var(--gold2); margin-bottom: .8rem; }
+    .cta-sub { font-size: .92rem; color: var(--muted); max-width: 560px; margin: 0 auto 2.2rem; line-height: 1.85; }
+    .cta-price-row { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.8rem; flex-wrap: wrap; }
+    .cta-price-old { font-size: 1.1rem; color: var(--muted); text-decoration: line-through; opacity: .6; }
+    .cta-price-arrow { color: var(--gold2); font-size: 1.1rem; }
+    .cta-price-new { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: var(--gold2); line-height: 1; }
+    .cta-note { margin-top: 1rem; font-size: .78rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer { background: rgba(3,3,12,0.97); border-top: 1px solid var(--border); padding: 3rem 6% 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.8rem; border-bottom: 1px solid var(--border); }
+    .footer-logo { display: flex; align-items: center; gap: .65rem; text-decoration: none; font-family: 'Cormorant Garamond', serif; font-size: .95rem; font-weight: 600; color: var(--text); }
+    .footer-logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .footer-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: .82rem; transition: color .25s; }
+    .footer-links a:hover { color: var(--neon); }
+    .footer-copy { max-width: 1100px; margin: 1.2rem auto 0; font-size: .75rem; color: var(--muted); }
+
+    /* ── FLOAT ANIMATION ── */
+    @keyframes bookFloat {
+      0%,100% { transform: perspective(1000px) rotateY(6deg) translateY(0px); }
+      50%      { transform: perspective(1000px) rotateY(6deg) translateY(-14px); }
+    }
+    @keyframes bookFloatMobile {
+      0%,100% { transform: translateY(0px); }
+      50%      { transform: translateY(-10px); }
+    }
+    .book-cover { animation: bookFloat 4.5s ease-in-out infinite; }
+
+    /* ── ANIM ── */
+    .rev { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .rev.visible { opacity: 1; transform: translateY(0); }
+    .rev-l { opacity: 0; transform: translateX(-32px); transition: opacity .7s ease, transform .7s ease; }
+    .rev-l.visible { opacity: 1; transform: translateX(0); }
+    .rev-r { opacity: 0; transform: translateX(32px); transition: opacity .7s ease, transform .7s ease; }
+    .rev-r.visible { opacity: 1; transform: translateX(0); }
+    .d1{transition-delay:.06s;} .d2{transition-delay:.12s;} .d3{transition-delay:.18s;} .d4{transition-delay:.24s;} .d5{transition-delay:.30s;}
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      /* Flatten grid: hero-inner becomes single column flex */
+      .hero-inner {
+        display: flex; flex-direction: column;
+        align-items: center; gap: 0; text-align: center;
+      }
+      /* hero-text becomes transparent to layout */
+      .hero-text { display: contents; }
+      /* Mobile order: title(1) → book(2) → body(3) */
+      .hero-title-block { order: 1; width: 100%; padding-bottom: 1.6rem; display: flex; flex-direction: column; align-items: center; gap: .8rem; }
+      .book-wrap        { order: 2; padding-bottom: 1.8rem; }
+      .hero-text-body   { order: 3; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+
+      .hero-badge { align-self: center; }
+      .for-whom, .price-box { text-align: left; width: 100%; }
+      .hero-quote { border-left: none; border-top: 2px solid rgba(201,168,76,0.35); padding-left: 0; padding-top: .75rem; }
+      .book-cover { animation: bookFloatMobile 4.5s ease-in-out infinite; max-width: 240px; }
+    }
+    @media (max-width: 768px) {
+      .chapters-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 4rem 5%; }
+      .hero { padding: 100px 5% 60px; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="nebula"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo">
+    <img src="sammy%20logo.jpg" alt="Sammy Trương" class="logo-mark">
+    <span style="text-transform:uppercase;letter-spacing:.12em;font-size:1rem;font-weight:700;background:linear-gradient(155deg,#F0ECFF 20%,#C084FC 52%,#2DD4BF 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Sammy Trương</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Trang Chủ</a></li>
+    <li><a href="luan-giai-ca-nhan.html">Luận Giải</a></li>
+    <li><a href="khoa-hoc.html">Khóa Học</a></li>
+    <li><a href="ebook.html" style="color:var(--gold2);">← Tất Cả Ebook</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="hoc-vien-dang-nhap.html" class="btn-hocvien">👤 Học Viên</a>
+  </div>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mob">
+  <ul class="nav-links" style="display:flex;">
+    <li><a href="index.html">Trang Chủ</a></li>
+    <li><a href="luan-giai-ca-nhan.html">Luận Giải</a></li>
+    <li><a href="ebook.html">← Tất Cả Ebook</a></li>
+  </ul>
+  <a href="thanh-toan.html?goi=ebook&ten=Khach+Hang" class="btn-gold" style="margin-top:1.4rem;display:block;text-align:center;padding:.8rem;border-radius:12px;font-size:.9rem;">Sở Hữu Ebook Ngay</a>
+</div>
+
+<main>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <!-- LEFT: Book cover (desktop) / Middle (mobile order 2) -->
+    <div class="book-wrap rev-l">
+      <img src="ebook-mockup.png" alt="Hành Trình Tiến Hóa Tối Thượng" class="book-cover" />
+    </div>
+
+    <!-- RIGHT: All text (desktop) -->
+    <div class="hero-text rev-r">
+
+      <!-- Top: badge + title — mobile order 1 -->
+      <div class="hero-title-block">
+        <div class="hero-badge">✦ Bộ Sách Điện Tử Độc Quyền</div>
+        <h1 class="hero-title">Hành Trình<br>Tiến Hóa<br>Tối Thượng</h1>
+      </div>
+
+      <!-- Body: rest of content — mobile order 3 -->
+      <div class="hero-text-body">
+        <div class="hero-quote">
+          "Khi khoa học đối đầu tâm linh —<br>
+          Khi vết thương trở thành ánh sáng dẫn đường"
+        </div>
+
+        <p class="hero-desc">Bạn có bao giờ cảm thấy mình đang lạc lối giữa những vòng lặp của nỗi đau, sự lo âu và những câu hỏi chưa có lời đáp về mục đích sống?</p>
+
+        <div class="for-whom">
+          <span class="for-whom-title">Cuốn Sách Này Dành Cho Bạn, Nếu Bạn Đang:</span>
+          <ul>
+            <li>Cảm thấy kiệt sức với những áp lực vô hình từ bên ngoài.</li>
+            <li>Mang trong mình những tổn thương chưa thể gọi tên.</li>
+            <li>Khao khát tìm lại bản thể chân thật và ý nghĩa thực sự của sự hiện diện.</li>
+          </ul>
+        </div>
+
+        <div>
+          <span class="inside-title">Bên Trong Cuốn Sách, Bạn Sẽ Tìm Thấy:</span>
+          <ul class="inside-list">
+            <li><span class="inside-num">1</span><span><strong>Chìa khóa Thức tỉnh:</strong> Nhận diện những rào cản tâm trí đang cầm chân bạn.</span></li>
+            <li><span class="inside-num">2</span><span><strong>Lộ trình Chữa lành:</strong> Từng bước đối thoại và ôm lấy đứa trẻ bên trong.</span></li>
+            <li><span class="inside-num">3</span><span><strong>Tư duy Tiến hóa:</strong> Chuyển hóa nỗi đau thành chất liệu của sự khôn ngoan và sức mạnh nội tại.</span></li>
+          </ul>
+        </div>
+
+        <p class="hero-cta-text">Đừng để linh hồn bạn phải chờ đợi thêm nữa.<br>Hãy bắt đầu hành trình trở về ngay hôm nay.</p>
+
+        <div class="price-box">
+          <div class="price-badge-row">
+            <span class="price-badge">✦ Giá Tri Ân</span>
+          </div>
+          <div class="price-row">
+            <span class="price-old">179.000đ</span>
+            <span class="price-arrow">→</span>
+            <span class="price-new">89.000đ</span>
+          </div>
+          <a href="thanh-toan.html?goi=ebook&ten=Khach+Hang" class="btn-gold">Sở Hữu Ebook Ngay</a>
+        </div>
+      </div><!-- /hero-text-body -->
+
+    </div><!-- /hero-text -->
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── 10 CHƯƠNG ── -->
+<section class="section chapters-section">
+  <div class="inner">
+    <div class="ch-head rev">
+      <span class="ch-tag">Nội Dung Cuốn Sách</span>
+      <div class="ch-title">10 Chương Thức Tỉnh</div>
+      <div class="ch-divider"></div>
+    </div>
+    <div class="chapters-grid">
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">01</span>
+        <div class="ch-info">
+          <div class="ch-name">Tiếng Gọi Từ Benares</div>
+          <div class="ch-sub">Khi Định Luật Vật Lý Sụp Đổ</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">02</span>
+        <div class="ch-info">
+          <div class="ch-name">Bản Đồ Định Mệnh</div>
+          <div class="ch-sub">Mật Mã Của Linh Hồn</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">03</span>
+        <div class="ch-info">
+          <div class="ch-name">Luân Hồi Và Hành Trình Của Những Linh Hồn Qua Nhiều Kiếp Sống</div>
+          <div class="ch-sub">Giải Mã Những Kết Nối Từ Tiền Kiếp</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">04</span>
+        <div class="ch-info">
+          <div class="ch-name">Sức Mạnh Của Tư Tưởng</div>
+          <div class="ch-sub">Kiến Tạo Thế Giới Từ Trong Tâm Trí</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">05</span>
+        <div class="ch-info">
+          <div class="ch-name">Bí Mật Của Âm Thanh Và Quyền Năng Của Luân Xa</div>
+          <div class="ch-sub">Đánh Thức Tần Số Rung Động Tự Nhiên</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">06</span>
+        <div class="ch-info">
+          <div class="ch-name">Mạng Lưới Nghiệp Quả Và Định Mệnh</div>
+          <div class="ch-sub">Hóa Giải Những Nút Thắt Của Số Phận</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">07</span>
+        <div class="ch-info">
+          <div class="ch-name">Sự Thức Tỉnh Của Trí Tuệ Tối Cao</div>
+          <div class="ch-sub">Vượt Qua Màn Sương Của Bản Ngã</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">08</span>
+        <div class="ch-info">
+          <div class="ch-name">Sức Mạnh Của Sự Đồng Thuận</div>
+          <div class="ch-sub">Hòa Hợp Cùng Dòng Chảy Vũ Trụ</div>
+        </div>
+      </div>
+      <div class="ch-card rev d1">
+        <span class="ch-num-badge">09</span>
+        <div class="ch-info">
+          <div class="ch-name">Sự Giao Thoa Liên Hành Tinh Và Những Người Bạn Từ Vì Sao</div>
+          <div class="ch-sub">Mở Rộng Tầm Nhìn Ngoài Giới Hạn Trái Đất</div>
+        </div>
+      </div>
+      <div class="ch-card rev d2">
+        <span class="ch-num-badge">10</span>
+        <div class="ch-info">
+          <div class="ch-name">Sự Tiến Hóa Nội Tại Tối Thượng</div>
+          <div class="ch-sub">Trở Thành Phiên Bản Ánh Sáng Rực Rỡ Nhất</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CTA BOTTOM ── -->
+<section class="section cta-section" id="own-ebook">
+  <div class="inner-sm rev">
+    <div class="ch-tag" style="text-align:center;">✦ Sở Hữu Ngay Hôm Nay ✦</div>
+    <div class="cta-title">Bắt Đầu Hành Trình<br>Tiến Hóa Của Bạn</div>
+    <p class="cta-sub">Một cuốn sách có thể thay đổi cách bạn nhìn nhận bản thân, chữa lành những vết thương và mở ra con đường tiến hóa thực sự từ bên trong.</p>
+    <div class="cta-price-row">
+      <span class="cta-price-old">179.000đ</span>
+      <span class="cta-price-arrow">→</span>
+      <span class="cta-price-new">89.000đ</span>
+    </div>
+    <a href="thanh-toan.html?goi=ebook&ten=Khach+Hang" class="btn-gold" style="font-size:1.05rem;padding:1.1rem 3.2rem;">
+      Sở Hữu Ebook Ngay
+    </a>
+    <p class="cta-note">Sau khi thanh toán, file PDF sẽ được gửi qua Zalo hoặc Email trong vòng 24 giờ.<br>Liên hệ hỗ trợ: <strong style="color:var(--gold2);">Zalo 0362.676.159</strong></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <img src="sammy%20logo.jpg" alt="Sammy Trương">
+      Sammy Trương
+    </a>
+    <div class="footer-links">
+      <a href="index.html">Trang Chủ</a>
+      <a href="luan-giai-ca-nhan.html">Luận Giải</a>
+      <a href="khoa-hoc.html">Khóa Học</a>
+      <a href="tarot.html">Tarot</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2025 Sammy Trương · Thần Số Học Chữa Lành</p>
+</footer>
+
+<script>
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  function init(){stars=[];for(let i=0;i<200;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.1,o:Math.random()*.4+.1,speed:Math.random()*.016+.004,phase:Math.random()*Math.PI*2});}
+  function draw(t){ctx.clearRect(0,0,W,H);stars.forEach(s=>{const tw=Math.sin(t*.001*s.speed*1000+s.phase)*.28+.72;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,220,120,${s.o*tw})`;ctx.fill();});requestAnimationFrame(draw);}
+  resize();init();requestAnimationFrame(draw);
+  window.addEventListener('resize',()=>{resize();init();});
+})();
+
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>50));
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mob').classList.toggle('open'));
+
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{ threshold:.1 });
+document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(el=>io.observe(el));
+</script>
+<script src="/assets/chatbot-embed.js" defer></script>
+</body>
+</html>
