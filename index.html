@@ -767,6 +767,28 @@
     }
     @media (max-width: 840px) { .ebook-cards { grid-template-columns: 1fr; max-width: 460px; } }
 
+    /* ── ĐÁ NĂNG LƯỢNG PREVIEW ── */
+    .da-preview-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem; max-width: 1100px; margin: 0 auto; }
+    .da-prev-card { background: var(--card); backdrop-filter: blur(16px); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; transition: border-color .3s, box-shadow .3s, transform .3s; text-decoration: none; display: flex; flex-direction: column; }
+    .da-prev-card:hover { border-color: rgba(45,212,191,0.42); box-shadow: 0 16px 48px rgba(45,212,191,0.12); transform: translateY(-5px); }
+    .da-prev-card::before { content:''; display:block; position:absolute;top:0;left:0;right:0;height:3px; }
+    .da-prev-img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
+    .da-prev-body { padding:1rem 1.2rem 1.4rem; flex:1; display:flex; flex-direction:column; gap:.5rem; }
+    .da-prev-tag { font-size:.6rem; text-transform:uppercase; letter-spacing:.16em; color:var(--teal2); }
+    .da-prev-name { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; color:var(--text); line-height:1.25; }
+    .da-prev-desc { font-size:.78rem; color:var(--muted); line-height:1.7; flex:1; }
+    .da-prev-price { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; color:var(--gold2); }
+    @media (max-width:720px){ .da-preview-grid { grid-template-columns:1fr 1fr; } }
+    @media (max-width:480px){ .da-preview-grid { grid-template-columns:1fr; max-width:360px; } }
+
+    /* ── CTA + FEEDBACK 2 CỘT ── */
+    .cta-fb-wrap { display:grid; grid-template-columns:1fr 1fr; gap:3rem; max-width:1200px; margin:0 auto; align-items:start; }
+    .fb-mini-head { text-align:left; margin-bottom:1.4rem; }
+    .fb-mini-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.65rem; margin-bottom:1.4rem; }
+    .fb-mini-img { width:100%; aspect-ratio:9/16; object-fit:cover; border-radius:10px; border:1px solid rgba(167,139,250,.16); display:block; transition:transform .22s,box-shadow .22s; }
+    .fb-mini-img:hover { transform:scale(1.04); box-shadow:0 8px 24px rgba(0,0,0,.45); }
+    @media (max-width:860px){ .cta-fb-wrap { grid-template-columns:1fr; gap:2.4rem; } .fb-mini-head { text-align:center; } }
+
     /* ── FOOTER ── */
     footer {
       background: rgba(4,5,26,0.97); border-top: 1px solid var(--border);
@@ -1675,73 +1697,59 @@
   </div>
 </section>
 
-<!-- FEEDBACK PREVIEW -->
+<!-- ĐÁ NĂNG LƯỢNG PREVIEW -->
 <div class="divider"></div>
 <section style="padding:5rem 6%;">
-  <div style="max-width:1100px;margin:0 auto;">
+  <div class="sec-head rev">
+    <span class="sec-tag">✦ Energy Stone Bottle ✦</span>
+    <h2 class="sec-title">Đá Năng Lượng</h2>
+    <p class="sec-sub">Lọ đá thiên nhiên theo số chủ đạo, luân xa và nhu cầu cá nhân — nâng cao tần số, thu hút tài lộc, chữa lành tâm hồn.</p>
+  </div>
+  <div class="da-preview-grid">
 
-    <div class="sec-head rev">
-      <span class="sec-tag">✦ Phản Hồi Thực Tế ✦</span>
-      <h2 class="sec-title">Khách Hàng Nói Gì?</h2>
-      <p class="sec-sub">Những chia sẻ thực tế từ khách hàng đã trải nghiệm — không chỉnh sửa, không dàn dựng.</p>
-    </div>
+    <a href="da-nang-luong.html#set-chu-dao" class="da-prev-card rev d1" style="position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--violet),var(--neon),var(--teal));"></div>
+      <img src="da/z7883418354391_f90d09af502820b02a40605891029b2d.jpg" alt="Set Chủ Đạo" class="da-prev-img" loading="lazy" />
+      <div class="da-prev-body">
+        <span class="da-prev-tag">✦ Set 3 Lọ</span>
+        <div class="da-prev-name">Set Theo Số Chủ Đạo</div>
+        <p class="da-prev-desc">3 lọ đá được chọn lọc theo năng lượng của từng con số chủ đạo — cân bằng và khuếch đại sức mạnh nội tâm.</p>
+        <span class="da-prev-price">Từ 177.000 ₫ / Set</span>
+      </div>
+    </a>
 
-    <!-- Grid preview 9 ảnh -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.2rem;" id="fbPreview"></div>
+    <a href="da-nang-luong.html#set-luan-xa" class="da-prev-card rev d2" style="position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--violet),var(--neon),var(--teal));"></div>
+      <img src="da/z7883415825040_87638c55f175352e399c8db304e65dec.jpg" alt="Set 7 Luân Xa" class="da-prev-img" loading="lazy" />
+      <div class="da-prev-body">
+        <span class="da-prev-tag">✦ Set 7 Lọ</span>
+        <div class="da-prev-name">Set 7 Luân Xa</div>
+        <p class="da-prev-desc">7 lọ đá cân bằng 7 luân xa — được chọn riêng cho Nam và Nữ để phù hợp với năng lượng tự nhiên của từng giới.</p>
+        <span class="da-prev-price">613.000 ₫ / Set</span>
+      </div>
+    </a>
 
-    <!-- CTA xem thêm -->
-    <div style="text-align:center;" class="rev">
-      <a href="phan-hoi.html"
-        style="display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,rgba(123,94,167,.18),rgba(79,107,255,.12));border:1px solid rgba(167,139,250,.35);border-radius:100px;padding:.75rem 2rem;color:var(--neon);text-decoration:none;font-size:.9rem;font-weight:500;transition:background .3s,border-color .3s,box-shadow .3s;"
-        onmouseover="this.style.background='rgba(123,94,167,.28)';this.style.borderColor='rgba(167,139,250,.6)';this.style.boxShadow='0 0 28px rgba(123,94,167,.22)'"
-        onmouseout="this.style.background='linear-gradient(135deg,rgba(123,94,167,.18),rgba(79,107,255,.12))';this.style.borderColor='rgba(167,139,250,.35)';this.style.boxShadow='none'">
-        Xem tất cả 54+ phản hồi &nbsp;→
-      </a>
-    </div>
+    <a href="da-nang-luong.html#lo-le" class="da-prev-card rev d3" style="position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--violet),var(--neon),var(--teal));"></div>
+      <img src="da/z7883417218821_1f181926b4bf237f537fdc923d3159aa.jpg" alt="Lọ Đá Lẻ" class="da-prev-img" loading="lazy" />
+      <div class="da-prev-body">
+        <span class="da-prev-tag">✦ 14 Loại Đá</span>
+        <div class="da-prev-name">Lọ Đá Lẻ</div>
+        <p class="da-prev-desc">Tự chọn loại đá phù hợp với nhu cầu — từ chữa lành cảm xúc, thu hút tài lộc đến kết nối tâm linh.</p>
+        <span class="da-prev-price">Từ 79.000 ₫ / Lọ</span>
+      </div>
+    </a>
 
   </div>
+  <div style="text-align:center;margin-top:2.4rem;" class="rev">
+    <a href="da-nang-luong.html"
+      style="display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,rgba(45,212,191,.15),rgba(123,94,167,.12));border:1px solid rgba(45,212,191,.38);border-radius:100px;padding:.75rem 2rem;color:var(--teal2);text-decoration:none;font-size:.9rem;font-weight:500;transition:background .3s,border-color .3s,box-shadow .3s;"
+      onmouseover="this.style.background='rgba(45,212,191,.25)';this.style.boxShadow='0 0 28px rgba(45,212,191,.20)'"
+      onmouseout="this.style.background='linear-gradient(135deg,rgba(45,212,191,.15),rgba(123,94,167,.12))';this.style.boxShadow='none'">
+      Xem Tất Cả Sản Phẩm &nbsp;→
+    </a>
+  </div>
 </section>
-
-<script>
-/* Feedback preview — 9 ảnh ngẫu nhiên */
-(function(){
-  var all = [
-    'z6847330088395_8b4c3249c9feea814a10f0b714f39ce9.jpg',
-    'z6847330092267_c3ae9251f786e944e57836b63385d2d2.jpg',
-    'z6847330096825_0f3ebb6647ffa3a10315d0997ba78e72.jpg',
-    'z6977769345970_79be2eb3fd0c45cef22ae6d1c673190d.jpg',
-    'z6977769354451_cfc772e7cc945fbc368db5ab48d520dc.jpg',
-    'z6977769360771_604b0825d711f25a7e92235c85725fc4.jpg',
-    'z7016999348555_0455af6c8ae755524ef315307c8da342.jpg',
-    'z7283272990505_e9b36b2e927ae2d99c69918591afe0f0.jpg',
-    'z7474350086373_a41564e7f68c97b3e706313256c027ad.jpg',
-    'z7557478212127_f4661e5ad09614574bc3c50fa6a0a5fc.jpg',
-    'z7664680104444_87536b1e4d1fbfd98872167cb9bc1a60.jpg',
-    'z7853487960234_57773ec1dfe035847317358e67a31700.jpg'
-  ];
-  /* Chọn 9 ảnh ngẫu nhiên */
-  var shuffled = all.sort(function(){ return Math.random() - .5; }).slice(0, 9);
-  var grid = document.getElementById('fbPreview');
-  if (!grid) return;
-  shuffled.forEach(function(name){
-    var a = document.createElement('a');
-    a.href = 'phan-hoi.html';
-    a.style.cssText = 'display:block;border-radius:12px;overflow:hidden;border:1px solid rgba(167,139,250,.16);transition:transform .22s,box-shadow .22s,border-color .22s;';
-    a.onmouseover = function(){ this.style.transform='scale(1.03)';this.style.boxShadow='0 8px 32px rgba(0,0,0,.5),0 0 20px rgba(167,139,250,.18)';this.style.borderColor='rgba(167,139,250,.45)'; };
-    a.onmouseout  = function(){ this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(167,139,250,.16)'; };
-    var img = document.createElement('img');
-    img.src = '/feedback/' + name;
-    img.alt = 'Phản hồi khách hàng';
-    img.loading = 'lazy';
-    img.style.cssText = 'width:100%;display:block;aspect-ratio:9/16;object-fit:cover;';
-    a.appendChild(img);
-    grid.appendChild(a);
-  });
-  /* Responsive: 2 cột trên mobile */
-  function setGrid(){ grid.style.gridTemplateColumns = window.innerWidth < 600 ? 'repeat(2,1fr)' : 'repeat(3,1fr)'; }
-  setGrid(); window.addEventListener('resize', setGrid);
-})();
-</script>
 
 <!-- BLOG — ẩn đến khi có bài viết được đăng -->
 <div class="divider" id="blogDivider" style="display:none;"></div>
@@ -1799,20 +1807,75 @@
 
 <div class="divider"></div>
 
-<!-- CTA -->
+<!-- CTA + FEEDBACK -->
 <section id="contact">
-  <div class="cta-wrap">
-    <div class="cta-box rev">
-      <span class="cta-tag">✦ Bắt Đầu Ngay ✦</span>
-      <h2 class="cta-title">Khám Phá Con Số Của Bạn</h2>
-      <p class="cta-sub">Đăng ký nhận bản tin miễn phí và bài học thần số học hàng tuần từ Sammy Trương</p>
-      <div class="email-row">
-        <input type="email" class="email-in" placeholder="Email của bạn..." />
-        <button class="btn-primary">Đăng Ký</button>
+  <div class="cta-fb-wrap">
+
+    <!-- Trái: CTA -->
+    <div class="cta-wrap" style="max-width:100%;">
+      <div class="cta-box rev">
+        <span class="cta-tag">✦ Bắt Đầu Ngay ✦</span>
+        <h2 class="cta-title">Khám Phá Con Số Của Bạn</h2>
+        <p class="cta-sub">Đăng ký nhận bản tin miễn phí và bài học thần số học hàng tuần từ Sammy Trương</p>
+        <div class="email-row">
+          <input type="email" class="email-in" placeholder="Email của bạn..." />
+          <button class="btn-primary">Đăng Ký</button>
+        </div>
       </div>
     </div>
+
+    <!-- Phải: Feedback mini -->
+    <div class="rev">
+      <div class="fb-mini-head">
+        <span class="sec-tag" style="text-align:left;">✦ Phản Hồi Thực Tế ✦</span>
+        <h2 class="sec-title" style="font-size:clamp(1.4rem,2.8vw,2rem);text-align:left;">Khách Hàng Nói Gì?</h2>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;">Những chia sẻ thực tế từ khách hàng — không chỉnh sửa, không dàn dựng.</p>
+      </div>
+      <div class="fb-mini-grid" id="fbPreview"></div>
+      <a href="phan-hoi.html"
+        style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,rgba(123,94,167,.18),rgba(79,107,255,.12));border:1px solid rgba(167,139,250,.35);border-radius:100px;padding:.65rem 1.6rem;color:var(--neon);text-decoration:none;font-size:.85rem;font-weight:500;transition:background .3s,box-shadow .3s;"
+        onmouseover="this.style.background='rgba(123,94,167,.28)';this.style.boxShadow='0 0 24px rgba(123,94,167,.22)'"
+        onmouseout="this.style.background='linear-gradient(135deg,rgba(123,94,167,.18),rgba(79,107,255,.12))';this.style.boxShadow='none'">
+        Xem 54+ phản hồi &nbsp;→
+      </a>
+    </div>
+
   </div>
 </section>
+
+<script>
+/* Feedback mini — 9 ảnh ngẫu nhiên */
+(function(){
+  var all = [
+    'z6847330088395_8b4c3249c9feea814a10f0b714f39ce9.jpg',
+    'z6847330092267_c3ae9251f786e944e57836b63385d2d2.jpg',
+    'z6847330096825_0f3ebb6647ffa3a10315d0997ba78e72.jpg',
+    'z6977769345970_79be2eb3fd0c45cef22ae6d1c673190d.jpg',
+    'z6977769354451_cfc772e7cc945fbc368db5ab48d520dc.jpg',
+    'z6977769360771_604b0825d711f25a7e92235c85725fc4.jpg',
+    'z7016999348555_0455af6c8ae755524ef315307c8da342.jpg',
+    'z7283272990505_e9b36b2e927ae2d99c69918591afe0f0.jpg',
+    'z7474350086373_a41564e7f68c97b3e706313256c027ad.jpg',
+    'z7557478212127_f4661e5ad09614574bc3c50fa6a0a5fc.jpg',
+    'z7664680104444_87536b1e4d1fbfd98872167cb9bc1a60.jpg',
+    'z7853487960234_57773ec1dfe035847317358e67a31700.jpg'
+  ];
+  var shuffled = all.sort(function(){ return Math.random()-.5; }).slice(0,9);
+  var grid = document.getElementById('fbPreview');
+  if (!grid) return;
+  shuffled.forEach(function(name){
+    var a = document.createElement('a');
+    a.href = 'phan-hoi.html';
+    var img = document.createElement('img');
+    img.src = '/feedback/' + name;
+    img.alt = 'Phản hồi';
+    img.loading = 'lazy';
+    img.className = 'fb-mini-img';
+    a.appendChild(img);
+    grid.appendChild(a);
+  });
+})();
+</script>
 
 <!-- FOOTER -->
 <footer>
