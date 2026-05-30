@@ -1392,13 +1392,14 @@ function nmCalc(name,day,month,year){
   const rawCB=firsts.reduce((s,l)=>s+(PYTH[l]||0),0);
   const d_r=nmR3(day),m_r=nmR3(month),ySum=nmDS(String(year)),y_r=nmR3(ySum);
   const d_s=nmRS(day),m_s=nmRS(month),y_s=nmRS(ySum),cluster=d_s+m_s+y_s;
-  const duongDoi=nmReduce(cluster);
+  const tienThan=nmDS(String(day)+String(month)+String(year));
+  /* Nếu tienThan đúng là master 11/22/33 → Chủ Đạo = master đó */
+  let duongDoi=(tienThan===11||tienThan===22||tienThan===33)?tienThan:nmReduce(cluster);
   let tamHon=nmReduce(rawTH);if(tamHon===10)tamHon=1;
   let tinhCach=nmReduce(rawTC);if(tinhCach===10)tinhCach=1;
   const _thTcSum=tamHon+tinhCach;
   const vanMemh=NM_MASTER.has(_thTcSum)?_thTcSum:nmReduce(rawVM);
   const ngaySinh=nmReduce(day),thaiDo=nmReduce(day+month),truongThanh=nmReduce(duongDoi+vanMemh),canBang=nmReduce(rawCB);
-  const tienThan=nmDS(String(day)+String(month)+String(year));
   const today=new Date();
   const yCurSum=nmDS(String(today.getFullYear()));
   const namCN=nmReduce(d_r+m_r+nmReduce(yCurSum));
