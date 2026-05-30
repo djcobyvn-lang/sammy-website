@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đá Năng Lượng — Energy Stone Bottle | Sammy Trương</title>
+  <meta name="description" content="Lọ đá năng lượng theo số chủ đạo, set 7 luân xa và lọ đá lẻ. Đá thiên nhiên được tuyển chọn kỹ lưỡng — nâng cao năng lượng, thu hút tài lộc, chữa lành tâm hồn." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png">
+  <meta name="theme-color" content="#03030C">
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    :root {
+      --bg: #03030C; --card: rgba(8,5,22,0.72);
+      --violet: #7B5EA7; --neon: #A78BFA; --teal: #2DD4BF; --teal2: #5EEAD4;
+      --violet3: #C4B5FD; --indigo: #4F6BFF;
+      --gold: #C9A84C; --gold2: #E8C56A;
+      --rose: #F43F5E; --rose2: #FB7185;
+      --text: #EDE9FF; --muted: #9090B8;
+      --border: rgba(167,139,250,0.16); --border-h: rgba(167,139,250,0.42);
+    }
+    body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.75; }
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .nebula { position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse 65% 55% at 15% 20%, rgba(123,94,167,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse 50% 45% at 85% 10%, rgba(45,212,191,0.07) 0%, transparent 55%),
+                  radial-gradient(ellipse 60% 50% at 50% 90%, rgba(201,168,76,0.06) 0%, transparent 60%); }
+    nav, main, footer, .mobile-menu, .cart-bar { position: relative; z-index: 2; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; height: 72px; background: rgba(3,3,12,0.70); backdrop-filter: blur(22px); border-bottom: 1px solid var(--border); transition: background .35s; }
+    nav.scrolled { background: rgba(3,3,12,0.97); }
+    .logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; font-family: 'Cormorant Garamond', serif; font-size: 1.18rem; font-weight: 600; color: var(--text); }
+    .logo-mark { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(167,139,250,0.50); box-shadow: 0 0 14px rgba(167,139,250,0.40); flex-shrink: 0; }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: #B0A0D0; text-decoration: none; font-size: .875rem; transition: color .25s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-actions { display: flex; align-items: center; gap: .6rem; }
+    .btn-cart { background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.35); color: var(--neon); font-family: 'Be Vietnam Pro', sans-serif; font-size: .85rem; font-weight: 600; padding: .5rem 1.2rem; border-radius: 100px; cursor: pointer; transition: background .25s; white-space: nowrap; }
+    .btn-cart:hover { background: rgba(167,139,250,0.22); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+    .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 99; background: rgba(3,3,12,0.98); backdrop-filter: blur(20px); padding: 1.6rem 6% 2rem; border-bottom: 1px solid var(--border); }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1.1rem; }
+    .mobile-menu a { color: var(--muted); text-decoration: none; font-size: 1rem; }
+
+    /* SHARED */
+    .section { padding: 5rem 6%; }
+    .inner { max-width: 1200px; margin: 0 auto; }
+    .divider { height: 1px; margin: 0 6%; background: linear-gradient(90deg, transparent, rgba(167,139,250,0.22), transparent); }
+    .sec-tag { font-size: .68rem; text-transform: uppercase; letter-spacing: .2em; color: var(--violet3); display: block; margin-bottom: .6rem; }
+    .sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.8vw, 3rem); font-weight: 700; background: linear-gradient(135deg, var(--text) 40%, var(--neon) 80%, var(--teal2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: .8rem; }
+    .sec-sub { font-size: .9rem; color: var(--muted); line-height: 1.88; max-width: 600px; }
+    .sec-head { text-align: center; margin-bottom: 3rem; }
+    .sec-head .sec-sub { margin: 0 auto; }
+
+    /* HERO */
+    .hero { min-height: 70vh; padding: 120px 6% 70px; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(123,94,167,0.12) 0%, transparent 65%); pointer-events: none; }
+    .hero-inner { max-width: 780px; position: relative; z-index: 1; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: .6rem; background: rgba(167,139,250,0.10); border: 1px solid rgba(167,139,250,0.28); border-radius: 100px; padding: .38rem 1.1rem; font-size: .65rem; color: var(--violet3); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 1.4rem; }
+    .hero-eyebrow .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 700; line-height: 1.05; background: linear-gradient(155deg, #EDE9FF 15%, var(--neon) 50%, var(--teal2) 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: .5rem; }
+    .hero-script { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.2rem, 3vw, 1.8rem); color: rgba(237,233,255,0.55); margin-bottom: 1.2rem; }
+    .hero-desc { font-size: .92rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem; }
+    .hero-tabs { display: flex; gap: .7rem; justify-content: center; flex-wrap: wrap; }
+    .hero-tab-btn { background: rgba(167,139,250,0.10); border: 1px solid rgba(167,139,250,0.28); color: var(--muted); font-family: 'Be Vietnam Pro', sans-serif; font-size: .82rem; font-weight: 500; padding: .55rem 1.3rem; border-radius: 100px; cursor: pointer; transition: all .25s; text-decoration: none; }
+    .hero-tab-btn:hover, .hero-tab-btn.active { background: rgba(167,139,250,0.20); border-color: var(--neon); color: var(--text); }
+
+    /* SECTION TITLE BADGE */
+    .section-badge { display: inline-flex; align-items: center; gap: .6rem; background: rgba(167,139,250,0.10); border: 1px solid rgba(167,139,250,0.28); border-radius: 100px; padding: .32rem 1rem; font-size: .62rem; color: var(--violet3); letter-spacing: .16em; text-transform: uppercase; margin-bottom: .8rem; }
+
+    /* SET CHỦ ĐẠO */
+    .chu-dao-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; max-width: 1100px; margin: 0 auto; }
+    .cd-card { background: var(--card); backdrop-filter: blur(16px); border: 1px solid var(--border); border-radius: 22px; overflow: hidden; transition: border-color .3s, box-shadow .3s, transform .3s; cursor: pointer; position: relative; }
+    .cd-card:hover { border-color: var(--border-h); box-shadow: 0 16px 48px rgba(123,94,167,0.18); transform: translateY(-4px); }
+    .cd-card.selected { border-color: var(--teal); box-shadow: 0 0 0 2px rgba(45,212,191,0.35), 0 16px 48px rgba(45,212,191,0.15); }
+    .cd-card.selected::after { content: '✓ Đã chọn'; position: absolute; top: .7rem; right: .7rem; background: var(--teal); color: #03030C; font-size: .6rem; font-weight: 700; padding: .2rem .6rem; border-radius: 100px; letter-spacing: .08em; }
+    .cd-img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .cd-body { padding: 1.1rem 1.2rem 1.4rem; }
+    .cd-num { font-size: .6rem; text-transform: uppercase; letter-spacing: .18em; color: var(--violet3); margin-bottom: .3rem; display: block; }
+    .cd-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: .3rem; }
+    .cd-stones { font-size: .75rem; color: var(--muted); line-height: 1.6; margin-bottom: .8rem; }
+    .cd-price-row { display: flex; align-items: center; justify-content: space-between; }
+    .cd-price { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--gold2); }
+    .btn-chon { background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.35); color: var(--violet3); font-family: 'Be Vietnam Pro', sans-serif; font-size: .75rem; font-weight: 600; padding: .38rem .9rem; border-radius: 100px; cursor: pointer; transition: all .25s; }
+    .btn-chon:hover { background: rgba(167,139,250,0.28); border-color: var(--neon); color: var(--text); }
+    .cd-card.selected .btn-chon { background: rgba(45,212,191,0.15); border-color: rgba(45,212,191,0.40); color: var(--teal2); }
+
+    /* SET LUÂN XA */
+    .luanxa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .lx-card { background: var(--card); backdrop-filter: blur(16px); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; transition: border-color .3s, box-shadow .3s, transform .3s; cursor: pointer; position: relative; }
+    .lx-card:hover { border-color: var(--border-h); box-shadow: 0 16px 48px rgba(123,94,167,0.18); transform: translateY(-4px); }
+    .lx-card.selected { border-color: var(--teal); box-shadow: 0 0 0 2px rgba(45,212,191,0.35); }
+    .lx-card.selected::after { content: '✓ Đã chọn'; position: absolute; top: .7rem; right: .7rem; background: var(--teal); color: #03030C; font-size: .6rem; font-weight: 700; padding: .2rem .6rem; border-radius: 100px; letter-spacing: .08em; }
+    .lx-img { width: 100%; aspect-ratio: 1.1; object-fit: cover; display: block; }
+    .lx-body { padding: 1.3rem 1.5rem 1.8rem; }
+    .lx-tag { font-size: .6rem; text-transform: uppercase; letter-spacing: .18em; color: var(--violet3); margin-bottom: .4rem; display: block; }
+    .lx-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 700; color: var(--text); margin-bottom: .5rem; }
+    .lx-stones { font-size: .8rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .lx-price-row { display: flex; align-items: center; justify-content: space-between; }
+    .lx-price { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700; color: var(--gold2); }
+
+    /* LỌ LẺ */
+    .lo-le-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; max-width: 1100px; margin: 0 auto; }
+    .ll-card { background: var(--card); backdrop-filter: blur(14px); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; transition: border-color .3s, transform .3s; cursor: pointer; position: relative; }
+    .ll-card:hover { border-color: var(--border-h); transform: translateY(-3px); }
+    .ll-card.selected { border-color: var(--teal); box-shadow: 0 0 0 2px rgba(45,212,191,0.30); }
+    .ll-card.selected::after { content: '✓'; position: absolute; top: .5rem; right: .55rem; background: var(--teal); color: #03030C; font-size: .65rem; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .ll-img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .ll-body { padding: .85rem 1rem 1rem; }
+    .ll-name { font-size: .82rem; font-weight: 600; color: var(--text); margin-bottom: .15rem; line-height: 1.35; }
+    .ll-en { font-size: .7rem; color: var(--muted); margin-bottom: .5rem; }
+    .ll-price-row { display: flex; align-items: center; justify-content: space-between; }
+    .ll-price { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold2); }
+    .ll-qty { display: flex; align-items: center; gap: .35rem; }
+    .qty-btn { width: 22px; height: 22px; border-radius: 50%; background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.30); color: var(--neon); font-size: .85rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; line-height: 1; }
+    .qty-btn:hover { background: rgba(167,139,250,0.28); }
+    .qty-num { font-size: .82rem; font-weight: 600; color: var(--text); min-width: 14px; text-align: center; }
+
+    /* CART BAR */
+    .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: rgba(8,5,22,0.97); backdrop-filter: blur(24px); border-top: 1px solid rgba(167,139,250,0.25); padding: .9rem 6%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; transform: translateY(100%); transition: transform .35s ease; }
+    .cart-bar.visible { transform: translateY(0); }
+    .cart-info { display: flex; align-items: center; gap: 1.4rem; flex: 1; min-width: 0; }
+    .cart-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); white-space: nowrap; }
+    .cart-items-text { font-size: .82rem; color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cart-total { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold2); white-space: nowrap; }
+    .btn-order { background: linear-gradient(135deg, var(--violet), var(--neon), var(--teal)); color: #fff; font-family: 'Be Vietnam Pro', sans-serif; font-size: .9rem; font-weight: 700; letter-spacing: .05em; padding: .8rem 2rem; border-radius: 100px; border: none; cursor: pointer; box-shadow: 0 0 24px rgba(167,139,250,0.38); transition: box-shadow .3s, transform .2s; white-space: nowrap; text-decoration: none; display: inline-block; }
+    .btn-order:hover { box-shadow: 0 0 46px rgba(167,139,250,0.58); transform: translateY(-2px); }
+    .btn-clear { background: transparent; border: 1px solid rgba(167,139,250,0.22); color: var(--muted); font-size: .75rem; padding: .5rem .9rem; border-radius: 100px; cursor: pointer; transition: border-color .25s, color .25s; white-space: nowrap; }
+    .btn-clear:hover { border-color: var(--rose2); color: var(--rose2); }
+
+    /* FOOTER */
+    footer { background: rgba(3,3,12,0.97); border-top: 1px solid var(--border); padding: 3rem 6% 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-bottom: 1.6rem; border-bottom: 1px solid var(--border); }
+    .footer-logo { display: flex; align-items: center; gap: .65rem; text-decoration: none; font-family: 'Cormorant Garamond', serif; font-size: .95rem; font-weight: 600; color: var(--text); }
+    .footer-logo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .footer-links { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: .82rem; transition: color .25s; }
+    .footer-links a:hover { color: var(--neon); }
+    .footer-copy { max-width: 1100px; margin: 1.2rem auto 0; font-size: .75rem; color: var(--muted); }
+
+    /* ANIM */
+    .rev { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .rev.visible { opacity: 1; transform: translateY(0); }
+    .d1{transition-delay:.06s;} .d2{transition-delay:.12s;} .d3{transition-delay:.18s;}
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) { .chu-dao-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 720px) {
+      .chu-dao-grid { grid-template-columns: 1fr 1fr; }
+      .lo-le-grid { grid-template-columns: 1fr 1fr; }
+      .luanxa-grid { grid-template-columns: 1fr; max-width: 420px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 4rem 5%; }
+    }
+    @media (max-width: 480px) {
+      .chu-dao-grid { grid-template-columns: 1fr 1fr; gap: .9rem; }
+      .lo-le-grid { grid-template-columns: 1fr 1fr; gap: .9rem; }
+      .cart-bar { padding: .8rem 4%; flex-wrap: wrap; gap: .6rem; }
+      .cart-items-text { display: none; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="nebula"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo">
+    <img src="sammy%20logo.jpg" alt="Sammy Trương" class="logo-mark">
+    <span style="text-transform:uppercase;letter-spacing:.1em;font-size:.95rem;font-weight:700;background:linear-gradient(155deg,#F0ECFF 20%,#C084FC 52%,#2DD4BF 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Sammy Trương</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Trang Chủ</a></li>
+    <li><a href="luan-giai-ca-nhan.html">Luận Giải</a></li>
+    <li><a href="da-nang-luong.html" style="color:var(--teal2);">Đá Năng Lượng</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-cart" id="cartNavBtn" onclick="scrollToOrder()">🛒 Giỏ Hàng (<span id="cartCount">0</span>)</button>
+  </div>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mob">
+  <ul>
+    <li><a href="index.html">Trang Chủ</a></li>
+    <li><a href="luan-giai-ca-nhan.html">Luận Giải</a></li>
+    <li><a href="da-nang-luong.html">Đá Năng Lượng</a></li>
+  </ul>
+</div>
+
+<!-- CART BAR -->
+<div class="cart-bar" id="cartBar">
+  <div class="cart-info">
+    <span class="cart-label">Giỏ hàng</span>
+    <span class="cart-items-text" id="cartItemsText">Chưa có sản phẩm</span>
+  </div>
+  <div class="cart-total" id="cartTotal">0 ₫</div>
+  <button class="btn-clear" onclick="clearCart()">Xóa tất cả</button>
+  <a href="#" class="btn-order" id="cartOrderBtn" onclick="goToOrder(event)">Đặt Hàng →</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow rev"><span class="dot"></span>Energy Stone Bottle · Sammy Trương<span class="dot"></span></div>
+    <h1 class="hero-title rev">Đá Năng Lượng</h1>
+    <div class="hero-script rev">Lọ Đá Thiên Nhiên · Nâng Cao Tần Số Rung Động</div>
+    <p class="hero-desc rev">Mỗi loại đá mang một năng lượng và tác dụng riêng — được tuyển chọn kỹ lưỡng để phù hợp với số chủ đạo, luân xa và nhu cầu của bạn. Thanh lọc không gian, thu hút tài lộc, chữa lành tâm hồn.</p>
+    <div class="hero-tabs rev">
+      <a href="#set-chu-dao" class="hero-tab-btn">Set Theo Số Chủ Đạo</a>
+      <a href="#set-luan-xa" class="hero-tab-btn">Set 7 Luân Xa</a>
+      <a href="#lo-le" class="hero-tab-btn">Lọ Đá Lẻ</a>
+      <a href="#dat-hang" class="hero-tab-btn active">Đặt Hàng</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SET 3 LỌ THEO SỐ CHỦ ĐẠO -->
+<section class="section" id="set-chu-dao">
+  <div class="inner">
+    <div class="sec-head rev">
+      <div class="section-badge">✦ Set 3 Lọ · Đá Theo Số Chủ Đạo</div>
+      <h2 class="sec-title">Set 3 Lọ Theo Số Chủ Đạo</h2>
+      <p class="sec-sub">Mỗi set được chọn lọc theo năng lượng của từng con số chủ đạo — giúp cân bằng, khuếch đại và hỗ trợ hành trình tiến hóa của bạn.</p>
+    </div>
+    <div class="chu-dao-grid">
+
+      <div class="cd-card rev d1" data-id="cd1" data-price="197000" data-name="Set Chủ Đạo 1 (3 lọ)">
+        <img src="da/z7883418377290_da3a09efe1b44fdeff0a11440cde257a.jpg" alt="Set Chủ Đạo 1" class="cd-img" loading="lazy" />
+        <div class="cd-body">
+          <span class="cd-num">✦ Set 3 Lọ</span>
+          <div class="cd-name">Chủ Đạo 1</div>
+          <div class="cd-stones">Thạch Anh Hồng · Thạch Anh Tím · Diopside</div>
+          <div class="cd-price-row">
+            <span class="cd-price">197.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'cd1',197000,'Set Chủ Đạo 1 (3 lọ)')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-card rev d2" data-id="cd2" data-price="277000" data-name="Set Chủ Đạo 2 (3 lọ)">
+        <img src="da/z7883418377290_da3a09efe1b44fdeff0a11440cde257a.jpg" alt="Set Chủ Đạo 2" class="cd-img" loading="lazy" />
+        <div class="cd-body">
+          <span class="cd-num">✦ Set 3 Lọ</span>
+          <div class="cd-name">Chủ Đạo 2</div>
+          <div class="cd-stones">Thạch Anh Hồng · Thạch Anh Tím · Diopside</div>
+          <div class="cd-price-row">
+            <span class="cd-price">277.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'cd2',277000,'Set Chủ Đạo 2 (3 lọ)')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-card rev d3" data-id="cd3" data-price="317000" data-name="Set Chủ Đạo 3 (3 lọ)">
+        <img src="da/z7883418370298_ff3edf2aff346a15044e3b8f8df32c32.jpg" alt="Set Chủ Đạo 3" class="cd-img" loading="lazy" />
+        <div class="cd-body">
+          <span class="cd-num">✦ Set 3 Lọ</span>
+          <div class="cd-name">Chủ Đạo 3</div>
+          <div class="cd-stones">Aquamarine · Thạch Anh Tím · Khổng Tước</div>
+          <div class="cd-price-row">
+            <span class="cd-price">317.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'cd3',317000,'Set Chủ Đạo 3 (3 lọ)')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-card rev d1" data-id="cd4" data-price="297000" data-name="Set Chủ Đạo 4 (3 lọ)">
+        <img src="da/z7883418365540_ebafa02d31216aeff1da3d83aa34515e.jpg" alt="Set Chủ Đạo 4" class="cd-img" loading="lazy" />
+        <div class="cd-body">
+          <span class="cd-num">✦ Set 3 Lọ</span>
+          <div class="cd-name">Chủ Đạo 4</div>
+          <div class="cd-stones">Mắt Hổ · Thạch Anh Vàng · Diopside</div>
+          <div class="cd-price-row">
+            <span class="cd-price">297.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'cd4',297000,'Set Chủ Đạo 4 (3 lọ)')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-card rev d2" data-id="cd5" data-price="317000" data-name="Set Chủ Đạo 5 (3 lọ)">
+        <img src="da/z7883418357371_237e6c079009369767acb53f450a3d8a.jpg" alt="Set Chủ Đạo 5" class="cd-img" loading="lazy" />
+        <div class="cd-body">
+          <span class="cd-num">✦ Set 3 Lọ</span>
+          <div class="cd-name">Chủ Đạo 5</div>
+          <div class="cd-stones">Aquamarine · Malachite · Lapis Lazuli</div>
+          <div class="cd-price-row">
+            <span class="cd-price">317.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'cd5',317000,'Set Chủ Đạo 5 (3 lọ)')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-card rev d3" data-id="cd6" data-price="197000" data-name="Set Chủ Đạo 6 (3 lọ)">
+        <img src="da/z7883418354391_f90d09af502820b02a40605891029b2d.jpg" alt="Set Chủ Đạo 6" class="cd-img" loading="lazy" />
+        <div class="cd-body">
+          <span class="cd-num">✦ Set 3 Lọ</span>
+          <div class="cd-name">Chủ Đạo 6</div>
+          <div class="cd-stones">Thạch Anh Hồng · Thạch Anh Tím · Dâu Đỏ</div>
+          <div class="cd-price-row">
+            <span class="cd-price">197.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'cd6',197000,'Set Chủ Đạo 6 (3 lọ)')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-card rev d1" data-id="cd7" data-price="177000" data-name="Set Chủ Đạo 7 (3 lọ)">
+        <img src="da/z7883418348131_3fdb1b1cd690da7705359e5cad1b5c6b.jpg" alt="Set Chủ Đạo 7" class="cd-img" loading="lazy" />
+        <div class="cd-body">
+          <span class="cd-num">✦ Set 3 Lọ</span>
+          <div class="cd-name">Chủ Đạo 7</div>
+          <div class="cd-stones">Thạch Anh Khói · Thạch Anh Tím · Lapis Lazuli</div>
+          <div class="cd-price-row">
+            <span class="cd-price">177.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'cd7',177000,'Set Chủ Đạo 7 (3 lọ)')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-card rev d2" data-id="cd8" data-price="197000" data-name="Set Chủ Đạo 8 (3 lọ)">
+        <img src="da/z7883418341239_e22032a7a05fac91b9bb7cc5c9a15390.jpg" alt="Set Chủ Đạo 8" class="cd-img" loading="lazy" />
+        <div class="cd-body">
+          <span class="cd-num">✦ Set 3 Lọ</span>
+          <div class="cd-name">Chủ Đạo 8</div>
+          <div class="cd-stones">Thạch Anh Khói · Thạch Anh Vàng · Mắt Hổ</div>
+          <div class="cd-price-row">
+            <span class="cd-price">197.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'cd8',197000,'Set Chủ Đạo 8 (3 lọ)')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd-card rev d3" data-id="cd9" data-price="217000" data-name="Set Chủ Đạo 9 (3 lọ)">
+        <img src="da/z7883418336867_975dd4974fbfce4d694fb816ff839db8.jpg" alt="Set Chủ Đạo 9" class="cd-img" loading="lazy" />
+        <div class="cd-body">
+          <span class="cd-num">✦ Set 3 Lọ</span>
+          <div class="cd-name">Chủ Đạo 9</div>
+          <div class="cd-stones">Thạch Anh Dâu Đỏ · Thạch Anh Tím · Garnet</div>
+          <div class="cd-price-row">
+            <span class="cd-price">217.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'cd9',217000,'Set Chủ Đạo 9 (3 lọ)')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SET 7 LUÂN XA -->
+<section class="section" id="set-luan-xa">
+  <div class="inner">
+    <div class="sec-head rev">
+      <div class="section-badge">✦ Set 7 Lọ · Cân Bằng Luân Xa</div>
+      <h2 class="sec-title">Set 7 Lọ Luân Xa</h2>
+      <p class="sec-sub">7 lọ đá cân bằng 7 luân xa — được chọn riêng cho nam và nữ để phù hợp với năng lượng tự nhiên của từng giới.</p>
+    </div>
+    <div class="luanxa-grid">
+
+      <div class="lx-card rev d1" data-id="lx-nu" data-price="613000" data-name="Set 7 Luân Xa Nữ">
+        <img src="da/z7883415825040_87638c55f175352e399c8db304e65dec.jpg" alt="Set 7 Luân Xa Nữ" class="lx-img" loading="lazy" />
+        <div class="lx-body">
+          <span class="lx-tag">✦ Set 7 Lọ · Dành Cho Nữ ♀</span>
+          <div class="lx-name">Set 7 Luân Xa Nữ</div>
+          <div class="lx-stones">Strawberry · Tiger's Eye · Citrine · Rose Quartz · Diopside · Aquamarine · Amethyst<br><br>Tình yêu & chữa lành · Tự tin & quyết đoán · Cân bằng & hài hòa · Giao tiếp & trí tuệ · Trực giác & tâm linh</div>
+          <div class="lx-price-row">
+            <span class="lx-price">613.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'lx-nu',613000,'Set 7 Luân Xa Nữ')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lx-card rev d2" data-id="lx-nam" data-price="613000" data-name="Set 7 Luân Xa Nam">
+        <img src="da/z7883415831140_47d233d8bdca94d9bd3c354919ad20af.jpg" alt="Set 7 Luân Xa Nam" class="lx-img" loading="lazy" />
+        <div class="lx-body">
+          <span class="lx-tag">✦ Set 7 Lọ · Dành Cho Nam ♂</span>
+          <div class="lx-name">Set 7 Luân Xa Nam</div>
+          <div class="lx-stones">Garnet · Tiger's Eye · Citrine · Diopside · Aquamarine · Lapis Lazuli · Amethyst<br><br>Sức mạnh & bền bỉ · Tài lộc & thành công · Cảm xúc & yêu thương · Giao tiếp & quyết đoán · Trí tuệ & trực giác · Bình an & giác ngộ</div>
+          <div class="lx-price-row">
+            <span class="lx-price">613.000 ₫</span>
+            <button class="btn-chon" onclick="toggleItem(this,'lx-nam',613000,'Set 7 Luân Xa Nam')">Chọn</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LỌ ĐÁ LẺ -->
+<section class="section" id="lo-le">
+  <div class="inner">
+    <div class="sec-head rev">
+      <div class="section-badge">✦ Lọ Đá Lẻ · Tự Chọn Loại Phù Hợp</div>
+      <h2 class="sec-title">Lọ Đá Lẻ</h2>
+      <p class="sec-sub">Chọn một hoặc nhiều loại đá theo nhu cầu và năng lượng bạn muốn thu hút. Mỗi lọ là một công cụ chữa lành độc đáo.</p>
+    </div>
+    <div class="lo-le-grid">
+
+      <div class="ll-card rev d1" data-id="ll-tim" data-price="79000" data-name="Thạch Anh Tím (Amethyst)">
+        <img src="da/z7883417218821_1f181926b4bf237f537fdc923d3159aa.jpg" alt="Thạch Anh Tím" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Thạch Anh Tím</div>
+          <div class="ll-en">Amethyst</div>
+          <div class="ll-price-row">
+            <span class="ll-price">79.000 ₫</span>
+            <div class="ll-qty" id="qty-ll-tim">
+              <button class="qty-btn" onclick="changeQty('ll-tim',79000,'Thạch Anh Tím (Amethyst)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-tim">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-tim',79000,'Thạch Anh Tím (Amethyst)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d2" data-id="ll-hong" data-price="79000" data-name="Thạch Anh Hồng (Rose Quartz)">
+        <img src="da/z7883417224398_d117c5b268602fbb7284fa9e9ea5ef55.jpg" alt="Thạch Anh Hồng" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Thạch Anh Hồng</div>
+          <div class="ll-en">Rose Quartz</div>
+          <div class="ll-price-row">
+            <span class="ll-price">79.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-hong',79000,'Thạch Anh Hồng (Rose Quartz)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-hong">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-hong',79000,'Thạch Anh Hồng (Rose Quartz)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d3" data-id="ll-xanh" data-price="79000" data-name="Thạch Anh Xanh (Green Quartz)">
+        <img src="da/z7883417230661_568b5bd543371f845e573f816c37de43.jpg" alt="Thạch Anh Xanh" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Thạch Anh Xanh</div>
+          <div class="ll-en">Green Quartz</div>
+          <div class="ll-price-row">
+            <span class="ll-price">79.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-xanh',79000,'Thạch Anh Xanh (Green Quartz)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-xanh">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-xanh',79000,'Thạch Anh Xanh (Green Quartz)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d1" data-id="ll-trang" data-price="79000" data-name="Thạch Anh Trắng (Clear Quartz)">
+        <img src="da/z7883417236471_dc9da10a352c952aed648cf83c2d9aba.jpg" alt="Thạch Anh Trắng" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Thạch Anh Trắng</div>
+          <div class="ll-en">Clear Quartz</div>
+          <div class="ll-price-row">
+            <span class="ll-price">79.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-trang',79000,'Thạch Anh Trắng (Clear Quartz)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-trang">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-trang',79000,'Thạch Anh Trắng (Clear Quartz)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d2" data-id="ll-khoi" data-price="79000" data-name="Thạch Anh Khói (Smoky Quartz)">
+        <img src="da/z7883417243106_e4392b303d8cc77cfa89a8aad791c147.jpg" alt="Thạch Anh Khói" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Thạch Anh Khói</div>
+          <div class="ll-en">Smoky Quartz</div>
+          <div class="ll-price-row">
+            <span class="ll-price">79.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-khoi',79000,'Thạch Anh Khói (Smoky Quartz)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-khoi">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-khoi',79000,'Thạch Anh Khói (Smoky Quartz)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d3" data-id="ll-vang" data-price="99000" data-name="Thạch Anh Vàng (Citrine)">
+        <img src="da/z7883417248613_71b54a66d1fe2f970748f78c4d558296.jpg" alt="Thạch Anh Vàng" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Thạch Anh Vàng</div>
+          <div class="ll-en">Citrine</div>
+          <div class="ll-price-row">
+            <span class="ll-price">99.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-vang',99000,'Thạch Anh Vàng (Citrine)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-vang">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-vang',99000,'Thạch Anh Vàng (Citrine)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d1" data-id="ll-dau" data-price="99000" data-name="Thạch Anh Dâu Đỏ (Strawberry Quartz)">
+        <img src="da/z7883417254152_1971a0f476af502700d866a64363bec7.jpg" alt="Thạch Anh Dâu Đỏ" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Thạch Anh Dâu Đỏ</div>
+          <div class="ll-en">Strawberry Quartz</div>
+          <div class="ll-price-row">
+            <span class="ll-price">99.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-dau',99000,'Thạch Anh Dâu Đỏ (Strawberry Quartz)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-dau">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-dau',99000,'Thạch Anh Dâu Đỏ (Strawberry Quartz)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d2" data-id="ll-rainbow" data-price="79000" data-name="Rainbow (Cầu Vồng)">
+        <img src="da/z7883417258449_aab3eb8f3f957053f2c744bdd59825c1.jpg" alt="Rainbow" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Rainbow</div>
+          <div class="ll-en">Cầu Vồng</div>
+          <div class="ll-price-row">
+            <span class="ll-price">79.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-rainbow',79000,'Rainbow (Cầu Vồng)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-rainbow">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-rainbow',79000,'Rainbow (Cầu Vồng)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d3" data-id="ll-mat-ho" data-price="79000" data-name="Tiger's Eye (Mắt Hổ)">
+        <img src="da/z7883417265878_4a36b85a8054a428f61ddaaa8d7d09d9.jpg" alt="Mắt Hổ" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Mắt Hổ</div>
+          <div class="ll-en">Tiger's Eye</div>
+          <div class="ll-price-row">
+            <span class="ll-price">79.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-mat-ho',79000,'Tiger\'s Eye (Mắt Hổ)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-mat-ho">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-mat-ho',79000,'Tiger\'s Eye (Mắt Hổ)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d1" data-id="ll-lapis" data-price="79000" data-name="Lapis Lazuli (Xanh Dương)">
+        <img src="da/z7883417271467_f743312bf4f0b62fda96785462916e3c.jpg" alt="Lapis Lazuli" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Lapis Lazuli</div>
+          <div class="ll-en">Xanh Dương</div>
+          <div class="ll-price-row">
+            <span class="ll-price">79.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-lapis',79000,'Lapis Lazuli (Xanh Dương)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-lapis">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-lapis',79000,'Lapis Lazuli (Xanh Dương)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d2" data-id="ll-garnet" data-price="79000" data-name="Garnet (Đỏ)">
+        <img src="da/z7883417277466_35fbe07859a4ce5d6b7bc135e06a5bdb.jpg" alt="Garnet" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Garnet</div>
+          <div class="ll-en">Đỏ</div>
+          <div class="ll-price-row">
+            <span class="ll-price">79.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-garnet',79000,'Garnet (Đỏ)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-garnet">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-garnet',79000,'Garnet (Đỏ)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d3" data-id="ll-aqua" data-price="139000" data-name="Aquamarine (Xanh Biển)">
+        <img src="da/z7883417283831_4f134bc1b50430c52b798236b6c7e1ac.jpg" alt="Aquamarine" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Aquamarine</div>
+          <div class="ll-en">Xanh Biển</div>
+          <div class="ll-price-row">
+            <span class="ll-price">139.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-aqua',139000,'Aquamarine (Xanh Biển)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-aqua">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-aqua',139000,'Aquamarine (Xanh Biển)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d1" data-id="ll-mala" data-price="159000" data-name="Malachite (Khổng Tước)">
+        <img src="da/z7883417288977_3bd4d0570b29919106f07ce342d56a3a.jpg" alt="Malachite" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Malachite</div>
+          <div class="ll-en">Khổng Tước</div>
+          <div class="ll-price-row">
+            <span class="ll-price">159.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-mala',159000,'Malachite (Khổng Tước)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-mala">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-mala',159000,'Malachite (Khổng Tước)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ll-card rev d2" data-id="ll-diop" data-price="179000" data-name="Diopside (Xanh Lá)">
+        <img src="da/z7883417218821_1f181926b4bf237f537fdc923d3159aa.jpg" alt="Diopside" class="ll-img" loading="lazy" />
+        <div class="ll-body">
+          <div class="ll-name">Diopside</div>
+          <div class="ll-en">Xanh Lá</div>
+          <div class="ll-price-row">
+            <span class="ll-price">179.000 ₫</span>
+            <div class="ll-qty">
+              <button class="qty-btn" onclick="changeQty('ll-diop',179000,'Diopside (Xanh Lá)',-1)">−</button>
+              <span class="qty-num" id="qn-ll-diop">0</span>
+              <button class="qty-btn" onclick="changeQty('ll-diop',179000,'Diopside (Xanh Lá)',1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ĐẶT HÀNG -->
+<section class="section" id="dat-hang" style="background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(123,94,167,0.08) 0%, transparent 70%);">
+  <div class="inner" style="max-width:760px;">
+    <div class="sec-head rev">
+      <div class="section-badge">✦ Đặt Hàng</div>
+      <h2 class="sec-title">Thông Tin Đặt Hàng</h2>
+      <p class="sec-sub">Điền thông tin bên dưới — chúng tôi sẽ liên hệ xác nhận đơn và gửi thông tin thanh toán.</p>
+    </div>
+    <div style="background:var(--card);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:28px;padding:2.8rem 2.4rem;position:relative;overflow:hidden;" class="rev">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--violet),var(--neon),var(--teal));"></div>
+
+      <!-- ORDER SUMMARY -->
+      <div id="orderSummary" style="display:none;background:rgba(45,212,191,0.06);border:1px solid rgba(45,212,191,0.20);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.8rem;">
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.16em;color:var(--teal2);margin-bottom:.8rem;">✦ Đơn Hàng Của Bạn</div>
+        <div id="summaryList" style="font-size:.84rem;color:var(--muted);line-height:1.9;"></div>
+        <div style="border-top:1px solid rgba(45,212,191,0.18);margin-top:.8rem;padding-top:.8rem;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:.75rem;color:var(--muted);">Tổng cộng</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--gold2);" id="summaryTotal">0 ₫</span>
+        </div>
+      </div>
+
+      <form id="orderForm" onsubmit="handleOrderSubmit(event)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.2rem;">
+          <div>
+            <label style="display:block;font-size:.75rem;color:var(--muted);margin-bottom:.4rem;">Họ và Tên *</label>
+            <input type="text" id="of-name" placeholder="Nguyễn Thị A" required style="width:100%;background:rgba(3,3,12,0.75);border:1px solid rgba(167,139,250,0.22);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s;" onfocus="this.style.borderColor='var(--neon)'" onblur="this.style.borderColor='rgba(167,139,250,0.22)'" />
+          </div>
+          <div>
+            <label style="display:block;font-size:.75rem;color:var(--muted);margin-bottom:.4rem;">Số Điện Thoại / Zalo *</label>
+            <input type="tel" id="of-phone" placeholder="0912 345 678" required style="width:100%;background:rgba(3,3,12,0.75);border:1px solid rgba(167,139,250,0.22);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s;" onfocus="this.style.borderColor='var(--neon)'" onblur="this.style.borderColor='rgba(167,139,250,0.22)'" />
+          </div>
+        </div>
+        <div style="margin-bottom:1.2rem;">
+          <label style="display:block;font-size:.75rem;color:var(--muted);margin-bottom:.4rem;">Địa Chỉ Giao Hàng *</label>
+          <input type="text" id="of-address" placeholder="Số nhà, tên đường, phường/xã, quận/huyện" required style="width:100%;background:rgba(3,3,12,0.75);border:1px solid rgba(167,139,250,0.22);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s;" onfocus="this.style.borderColor='var(--neon)'" onblur="this.style.borderColor='rgba(167,139,250,0.22)'" />
+        </div>
+        <div style="margin-bottom:1.2rem;">
+          <label style="display:block;font-size:.75rem;color:var(--muted);margin-bottom:.4rem;">Tỉnh / Thành Phố *</label>
+          <input type="text" id="of-city" placeholder="TP. Hồ Chí Minh" required style="width:100%;background:rgba(3,3,12,0.75);border:1px solid rgba(167,139,250,0.22);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s;" onfocus="this.style.borderColor='var(--neon)'" onblur="this.style.borderColor='rgba(167,139,250,0.22)'" />
+        </div>
+        <div style="margin-bottom:2rem;">
+          <label style="display:block;font-size:.75rem;color:var(--muted);margin-bottom:.4rem;">Ghi Chú</label>
+          <textarea id="of-note" placeholder="Ghi chú thêm về đơn hàng (không bắt buộc)" rows="2" style="width:100%;background:rgba(3,3,12,0.75);border:1px solid rgba(167,139,250,0.22);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:.9rem;outline:none;resize:none;transition:border-color .3s;" onfocus="this.style.borderColor='var(--neon)'" onblur="this.style.borderColor='rgba(167,139,250,0.22)'"></textarea>
+        </div>
+        <button type="submit" id="submitOrderBtn" style="display:block;width:100%;background:linear-gradient(135deg,var(--violet),var(--neon),var(--teal));color:#fff;border:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.04em;padding:1.05rem;border-radius:100px;box-shadow:0 0 28px rgba(167,139,250,0.38);transition:box-shadow .3s,transform .2s;">
+          Tiến Hành Thanh Toán →
+        </button>
+        <p style="font-size:.75rem;color:var(--muted);text-align:center;margin-top:.8rem;">Thanh toán chuyển khoản trước · Giao hàng toàn quốc · Hỗ trợ: Zalo <strong style="color:var(--violet3);">0362 676 159</strong></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <img src="sammy%20logo.jpg" alt="Sammy Trương">
+      Sammy Trương
+    </a>
+    <div class="footer-links">
+      <a href="index.html">Trang Chủ</a>
+      <a href="luan-giai-ca-nhan.html">Luận Giải</a>
+      <a href="da-nang-luong.html">Đá Năng Lượng</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2025 Sammy Trương · Energy Stone Bottle</p>
+</footer>
+
+<script>
+/* STARFIELD */
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  function init(){stars=[];for(let i=0;i<180;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.1,o:Math.random()*.38+.08,speed:Math.random()*.016+.004,phase:Math.random()*Math.PI*2});}
+  function draw(t){ctx.clearRect(0,0,W,H);stars.forEach(s=>{const tw=Math.sin(t*.001*s.speed*1000+s.phase)*.28+.72;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(190,170,255,${s.o*tw})`;ctx.fill();});requestAnimationFrame(draw);}
+  resize();init();requestAnimationFrame(draw);
+  window.addEventListener('resize',()=>{resize();init();});
+})();
+
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>50));
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mob').classList.toggle('open'));
+
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+/* ── CART ── */
+let cart = {}; // id → { name, price, qty, type:'set'|'lo' }
+
+function fmt(n){ return n.toLocaleString('vi-VN'); }
+
+function toggleItem(btn, id, price, name) {
+  const card = btn.closest('.cd-card, .lx-card');
+  if (cart[id]) {
+    delete cart[id];
+    card.classList.remove('selected');
+    btn.textContent = 'Chọn';
+  } else {
+    cart[id] = { name, price, qty: 1, type: 'set' };
+    card.classList.add('selected');
+    btn.textContent = 'Bỏ chọn';
+  }
+  updateCart();
+}
+
+function changeQty(id, price, name, delta) {
+  const cur = cart[id] ? cart[id].qty : 0;
+  const next = Math.max(0, cur + delta);
+  const qnEl = document.getElementById('qn-' + id);
+  const card = qnEl?.closest('.ll-card');
+  if (next === 0) {
+    delete cart[id];
+    if (card) card.classList.remove('selected');
+  } else {
+    cart[id] = { name, price, qty: next, type: 'lo' };
+    if (card) card.classList.add('selected');
+  }
+  if (qnEl) qnEl.textContent = next;
+  updateCart();
+}
+
+function updateCart() {
+  const items = Object.values(cart);
+  const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+  const count = items.reduce((s, i) => s + i.qty, 0);
+
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartTotal').textContent = fmt(total) + ' ₫';
+  document.getElementById('cartItemsText').textContent = items.map(i => i.qty > 1 ? `${i.name} x${i.qty}` : i.name).join(' · ') || 'Chưa có sản phẩm';
+
+  const bar = document.getElementById('cartBar');
+  bar.classList.toggle('visible', count > 0);
+
+  // Update order summary
+  const summary = document.getElementById('orderSummary');
+  const summaryList = document.getElementById('summaryList');
+  const summaryTotal = document.getElementById('summaryTotal');
+  if (count > 0) {
+    summary.style.display = 'block';
+    summaryList.innerHTML = items.map(i => `<div>✦ ${i.name}${i.qty > 1 ? ` x${i.qty}` : ''} — <strong style="color:var(--gold2)">${fmt(i.price * i.qty)} ₫</strong></div>`).join('');
+    summaryTotal.textContent = fmt(total) + ' ₫';
+  } else {
+    summary.style.display = 'none';
+  }
+}
+
+function clearCart() {
+  cart = {};
+  document.querySelectorAll('.cd-card.selected, .lx-card.selected, .ll-card.selected').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.btn-chon').forEach(b => b.textContent = 'Chọn');
+  document.querySelectorAll('[id^="qn-"]').forEach(el => el.textContent = '0');
+  updateCart();
+}
+
+function scrollToOrder() {
+  document.getElementById('dat-hang').scrollIntoView({ behavior: 'smooth' });
+}
+
+function goToOrder(e) {
+  e.preventDefault();
+  scrollToOrder();
+}
+
+/* ── ORDER SUBMIT ── */
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwFi3Iq79XFFA9BBAUar9Ius727HeZncIHOVQdxMXczbpNRJ_TiBUgHnsI-YJDYnNl-ew/exec';
+
+async function handleOrderSubmit(e) {
+  e.preventDefault();
+  const items = Object.values(cart);
+  if (items.length === 0) {
+    alert('Vui lòng chọn ít nhất một sản phẩm trước khi đặt hàng.');
+    document.getElementById('set-chu-dao').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+  const btn = document.getElementById('submitOrderBtn');
+  btn.disabled = true; btn.textContent = 'Đang xử lý...';
+
+  const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+  const name = document.getElementById('of-name').value.trim();
+  const phone = document.getElementById('of-phone').value.trim();
+  const address = document.getElementById('of-address').value.trim();
+  const city = document.getElementById('of-city').value.trim();
+  const note = document.getElementById('of-note').value.trim();
+  const itemsText = items.map(i => i.qty > 1 ? `${i.name} x${i.qty}` : i.name).join('; ');
+
+  const payload = {
+    formType: 'da-nang-luong',
+    fullName: name, phone, address: address + ', ' + city,
+    items: itemsText, total, note, status: 'Chờ Thanh Toán'
+  };
+
+  try {
+    await fetch(GAS_URL + '?payload=' + encodeURIComponent(JSON.stringify(payload)), { mode: 'no-cors' });
+  } catch { /* non-blocking */ }
+
+  // Save to sessionStorage and redirect to payment
+  sessionStorage.setItem('da_order', JSON.stringify({ name, phone, address: address + ', ' + city, items: itemsText, total, note }));
+  window.location.href = `thanh-toan-da.html?ten=${encodeURIComponent(name)}&amount=${total}&items=${encodeURIComponent(itemsText)}`;
+}
+</script>
+<script src="/assets/chatbot-embed.js" defer></script>
+</body>
+</html>

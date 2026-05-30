@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanh Toán Đá Năng Lượng | Sammy Trương</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <meta name="theme-color" content="#03030C">
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #03030C; --card: rgba(6,6,20,0.72);
+      --violet: #7B5EA7; --indigo: #4F6BFF; --neon: #A78BFA;
+      --teal: #2DD4BF; --teal2: #5EEAD4; --gold: #C9A84C; --gold2: #E8C56A;
+      --text: #E8E8F0; --muted: #9898B8;
+      --border: rgba(167,139,250,0.18);
+    }
+    body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg) url('/assets/anh-nen-sammy.png') center top / 100% auto no-repeat; color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2rem 1.2rem 6rem; }
+    #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .wrap { position: relative; z-index: 1; width: 100%; max-width: 700px; }
+
+    /* LOGO BAR */
+    .logo-bar { text-align: center; margin: 1.6rem 0 2rem; }
+    .logo-mark { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(167,139,250,0.55); box-shadow: 0 0 16px rgba(167,139,250,0.45), 0 0 32px rgba(167,139,250,0.22); margin: 0 auto .75rem; display: block; }
+    .logo-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; background: linear-gradient(155deg,#F0ECFF 20%,#C084FC 52%,#2DD4BF 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* STEPS */
+    .steps { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 2.2rem; }
+    .step { display: flex; flex-direction: column; align-items: center; gap: .3rem; }
+    .step-dot { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 600; border: 2px solid rgba(167,139,250,0.25); color: var(--muted); }
+    .step-dot.done { background: rgba(45,212,191,0.15); border-color: rgba(45,212,191,0.40); color: var(--teal); }
+    .step-dot.active { background: linear-gradient(135deg, var(--violet), var(--indigo)); border-color: transparent; color: #fff; box-shadow: 0 0 14px rgba(123,94,167,0.40); }
+    .step-lbl { font-size: .62rem; color: var(--muted); white-space: nowrap; }
+    .step-lbl.active { color: var(--neon); }
+    .step-line { width: 48px; height: 2px; background: rgba(167,139,250,0.15); margin: 0 .3rem; margin-bottom: 1.2rem; }
+    .step-line.done { background: rgba(45,212,191,0.35); }
+
+    /* CARD */
+    .card { background: var(--card); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; position: relative; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--violet), var(--neon), var(--teal)); }
+
+    /* HEADER */
+    .card-header { padding: 2rem 2.4rem 1.6rem; text-align: center; }
+    .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.65rem; font-weight: 600; margin-bottom: .4rem; background: linear-gradient(135deg, var(--text) 40%, var(--neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .card-sub { font-size: .83rem; color: var(--muted); }
+    .sec-divider { height: 1px; margin: 0 2.4rem; background: linear-gradient(90deg, transparent, rgba(167,139,250,.2), transparent); }
+
+    /* ORDER SUMMARY */
+    .order-box { padding: 1.4rem 2.4rem; background: rgba(4,5,26,.35); }
+    .order-title { font-size: .65rem; text-transform: uppercase; letter-spacing: .16em; color: var(--teal2); margin-bottom: .9rem; display: block; }
+    .order-items { display: flex; flex-direction: column; gap: .45rem; margin-bottom: 1rem; }
+    .order-item { display: flex; justify-content: space-between; align-items: baseline; font-size: .84rem; }
+    .order-item-name { color: var(--muted); flex: 1; }
+    .order-item-price { color: var(--gold2); font-weight: 600; flex-shrink: 0; margin-left: 1rem; }
+    .order-total-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(167,139,250,0.15); padding-top: .85rem; }
+    .order-total-lbl { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+    .order-total-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--gold2); }
+
+    /* INFO BOX */
+    .info-box { padding: 1rem 2.4rem; background: rgba(167,139,250,0.05); border-bottom: 1px solid rgba(167,139,250,0.12); }
+    .info-row { display: flex; gap: .6rem; font-size: .82rem; color: var(--muted); line-height: 1.6; }
+    .info-ic { flex-shrink: 0; }
+
+    /* 2-COLUMN PAYMENT */
+    .payment-body { display: grid; grid-template-columns: 1fr 212px; gap: 1.8rem; padding: 2rem 2.4rem; align-items: stretch; }
+    .bank-col { display: flex; flex-direction: column; gap: .75rem; }
+    .bank-card { flex: 1; background: rgba(13,10,0,0.55); border: 1px solid rgba(201,168,76,0.28); border-radius: 14px; overflow: hidden; position: relative; }
+    .bank-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold2), transparent); }
+    .bank-card-header { padding: .7rem 1rem .55rem; border-bottom: 1px solid rgba(201,168,76,.12); font-size: .65rem; text-transform: uppercase; letter-spacing: .16em; color: var(--gold2); }
+    .bank-row { display: flex; align-items: center; justify-content: space-between; padding: .65rem 1rem; border-bottom: 1px solid rgba(201,168,76,0.10); gap: .6rem; }
+    .bank-row:last-child { border-bottom: none; }
+    .bank-row-label { font-size: .68rem; color: var(--muted); flex-shrink: 0; min-width: 90px; }
+    .bank-row-val { font-size: .85rem; color: var(--text); font-weight: 500; flex: 1; }
+    .bank-row-val.highlight { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: var(--gold2); letter-spacing: .04em; }
+    .btn-copy { flex-shrink: 0; background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.28); border-radius: 7px; color: var(--neon); font-size: .68rem; font-weight: 500; padding: .25rem .55rem; cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif; transition: background .25s; white-space: nowrap; }
+    .btn-copy:hover { background: rgba(167,139,250,0.22); }
+    .btn-copy.copied { background: rgba(45,212,191,0.14); border-color: rgba(45,212,191,0.40); color: var(--teal); }
+    .ck-box { background: rgba(79,107,255,0.08); border: 1px solid rgba(79,107,255,0.22); border-radius: 12px; padding: .85rem 1rem; }
+    .ck-label { font-size: .65rem; text-transform: uppercase; letter-spacing: .14em; color: var(--neon); margin-bottom: .35rem; display: block; }
+    .ck-value-wrap { display: flex; align-items: center; justify-content: space-between; gap: .7rem; }
+    .ck-value { font-size: .88rem; color: var(--text); font-weight: 600; word-break: break-all; }
+    .qr-col { display: flex; flex-direction: column; align-items: center; gap: .75rem; }
+    .qr-wrap { background: #fff; border-radius: 16px; padding: 10px; width: 202px; height: 202px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(0,0,0,.35); }
+    .qr-wrap img { width: 182px; height: 182px; display: block; }
+    .qr-caption { font-size: .68rem; color: var(--gold2); text-transform: uppercase; letter-spacing: .12em; text-align: center; line-height: 1.55; }
+
+    /* INSTRUCTIONS */
+    .instructions { padding: 1.4rem 2.4rem; display: flex; gap: 1.8rem; }
+    .instr-item { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: .5rem; }
+    .instr-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(45,212,191,.12); border: 1px solid rgba(45,212,191,.3); color: var(--teal); font-size: .72rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .instr-text { font-size: .78rem; color: var(--muted); line-height: 1.6; }
+
+    /* CTA */
+    .cta-section { padding: 0 2.4rem 2.4rem; }
+    .btn-confirm { display: block; width: 100%; text-align: center; background: linear-gradient(135deg, var(--violet), var(--indigo)); color: #fff; border: none; cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif; font-size: .97rem; font-weight: 600; padding: 1rem; border-radius: 100px; box-shadow: 0 0 28px rgba(123,94,167,0.35); transition: box-shadow .3s, transform .2s; }
+    .btn-confirm:hover { box-shadow: 0 0 54px rgba(123,94,167,0.58); transform: translateY(-1px); }
+    .support-row { display: flex; align-items: center; justify-content: center; gap: .75rem; margin-top: 1rem; }
+    .support-text { font-size: .78rem; color: var(--muted); }
+    .btn-zalo { display: inline-flex; align-items: center; gap: .4rem; background: rgba(74,222,128,.1); border: 1px solid rgba(74,222,128,.35); border-radius: 100px; padding: .45rem 1.1rem; color: #4ADE80; font-family: 'Be Vietnam Pro', sans-serif; font-size: .8rem; font-weight: 500; text-decoration: none; }
+    .note-small { font-size: .75rem; color: var(--muted); text-align: center; margin-top: .8rem; line-height: 1.7; }
+
+    /* SUCCESS */
+    .success-panel { display: none; text-align: center; padding: 3rem 2rem 2.5rem; }
+    .success-icon { font-size: 3.5rem; margin-bottom: 1rem; display: block; }
+    .success-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: .6rem; color: var(--teal); }
+    .success-sub { font-size: .88rem; color: var(--muted); line-height: 1.8; }
+
+    @media (max-width: 560px) {
+      .payment-body { grid-template-columns: 1fr; }
+      .qr-col { flex-direction: row; align-items: flex-start; gap: 1rem; }
+      .qr-wrap { width: 130px; height: 130px; flex-shrink: 0; }
+      .qr-wrap img { width: 110px; height: 110px; }
+      .instructions { flex-direction: column; gap: .85rem; padding: 1.2rem 1.6rem; }
+      .instr-item { flex-direction: row; text-align: left; gap: .75rem; }
+      body { padding: 1rem .8rem 3rem; }
+      .card-header { padding: 1.4rem 1.2rem 1rem; }
+      .payment-body { padding: 1.2rem; }
+      .cta-section { padding: 0 1.2rem 1.6rem; }
+      .order-box { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+
+<div class="wrap">
+  <div class="logo-bar">
+    <img src="sammy%20logo.jpg" alt="Sammy Trương" class="logo-mark">
+    <div class="logo-name">Sammy Trương</div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps">
+    <div class="step"><div class="step-dot done">✓</div><span class="step-lbl">Chọn sản phẩm</span></div>
+    <div class="step-line done"></div>
+    <div class="step"><div class="step-dot done">✓</div><span class="step-lbl">Điền thông tin</span></div>
+    <div class="step-line done"></div>
+    <div class="step"><div class="step-dot active">3</div><span class="step-lbl active">Thanh toán</span></div>
+    <div class="step-line"></div>
+    <div class="step"><div class="step-dot">4</div><span class="step-lbl">Nhận hàng</span></div>
+  </div>
+
+  <div class="card" id="mainCard">
+
+    <div class="card-header">
+      <div class="card-title">Xác Nhận Thanh Toán</div>
+      <p class="card-sub">Chuyển khoản trước · Đóng gói & giao hàng sau khi xác nhận</p>
+    </div>
+
+    <div class="sec-divider"></div>
+
+    <!-- ORDER SUMMARY -->
+    <div class="order-box">
+      <span class="order-title">✦ Đơn Hàng Đá Năng Lượng</span>
+      <div class="order-items" id="orderItems">
+        <div class="order-item"><span class="order-item-name">Đang tải...</span></div>
+      </div>
+      <div class="order-total-row">
+        <span class="order-total-lbl">Tổng thanh toán</span>
+        <span class="order-total-num" id="orderTotal">—</span>
+      </div>
+    </div>
+
+    <div class="sec-divider"></div>
+
+    <!-- INFO NOTICE -->
+    <div class="info-box">
+      <div class="info-row"><span class="info-ic">📦</span><span>Đơn hàng sẽ được đóng gói và giao sau khi xác nhận thanh toán. Thời gian giao hàng <strong style="color:var(--text);">2–5 ngày làm việc</strong> tùy khu vực.</span></div>
+    </div>
+
+    <!-- 2-COLUMN: QR + BANK -->
+    <div class="payment-body">
+      <div class="bank-col">
+        <div class="bank-card">
+          <div class="bank-card-header">✦ Thông Tin Chuyển Khoản</div>
+          <div class="bank-row">
+            <span class="bank-row-label">Ngân hàng</span>
+            <span class="bank-row-val">ACB — Á Châu</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-row-label">Số tài khoản</span>
+            <span class="bank-row-val highlight">6855117</span>
+            <button class="btn-copy" onclick="copyText('6855117',this)">Sao chép</button>
+          </div>
+          <div class="bank-row">
+            <span class="bank-row-label">Chủ tài khoản</span>
+            <span class="bank-row-val">Truong Thi Diem Kieu</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-row-label">Số tiền</span>
+            <span class="bank-row-val highlight" id="bankAmount">—</span>
+          </div>
+        </div>
+        <div class="ck-box">
+          <span class="ck-label">Nội Dung Chuyển Khoản</span>
+          <div class="ck-value-wrap">
+            <span class="ck-value" id="ckContent">—</span>
+            <button class="btn-copy" onclick="copyCK(this)">Sao chép</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="qr-col">
+        <div class="qr-wrap">
+          <img id="sePayQR" src="" alt="QR Thanh Toán" loading="lazy">
+        </div>
+        <div class="qr-caption">✦ Quét mã để<br>thanh toán nhanh</div>
+      </div>
+    </div>
+
+    <div class="sec-divider"></div>
+
+    <div class="instructions">
+      <div class="instr-item"><div class="instr-num">1</div><div class="instr-text">Chuyển khoản đúng số tiền & nội dung</div></div>
+      <div class="instr-item"><div class="instr-num">2</div><div class="instr-text">Chụp màn hình xác nhận giao dịch</div></div>
+      <div class="instr-item"><div class="instr-num">3</div><div class="instr-text">Bấm nút bên dưới để hoàn tất</div></div>
+    </div>
+
+    <div class="sec-divider"></div>
+
+    <div class="cta-section">
+      <button class="btn-confirm" id="confirmBtn" onclick="handleConfirm()">Tôi Đã Chuyển Khoản ✓</button>
+      <div class="support-row">
+        <span class="support-text">Cần hỗ trợ ngay?</span>
+        <a href="https://zalo.me/0362676159" target="_blank" class="btn-zalo">💬 Chat Zalo</a>
+      </div>
+      <p class="note-small">Sau khi xác nhận thanh toán, chúng tôi sẽ liên hệ Zalo để xác nhận đơn và cập nhật mã vận chuyển.</p>
+    </div>
+
+    <div class="success-panel" id="successPanel">
+      <span class="success-icon">✅</span>
+      <div class="success-title">Đặt Hàng Thành Công!</div>
+      <p class="success-sub">
+        Cảm ơn bạn đã đặt hàng Đá Năng Lượng từ Sammy Trương.<br><br>
+        Sammy sẽ liên hệ Zalo trong vòng <strong style="color:var(--teal);">24 giờ</strong> để xác nhận đơn hàng và thông báo lịch giao.<br><br>
+        <a href="da-nang-luong.html" style="color:var(--neon);font-size:.88rem;">← Quay lại trang đá năng lượng</a>
+      </p>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:1.4rem;">
+    <a href="da-nang-luong.html" style="font-size:.78rem;color:var(--muted);text-decoration:none;">← Quay lại chọn sản phẩm</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  function init(){stars=[];for(let i=0;i<180;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.1,o:Math.random()*.4+.1,speed:Math.random()*.016+.004,phase:Math.random()*Math.PI*2});}
+  function draw(t){ctx.clearRect(0,0,W,H);stars.forEach(s=>{const tw=Math.sin(t*.001*s.speed*1000+s.phase)*.28+.72;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(190,170,255,${s.o*tw})`;ctx.fill();});requestAnimationFrame(draw);}
+  resize();init();requestAnimationFrame(draw);
+  window.addEventListener('resize',()=>{resize();init();});
+})();
+
+const params = new URLSearchParams(location.search);
+const tenRaw  = params.get('ten') || '';
+const custName = (() => { try { return decodeURIComponent(tenRaw); } catch { return tenRaw; } })() || 'Khach';
+const amount  = parseInt(params.get('amount') || '0');
+const itemsRaw = (() => { try { return decodeURIComponent(params.get('items') || ''); } catch { return params.get('items') || ''; } })();
+
+function fmt(n){ return n.toLocaleString('vi-VN'); }
+function randCode(){ return String(Math.floor(1000 + Math.random() * 9000)); }
+
+const orderCode = randCode();
+const ckContent = `${custName} DA${orderCode}`;
+
+// Render order items
+const itemsEl = document.getElementById('orderItems');
+if (itemsRaw) {
+  const parts = itemsRaw.split(';').map(s => s.trim()).filter(Boolean);
+  itemsEl.innerHTML = parts.map(p => `<div class="order-item"><span class="order-item-name">✦ ${p}</span></div>`).join('');
+}
+document.getElementById('orderTotal').textContent = fmt(amount) + ' ₫';
+document.getElementById('bankAmount').textContent = fmt(amount) + ' VNĐ';
+document.getElementById('ckContent').textContent = ckContent;
+document.title = `Thanh toán Đá Năng Lượng | Sammy Trương`;
+
+// QR SePay
+const qrUrl = `https://qr.sepay.vn/img?bank=ACB&acc=6855117&template=compact&amount=${amount}&des=${encodeURIComponent(ckContent)}`;
+document.getElementById('sePayQR').src = qrUrl;
+
+// Save to KV
+sessionStorage.setItem('da_order_code', orderCode);
+setTimeout(() => saveInfoNow(), 300);
+
+async function saveInfoNow() {
+  const order = JSON.parse(sessionStorage.getItem('da_order') || '{}');
+  try {
+    await fetch('/api/order?action=save-info', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: `DA${orderCode}`, email: order.phone || '', name: order.name || custName, phone: order.phone || '', address: order.address || '', items: itemsRaw, total: amount })
+    });
+  } catch(e) { console.warn('[save-info]', e.message); }
+}
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Đã sao chép'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Sao chép'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    const el = document.createElement('textarea');
+    el.value = text; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);
+    btn.textContent = '✓ Đã sao chép'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Sao chép'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+function copyCK(btn) { copyText(document.getElementById('ckContent').textContent, btn); }
+
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwFi3Iq79XFFA9BBAUar9Ius727HeZncIHOVQdxMXczbpNRJ_TiBUgHnsI-YJDYnNl-ew/exec';
+
+async function handleConfirm() {
+  const btn = document.getElementById('confirmBtn');
+  btn.disabled = true; btn.textContent = 'Đang ghi nhận...';
+  const order = JSON.parse(sessionStorage.getItem('da_order') || '{}');
+  try {
+    await fetch(GAS_URL + '?payload=' + encodeURIComponent(JSON.stringify({
+      formType: 'da-nang-luong-confirm', orderCode, name: order.name || custName,
+      phone: order.phone || '', address: order.address || '',
+      items: itemsRaw, total: amount, status: 'Đã Chuyển Khoản — Chờ Xác Nhận'
+    })), { mode: 'no-cors' });
+    await fetch('/api/order?action=confirm', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ packageId: 'da-nang-luong', customerName: order.name || custName, price: amount, orderCode })
+    });
+  } catch { /* offline */ }
+  document.querySelector('.card-header').style.display = 'none';
+  document.querySelector('.order-box').style.display = 'none';
+  document.querySelectorAll('.sec-divider').forEach(d => d.style.display = 'none');
+  document.querySelector('.info-box').style.display = 'none';
+  document.querySelector('.payment-body').style.display = 'none';
+  document.querySelector('.instructions').style.display = 'none';
+  document.querySelector('.cta-section').style.display = 'none';
+  document.getElementById('successPanel').style.display = 'block';
+}
+</script>
+</body>
+</html>
