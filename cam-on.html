@@ -274,6 +274,31 @@ if (type === 'khoa-hoc') {
     <a href="https://zalo.me/0362676159" target="_blank" class="btn-primary">💬 Liên Hệ Sammy</a>
     <a href="index.html" class="btn-zalo">🏠 Về Trang Chủ</a>`;
 
+} else if (type === 'da-nang-luong') {
+  const cityParam = (() => { try { return decodeURIComponent(params.get('city') || ''); } catch { return ''; } })();
+  const isSaigon = /hồ chí minh|ho chi minh|hcm|sài gòn|sai gon|tphcm|tp\.hcm/i.test(cityParam);
+  const deliveryTime = isSaigon ? '2–3 ngày làm việc' : '3–5 ngày làm việc';
+  const daOrder = JSON.parse(sessionStorage.getItem('da_order') || '{}');
+  document.querySelector('h1').textContent  = 'Đặt Hàng Thành Công!';
+  document.querySelector('.sub').innerHTML  = 'Thanh toán đã xác nhận. Đá năng lượng của bạn sẽ sớm lên đường!';
+  document.querySelector('.order-val.status').textContent = '✓ Đã thanh toán';
+  document.querySelector('.timeline').innerHTML = `
+    <div class="tl-item"><div class="tl-dot">✅</div>
+    <div class="tl-body"><div class="tl-title">Ngay bây giờ</div>
+    <div class="tl-desc">Thanh toán xác nhận — đơn hàng đá năng lượng của bạn đang được chuẩn bị.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">📧</div>
+    <div class="tl-body"><div class="tl-title">Email xác nhận</div>
+    <div class="tl-desc">Thông tin đơn hàng đã được gửi về <strong style="color:var(--neon)">${daOrder.email || 'email của bạn'}</strong>. Kiểm tra cả Spam.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">📦</div>
+    <div class="tl-body"><div class="tl-title">Đóng gói & giao hàng</div>
+    <div class="tl-desc">Đơn hàng sẽ được đóng gói và giao trong <strong style="color:var(--teal);">${deliveryTime}</strong>. Sammy sẽ gửi mã vận đơn qua Zalo.</div></div></div>
+    <div class="tl-item"><div class="tl-dot">💎</div>
+    <div class="tl-body"><div class="tl-title">Nhận hàng</div>
+    <div class="tl-desc">Đá năng lượng đến tay — chúc bạn luôn tràn đầy năng lượng tích cực!</div></div></div>`;
+  document.querySelector('.btns').innerHTML = `
+    <a href="da-nang-luong.html" class="btn-primary">💎 Xem Thêm Đá Năng Lượng</a>
+    <a href="https://zalo.me/0362676159" target="_blank" class="btn-zalo">💬 Hỗ trợ Zalo</a>`;
+
 } else if (type === 'tarot') {
   document.querySelector('h1').textContent  = 'Đặt Bài Thành Công!';
   document.querySelector('.sub').innerHTML  = 'Sammy đã nhận được câu hỏi của bạn.<br>Video trải bài sẽ được gửi về email trong 3–5 ngày làm việc.';

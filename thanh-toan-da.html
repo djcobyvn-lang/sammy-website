@@ -260,17 +260,21 @@
   window.addEventListener('resize',()=>{resize();init();});
 })();
 
-const params = new URLSearchParams(location.search);
-const tenRaw  = params.get('ten') || '';
+const params   = new URLSearchParams(location.search);
+const tenRaw   = params.get('ten')   || '';
+const emailRaw = params.get('email') || '';
 const custName = (() => { try { return decodeURIComponent(tenRaw); } catch { return tenRaw; } })() || 'Khach';
-const amount  = parseInt(params.get('amount') || '0');
+const custEmail= (() => { try { return decodeURIComponent(emailRaw); } catch { return emailRaw; } })() || '';
+const amount   = parseInt(params.get('amount') || '0');
 const itemsRaw = (() => { try { return decodeURIComponent(params.get('items') || ''); } catch { return params.get('items') || ''; } })();
+const order    = JSON.parse(sessionStorage.getItem('da_order') || '{}');
+const email    = custEmail || order.email || '';
 
 function fmt(n){ return n.toLocaleString('vi-VN'); }
 function randCode(){ return String(Math.floor(1000 + Math.random() * 9000)); }
 
 const orderCode = randCode();
-const ckContent = `${custName} DA${orderCode}`;
+const ckContent = `${custName.replace(/\s+/g,' ').split(' ').slice(0,2).join('').toUpperCase()} DA${orderCode}`;
 
 // Render order items
 const itemsEl = document.getElementById('orderItems');
@@ -278,29 +282,39 @@ if (itemsRaw) {
   const parts = itemsRaw.split(';').map(s => s.trim()).filter(Boolean);
   itemsEl.innerHTML = parts.map(p => `<div class="order-item"><span class="order-item-name">✦ ${p}</span></div>`).join('');
 }
-document.getElementById('orderTotal').textContent = fmt(amount) + ' ₫';
-document.getElementById('bankAmount').textContent = fmt(amount) + ' VNĐ';
-document.getElementById('ckContent').textContent = ckContent;
+document.getElementById('orderTotal').textContent  = fmt(amount) + ' ₫';
+document.getElementById('bankAmount').textContent  = fmt(amount) + ' VNĐ';
+document.getElementById('ckContent').textContent   = ckContent;
 document.title = `Thanh toán Đá Năng Lượng | Sammy Trương`;
 
 // QR SePay
 const qrUrl = `https://qr.sepay.vn/img?bank=ACB&acc=6855117&template=compact&amount=${amount}&des=${encodeURIComponent(ckContent)}`;
 document.getElementById('sePayQR').src = qrUrl;
 
-// Save to KV
+// Save info to KV
 sessionStorage.setItem('da_order_code', orderCode);
-setTimeout(() => saveInfoNow(), 300);
+setTimeout(saveInfoNow, 400);
 
 async function saveInfoNow() {
-  const order = JSON.parse(sessionStorage.getItem('da_order') || '{}');
+  if (!email) return;
   try {
     await fetch('/api/order?action=save-info', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: `DA${orderCode}`, email: order.phone || '', name: order.name || custName, phone: order.phone || '', address: order.address || '', items: itemsRaw, total: amount })
+      body: JSON.stringify({
+        code: `DA${orderCode}`,
+        email,
+        name:    order.name    || custName,
+        phone:   order.phone   || '',
+        address: order.address || '',
+        city:    order.city    || '',
+        items:   itemsRaw,
+        total:   amount
+      })
     });
   } catch(e) { console.warn('[save-info]', e.message); }
 }
 
+/* ── COPY ── */
 function copyText(text, btn) {
   navigator.clipboard.writeText(text).then(() => {
     btn.textContent = '✓ Đã sao chép'; btn.classList.add('copied');
@@ -316,29 +330,58 @@ function copyCK(btn) { copyText(document.getElementById('ckContent').textContent
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwFi3Iq79XFFA9BBAUar9Ius727HeZncIHOVQdxMXczbpNRJ_TiBUgHnsI-YJDYnNl-ew/exec';
 
+/* ── POLLING — tự động phát hiện thanh toán SePay ── */
+let _pollTimer = null;
+function startPolling() {
+  let attempts = 0;
+  const MAX = 200; // 200 × 3s = 10 phút
+  _pollTimer = setInterval(async () => {
+    attempts++;
+    try {
+      const res  = await fetch(`/api/order?action=check&pkgId=DA${orderCode}`);
+      const data = await res.json();
+      if (data.paid) {
+        clearInterval(_pollTimer);
+        onPaymentConfirmed();
+        return;
+      }
+    } catch { /* tiếp tục polling */ }
+    if (attempts >= MAX) {
+      clearInterval(_pollTimer);
+      window.location.href = `cam-on.html?type=da-nang-luong&ten=${encodeURIComponent(order.name || custName)}`;
+    }
+  }, 3000);
+}
+
+function onPaymentConfirmed() {
+  // Cập nhật GAS Sheets
+  fetch(GAS_URL + '?payload=' + encodeURIComponent(JSON.stringify({
+    formType: 'da-nang-luong', orderCode,
+    fullName: order.name || custName, phone: order.phone || '', email,
+    address:  order.address || '', city: order.city || '',
+    items:    itemsRaw, total: amount, status: 'Đã Thanh Toán ✓'
+  })), { mode: 'no-cors' }).catch(() => {});
+  // Redirect sau 800ms
+  setTimeout(() => {
+    window.location.href = `cam-on.html?type=da-nang-luong&ten=${encodeURIComponent(order.name || custName)}&city=${encodeURIComponent(order.city || '')}`;
+  }, 800);
+}
+
+// Bắt đầu polling ngay khi mở trang
+startPolling();
+
+/* ── NÚT THỦ CÔNG (fallback) ── */
 async function handleConfirm() {
   const btn = document.getElementById('confirmBtn');
   btn.disabled = true; btn.textContent = 'Đang ghi nhận...';
-  const order = JSON.parse(sessionStorage.getItem('da_order') || '{}');
+  await saveInfoNow();
   try {
-    await fetch(GAS_URL + '?payload=' + encodeURIComponent(JSON.stringify({
-      formType: 'da-nang-luong-confirm', orderCode, name: order.name || custName,
-      phone: order.phone || '', address: order.address || '',
-      items: itemsRaw, total: amount, status: 'Đã Chuyển Khoản — Chờ Xác Nhận'
-    })), { mode: 'no-cors' });
     await fetch('/api/order?action=confirm', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ packageId: 'da-nang-luong', customerName: order.name || custName, price: amount, orderCode })
+      body: JSON.stringify({ packageId: `DA${orderCode}`, customerName: order.name || custName, price: amount, email })
     });
   } catch { /* offline */ }
-  document.querySelector('.card-header').style.display = 'none';
-  document.querySelector('.order-box').style.display = 'none';
-  document.querySelectorAll('.sec-divider').forEach(d => d.style.display = 'none');
-  document.querySelector('.info-box').style.display = 'none';
-  document.querySelector('.payment-body').style.display = 'none';
-  document.querySelector('.instructions').style.display = 'none';
-  document.querySelector('.cta-section').style.display = 'none';
-  document.getElementById('successPanel').style.display = 'block';
+  onPaymentConfirmed();
 }
 </script>
 </body>

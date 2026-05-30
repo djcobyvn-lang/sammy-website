@@ -5,6 +5,7 @@ const {
   sendAdvancedCourseEmail,
   sendEbookEmail,
   sendEbookTshEmail,
+  sendDaOrderEmail,
   sendTarotConfirmEmail,
   sendPaymentConfirmEmail
 } = require('../_lib/mailer');
@@ -91,7 +92,30 @@ async function processWebhook(req) {
   }
 
   // ══════════════════════════════════════════════════════
-  // CASE 3: EBOOK TSH — EBOKTSH + 4 digits
+  // CASE 3: ĐÁ NĂNG LƯỢNG — DA + 4 digits
+  // ══════════════════════════════════════════════════════
+  const daMatch = contentNorm.match(/(?:^|[^A-Z])DA(\d{4})/) || contentNorm.match(/^DA(\d{4})/);
+  if (daMatch && !contentNorm.includes('DACBIET') && !contentNorm.includes('DANG') && !contentNorm.includes('DAT')) {
+    if (amount < 70000) { console.warn('[DA] Thiếu tiền:', amount); return; }
+    const code = daMatch[1];
+    await kvSet(`paid:DA${code}`, '1', 86400);
+    console.log('[DA] ✓ paid:DA' + code + ' set');
+
+    const infoRaw = await kvGet(`info:DA${code}`);
+    const info = safeParseJSON(infoRaw);
+    if (info?.email) {
+      const city = info.city || info.address || '';
+      await sendDaOrderEmail({ email: info.email, name: info.name || '', phone: info.phone || '', items: info.items || '', total: info.total || amount, address: info.address || '', city, orderCode: code }).catch(console.warn);
+      await gasCall({ formType: 'da-nang-luong', orderCode: code, fullName: info.name || '', phone: info.phone || '', email: info.email, address: info.address || '', city, items: info.items || '', total: info.total || amount, status: 'Đã Thanh Toán ✓' }).catch(console.warn);
+      console.log('[DA] ✓ email →', info.email);
+    } else {
+      console.warn('[DA] Không có info trong KV cho code DA' + code);
+    }
+    return;
+  }
+
+  // ══════════════════════════════════════════════════════
+  // CASE 4: EBOOK TSH — EBOKTSH + 4 digits
   // ══════════════════════════════════════════════════════
   const ebookTshMatch = contentNorm.match(/EBOKTSH(\d{4})/);
   if (ebookTshMatch) {

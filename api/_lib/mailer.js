@@ -116,6 +116,57 @@ async function sendEbookTshEmail({ email, name }) {
   });
 }
 
+// ─── ĐÁ NĂNG LƯỢNG ────────────────────────────────────────
+async function sendDaOrderEmail({ email, name, phone, items, total, address, city, orderCode }) {
+  const isSaigon = /hồ chí minh|ho chi minh|hcm|sài gòn|sai gon|tphcm|bình thạnh|quận|q\.\d|tp\.hcm/i.test((city || address || ''));
+  const deliveryTime = isSaigon ? '2–3 ngày làm việc' : '3–5 ngày làm việc';
+  const deliveryNote = isSaigon ? 'Khu vực TP.HCM' : 'Giao hàng toàn quốc';
+  const itemLines = (items || '').split(';').map(s => s.trim()).filter(Boolean);
+  await transporter.sendMail({
+    from: FROM, to: email,
+    subject: `✓ Đặt Hàng Đá Năng Lượng Thành Công — Mã Đơn DA${orderCode}`,
+    html: `
+      <div style="font-family:sans-serif;max-width:580px;margin:0 auto;background:#04020F;color:#EDE9FF;padding:40px;border-radius:16px;">
+        <div style="text-align:center;margin-bottom:28px;">
+          <div style="font-size:2rem;margin-bottom:8px;">💎</div>
+          <h2 style="background:linear-gradient(135deg,#C4B5FD,#A78BFA,#5EEAD4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:1.5rem;margin-bottom:6px;">Đặt Hàng Thành Công!</h2>
+          <p style="color:#8B82B0;font-size:.9rem;">Mã đơn: <strong style="color:#EDE9FF;letter-spacing:.08em;">DA${orderCode}</strong></p>
+        </div>
+        <p style="color:#8B82B0;margin-bottom:24px;">Xin chào <strong style="color:#EDE9FF;">${name || 'bạn'}</strong>, đơn hàng đá năng lượng của bạn đã được xác nhận thanh toán.</p>
+
+        <div style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.25);border-radius:14px;padding:20px;margin-bottom:20px;">
+          <p style="font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:#A78BFA;margin-bottom:12px;">✦ Sản Phẩm Đặt Hàng</p>
+          ${itemLines.map(item => `<div style="font-size:.88rem;color:#EDE9FF;padding:5px 0;border-bottom:1px solid rgba(167,139,250,0.12);">✦ ${item}</div>`).join('')}
+          <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid rgba(167,139,250,0.20);">
+            <span style="font-size:.78rem;color:#8B82B0;">Tổng thanh toán</span>
+            <strong style="font-size:1.2rem;color:#E8C56A;">${Number(total).toLocaleString('vi-VN')} ₫</strong>
+          </div>
+        </div>
+
+        <div style="background:rgba(45,212,191,0.08);border:1px solid rgba(45,212,191,0.25);border-radius:14px;padding:20px;margin-bottom:20px;">
+          <p style="font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:#5EEAD4;margin-bottom:12px;">✦ Thông Tin Giao Hàng</p>
+          <p style="font-size:.88rem;color:#EDE9FF;margin-bottom:6px;">📍 ${address || 'Đang cập nhật'}</p>
+          <p style="font-size:.88rem;color:#EDE9FF;margin-bottom:12px;">📞 ${phone || 'Đang cập nhật'}</p>
+          <div style="background:rgba(45,212,191,0.12);border-radius:10px;padding:12px;text-align:center;">
+            <p style="font-size:.78rem;color:#8B82B0;margin-bottom:4px;">${deliveryNote}</p>
+            <p style="font-size:1rem;font-weight:700;color:#5EEAD4;">🚚 Dự kiến giao trong <strong>${deliveryTime}</strong></p>
+          </div>
+        </div>
+
+        <div style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.22);border-radius:12px;padding:16px;margin-bottom:20px;font-size:.83rem;color:#8B82B0;line-height:1.75;">
+          ✦ Đơn hàng sẽ được đóng gói cẩn thận và giao qua đơn vị vận chuyển.<br>
+          ✦ Sammy sẽ gửi mã vận đơn qua Zalo <strong style="color:#EDE9FF;">${ZALO}</strong> sau khi xuất hàng.<br>
+          ✦ Mọi thắc mắc liên hệ Zalo để được hỗ trợ nhanh nhất.
+        </div>
+
+        <div style="text-align:center;">
+          <a href="https://zalo.me/${ZALO}" style="display:inline-block;background:linear-gradient(135deg,#5B3FA0,#A78BFA);color:#fff;padding:12px 28px;border-radius:100px;text-decoration:none;font-weight:700;font-size:.9rem;">💬 Liên Hệ Zalo</a>
+        </div>
+        <p style="margin-top:28px;font-size:.75rem;color:#8B82B0;text-align:center;">Sammy Trương · Energy Stone Bottle · sammytruong.com</p>
+      </div>`
+  });
+}
+
 // ─── KHÓA HỌC CHUYÊN SÂU ─────────────────────────────────
 // Thay ZALO_GROUP_LINK bằng link nhóm Zalo thực tế khi có
 const ZALO_GROUP_LINK = process.env.ZALO_GROUP_LINK || 'https://zalo.me/0362676159';
@@ -155,4 +206,4 @@ async function sendTarotConfirmEmail({ email, name }) {
   });
 }
 
-module.exports = { sendOTPEmail, sendPaymentConfirmEmail, sendActivationEmail, sendEbookEmail, sendEbookTshEmail, sendAdvancedCourseEmail, sendTarotConfirmEmail };
+module.exports = { sendOTPEmail, sendPaymentConfirmEmail, sendActivationEmail, sendEbookEmail, sendEbookTshEmail, sendDaOrderEmail, sendAdvancedCourseEmail, sendTarotConfirmEmail };
