@@ -1754,7 +1754,6 @@
 </section>
 
 <!-- BLOG — ẩn đến khi có bài viết được đăng -->
-<!-- BLOG ẨN TẠM THỜI -->
 <div class="divider" id="blogDivider" style="display:none!important;"></div>
 <section id="blog" style="display:none!important;">
   <div class="sec-head rev">
@@ -1763,6 +1762,27 @@
     <p class="sec-sub">Khám phá kho tàng kiến thức về thần số học và tâm linh</p>
   </div>
   <div class="blog-grid" id="blogGrid"></div>
+</section>
+
+<!-- PHẢN HỒI PREVIEW -->
+<div class="divider"></div>
+<section style="padding:5rem 6%;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="sec-head rev">
+      <span class="sec-tag">✦ Phản Hồi Thực Tế ✦</span>
+      <h2 class="sec-title">Khách Hàng Nói Gì?</h2>
+      <p class="sec-sub">Những chia sẻ thực tế từ khách hàng đã trải nghiệm — không chỉnh sửa, không dàn dựng.</p>
+    </div>
+    <div id="fbPreview" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.2rem;"></div>
+    <div style="text-align:center;" class="rev">
+      <a href="phan-hoi.html"
+        style="display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,rgba(123,94,167,.18),rgba(79,107,255,.12));border:1px solid rgba(167,139,250,.35);border-radius:100px;padding:.75rem 2rem;color:var(--neon);text-decoration:none;font-size:.9rem;font-weight:500;transition:background .3s,border-color .3s,box-shadow .3s;"
+        onmouseover="this.style.background='rgba(123,94,167,.28)';this.style.borderColor='rgba(167,139,250,.6)';this.style.boxShadow='0 0 28px rgba(123,94,167,.22)'"
+        onmouseout="this.style.background='linear-gradient(135deg,rgba(123,94,167,.18),rgba(79,107,255,.12))';this.style.borderColor='rgba(167,139,250,.35)';this.style.boxShadow='none'">
+        Xem tất cả 54+ phản hồi &nbsp;→
+      </a>
+    </div>
+  </div>
 </section>
 
 <script>
@@ -1810,44 +1830,24 @@
 
 <div class="divider"></div>
 
-<!-- CTA + FEEDBACK -->
+<!-- CTA -->
+<div class="divider"></div>
 <section id="contact">
-  <div class="cta-fb-wrap">
-
-    <!-- Trái: CTA -->
-    <div class="cta-wrap" style="max-width:100%;">
-      <div class="cta-box rev">
-        <span class="cta-tag">✦ Bắt Đầu Ngay ✦</span>
-        <h2 class="cta-title">Khám Phá Con Số Của Bạn</h2>
-        <p class="cta-sub">Đăng ký nhận bản tin miễn phí và bài học thần số học hàng tuần từ Sammy Trương</p>
-        <div class="email-row">
-          <input type="email" class="email-in" placeholder="Email của bạn..." />
-          <button class="btn-primary">Đăng Ký</button>
-        </div>
+  <div class="cta-wrap">
+    <div class="cta-box rev">
+      <span class="cta-tag">✦ Bắt Đầu Ngay ✦</span>
+      <h2 class="cta-title">Khám Phá Con Số Của Bạn</h2>
+      <p class="cta-sub">Đăng ký nhận bản tin miễn phí và bài học thần số học hàng tuần từ Sammy Trương</p>
+      <div class="email-row">
+        <input type="email" class="email-in" placeholder="Email của bạn..." />
+        <button class="btn-primary">Đăng Ký</button>
       </div>
     </div>
-
-    <!-- Phải: Feedback mini -->
-    <div class="rev">
-      <div class="fb-mini-head">
-        <span class="sec-tag" style="text-align:left;">✦ Phản Hồi Thực Tế ✦</span>
-        <h2 class="sec-title" style="font-size:clamp(1.4rem,2.8vw,2rem);text-align:left;">Khách Hàng Nói Gì?</h2>
-        <p style="font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;">Những chia sẻ thực tế từ khách hàng — không chỉnh sửa, không dàn dựng.</p>
-      </div>
-      <div class="fb-mini-grid" id="fbPreview"></div>
-      <a href="phan-hoi.html"
-        style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,rgba(123,94,167,.18),rgba(79,107,255,.12));border:1px solid rgba(167,139,250,.35);border-radius:100px;padding:.65rem 1.6rem;color:var(--neon);text-decoration:none;font-size:.85rem;font-weight:500;transition:background .3s,box-shadow .3s;"
-        onmouseover="this.style.background='rgba(123,94,167,.28)';this.style.boxShadow='0 0 24px rgba(123,94,167,.22)'"
-        onmouseout="this.style.background='linear-gradient(135deg,rgba(123,94,167,.18),rgba(79,107,255,.12))';this.style.boxShadow='none'">
-        Xem 54+ phản hồi &nbsp;→
-      </a>
-    </div>
-
   </div>
 </section>
 
 <script>
-/* Feedback mini — 9 ảnh ngẫu nhiên */
+/* Feedback preview — 9 ảnh ngẫu nhiên */
 (function(){
   var all = [
     'z6847330088395_8b4c3249c9feea814a10f0b714f39ce9.jpg',
@@ -1869,14 +1869,19 @@
   shuffled.forEach(function(name){
     var a = document.createElement('a');
     a.href = 'phan-hoi.html';
+    a.style.cssText = 'display:block;border-radius:12px;overflow:hidden;border:1px solid rgba(167,139,250,.16);transition:transform .22s,box-shadow .22s,border-color .22s;';
+    a.onmouseover = function(){ this.style.transform='scale(1.03)';this.style.boxShadow='0 8px 32px rgba(0,0,0,.5),0 0 20px rgba(167,139,250,.18)';this.style.borderColor='rgba(167,139,250,.45)'; };
+    a.onmouseout  = function(){ this.style.transform='';this.style.boxShadow='';this.style.borderColor='rgba(167,139,250,.16)'; };
     var img = document.createElement('img');
     img.src = '/feedback/' + name;
-    img.alt = 'Phản hồi';
+    img.alt = 'Phản hồi khách hàng';
     img.loading = 'lazy';
-    img.className = 'fb-mini-img';
+    img.style.cssText = 'width:100%;display:block;aspect-ratio:9/16;object-fit:cover;';
     a.appendChild(img);
     grid.appendChild(a);
   });
+  function setGrid(){ grid.style.gridTemplateColumns = window.innerWidth < 600 ? 'repeat(2,1fr)' : 'repeat(3,1fr)'; }
+  setGrid(); window.addEventListener('resize', setGrid);
 })();
 </script>
 
