@@ -1753,17 +1753,6 @@
   </div>
 </section>
 
-<!-- BLOG — ẩn đến khi có bài viết được đăng -->
-<div class="divider" id="blogDivider" style="display:none!important;"></div>
-<section id="blog" style="display:none!important;">
-  <div class="sec-head rev">
-    <span class="sec-tag">✦ Kiến Thức ✦</span>
-    <h2 class="sec-title">Bài Viết Mới Nhất</h2>
-    <p class="sec-sub">Khám phá kho tàng kiến thức về thần số học và tâm linh</p>
-  </div>
-  <div class="blog-grid" id="blogGrid"></div>
-</section>
-
 <!-- PHẢN HỒI PREVIEW -->
 <div class="divider"></div>
 <section style="padding:5rem 6%;">
@@ -1784,49 +1773,6 @@
     </div>
   </div>
 </section>
-
-<script>
-(function(){
-  const EMOJIS = ['🌌','✨','🔢','🌸','💫','🌙','⭐','🔮'];
-  const delays  = ['d1','d2','d3'];
-
-  function renderBlog(articles){
-    if (!articles.length) return;
-    const grid = document.getElementById('blogGrid');
-    grid.innerHTML = articles.slice(0, 3).map(function(p, i){
-      const thumb = p.thumb
-        ? '<div class="blog-thumb" style="background-image:url(\''+p.thumb+'\');background-size:cover;background-position:center;font-size:0;"></div>'
-        : '<div class="blog-thumb">'+EMOJIS[i % EMOJIS.length]+'</div>';
-      const d = p.date ? new Date(p.date) : null;
-      const dateStr = d && !isNaN(d)
-        ? d.toLocaleDateString('vi-VN',{day:'numeric',month:'long',year:'numeric'}) : '';
-      const href = p.slug ? 'bai-viet/'+p.slug+'.html' : '#';
-      return '<div class="blog-card rev '+(delays[i]||'')+'">'+thumb+'<div class="blog-body">'
-        +(p.category ? '<span class="blog-cat">'+p.category+'</span>' : '')
-        +(dateStr    ? '<div class="blog-date">'+dateStr+'</div>' : '')
-        +'<h3>'+p.title+'</h3>'
-        +(p.excerpt ? '<p class="blog-ex">'+p.excerpt+'</p>' : '')
-        +'<a href="'+href+'" class="blog-more">Đọc Thêm →</a>'
-        +'</div></div>';
-    }).join('');
-    document.getElementById('blog').style.display       = '';
-    document.getElementById('blogDivider').style.display = '';
-  }
-
-  try {
-    const local = JSON.parse(localStorage.getItem('sammy_posts') || '[]');
-    const pub   = local.filter(function(p){ return p.status === 'published'; });
-    if (pub.length) renderBlog(pub);
-  } catch(e) {}
-
-  fetch('/api/articles')
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      if (data.articles && data.articles.length) renderBlog(data.articles);
-    })
-    .catch(function(){});
-})();
-</script>
 
 <div class="divider"></div>
 
