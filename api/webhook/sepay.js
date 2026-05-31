@@ -94,10 +94,12 @@ async function processWebhook(req) {
   // ══════════════════════════════════════════════════════
   // CASE 3: ĐÁ NĂNG LƯỢNG — DA + 4 digits
   // ══════════════════════════════════════════════════════
-  const daMatch = contentNorm.match(/(?:^|[^A-Z])DA(\d{4})/) || contentNorm.match(/^DA(\d{4})/);
-  if (daMatch && !contentNorm.includes('DACBIET') && !contentNorm.includes('DANG') && !contentNorm.includes('DAT')) {
+  // Tìm DA + 4 chữ số ở bất kỳ vị trí — loại trừ các prefix hợp lệ khác
+  const daRaw = contentNorm.match(/DA(\d{4})/);
+  const daMatch = daRaw && !contentNorm.match(/DACBIET/) && !contentNorm.match(/EBOOKDA/);
+  if (daMatch) {
     if (amount < 70000) { console.warn('[DA] Thiếu tiền:', amount); return; }
-    const code = daMatch[1];
+    const code = daRaw[1];
     await kvSet(`paid:DA${code}`, '1', 86400);
     console.log('[DA] ✓ paid:DA' + code + ' set');
 

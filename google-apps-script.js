@@ -72,6 +72,7 @@ function doGet(e) {
     else if (t === 'tarot-order')     r = saveTarotOrder(d);
     else if (t === 'xac-nhan-ck')     r = saveXacNhanCK(d);
     else if (t === 'khoa-hoc')        r = saveKhoaHoc(d);
+    else if (t === 'da-nang-luong')   r = saveDaNangLuong(d);
     else if (t === 'save-article')    r = saveArticle(d);
     else if (t === 'delete-article')  r = deleteArticle(d);
     else                              r = saveDangKy(d);
@@ -261,6 +262,37 @@ function saveXacNhanCK(d) {
     }
   }
   return null;
+}
+
+// Đá năng lượng
+function saveDaNangLuong(d) {
+  var tg  = now();
+  var nm  = clean(d.fullName || d.name || '');
+  var em  = clean(d.email || '').toLowerCase();
+  var ph  = clean(d.phone || '');
+  var adr = clean(d.address || '');
+  var its = clean(d.items || '');
+  var tot = clean(d.total ? String(Number(d.total).toLocaleString('vi-VN')) + ' VNĐ' : '');
+  var st  = clean(d.status || 'Chờ Thanh Toán');
+  var s   = mainSheet();
+
+  // Nếu đã có row với email + loại Đá Năng Lượng → chỉ cập nhật trạng thái
+  if (em) {
+    var rows = s.getDataRange().getValues();
+    for (var i = rows.length - 1; i >= 1; i--) {
+      if (String(rows[i][C.EMAIL] || '').toLowerCase() === em &&
+          vi(String(rows[i][C.LOAI] || '')).includes('da nang luong')) {
+        s.getRange(i + 1, C.TRANG_THAI + 1).setValue(st);
+        if (its && !rows[i][C.GOI]) s.getRange(i + 1, C.GOI + 1).setValue(its);
+        if (tot && !rows[i][C.GHI_CHU]) s.getRange(i + 1, C.GHI_CHU + 1).setValue(tot);
+        return i + 1;
+      }
+    }
+  }
+
+  // Tạo row mới: [TG, 'Đá Năng Lượng', Tên, Địa Chỉ, Email, SĐT, Sản Phẩm, Tổng Tiền, Trạng Thái]
+  s.appendRow([tg, 'Đá Năng Lượng', nm, adr, em, ph, its, tot, st]);
+  return s.getLastRow();
 }
 
 // ════════════════════════════════════════════════════

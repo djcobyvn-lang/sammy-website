@@ -26,9 +26,13 @@ module.exports = async (req, res) => {
   // ── save-info: POST /api/order?action=save-info ──
   if (action === 'save-info') {
     if (req.method !== 'POST') return res.status(405).json({ ok: false });
-    const { code, email, name, phone } = req.body || {};
+    const { code, email, name, phone, address, city, items, total } = req.body || {};
     if (!code || !email) return res.status(400).json({ ok: false, error: 'Missing code or email' });
-    await kvSet(`info:${code}`, JSON.stringify({ email, name: name || '', phone: phone || '' }), 86400);
+    await kvSet(`info:${code}`, JSON.stringify({
+      email, name: name || '', phone: phone || '',
+      address: address || '', city: city || '',
+      items: items || '', total: total || 0
+    }), 86400);
     console.log('[order/save-info] saved info for', code, '→', email);
     return res.json({ ok: true });
   }
