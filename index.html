@@ -21,7 +21,7 @@
       --indigo:    #4F6BFF;
       --neon:      #A78BFA;
       --teal:      #2DD4BF;
-      --gold:      #C9A84C;
+      --gold:      #C9A84C; --gold2: #E8C56A; --gold3: #FDE68A;
       --text:      #E8E8F0;
       --muted:     #9898B8;
       --border:    rgba(167,139,250,0.16);
@@ -774,10 +774,10 @@
     .da-prev-card::before { content:''; display:block; position:absolute;top:0;left:0;right:0;height:3px; }
     .da-prev-img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
     .da-prev-body { padding:1rem 1.2rem 1.4rem; flex:1; display:flex; flex-direction:column; gap:.5rem; }
-    .da-prev-tag { font-size:.6rem; text-transform:uppercase; letter-spacing:.16em; color:var(--teal2); }
-    .da-prev-name { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; color:var(--text); line-height:1.25; }
+    .da-prev-tag { font-size:.6rem; text-transform:uppercase; letter-spacing:.16em; color:var(--gold2); }
+    .da-prev-name { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; color:var(--gold2); line-height:1.25; }
     .da-prev-desc { font-size:.78rem; color:var(--muted); line-height:1.7; flex:1; }
-    .da-prev-price { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; color:var(--gold2); }
+    .da-prev-price { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:700; color:var(--gold3); }
     @media (max-width:720px){ .da-preview-grid { grid-template-columns:1fr 1fr; } }
     @media (max-width:480px){ .da-preview-grid { grid-template-columns:1fr; max-width:360px; } }
 
