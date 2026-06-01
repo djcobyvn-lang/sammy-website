@@ -170,6 +170,33 @@
       .cart-bar { padding: .8rem 4%; flex-wrap: wrap; gap: .6rem; }
       .cart-items-text { display: none; }
     }
+
+    /* ── LIGHTBOX ── */
+    .lb-overlay {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(3,3,12,0.92); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; cursor: zoom-out;
+    }
+    .lb-overlay.open { display: flex; }
+    .lb-img {
+      max-width: 92vw; max-height: 90vh;
+      border-radius: 16px;
+      box-shadow: 0 0 60px rgba(167,139,250,0.28), 0 0 120px rgba(0,0,0,0.6);
+      cursor: default;
+      animation: lbIn .25s ease;
+    }
+    @keyframes lbIn { from { opacity:0; transform:scale(.88); } to { opacity:1; transform:scale(1); } }
+    .lb-close {
+      position: fixed; top: 1.2rem; right: 1.4rem; z-index: 1000;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(167,139,250,0.18); border: 1px solid rgba(167,139,250,0.38);
+      color: #fff; font-size: 1.2rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .2s;
+    }
+    .lb-close:hover { background: rgba(167,139,250,0.38); }
+    .zoomable { cursor: zoom-in; transition: opacity .2s; }
+    .zoomable:hover { opacity: .88; }
   </style>
 </head>
 <body>
@@ -837,6 +864,39 @@ async function handleOrderSubmit(e) {
   window.location.href = `thanh-toan-da.html?ten=${encodeURIComponent(name)}&amount=${total}&items=${encodeURIComponent(itemsText)}&email=${encodeURIComponent(email)}`;
 }
 </script>
+<!-- LIGHTBOX -->
+<div class="lb-overlay" id="lbOverlay" onclick="lbClose()">
+  <button class="lb-close" onclick="lbClose()" title="Đóng">✕</button>
+  <img class="lb-img" id="lbImg" src="" alt="" onclick="event.stopPropagation()" />
+</div>
+
+<script>
+/* ── LIGHTBOX ── */
+function lbOpen(src, alt) {
+  var img = document.getElementById('lbImg');
+  img.src = src;
+  img.alt = alt || '';
+  document.getElementById('lbOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function lbClose() {
+  document.getElementById('lbOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') lbClose();
+});
+
+/* Gắn lightbox vào tất cả ảnh sản phẩm */
+document.querySelectorAll('.cd-img, .lx-img, .ll-img').forEach(function(img) {
+  img.classList.add('zoomable');
+  img.addEventListener('click', function(e) {
+    e.stopPropagation();
+    lbOpen(this.src, this.alt);
+  });
+});
+</script>
+
 <script src="/assets/chatbot-embed.js" defer></script>
 </body>
 </html>
