@@ -202,7 +202,7 @@
     if (!moved) return;
 
     var newRight  = clampRight(startRight  - dx);
-    var newBottom = clampBottom(startBottom + dy);
+    var newBottom = clampBottom(startBottom - dy);
     wrap.style.right  = newRight  + "px";
     wrap.style.bottom = newBottom + "px";
   }
