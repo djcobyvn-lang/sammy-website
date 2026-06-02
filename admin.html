@@ -1392,6 +1392,8 @@ function nmCalc(name,day,month,year){
   const rawCB=firsts.reduce((s,l)=>s+(PYTH[l]||0),0);
   const d_r=nmR3(day),m_r=nmR3(month),ySum=nmDS(String(year)),y_r=nmR3(ySum);
   const d_s=nmRS(day),m_s=nmRS(month),y_s=nmRS(ySum),cluster=d_s+m_s+y_s;
+  /* clusterRaw giữ master (d_r+m_r+y_r) — dùng cho kiểm tra nợ nghiệp Cụm ĐĐ */
+  const clusterRaw=d_r+m_r+y_r;
   const tienThan=nmDS(String(day)+String(month)+String(year));
   /* Nếu tienThan đúng là master 11/22/33 → Chủ Đạo = master đó */
   let duongDoi=(tienThan===11||tienThan===22||tienThan===33)?tienThan:nmReduce(cluster);
@@ -1418,7 +1420,7 @@ function nmCalc(name,day,month,year){
   const lset=new Set(all);
   const soKhuyet=[];for(let i=1;i<=9;i++){const g=N2L[i]||[];if(g.length&&!g.some(l=>lset.has(l)))soKhuyet.push({num:i,miss:g.filter(l=>!lset.has(l))});}
   const tcThSum=tinhCach+tamHon;
-  const dcs=[['Vận mệnh',rawVM],['Tâm hồn',rawTH],['Tính cách',rawTC],['Cân bằng',rawCB],['Ngày sinh',day],['Thái độ',day+month],['Trưởng thành',duongDoi+vanMemh],['Cụm đường đời',cluster],['TC+TH',tcThSum]];
+  const dcs=[['Vận mệnh',rawVM],['Tâm hồn',rawTH],['Tính cách',rawTC],['Cân bằng',rawCB],['Ngày sinh',day],['Thái độ',day+month],['Trưởng thành',duongDoi+vanMemh],['Cụm đường đời',clusterRaw],['TC+TH',tcThSum]];
   const noNghiep={};for(const [lb,v] of dcs){if(NM_DEBTS.has(v)){if(!noNghiep[v])noNghiep[v]=[];noNghiep[v].push(lb);}}
   const d1=peakReduce(m_r+d_r),d2=peakReduce(d_r+y_r);
   const d3=peakReduce(d1+d2),d4=peakReduce(m_r+y_r);
