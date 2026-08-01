@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Admin — Quản Trị Nội Dung</title>
+  <meta name="robots" content="noindex, nofollow" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -450,10 +451,6 @@ option{background:var(--card);color:var(--txt);}
   .nm-doc-name{font-size:1.1rem;}
   .nm-num-xl{font-size:1.25rem;}
 }
-.analytics-row{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;transition:border-color .2s;}
-.analytics-row:hover{border-color:var(--border-h);}
-#analyticsStats{grid-template-columns:repeat(2,1fr);}
-@media(min-width:600px){#analyticsStats{grid-template-columns:repeat(4,1fr);}}
 </style>
 </head>
 <body>
@@ -484,14 +481,6 @@ option{background:var(--card);color:var(--txt);}
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-inner">
 
-      <div>
-        <div class="sidebar-section-head">
-          <span class="sidebar-section-title">Bài Viết Hiện Có</span>
-          <button class="btn-new" id="btnNew">+ Bài Mới</button>
-        </div>
-        <div class="post-list" id="postList"></div>
-      </div>
-
       <!-- CÔNG CỤ -->
       <div>
         <div class="sidebar-section-head">
@@ -504,16 +493,14 @@ option{background:var(--card);color:var(--txt);}
             <div style="font-size:.68rem;color:var(--muted);">25 chỉ số Pythagoras</div>
           </div>
         </div>
-        <div class="nm-tool-item" id="navAnalytics" onclick="switchView('analytics')">
-          <span style="font-size:1rem;">📊</span>
+        <div class="nm-tool-item" id="navStudent" onclick="switchView('student')">
+          <span style="font-size:1rem;">🎓</span>
           <div>
-            <div style="font-size:.8rem;font-weight:500;color:var(--txt);">Lịch Sử Chat</div>
-            <div style="font-size:.68rem;color:var(--muted);">Analytics & hội thoại</div>
+            <div style="font-size:.8rem;font-weight:500;color:var(--txt);">Kích Hoạt Học Viên</div>
+            <div style="font-size:.68rem;color:var(--muted);">Khóa 3 Gốc — bật tay</div>
           </div>
         </div>
       </div>
-
-      <div class="sidebar-stats" id="sidebarStats"></div>
 
     </div>
   </aside>
@@ -674,6 +661,68 @@ option{background:var(--card);color:var(--txt);}
   </main>
 
   <!-- NUMEROLOGY MAIN PANEL -->
+  <!-- KÍCH HOẠT HỌC VIÊN (thêm 2026-08-01) — lưới an toàn khi đường tự động không nổ -->
+  <main class="main" id="mainStudent" style="display:none">
+    <div class="editor-wrap" style="max-width:720px;">
+
+      <div class="editor-toolbar">
+        <div class="editor-title-area">
+          <span class="editor-label">🎓 Kích Hoạt Học Viên — Khóa Thần Số Học 3 Gốc</span>
+          <div class="editor-status"><span id="stStatusTxt" style="font-size:.72rem;color:var(--muted);">Nhập email học viên</span></div>
+        </div>
+      </div>
+
+      <div class="nm-card">
+        <div class="nm-card-title">📋 Thông Tin Học Viên</div>
+        <div class="f-grid" style="gap:.85rem;">
+          <div class="f-group">
+            <label class="f-label">Email học viên <span class="req">*</span></label>
+            <input class="f-input" id="stEmail" type="email" placeholder="hocvien@gmail.com" autocomplete="off">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Họ và tên <span style="color:var(--muted);font-weight:400;">(để trống nếu đã đăng ký trên web)</span></label>
+            <input class="f-input" id="stName" type="text" placeholder="Nguyễn Thị Lan">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Zalo <span style="color:var(--muted);font-weight:400;">(tuỳ chọn)</span></label>
+            <input class="f-input" id="stZalo" type="tel" placeholder="0912345678">
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:.55rem;padding:.7rem .85rem;border-radius:10px;background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.22);">
+            <input type="checkbox" id="stWithEbook" style="margin-top:.15rem;width:16px;height:16px;accent-color:#A78BFA;cursor:pointer;">
+            <label for="stWithEbook" style="font-size:.78rem;line-height:1.6;cursor:pointer;">
+              Kèm bộ <strong style="color:var(--txt);">35 PDF Thần Số Học</strong> khi kích hoạt
+              <span style="color:var(--muted);display:block;font-size:.72rem;">Mặc định TẮT — không phải học viên nào cũng được gửi bộ này.</span>
+            </label>
+          </div>
+          <div>
+            <button class="btn-publish" id="stBtn" onclick="stActivate()" style="width:100%;">🎓 Kích Hoạt + Gửi Mail</button>
+          </div>
+          <div>
+            <button class="btn-publish" id="stEbookBtn" onclick="stSendEbook()" style="width:100%;background:transparent;border:1px solid rgba(167,139,250,0.45);color:#A78BFA;">📚 Chỉ Gửi Bộ 35 PDF</button>
+          </div>
+        </div>
+        <p style="font-size:.72rem;color:var(--muted);line-height:1.7;margin-top:.9rem;">
+          <strong style="color:var(--txt);">🎓 Kích Hoạt + Gửi Mail</strong>: bật cờ
+          <strong style="color:var(--txt);">paid + activated</strong> trong hệ thống · gửi mail hướng dẫn
+          <strong style="color:var(--txt);">đăng nhập bằng OTP</strong> (không mật khẩu).
+          Bộ 35 PDF chỉ đi kèm khi tick ô ở trên.
+          Bấm lại cho cùng một email = gửi lại mail cho khách báo mất thư. Có hiệu lực ngay, không cần deploy.
+        </p>
+        <p style="font-size:.72rem;color:var(--muted);line-height:1.7;margin-top:.5rem;">
+          <strong style="color:var(--txt);">📚 Chỉ Gửi Bộ 35 PDF</strong>: gửi riêng bộ tài liệu tới email trên,
+          <strong style="color:var(--txt);">KHÔNG</strong> đụng tới trạng thái học viên — dùng khi muốn tặng tài liệu
+          cho người chưa/không học khóa, hoặc gửi bù cho học viên đã kích hoạt trước đó.
+        </p>
+        <p style="font-size:.72rem;color:var(--muted);line-height:1.7;margin-top:.5rem;">
+          Bình thường hệ thống <strong style="color:var(--txt);">tự làm hết</strong> khi tiền về. Chỉ cần bật tay khi:
+          khách trả thiếu học phí · gõ sai nội dung chuyển khoản (mất mã HV####) · SePay không bắn webhook.
+        </p>
+        <div id="stResult" style="display:none;margin-top:1rem;padding:.85rem 1rem;border-radius:10px;font-size:.8rem;line-height:1.6;"></div>
+      </div>
+
+    </div>
+  </main>
+
   <main class="main" id="mainNumerology" style="display:none">
     <div class="editor-wrap" style="max-width:960px;">
 
@@ -697,6 +746,10 @@ option{background:var(--card);color:var(--txt);}
           <div class="f-group">
             <label class="f-label">Họ và tên đầy đủ <span class="req">*</span></label>
             <input class="f-input" id="nmName" type="text" placeholder="Nguyễn Thị Lan">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Nickname <span style="color:var(--muted);font-weight:400;">(tuỳ chọn)</span></label>
+            <input class="f-input" id="nmNickname" type="text" placeholder="Vd: Sushi, Kem...">
           </div>
           <div class="f-grid f-grid-3" style="gap:.75rem;">
             <div class="f-group">
@@ -729,6 +782,7 @@ option{background:var(--card);color:var(--txt);}
           <div style="display:grid;grid-template-columns:1fr;gap:.6rem;" id="nmSecondary">
             <div style="background:rgba(4,5,26,.55);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;"></div>
           </div>
+          <div id="nmNickSecondary" style="display:none;margin-top:.6rem;"></div>
           <div id="nmArrows" style="display:none;"></div>
           <div id="nmDebt" style="display:none;"></div>
           <div id="nmMisc" style="display:none;"></div>
@@ -745,28 +799,6 @@ option{background:var(--card);color:var(--txt);}
         </div>
 
       </div>
-    </div>
-  </main>
-
-  <!-- ANALYTICS PANEL -->
-  <main class="main" id="mainAnalytics" style="display:none;padding:2rem;">
-    <div style="max-width:1100px;margin:0 auto;">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.8rem;">
-        <div>
-          <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:.3rem;">📊 Lịch Sử Chat</h2>
-          <p style="font-size:.8rem;color:var(--muted);">Thống kê và hội thoại với khách hàng qua chatbot</p>
-        </div>
-        <button onclick="loadAnalytics(0)" style="background:var(--accent);color:#fff;border:none;padding:.5rem 1.2rem;border-radius:8px;cursor:pointer;font-size:.82rem;">↻ Tải lại</button>
-      </div>
-
-      <!-- Stats row -->
-      <div id="analyticsStats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.8rem;"></div>
-
-      <!-- Session list -->
-      <div id="analyticsTable"></div>
-
-      <!-- Pagination -->
-      <div id="analyticsPager" style="display:flex;gap:.5rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;"></div>
     </div>
   </main>
 
@@ -848,6 +880,7 @@ if(!posts.length){
 /* ── RENDER SIDEBAR ── */
 function renderSidebar(){
   const list=document.getElementById('postList');
+  if(!list) return;   // mục "Bài Viết Hiện Có" đã gỡ khỏi sidebar
   list.innerHTML=posts.map(p=>`
     <div class="post-item${p.id===currentId?' active':''}" data-id="${p.id}">
       <span class="post-item-icon">${p.status==='published'?'📄':'📝'}</span>
@@ -870,6 +903,7 @@ function renderSidebar(){
   });
 
   const stats=document.getElementById('sidebarStats');
+  if(!stats) return;
   const pub=posts.filter(p=>p.status==='published').length;
   const mem=posts.filter(p=>p.access==='member').length;
   stats.innerHTML=`
@@ -927,7 +961,7 @@ function collectForm(){
 }
 
 /* ── NEW POST ── */
-document.getElementById('btnNew').addEventListener('click',()=>{
+document.getElementById('btnNew')?.addEventListener('click',()=>{
   const id=Date.now().toString();
   const today=new Date().toISOString().split('T')[0];
   const np={id,title:'',slug:'',excerpt:'',category:'',date:today,readTime:5,access:'public',thumb:'',music:'',color:'linear-gradient(135deg,#7B5EA7,#4F6BFF)',content:'',status:'draft'};
@@ -1104,13 +1138,14 @@ document.getElementById('fDate').value=new Date().toISOString().split('T')[0];
 async function syncArticleToCloud(article){
   if(!article) return;
   const email=localStorage.getItem('admin_email')||'';
+  const token=localStorage.getItem('admin_token')||'';
 
   // Sync toàn bộ published (đảm bảo KV luôn đúng)
   const published=posts.filter(p=>p.status==='published');
   try{
     const res=await fetch('/api/admin/sync-articles',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
       body:JSON.stringify({email,articles:published})
     });
     const d=await res.json();
@@ -1140,10 +1175,9 @@ async function syncAllArticles(){
   const token=localStorage.getItem('admin_token')||'';
 
   try{
-    // Thử endpoint đơn giản trước (không cần JWT)
     const res=await fetch('/api/admin/sync-articles',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
       body:JSON.stringify({email,articles:published})
     });
     const d=await res.json();
@@ -1189,8 +1223,9 @@ function updateSyncBanners(){
 
 /* ── INIT ── */
 renderSidebar();
-if(posts.length) loadPost(posts[0].id);
 updateSyncBanners();
+// Sidebar chỉ còn mục Công Cụ → mở thẳng công cụ Thần Số Học
+switchView('numerology');
 
 /* ════════════════════════════════════════════════════════════
    VIEW SWITCHER
@@ -1198,142 +1233,108 @@ updateSyncBanners();
 function switchView(view){
   document.getElementById('mainEditor').style.display     = view==='editor'    ? '' : 'none';
   document.getElementById('mainNumerology').style.display = view==='numerology' ? '' : 'none';
-  document.getElementById('mainAnalytics').style.display  = view==='analytics'  ? '' : 'none';
+  document.getElementById('mainStudent').style.display    = view==='student'    ? '' : 'none';
   document.getElementById('navNumerology').classList.toggle('active', view==='numerology');
-  document.getElementById('navAnalytics').classList.toggle('active', view==='analytics');
+  document.getElementById('navStudent').classList.toggle('active', view==='student');
   document.querySelectorAll('.post-item').forEach(el=>el.classList.toggle('active', view==='editor'&&el.dataset.id===currentId));
   if(view==='numerology' && !window._nmMeanings) nmLoadMeanings();
-  if(view==='analytics') loadAnalytics(0);
   if(window.innerWidth<768) closeSidebar();
 }
 document.getElementById('mainNumerology').addEventListener('click',()=>{
   if(window.innerWidth<768) closeSidebar();
 });
+document.getElementById('mainStudent').addEventListener('click',()=>{
+  if(window.innerWidth<768) closeSidebar();
+});
 
 /* ════════════════════════════════════════════════════════════
-   ANALYTICS
+   KÍCH HOẠT HỌC VIÊN (2026-08-01, tách bộ 35 PDF ra tùy chọn 2026-08-02)
+   Gọi /api/admin/activate-student → rewrite về api/admin/deliver-ebook.js,
+   nhánh ebookType='kich-hoat-full' → _lib/student.js → activateAndNotify().
+   Bộ 35 PDF KHÔNG còn đi kèm mặc định: chỉ gửi khi tick ô stWithEbook, hoặc
+   bấm nút riêng stSendEbook() (nhánh ebookType='tsh' — không đụng cờ học viên).
 ════════════════════════════════════════════════════════════ */
-var _analyticsPage = 0;
-
-function loadAnalytics(page) {
-  _analyticsPage = page;
-  var email = window._adminEmail || localStorage.getItem('admin_email') || '';
-  if (!email) { document.getElementById('analyticsTable').innerHTML='<p style="color:var(--muted);text-align:center;padding:2rem;">Cần đăng nhập để xem analytics.</p>'; return; }
-
-  document.getElementById('analyticsTable').innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem;">Đang tải...</p>';
-
-  fetch('/api/track-chat?email='+encodeURIComponent(email)+'&page='+page)
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      if(data.error){ document.getElementById('analyticsTable').innerHTML='<p style="color:#f87171;text-align:center;padding:2rem;">'+data.error+'</p>'; return; }
-      renderAnalyticsStats(data);
-      renderAnalyticsSessions(data.sessions);
-      renderAnalyticsPager(data.total, data.limit, page);
-    })
-    .catch(function(e){ document.getElementById('analyticsTable').innerHTML='<p style="color:#f87171;padding:2rem;">Lỗi kết nối.</p>'; });
-}
-
-function renderAnalyticsStats(data) {
-  var sessions = data.sessions || [];
-  var total = data.total || 0;
-  var today = new Date(); today.setHours(0,0,0,0);
-  var todayCount = sessions.filter(function(s){ return s.ts >= today.getTime(); }).length;
-  var countries = [...new Set(sessions.map(function(s){ return s.country; }).filter(Boolean))];
-  var regCount  = sessions.filter(function(s){ return s.registered; }).length;
-
-  var cards = [
-    { label:'Tổng phiên chat', value: total, icon:'💬' },
-    { label:'Hôm nay',         value: todayCount, icon:'📅' },
-    { label:'Quốc gia', value: countries.join(', ')||'—', icon:'🌏', small:true },
-    { label:'Đã đăng ký',     value: regCount, icon:'✅' },
-  ];
-  document.getElementById('analyticsStats').innerHTML = cards.map(function(c){
-    return '<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;">'
-      + '<div style="font-size:1.4rem;margin-bottom:.4rem;">'+c.icon+'</div>'
-      + '<div style="font-size:'+(c.small?'.8rem':'1.5rem')+';font-weight:700;color:var(--txt);">'+c.value+'</div>'
-      + '<div style="font-size:.72rem;color:var(--muted);margin-top:.2rem;">'+c.label+'</div>'
-      + '</div>';
-  }).join('');
-}
-
-function renderAnalyticsSessions(sessions) {
-  if(!sessions||!sessions.length){
-    document.getElementById('analyticsTable').innerHTML='<p style="color:var(--muted);text-align:center;padding:3rem;">Chưa có dữ liệu chat.</p>';
-    return;
+function stRead(){
+  const email = document.getElementById('stEmail').value.trim().toLowerCase();
+  const name  = document.getElementById('stName').value.trim();
+  const zalo  = document.getElementById('stZalo').value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){
+    toast('Email không hợp lệ','warn'); return null;
   }
+  const token = localStorage.getItem('admin_token')||'';
+  if(!token){ toast('Thiếu phiên đăng nhập — đăng xuất rồi đăng nhập lại','warn'); return null; }
+  return { email, name, zalo, token };
+}
 
-  var FLAG = { VN:'🇻🇳', US:'🇺🇸', TH:'🇹🇭', SG:'🇸🇬', AU:'🇦🇺', GB:'🇬🇧', KR:'🇰🇷', JP:'🇯🇵', FR:'🇫🇷', DE:'🇩🇪' };
+function stShow(okState, text){
+  const box = document.getElementById('stResult');
+  if(okState){
+    box.style.background='rgba(45,212,191,0.08)'; box.style.border='1px solid rgba(45,212,191,0.3)';
+    box.style.color='var(--teal)'; box.textContent='✓ '+text;
+  }else{
+    box.style.background='rgba(248,113,113,0.08)'; box.style.border='1px solid rgba(248,113,113,0.3)';
+    box.style.color='#F87171'; box.textContent='✕ '+text;
+  }
+  box.style.display='block';
+}
 
-  var rows = sessions.map(function(s,i){
-    var dt = new Date(s.ts);
-    var dateStr = dt.toLocaleDateString('vi-VN')+' '+dt.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});
-    var flag = FLAG[s.country]||'🌐';
-    var loc = flag+' '+(s.city&&s.city!=='—'?s.city+', ':'')+(s.country||'—');
-    var device = s.mobile ? '📱 Mobile' : '💻 Desktop';
-    var svcs = (s.services||[]).map(function(sid){ return '<span style="background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.25);border-radius:5px;padding:1px 6px;font-size:.7rem;">'+sid+'</span>'; }).join(' ');
-    var msgPreview = '';
-    if(s.messages&&s.messages.length){
-      var firstUser = s.messages.find(function(m){ return m.role==='user'; });
-      if(firstUser) msgPreview = '<div style="font-size:.75rem;color:var(--muted);margin-top:.3rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px;">'+escAdmin(firstUser.content.slice(0,80))+'</div>';
+/* Gửi một lệnh tới deliver-ebook và hiển thị kết quả. btn/label để trả nút về
+   trạng thái cũ dù thành công hay hỏng. */
+async function stPost({ path, payload, btn, label, busyLabel, busyStatus, okToast }){
+  document.getElementById('stResult').style.display='none';
+  btn.disabled = true; btn.textContent = busyLabel;
+  document.getElementById('stStatusTxt').textContent = busyStatus;
+  try{
+    const res = await fetch(path,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+payload.token},
+      body:JSON.stringify(payload.body)
+    });
+    const d = await res.json();
+    if(res.ok && d.success){
+      stShow(true, d.message);
+      toast(okToast,'success');
+      document.getElementById('stStatusTxt').textContent='Xong';
+    }else{
+      stShow(false, d.error||'Lỗi không rõ');
+      toast('Lỗi: '+(d.error||'unknown'),'warn');
+      document.getElementById('stStatusTxt').textContent='Thất bại';
     }
-    return '<div class="analytics-row" id="arow-'+i+'">'
-      + '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;cursor:pointer;" onclick="toggleConvo('+i+')">'
-      + '<div style="flex:1;min-width:0;">'
-      + '<div style="font-size:.82rem;font-weight:600;color:var(--txt);">'+dateStr+'</div>'
-      + msgPreview
-      + (svcs?'<div style="margin-top:.4rem;">'+svcs+'</div>':'')
-      + '</div>'
-      + '<div style="flex-shrink:0;text-align:right;font-size:.78rem;color:var(--muted);">'
-      + '<div>'+loc+'</div>'
-      + '<div>'+device+'</div>'
-      + '<div>'+s.msgCount+' tin nhắn</div>'
-      + '</div>'
-      + '<div style="color:var(--muted);font-size:.9rem;flex-shrink:0;" id="arrow-'+i+'">▾</div>'
-      + '</div>'
-      + '<div id="convo-'+i+'" style="display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:.8rem;">'
-      + renderConvo(s.messages)
-      + '</div>'
-      + '</div>';
-  }).join('');
-
-  document.getElementById('analyticsTable').innerHTML =
-    '<div style="display:flex;flex-direction:column;gap:.75rem;">'+rows+'</div>';
-}
-
-function renderConvo(messages) {
-  if(!messages||!messages.length) return '<p style="color:var(--muted);font-size:.8rem;">Không có tin nhắn.</p>';
-  return messages.map(function(m){
-    var isUser = m.role==='user';
-    var bg = isUser ? 'rgba(123,94,167,.18)' : 'rgba(13,18,64,.5)';
-    var align = isUser ? 'flex-end' : 'flex-start';
-    var label = isUser ? '👤 Khách' : '🤖 Bot';
-    return '<div style="display:flex;flex-direction:column;align-items:'+align+';margin-bottom:.6rem;">'
-      + '<div style="font-size:.68rem;color:var(--muted);margin-bottom:.2rem;">'+label+'</div>'
-      + '<div style="background:'+bg+';border-radius:10px;padding:.5rem .8rem;max-width:85%;font-size:.8rem;line-height:1.5;white-space:pre-wrap;">'+escAdmin(m.content)+'</div>'
-      + '</div>';
-  }).join('');
-}
-
-function toggleConvo(i) {
-  var convo = document.getElementById('convo-'+i);
-  var arrow = document.getElementById('arrow-'+i);
-  var open = convo.style.display === 'none';
-  convo.style.display = open ? '' : 'none';
-  arrow.textContent = open ? '▴' : '▾';
-}
-
-function renderAnalyticsPager(total, limit, page) {
-  var pages = Math.ceil(total/limit);
-  if(pages<=1){ document.getElementById('analyticsPager').innerHTML=''; return; }
-  var btns = '';
-  for(var p=0;p<Math.min(pages,20);p++){
-    var active = p===page ? 'background:var(--accent);color:#fff;' : 'background:var(--card);color:var(--txt);';
-    btns += '<button onclick="loadAnalytics('+p+')" style="'+active+'border:1px solid var(--border);padding:.35rem .75rem;border-radius:7px;cursor:pointer;font-size:.8rem;">'+( p+1)+'</button>';
+  }catch(e){
+    toast('Mất kết nối: '+e.message,'warn');
+    document.getElementById('stStatusTxt').textContent='Mất kết nối';
+  }finally{
+    btn.disabled=false; btn.textContent=label;
   }
-  document.getElementById('analyticsPager').innerHTML = btns;
 }
 
-function escAdmin(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+async function stActivate(){
+  const f = stRead(); if(!f) return;
+  const withEbook = document.getElementById('stWithEbook').checked;
+  await stPost({
+    path:'/api/admin/activate-student',
+    payload:{ token:f.token, body:{ ebookType:'kich-hoat-full', email:f.email, customerName:f.name, zalo:f.zalo, sendEbook:withEbook } },
+    btn:document.getElementById('stBtn'),
+    label:'🎓 Kích Hoạt + Gửi Mail',
+    busyLabel:'Đang kích hoạt...',
+    busyStatus:'Đang xử lý — có gửi email nên hơi lâu',
+    okToast:'✓ Đã kích hoạt '+f.email
+  });
+}
+
+/* Nút riêng: CHỈ gửi bộ 35 PDF, không bật/đổi trạng thái học viên. */
+async function stSendEbook(){
+  const f = stRead(); if(!f) return;
+  await stPost({
+    path:'/api/admin/deliver-ebook',
+    payload:{ token:f.token, body:{ ebookType:'tsh', email:f.email, customerName:f.name } },
+    btn:document.getElementById('stEbookBtn'),
+    label:'📚 Chỉ Gửi Bộ 35 PDF',
+    busyLabel:'Đang gửi 35 PDF...',
+    busyStatus:'Đang gửi bộ 35 PDF — không đụng trạng thái học viên',
+    okToast:'📚 Đã gửi bộ 35 PDF tới '+f.email
+  });
+}
 
 /* ════════════════════════════════════════════════════════════
    NUMEROLOGY ENGINE
@@ -1373,10 +1374,11 @@ function nmOcDao(fd){
   return iso;
 }
 
-function nmCalc(name,day,month,year){
-  const clean=nmDiac(name);
+/* Tính các giá trị thô (rawVM/TH/TC/CB) từ một chuỗi tên bất kỳ — dùng chung cho Họ Tên thật và Nickname */
+function nmNameRaws(nameStr){
+  const clean=nmDiac(nameStr);
   const cls=[];
-  const words=clean.trim().split(/\s+/);
+  const words=clean.trim().split(/\s+/).filter(Boolean);
   for(const w of words){
     const lts=w.split('').filter(c=>/[A-Z]/.test(c));
     lts.forEach((ch,i)=>{
@@ -1390,6 +1392,13 @@ function nmCalc(name,day,month,year){
   const rawTH=vowels.reduce((s,l)=>s+(PYTH[l]||0),0);
   const rawTC=cons.reduce((s,l)=>s+(PYTH[l]||0),0);
   const rawCB=firsts.reduce((s,l)=>s+(PYTH[l]||0),0);
+  const nums=all.map(l=>PYTH[l]||0).filter(n=>n>=1);
+  return {clean,all,vowels,cons,firsts,rawVM,rawTH,rawTC,rawCB,nums};
+}
+
+function nmCalc(name,day,month,year,nickname){
+  const nr=nmNameRaws(name);
+  const {clean,all,rawVM,rawTH,rawTC,rawCB}=nr;
   const d_r=nmR3(day),m_r=nmR3(month),ySum=nmDS(String(year)),y_r=nmR3(ySum);
   const d_s=nmRS(day),m_s=nmRS(month),y_s=nmRS(ySum),cluster=d_s+m_s+y_s;
   /* clusterRaw giữ master (d_r+m_r+y_r) — dùng cho kiểm tra nợ nghiệp Cụm ĐĐ */
@@ -1397,8 +1406,8 @@ function nmCalc(name,day,month,year){
   const tienThan=nmDS(String(day)+String(month)+String(year));
   /* Nếu tienThan đúng là master 11/22/33 → Chủ Đạo = master đó */
   let duongDoi=(tienThan===11||tienThan===22||tienThan===33)?tienThan:nmReduce(cluster);
-  let tamHon=nmReduce(rawTH);if(tamHon===10)tamHon=1;
-  let tinhCach=nmReduce(rawTC);if(tinhCach===10)tinhCach=1;
+  let tamHon=nmReduce(rawTH);
+  let tinhCach=nmReduce(rawTC);
   const _thTcSum=tamHon+tinhCach;
   const vanMemh=NM_MASTER.has(_thTcSum)?_thTcSum:nmReduce(rawVM);
   const ngaySinh=nmReduce(day),thaiDo=nmReduce(day+month),truongThanh=nmReduce(duongDoi+vanMemh),canBang=nmReduce(rawCB);
@@ -1431,7 +1440,29 @@ function nmCalc(name,day,month,year){
   for(let i=0;i<12;i++){const off=today.getMonth()+i;const mo=off%12+1;const yr=today.getFullYear()+Math.floor(off/12);const ncn=nmReduce(d_r+m_r+nmReduce(nmDS(String(yr))));thangCNList.push({month:mo,year:yr,num:nmReduce(ncn+mo),cur:i===0});}
   const peaks=[{num:d1,age:age1,year:year+age1},{num:d2,age:age1+9,year:year+age1+9},{num:d3,age:age1+18,year:year+age1+18},{num:d4,age:age1+27,year:year+age1+27}];
   const tuoiDC=[`0–${age1}`,`${age1+1}–${age1+9}`,`${age1+10}–${age1+18}`,`${age1+19}+`];
-  return {name,clean,day,month,year,
+
+  /* ── NICKNAME: biểu đồ tổng hợp + chỉ số phụ (ngày sinh + nickname, KHÔNG dùng họ tên thật) ── */
+  let nick=null;
+  if(nickname&&nickname.trim()){
+    const nnr=nmNameRaws(nickname);
+    const tamHonNick=nmReduce(nnr.rawTH);
+    const tinhCachNick=nmReduce(nnr.rawTC);
+    const vanMenhNick=nmReduce(nnr.rawVM);
+    const truongThanhNick=nmReduce(duongDoi+vanMenhNick);
+    const faNick={};for(let i=1;i<=9;i++)faNick[i]=fd[i]||0;
+    nnr.nums.forEach(n=>faNick[n]++);
+    nick={
+      clean:nnr.clean,
+      rawVM:nnr.rawVM,rawTH:nnr.rawTH,rawTC:nnr.rawTC,
+      vanMenh:vanMenhNick,tamHon:tamHonNick,tinhCach:tinhCachNick,
+      truongThanh:truongThanhNick,rawTruongThanh:duongDoi+vanMenhNick,
+      cauNoiTC:nmReduce(Math.abs(duongDoi-vanMenhNick)),
+      cauNoiHP:nmReduce(Math.abs(tamHonNick-tinhCachNick)),
+      fa:faNick,
+    };
+  }
+
+  return {name,clean,day,month,year,nick,
     duongDoi,vanMemh,tamHon,tinhCach,
     ngaySinh,thaiDo,truongThanh,canBang,tienThan,
     namCN,thangCN,noiCam,noNghiep,soThieu,soKhuyet,
@@ -1539,11 +1570,12 @@ function nmShowTab(t){
 
 function nmCalculate(){
   const name=document.getElementById('nmName').value.trim();
+  const nickname=document.getElementById('nmNickname').value.trim();
   const day=parseInt(document.getElementById('nmDay').value);
   const month=parseInt(document.getElementById('nmMonth').value);
   const year=parseInt(document.getElementById('nmYear').value);
   if(!name||isNaN(day)||isNaN(month)||isNaN(year)){toast('⚠️ Vui lòng nhập đầy đủ thông tin','warn');return;}
-  _nmResult=nmCalc(name,day,month,year);
+  _nmResult=nmCalc(name,day,month,year,nickname);
   nmRenderAll(_nmResult);
   document.getElementById('nmResults').style.display='';
   document.getElementById('nmTabBtns').style.display='flex';
@@ -1597,10 +1629,40 @@ function nmRenderAll(r){
   </div>`;
 
   // Matrix row
-  document.getElementById('nmMatrixRow').innerHTML=`
+  const matrixRowEl=document.getElementById('nmMatrixRow');
+  let matrixHtml=`
     <div style="display:flex;justify-content:center;padding:1rem 0;">${nmRenderMatrix(r.fd,'Biểu Đồ Ngày Sinh','Ngày/tháng/năm · dùng cho mũi tên')}</div>
     <div style="display:flex;justify-content:center;padding:1rem 0;">${nmRenderMatrix(r.fa,'Biểu Đồ Tổng Hợp','Tên + ngày sinh · dùng cho nội cảm')}</div>
   `;
+  if(r.nick){
+    matrixHtml+=`<div style="display:flex;justify-content:center;padding:1rem 0;">${nmRenderMatrix(r.nick.fa,'Biểu Đồ Tổng Hợp (Nickname)','Nickname + ngày sinh · không gồm họ tên thật')}</div>`;
+  }
+  matrixRowEl.innerHTML=matrixHtml;
+  matrixRowEl.style.gridTemplateColumns=r.nick?'1fr 1fr 1fr':'1fr 1fr';
+
+  // Chỉ số phụ Nickname
+  const nickSecEl=document.getElementById('nmNickSecondary');
+  if(r.nick){
+    const nk=r.nick;
+    nickSecEl.style.display='';
+    nickSecEl.innerHTML=`<div class="nm-doc" style="background:rgba(4,5,26,.55);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;">
+      <div class="nm-field" style="margin-bottom:.5rem;"><span style="color:var(--glow);font-weight:700;">✦ Chỉ Số Phụ (Nickname: ${nk.clean})</span></div>
+      <div style="font-size:.72rem;color:var(--muted);margin-bottom:.6rem;">Tính từ Nickname + Ngày sinh — không dùng họ tên thật</div>
+      <div class="nm-row-3" style="margin-bottom:.6rem;">
+        <div class="nm-field">${lbl('Vận Mệnh :')} ${N(nk.vanMenh,'van_menh','md')} ${raw(nk.rawVM)}</div>
+        <div class="nm-field">${lbl('Tâm Hồn :')} ${N(nk.tamHon,'tam_hon','md')} ${raw(nk.rawTH)}</div>
+        <div class="nm-field">${lbl('Tính Cách :')} ${N(nk.tinhCach,'tinh_cach','md')} ${raw(nk.rawTC)}</div>
+      </div>
+      <div class="nm-row-3">
+        <div class="nm-field">${lbl('Trưởng Thành :')} ${N(nk.truongThanh,'truong_thanh','md')} ${raw(nk.rawTruongThanh)}</div>
+        <div class="nm-field">${lbl('Cầu Nối Thành Công :')} ${N(nk.cauNoiTC,'cau_noi_thanh_cong','md')}</div>
+        <div class="nm-field">${lbl('Cầu Nối Hạnh Phúc :')} ${N(nk.cauNoiHP,'cau_noi_hanh_phuc','md')}</div>
+      </div>
+    </div>`;
+  } else {
+    nickSecEl.style.display='none';
+    nickSecEl.innerHTML='';
+  }
 
   // Secondary (debt, misc, cauNoi)
   const hasDebt=Object.keys(r.noNghiep).length>0;
@@ -1732,7 +1794,7 @@ function nmRenderAll(r){
 }
 
 /* ── Enter key triggers calculation from any input field ── */
-['nmName','nmDay','nmMonth','nmYear'].forEach(id=>{
+['nmName','nmNickname','nmDay','nmMonth','nmYear'].forEach(id=>{
   document.getElementById(id).addEventListener('keydown',e=>{
     if(e.key==='Enter')nmCalculate();
   });
